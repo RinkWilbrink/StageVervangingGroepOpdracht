@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherTower : TowerCore
+public class WizardTower : TowerCore
 {
     // Variables
-    [Header("Archer Tower Stats")]
-    [SerializeField] private int banaan;
 
     public override void PrimairyAttack(int _damage, int _attackTime)
     {
-        Debug.Log("Archer Primairy");
+        Debug.Log("Wizard Primairy");
     }
 
     public override void SecondairyAttack(int _damage, int _attackTime)
     {
-        Debug.Log("Archer Secondairy");
+        Debug.Log("Wizard Secondairy");
+    }
+
+    public override void banaan()
+    {
+        Debug.Log("Wizard Banaan");
     }
 }

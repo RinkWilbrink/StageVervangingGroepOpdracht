@@ -12,26 +12,29 @@ public class TowerCore : MonoBehaviour
     [SerializeField] private int SecondairyShootingTime;
     [SerializeField] private int SecondairyDamage;
 
+    // Shooting Counter
+    private float ShootingTimer;
+
     [Header("a")]
     [SerializeField] private GameObject ShootOrigin;
 
     [Header("Targets")]
-    [SerializeField] private GameObject CurrentTarget;
-
-    void Start()
-    {
-
-    }
+    [SerializeField] public GameObject CurrentTarget;
 
     void Update()
     {
+        if(CurrentTarget != null)
+        {
+            HandleAttackTiming();
+        }
+
         if(Input.GetKeyDown(KeyCode.P))
         {
-            PrimairyAttack();
+            PrimairyAttack(PrimairyDamage, PrimairyShootingTime);
         }
         if(Input.GetKeyDown(KeyCode.O))
         {
-            SecondairyAttack();
+            SecondairyAttack(SecondairyDamage, SecondairyShootingTime);
         }
     }
 
@@ -54,7 +57,14 @@ public class TowerCore : MonoBehaviour
         //return newTarget;
     }
 
+    public virtual void HandleAttackTiming()
+    {
+        Debug.Log("banaan");
+    }
+
     // Virtual functions for shooting and special abilities
-    public virtual void PrimairyAttack() { Debug.Log("Core Primairy"); }
-    public virtual void SecondairyAttack() { Debug.Log("Core Secondairy"); }
+    public virtual void PrimairyAttack(int _damage, int _attackTime)
+    { Debug.Log("Core Primairy"); }
+    public virtual void SecondairyAttack(int _damage, int _attackTime)
+    { Debug.Log("Core Secondairy"); }
 }

@@ -20,6 +20,7 @@ namespace Tower
 
         [Header("a")]
         [SerializeField] private GameObject ShootOrigin;
+        [SerializeField] private float ShootingRange = 0;
 
         [Header("Targets")]
         [SerializeField] public GameObject CurrentTarget;
@@ -29,6 +30,10 @@ namespace Tower
             if(CurrentTarget != null)
             {
                 HandleAttackTiming();
+            }
+            else
+            {
+                CheckTargets();
             }
 
             if(Input.GetKeyDown(KeyCode.P))
@@ -53,9 +58,31 @@ namespace Tower
             Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
         }
 
-        private void TargetManager()
+        private void CheckTargets()
         {
-            //CurrentTarget = target;
+            Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange);
+            foreach(Collider go in enemies)
+            {
+                if(CurrentTarget == null)
+                {
+                    CurrentTarget = go.gameObject;
+
+                    return;
+                }
+
+                float Distance1 = Mathf.Pow(Mathf.Sqrt(
+                    (CurrentTarget.transform.position.x - ShootOrigin.transform.position.x) +
+                    (CurrentTarget.transform.position.z - ShootOrigin.transform.position.z)), 2);
+
+                float Distance2 = Mathf.Pow(Mathf.Sqrt(
+                    (go.transform.transform.position.x - ShootOrigin.transform.position.x) +
+                    (go.transform.transform.position.z - ShootOrigin.transform.position.z)), 2);
+
+                if(Distance2 < Distance1)
+                {
+                    CurrentTarget = go.gameObject;
+                }
+            }
         }
 
         public virtual void HandleAttackTiming()
@@ -63,7 +90,7 @@ namespace Tower
             Debug.Log("banaan");
 
             //if()
-    }
+        }
 
         // Virtual functions for shooting and special abilities
         public virtual void PrimairyAttack(int _damage, int _attackTime)

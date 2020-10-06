@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Tower
 {
+    [SelectionBase]
     public class ArcherTower : TowerCore
     {
         // Variables

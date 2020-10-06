@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Tower
 {
+    [SelectionBase]
     public class WizardTower : TowerCore
     {
         // Variables
@@ -20,7 +21,7 @@ namespace Tower
 
         public override void HandleAttackTiming()
         {
-            Debug.Log("Wizard Banaan");
+            //Debug.Log("Wizard Banaan");
         }
     }
 }

@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardTower : TowerCore
+namespace Tower
 {
-    // Variables
-
-    public override void PrimairyAttack(int _damage, int _attackTime)
+    public class WizardTower : TowerCore
     {
-        Debug.Log("Wizard Primairy");
-    }
+        // Variables
 
-    public override void SecondairyAttack(int _damage, int _attackTime)
-    {
-        Debug.Log("Wizard Secondairy");
-    }
+        public override void PrimairyAttack(int _damage, int _attackTime)
+        {
+            Debug.Log("Wizard Primairy");
+        }
 
-    public override void banaan()
-    {
-        Debug.Log("Wizard Banaan");
+        public override void SecondairyAttack(int _damage, int _attackTime)
+        {
+            Debug.Log("Wizard Secondairy");
+        }
+
+        public override void HandleAttackTiming()
+        {
+            Debug.Log("Wizard Banaan");
+        }
     }
 }

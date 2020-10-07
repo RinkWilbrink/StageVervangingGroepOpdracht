@@ -19,6 +19,8 @@ namespace Tower
 
         public override void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
         {
+            base.SecondairyAttack(_target, _damage, _attackTime);
+
             Debug.Log("Archer Secondairy");
         }
 

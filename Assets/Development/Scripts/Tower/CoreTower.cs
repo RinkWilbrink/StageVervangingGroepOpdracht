@@ -30,8 +30,8 @@ namespace Tower
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
-        [SerializeField] public int EnemiesInRange = 0;
 
+        [HideInInspector] public int EnemiesInRange = 0;
         [HideInInspector] public RaycastHit hit;
 
         [Header("Targets")]
@@ -46,30 +46,25 @@ namespace Tower
         {
             if(CurrentTarget != null)
             {
+                Debug.DrawRay(ShootOrigin.transform.position, (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized, Color.red);
+
                 HandleAttackTiming();
+
+                HandleShooting();
             }
             else
             {
                 CheckTargets();
             }
-
-            if(Input.GetKeyDown(KeyCode.P))
-            {
-                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), AttackDamage, AttackShootingTime);
-            }
-            if(Input.GetKeyDown(KeyCode.O))
-            {
-                SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), SpecialDamage, SpecialShootingTime);
-            }
         }
 
         public virtual void HandleShooting()
         {
-            Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
-
-            Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
-
-            Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
+            //Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
+            //
+            //Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
+            //
+            //Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
 
             if(CanAttack)
             {
@@ -92,11 +87,14 @@ namespace Tower
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange);
-            EnemiesInRange = enemies.Length;
+            EnemiesInRange = 0;
+
             foreach(Collider go in enemies)
             {
                 if(go.tag == "Enemy")
                 {
+                    EnemiesInRange += 1;
+
                     if(CurrentTarget == null)
                     {
                         CurrentTarget = go.gameObject;
@@ -125,7 +123,7 @@ namespace Tower
             if(AttackTimer >= AttackShootingTime)
             {
                 CanAttack = true;
-                AttackTimer += Time.deltaTime;
+                AttackTimer = 0;
             }
             else
             {

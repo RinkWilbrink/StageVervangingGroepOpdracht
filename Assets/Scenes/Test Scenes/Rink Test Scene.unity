@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &13015955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1984,7 +1984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1972557552
 Transform:
   m_ObjectHideFlags: 0
@@ -2013,12 +2013,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3140ddd907398b642b03eac41587aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 2
+  AttackShootingTime: 3
   AttackDamage: 1
   AttackTimer: 0
   CanAttack: 1
   SpecialShootingTime: 100
-  SpecialDamage: 2
+  SpecialDamage: 0
   SpecialAttackThresshold: 4
   SpecialTimer: 0
   CanUseSpecial: 0

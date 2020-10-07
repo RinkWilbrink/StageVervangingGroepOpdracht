@@ -123,7 +123,6 @@ namespace Tower
             if(AttackTimer >= AttackShootingTime)
             {
                 CanAttack = true;
-                AttackTimer = 0;
             }
             else
             {
@@ -132,7 +131,6 @@ namespace Tower
             if(SpecialTimer >= SpecialShootingTime)
             {
                 CanUseSpecial = true;
-                SpecialTimer = 0;
             }
             else
             {
@@ -146,12 +144,18 @@ namespace Tower
             Debug.Log("Core Primairy");
 
             _target.TakeDamage(_damage);
+
+            CanAttack = false;
+            AttackTimer = 0;
         }
         public virtual void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
         {
             Debug.Log("Core Secondairy");
 
             _target.TakeDamage(_damage);
+
+            CanUseSpecial = false;
+            SpecialTimer = 0;
         }
     }
 }

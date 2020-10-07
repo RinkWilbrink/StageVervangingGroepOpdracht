@@ -44,4 +44,8 @@ public class EnemyUnit : MonoBehaviour
                 // Do damage to the main structure
             }
     }
+
+    public void TakeDamage( int damage ) {
+        Health -= damage;
+    }
 }

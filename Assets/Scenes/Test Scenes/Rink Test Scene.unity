@@ -150,13 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17269fd232a851843b718369c15a1414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrimairyShootingTime: 0
-  PrimairyDamage: 0
-  SecondairyShootingTime: 0
-  SecondairyDamage: 0
+  AttackShootingTime: 0
+  AttackDamage: 0
+  AttackTimer: 0
+  CanAttack: 1
+  SpecialShootingTime: 0
+  SpecialDamage: 0
+  SpecialAttackThresshold: 0
+  SpecialTimer: 0
+  CanUseSpecial: 0
   ShootOrigin: {fileID: 1762718097}
-  ShootingRange: 0
+  EnemiesInRange: 0
   CurrentTarget: {fileID: 1488021541}
+  ShootingRange: 0
 --- !u!4 &13015956
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +438,7 @@ BoxCollider:
   m_GameObject: {fileID: 755343223}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -677,6 +683,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUnit
       objectReference: {fileID: 0}
+    - target: {fileID: 341408206199449656, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34f03df14fddaca41a8cbc0d944299f8, type: 3}
 --- !u!1 &1488021541 stripped
@@ -790,13 +801,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3140ddd907398b642b03eac41587aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrimairyShootingTime: 0
-  PrimairyDamage: 0
-  SecondairyShootingTime: 0
-  SecondairyDamage: 0
+  AttackShootingTime: 2
+  AttackDamage: 1
+  AttackTimer: 0
+  CanAttack: 1
+  SpecialShootingTime: 4
+  SpecialDamage: 2
+  SpecialAttackThresshold: 4
+  SpecialTimer: 0
+  CanUseSpecial: 0
   ShootOrigin: {fileID: 427360512}
-  ShootingRange: 0
+  EnemiesInRange: 4
   CurrentTarget: {fileID: 0}
+  ShootingRange: 10
 --- !u!1 &2074389835
 GameObject:
   m_ObjectHideFlags: 0

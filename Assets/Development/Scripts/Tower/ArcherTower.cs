@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Tower
@@ -19,6 +20,11 @@ namespace Tower
         public override void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
         {
             Debug.Log("Archer Secondairy");
+        }
+
+        public override void HandleShooting()
+        {
+            base.HandleShooting();
         }
     }
 }

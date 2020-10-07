@@ -2013,12 +2013,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3140ddd907398b642b03eac41587aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 3
+  AttackShootingTime: 2
   AttackDamage: 1
   AttackTimer: 0
   CanAttack: 1
-  SpecialShootingTime: 100
-  SpecialDamage: 0
+  SpecialShootingTime: 6
+  SpecialDamage: 2
   SpecialAttackThresshold: 4
   SpecialTimer: 0
   CanUseSpecial: 0

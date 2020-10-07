@@ -60,12 +60,6 @@ namespace Tower
 
         public virtual void HandleShooting()
         {
-            //Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
-            //
-            //Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
-            //
-            //Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
-
             if(CanAttack)
             {
                 if(CanUseSpecial)

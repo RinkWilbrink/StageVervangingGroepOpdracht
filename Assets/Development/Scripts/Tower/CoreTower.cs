@@ -38,24 +38,17 @@ namespace Tower
 
             if(Input.GetKeyDown(KeyCode.P))
             {
-                PrimairyAttack(PrimairyDamage, PrimairyShootingTime);
+                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), PrimairyDamage, PrimairyShootingTime);
             }
             if(Input.GetKeyDown(KeyCode.O))
             {
-                SecondairyAttack(SecondairyDamage, SecondairyShootingTime);
+                SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), SecondairyDamage, SecondairyShootingTime);
             }
         }
 
         private void HitManager()
         {
-            RaycastHit hit;
-            Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
-
-            Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
-
-            Debug.Log(hit.collider.name);
-
-            Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
+            
         }
 
         private void CheckTargets()
@@ -87,15 +80,26 @@ namespace Tower
 
         public virtual void HandleAttackTiming()
         {
-            Debug.Log("banaan");
+            RaycastHit hit;
+            Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
 
-            //if()
+            Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
+
+            Debug.Log(hit.collider.name);
+
+            Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
+
+            float Health = hit.collider.gameObject.GetComponent<EnemyUnit>().Health;
         }
 
         // Virtual functions for shooting and special abilities
-        public virtual void PrimairyAttack(int _damage, int _attackTime)
-        { Debug.Log("Core Primairy"); }
-        public virtual void SecondairyAttack(int _damage, int _attackTime)
-        { Debug.Log("Core Secondairy"); }
+        public virtual void PrimairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        {
+            Debug.Log("Core Primairy");
+        }
+        public virtual void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        {
+            Debug.Log("Core Secondairy");
+        }
     }
 }

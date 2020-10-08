@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum GridBlockType
@@ -12,13 +13,28 @@ public class TowerPlacement : MonoBehaviour
     // Variables
     [SerializeField] private Camera camera;
     [Space(6)]
+    [SerializeField] private Transform TowerParent;
     [SerializeField] private GameObject[] TowerList;
+    private int TowerSelectedIndex;
+    private GameObject[] Prefablist;
+
 
     // private variables
     private GridBlockType[,] grid = new GridBlockType[20, 20];
     private Vector3 hitPoint = Vector3.zero;
+    private RaycastHit hit;
 
-    private int cool;
+    private void Start()
+    {
+        Prefablist = new GameObject[TowerList.Length];
+        for(int i = 0; i < TowerList.Length; i++)
+        {
+            Prefablist[i] = Instantiate(TowerList[i], Vector3.zero, Quaternion.identity, transform);
+            Prefablist[i].SetActive(false);
+            Prefablist[i].name = Prefablist[i].name.Replace("Clone", "Template");
+            Prefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
+        }
+    }
 
     private void Update()
     {
@@ -26,24 +42,35 @@ public class TowerPlacement : MonoBehaviour
         {
             var ray = camera.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit = new RaycastHit();
+            hit = new RaycastHit();
 
             if(Physics.Raycast(ray, out hit, 100f))
             {
                 hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
                 hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
+
+                Debug.LogFormat("{0} | {1}", hit.collider.name, hit.collider.tag);
+
+                Prefablist[TowerSelectedIndex].SetActive(true);
+                Prefablist[TowerSelectedIndex].transform.position = hitPoint;
             }
         }
 
         if(Input.GetMouseButtonUp(0))
         {
-            Debug.Log(hitPoint);
-            GameObject go = Instantiate(TowerList[cool], hitPoint, Quaternion.identity, gameObject.transform);
+            if(hit.collider.tag == "PlaceableGround")
+            {
+                Debug.Log(hitPoint);
+                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, gameObject.transform);
+            }
+
+            Prefablist[TowerSelectedIndex].SetActive(false);
+            Prefablist[TowerSelectedIndex].transform.position = Vector3.zero;
         }
     }
 
     public void OnButtonClick(int _i)
     {
-        cool = _i;
+        TowerSelectedIndex = _i;
     }
 }

@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2727193882764642318}
   - component: {fileID: 2727193882764642313}
+  - component: {fileID: 8437573251633843400}
   m_Layer: 0
   m_Name: WizardTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,12 +53,27 @@ MonoBehaviour:
   SpecialShootingTime: 1000
   SpecialDamage: 8
   SpecialAttackThresshold: 5
+  DamageMultiplier: 1
+  AttackTimeMultiplier: 1
   SpecialTimer: 0
   CanUseSpecial: 0
   ShootOrigin: {fileID: 2727193884480791051}
   EnemiesInRange: 0
   CurrentTarget: {fileID: 0}
   ShootingRange: 3
+--- !u!65 &8437573251633843400
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727193882764642312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2727193882833703325
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +163,7 @@ BoxCollider:
   m_GameObject: {fileID: 2727193882833703325}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

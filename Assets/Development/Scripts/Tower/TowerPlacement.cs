@@ -18,6 +18,9 @@ public class TowerPlacement : MonoBehaviour
     private int TowerSelectedIndex;
     private GameObject[] Prefablist;
 
+    [Space(6)]
+    [SerializeField] private UpgradeUI upgradeUI;
+
 
     // private variables
     private GridBlockType[,] grid = new GridBlockType[20, 20];
@@ -49,10 +52,13 @@ public class TowerPlacement : MonoBehaviour
                 hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
                 hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
 
-                Debug.LogFormat("{0} | {1}", hit.collider.name, hit.collider.tag);
+                if(hit.collider.tag == "PlaceableGround")
+                {
+                    Prefablist[TowerSelectedIndex].SetActive(true);
+                    Prefablist[TowerSelectedIndex].transform.position = hitPoint;
+                }
 
-                Prefablist[TowerSelectedIndex].SetActive(true);
-                Prefablist[TowerSelectedIndex].transform.position = hitPoint;
+                Debug.Log(hitPoint);
             }
         }
 
@@ -60,8 +66,13 @@ public class TowerPlacement : MonoBehaviour
         {
             if(hit.collider.tag == "PlaceableGround")
             {
-                Debug.Log(hitPoint);
-                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, gameObject.transform);
+                //Debug.Log(hitPoint);
+                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+            }
+            if(hit.collider.tag == "Tower")
+            {
+                Debug.Log("Cool");
+                upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
             }
 
             Prefablist[TowerSelectedIndex].SetActive(false);

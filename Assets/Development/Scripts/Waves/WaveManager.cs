@@ -24,7 +24,7 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log("TIP: Press Spacebar to Instantiate a test unit...");
 
-        updateWave = UpdateWave(0);
+        updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
 

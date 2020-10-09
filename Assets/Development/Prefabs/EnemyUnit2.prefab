@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 341408206199449659}
   - component: {fileID: 341408206199449655}
   m_Layer: 0
-  m_Name: EnemyUnit
+  m_Name: EnemyUnit2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02e9afb01cf837b4c8ce4bdc72fbd645, type: 2}
+  - {fileID: 2100000, guid: 5e2a2841d276e3f49b1259793bc63c86, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,3 +201,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 60
+  enemyData: {fileID: 11400000, guid: ee9d13a714a33654cbed54be63c99c8a, type: 2}

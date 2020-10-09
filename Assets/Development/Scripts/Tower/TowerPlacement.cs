@@ -71,8 +71,8 @@ public class TowerPlacement : MonoBehaviour
             }
             if(hit.collider.tag == "Tower")
             {
-                Debug.Log("Cool");
-                upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
+                //Debug.Log("Cool");
+                //upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
             }
 
             Prefablist[TowerSelectedIndex].SetActive(false);

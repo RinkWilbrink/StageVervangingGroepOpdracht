@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fed1978b68c84f9d152239296968e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect: {fileID: 1086120655}
+  UpgradePanel: {fileID: 1086120654}
 --- !u!1 &219473749
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Tower
@@ -22,7 +24,12 @@ namespace Tower
         [SerializeField] public int SpecialDamage;
 
         [Space(2)]
+
         [SerializeField] public int SpecialAttackThresshold;
+
+        [Header("Damage and Firerate Upgrades")]
+        [SerializeField] public float DamageMultiplier = 1f;
+        [SerializeField] public float AttackTimeMultiplier = 1f;
 
         // Hidden Secondairy Attack Variables
         [HideInInspector] public float SpecialTimer;
@@ -60,12 +67,6 @@ namespace Tower
 
         public virtual void HandleShooting()
         {
-            //Vector3 direction = (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized;
-            //
-            //Physics.Raycast(ShootOrigin.transform.position, direction, out hit, 100f);
-            //
-            //Debug.DrawRay(ShootOrigin.transform.position, direction, Color.red, 1f);
-
             if(CanAttack)
             {
                 if(CanUseSpecial)
@@ -74,13 +75,13 @@ namespace Tower
                     {
                         //The Attack
 
-                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), SpecialDamage, SpecialShootingTime);
+                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage * DamageMultiplier), SpecialShootingTime);
 
                         return;
                     }
                 }
 
-                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), AttackDamage, AttackShootingTime);
+                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage * DamageMultiplier), AttackShootingTime);
             }
         }
 
@@ -120,7 +121,7 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= AttackShootingTime)
+            if(AttackTimer >= (AttackShootingTime * AttackTimeMultiplier))
             {
                 CanAttack = true;
             }
@@ -128,7 +129,7 @@ namespace Tower
             {
                 AttackTimer += Time.deltaTime;
             }
-            if(SpecialTimer >= SpecialShootingTime)
+            if(SpecialTimer >= (SpecialShootingTime * AttackTimeMultiplier))
             {
                 CanUseSpecial = true;
             }

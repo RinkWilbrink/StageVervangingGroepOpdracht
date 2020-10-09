@@ -5,24 +5,19 @@ using UnityEngine;
 public class UpgradeUI : MonoBehaviour
 {
     // Variables
-    [SerializeField] private RectTransform rect;
+    [SerializeField] private RectTransform UpgradePanel;
 
     void Start()
     {
-        try
-        {
-            rect.localScale = Vector3.zero;
-        }
-        catch
-        {
-            Debug.LogErrorFormat("rect is NULL");
-        }
+        UpgradePanel.gameObject.SetActive(false);
     }
 
     public void UpdateUIPosition(float _x, float _y)
     {
-        rect.anchoredPosition = new Vector3(_x, _y);
-        rect.localScale = Vector3.one;
+        UpgradePanel.gameObject.SetActive(true);
+
+        UpgradePanel.anchoredPosition = new Vector3(_x, _y);
+        UpgradePanel.localScale = Vector3.one;
     }
 }
 

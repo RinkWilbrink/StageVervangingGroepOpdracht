@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46010331}
   - component: {fileID: 46010332}
+  - component: {fileID: 46010333}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -194,7 +195,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dec4f12c09feb49a4509856c83568b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testUnit: {fileID: 341408206199449656, guid: 34f03df14fddaca41a8cbc0d944299f8, type: 3}
+  waves:
+  - enemyCount: 10
+    minSpawnTime: 1
+    maxSpawnTime: 3
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 100
+  - enemyCount: 15
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 100
+  - enemyCount: 20
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 60
+    - enemy: {fileID: 341408206199449655, guid: f3db3767aadc83d4e8627ddc5b2e0427,
+        type: 3}
+      chance: 40
+  waveCooldown: 20
+--- !u!114 &46010333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46010330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da56e1dc7a950324e911cac14f1ec0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &48272229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979271443}
   - component: {fileID: 1979271444}
+  - component: {fileID: 1979271445}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -1730,6 +1769,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointDeadZone: 0.1
   waypoints: []
+--- !u!114 &1979271445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979271442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d17418018d85c45819dc3400865062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaypointManager: {fileID: 1979271444}
 --- !u!1 &2012198148
 GameObject:
   m_ObjectHideFlags: 0

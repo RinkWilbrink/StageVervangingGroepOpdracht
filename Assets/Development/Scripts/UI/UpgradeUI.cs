@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tower;
 using UnityEngine;
 
 namespace UI
@@ -11,7 +12,12 @@ namespace UI
         [Header("UI Stuff")]
         [SerializeField] private float UILerpSpeed;
 
-        [SerializeField] private Tower.TowerCore currentTower;
+        [Header("Upgrade Stats")]
+        [SerializeField] private float DamageIncrease;
+        [SerializeField] private float FireRateIncrease;
+
+        [Space(2)]
+        [SerializeField] public Tower.TowerCore currentTower;
 
         void Start()
         {
@@ -37,6 +43,16 @@ namespace UI
 
                 yield return null;
             }
+        }
+
+        public void DamageButton()
+        {
+            currentTower.DamageMultiplier += DamageIncrease;
+        }
+
+        public void FireRateButton()
+        {
+            currentTower.FireRateMutliplier += FireRateIncrease;
         }
     }
 }

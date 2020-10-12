@@ -73,6 +73,7 @@ public class TowerPlacement : MonoBehaviour
                 {
                     Debug.Log("Cool");
                     CanPlaceTowers = false;
+                    upgradeUI.currentTower = hit.collider.GetComponent<Tower.TowerCore>();
                     upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
                 }
             }

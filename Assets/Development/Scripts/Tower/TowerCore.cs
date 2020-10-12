@@ -31,7 +31,7 @@ namespace Tower
         // Straight up higher damage with increases in the multiplier.
         [SerializeField] public float DamageMultiplier = 1f;
         // The higher the number that faster the turrets can shoot thus increasing its firerate and damage output over time.
-        [SerializeField] public float AttackTimeDivision = 1f;
+        [SerializeField] public float FireRateMutliplier = 1f;
 
         // Hidden Secondairy Attack Variables
         [HideInInspector] public float SpecialTimer;
@@ -123,7 +123,7 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime / AttackTimeDivision))
+            if(AttackTimer >= (AttackShootingTime / FireRateMutliplier))
             {
                 CanAttack = true;
             }
@@ -131,7 +131,7 @@ namespace Tower
             {
                 AttackTimer += Time.deltaTime;
             }
-            if(SpecialTimer >= (SpecialShootingTime / AttackTimeDivision))
+            if(SpecialTimer >= (SpecialShootingTime / FireRateMutliplier))
             {
                 CanUseSpecial = true;
             }
@@ -140,6 +140,8 @@ namespace Tower
                 SpecialTimer += Time.deltaTime;
             }
         }
+
+        #region Virtual Functions
 
         // Virtual functions for shooting and special abilities
         public virtual void PrimairyAttack(EnemyUnit _target, int _damage, int _attackTime)
@@ -160,5 +162,7 @@ namespace Tower
             CanUseSpecial = false;
             SpecialTimer = 0;
         }
+
+        #endregion
     }
 }

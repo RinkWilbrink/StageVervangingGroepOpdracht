@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Tower
 {
     [SelectionBase]
-    public class WizardTower : TowerCore
+    public class TowerWizard : TowerCore
     {
         // Variables
 

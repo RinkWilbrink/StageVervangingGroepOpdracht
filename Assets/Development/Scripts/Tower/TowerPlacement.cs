@@ -21,6 +21,7 @@ public class TowerPlacement : MonoBehaviour
     [Space(6)]
     [SerializeField] private UI.UpgradeUI upgradeUI;
 
+    [HideInInspector] public bool CanPlaceTowers = true;
 
     // private variables
     private GridBlockType[,] grid = new GridBlockType[20, 20];
@@ -37,51 +38,72 @@ public class TowerPlacement : MonoBehaviour
             Prefablist[i].name = Prefablist[i].name.Replace("Clone", "Template");
             Prefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
         }
+
+        CanPlaceTowers = true;
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (CanPlaceTowers)
         {
-            var ray = camera.ScreenPointToRay(Input.mousePosition);
-
-            hit = new RaycastHit();
-
-            if(Physics.Raycast(ray, out hit, 100f))
+            if (Input.GetMouseButton(0))
             {
-                hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
-                hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
 
-                if(hit.collider.tag == "PlaceableGround")
+                hit = new RaycastHit();
+
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
-                    Prefablist[TowerSelectedIndex].SetActive(true);
-                    Prefablist[TowerSelectedIndex].transform.position = hitPoint;
+                    hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
+                    hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
+
+                    if (hit.collider.tag == "PlaceableGround")
+                    {
+                        Prefablist[TowerSelectedIndex].SetActive(true);
+                        Prefablist[TowerSelectedIndex].transform.position = hitPoint;
+                    }
+
+                    Debug.Log(hitPoint);
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hit.collider.tag == "Tower")
+                {
+                    Debug.Log("Cool");
+                    CanPlaceTowers = false;
+                    upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (hit.collider.tag == "PlaceableGround")
+                {
+                    //Debug.Log(hitPoint);
+                    GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                 }
 
-                Debug.Log(hitPoint);
+                Prefablist[TowerSelectedIndex].SetActive(false);
+                Prefablist[TowerSelectedIndex].transform.position = Vector3.zero;
             }
-        }
-
-        if(Input.GetMouseButtonUp(0))
-        {
-            if(hit.collider.tag == "PlaceableGround")
-            {
-                //Debug.Log(hitPoint);
-                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
-            }
-            if(hit.collider.tag == "Tower")
-            {
-                Debug.Log("Cool");
-                upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
-            }
-
-            Prefablist[TowerSelectedIndex].SetActive(false);
-            Prefablist[TowerSelectedIndex].transform.position = Vector3.zero;
         }
     }
 
     public void OnButtonClick(int _i)
     {
         TowerSelectedIndex = _i;
+    }
+
+    public void SetCanPlaceTowers(bool _x)
+    {
+        Debug.Log("BANAAAN!");
+        CanPlaceTowers = _x;
+    }
+
+    public void ResetUpgradeUI(bool _x)
+    {
+        SetCanPlaceTowers(_x);
     }
 }

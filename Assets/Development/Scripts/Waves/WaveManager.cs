@@ -18,7 +18,6 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
-
     private void Start() {
         WaypointManager = FindObjectOfType<WaypointManager>();
 

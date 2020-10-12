@@ -29,7 +29,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update() {
         GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
-        print("Wave: " + currentWaveNum);
+        //print("Wave: " + currentWaveNum);
 
         if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
             enemiesLeftToSpawn--;

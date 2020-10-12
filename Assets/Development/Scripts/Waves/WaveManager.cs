@@ -20,15 +20,16 @@ public class WaveManager : MonoBehaviour
 
     private void Start() {
         WaypointManager = FindObjectOfType<WaypointManager>();
+        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
 
         Debug.Log("TIP: Press Spacebar to Instantiate a test unit...");
 
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
+
     }
 
     private void Update() {
-        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
         //print("Wave: " + currentWaveNum);
 
         if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
@@ -73,6 +74,8 @@ public class WaveManager : MonoBehaviour
 
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
+
+        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;

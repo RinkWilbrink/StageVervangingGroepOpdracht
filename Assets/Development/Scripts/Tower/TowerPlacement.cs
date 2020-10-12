@@ -19,7 +19,7 @@ public class TowerPlacement : MonoBehaviour
     private GameObject[] Prefablist;
 
     [Space(6)]
-    [SerializeField] private UpgradeUI upgradeUI;
+    [SerializeField] private UI.UpgradeUI upgradeUI;
 
 
     // private variables
@@ -71,8 +71,8 @@ public class TowerPlacement : MonoBehaviour
             }
             if(hit.collider.tag == "Tower")
             {
-                //Debug.Log("Cool");
-                //upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
+                Debug.Log("Cool");
+                upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
             }
 
             Prefablist[TowerSelectedIndex].SetActive(false);

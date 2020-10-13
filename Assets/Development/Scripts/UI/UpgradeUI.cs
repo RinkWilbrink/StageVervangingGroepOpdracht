@@ -95,11 +95,11 @@ namespace UI
 
         private void UpdateButtonUI()
         {
+            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageLevel + 1);
             DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageLevel);
-            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageLevel);
 
+            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateLevel + 1);
             FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateLevel);
-            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateLevel);
         }
 
         public void CleanUpAfterClosing()

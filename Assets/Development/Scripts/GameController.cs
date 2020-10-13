@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
         if ( MainTowerHP < 1 ) {
             Debug.Log("GAME OVER");
         } else {
-            Debug.Log("Main Tower HP: " + MainTowerHP);
+            //Debug.LogFormat("Main Tower HP: {0}", MainTowerHP);
         }
     }
 }

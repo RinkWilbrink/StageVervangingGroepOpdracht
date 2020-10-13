@@ -25,7 +25,7 @@ namespace UI
         [SerializeField] private float FirerateGoldMultiplier;
 
         [Space(4)]
-        [HideInInspector] public Tower.TowerCore currentTower;
+        [HideInInspector] public TowerCore currentTower;
 
         void Start()
         {
@@ -39,11 +39,7 @@ namespace UI
             UpgradePanel.anchoredPosition = new Vector2(_x, _y);
             UpgradePanel.localScale = Vector3.zero;
 
-            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
-            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
-
-            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
-            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
+            UpdateButtonUI();
 
             StartCoroutine(LerpUI());
         }
@@ -77,7 +73,7 @@ namespace UI
         {
             if(PayGold(0))
             {
-                currentTower.DamageMultiplier += DamageIncrease;
+                currentTower.DamageLevel += 1;
 
                 Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
             }
@@ -89,7 +85,7 @@ namespace UI
         {
             if(PayGold(0))
             {
-                currentTower.FireRateMutliplier += FireRateIncrease;
+                currentTower.FireRateLevel += 1;
 
                 Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
             }
@@ -99,11 +95,11 @@ namespace UI
 
         private void UpdateButtonUI()
         {
-            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
-            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
+            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageLevel);
+            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageLevel);
 
-            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
-            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
+            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateLevel);
+            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateLevel);
         }
 
         public void CleanUpAfterClosing()

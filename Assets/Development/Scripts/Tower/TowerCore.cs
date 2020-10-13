@@ -33,6 +33,9 @@ namespace Tower
         // The higher the number that faster the turrets can shoot thus increasing its firerate and damage output over time.
         [SerializeField] public float FireRateMutliplier = 1f;
 
+        [SerializeField] public int DamageLevel = 1;
+        [SerializeField] public int FireRateLevel = 1;
+
         // Hidden Secondairy Attack Variables
         [HideInInspector] public float SpecialTimer;
         [HideInInspector] public bool CanUseSpecial = false;

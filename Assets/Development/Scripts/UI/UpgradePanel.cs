@@ -5,10 +5,6 @@ using UnityEngine;
 public class UpgradePanel : MonoBehaviour
 {
     // Variables
-    //[SerializeField] private string UpgradeName;
-    [SerializeField] private string IDK1;
-    [SerializeField] private string IDK2;
-
     //[HideInInspector] public TMPro.TextMeshProUGUI UpgradeName_Text;
     [HideInInspector] public TMPro.TextMeshProUGUI UpgradeMultiplier_Text;
     [HideInInspector] public TMPro.TextMeshProUGUI UpgradeCost_Text;

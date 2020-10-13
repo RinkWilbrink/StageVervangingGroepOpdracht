@@ -44,46 +44,50 @@ public class TowerPlacement : MonoBehaviour
 
     private void Update()
     {
-        if (CanPlaceTowers)
+        if(CanPlaceTowers)
         {
-            if (Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0))
             {
                 var ray = camera.ScreenPointToRay(Input.mousePosition);
 
                 hit = new RaycastHit();
 
-                if (Physics.Raycast(ray, out hit, 100f))
+                if(Physics.Raycast(ray, out hit, 100f))
                 {
                     hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
                     hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
 
-                    if (hit.collider.tag == "PlaceableGround")
+                    if(hit.collider.tag == "PlaceableGround")
                     {
                         Prefablist[TowerSelectedIndex].SetActive(true);
                         Prefablist[TowerSelectedIndex].transform.position = hitPoint;
                     }
-
-                    //Debug.Log(hitPoint);
                 }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag == "Tower")
+                if(hit.collider != null)
                 {
-                    Debug.Log("Cool");
-                    CanPlaceTowers = false;
-                    upgradeUI.currentTower = hit.collider.GetComponent<Tower.TowerCore>();
-                    upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
+                    if(hit.collider.tag == "Tower")
+                    {
+                        Debug.Log("Cool");
+                        CanPlaceTowers = false;
+                        upgradeUI.currentTower = hit.collider.GetComponent<Tower.TowerCore>();
+                        upgradeUI.UpdateUIPosition(hitPoint.x, hitPoint.z);
+                    }
                 }
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0))
             {
-                if (hit.collider.tag == "PlaceableGround")
+                if(hit.collider != null)
                 {
-                    //Debug.Log(hitPoint);
-                    GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+                    if(hit.collider.tag == "PlaceableGround")
+                    {
+                        //Debug.Log(hitPoint);
+                        GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+                    }
                 }
 
                 Prefablist[TowerSelectedIndex].SetActive(false);

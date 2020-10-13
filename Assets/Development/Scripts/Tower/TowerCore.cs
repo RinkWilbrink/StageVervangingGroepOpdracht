@@ -28,13 +28,10 @@ namespace Tower
         [SerializeField] public int SpecialAttackThresshold;
 
         [Header("Damage and Firerate Upgrades")]
-        // Straight up higher damage with increases in the multiplier.
-        [SerializeField] public float DamageMultiplier = 1f;
-        // The higher the number that faster the turrets can shoot thus increasing its firerate and damage output over time.
-        [SerializeField] public float FireRateMutliplier = 1f;
-
-        [SerializeField] public int DamageLevel = 1;
-        [SerializeField] public int FireRateLevel = 1;
+        [SerializeField] public float DamageAddedPerLevel;
+        [SerializeField] public float FireRateAddedPerLevel;
+        [SerializeField] public int DamageLevel = 0;
+        [SerializeField] public int FireRateLevel = 0;
 
         // Hidden Secondairy Attack Variables
         [HideInInspector] public float SpecialTimer;
@@ -80,13 +77,13 @@ namespace Tower
                     {
                         //The Attack
 
-                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage * DamageMultiplier), SpecialShootingTime);
+                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage + (DamageAddedPerLevel * DamageLevel)), SpecialShootingTime);
 
                         return;
                     }
                 }
 
-                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage * DamageMultiplier), AttackShootingTime);
+                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage + (DamageAddedPerLevel * DamageLevel)), AttackShootingTime);
             }
         }
 
@@ -126,7 +123,7 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime / FireRateMutliplier))
+            if(AttackTimer >= (AttackShootingTime - (FireRateLevel * FireRateAddedPerLevel)))
             {
                 CanAttack = true;
             }
@@ -134,7 +131,7 @@ namespace Tower
             {
                 AttackTimer += Time.deltaTime;
             }
-            if(SpecialTimer >= (SpecialShootingTime / FireRateMutliplier))
+            if(SpecialTimer >= (SpecialShootingTime - (FireRateLevel * FireRateAddedPerLevel)))
             {
                 CanUseSpecial = true;
             }

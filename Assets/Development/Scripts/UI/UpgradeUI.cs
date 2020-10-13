@@ -20,9 +20,10 @@ namespace UI
         [SerializeField] private UpgradePanel DamageButtonPanel;
         [SerializeField] private UpgradePanel FirerateButtonPanel;
 
-        [Space(6)]
+        [Header("Resources")]
         [SerializeField] private float DamageGoldMultiplier;
         [SerializeField] private float FirerateGoldMultiplier;
+        [SerializeField] private ResourceUIManager ResourceManager;
 
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
@@ -66,16 +67,17 @@ namespace UI
                 //Update UI That there is not enough gold.
                 return false;
             }
+
+            ResourceManager.UpdateResourceUI();
+
             return true;
         }
 
         public void DamageButton(GameObject button)
         {
-            if(PayGold(0))
+            if(PayGold(1))
             {
                 currentTower.DamageLevel += 1;
-
-                Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
             }
 
             UpdateButtonUI();
@@ -83,11 +85,9 @@ namespace UI
 
         public void FireRateButton(GameObject button)
         {
-            if(PayGold(0))
+            if(PayGold(1))
             {
                 currentTower.FireRateLevel += 1;
-
-                Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
             }
 
             UpdateButtonUI();

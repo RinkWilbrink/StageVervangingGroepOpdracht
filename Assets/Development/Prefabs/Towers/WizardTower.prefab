@@ -53,8 +53,10 @@ MonoBehaviour:
   SpecialShootingTime: 1000
   SpecialDamage: 8
   SpecialAttackThresshold: 5
-  DamageMultiplier: 1
-  AttackTimeMultiplier: 1
+  DamageAddedPerLevel: 1
+  FireRateAddedPerLevel: 0.1
+  DamageLevel: 0
+  FireRateLevel: 0
   SpecialTimer: 0
   CanUseSpecial: 0
   ShootOrigin: {fileID: 2727193884480791051}

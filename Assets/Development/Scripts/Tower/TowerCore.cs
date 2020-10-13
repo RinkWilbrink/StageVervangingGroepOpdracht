@@ -14,24 +14,24 @@ namespace Tower
         [SerializeField] public int AttackShootingTime;
         [SerializeField] public int AttackDamage;
 
+        [Space(4)]
+
+        [SerializeField] public int SpecialShootingTime;
+        [SerializeField] public int SpecialDamage;
+        [SerializeField] public int SpecialAttackThresshold;
+
         // Hidden Primairy Attack Variables
         [HideInInspector] public float AttackTimer;
         [HideInInspector] public bool CanAttack = true;
 
-        [Space(6)]
-
-        [SerializeField] public int SpecialShootingTime;
-        [SerializeField] public int SpecialDamage;
-
-        [Space(2)]
-
-        [SerializeField] public int SpecialAttackThresshold;
 
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] public float DamageAddedPerLevel;
         [SerializeField] public float FireRateAddedPerLevel;
         [SerializeField] public int DamageLevel = 0;
         [SerializeField] public int FireRateLevel = 0;
+        private float UpgradedDamage;
+        private float UpgradedFireRate;
 
         // Hidden Secondairy Attack Variables
         [HideInInspector] public float SpecialTimer;
@@ -67,25 +67,6 @@ namespace Tower
             }
         }
 
-        public virtual void HandleShooting()
-        {
-            if(CanAttack)
-            {
-                if(CanUseSpecial)
-                {
-                    if(EnemiesInRange > SpecialAttackThresshold)
-                    {
-                        //The Attack
-
-                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage + (DamageAddedPerLevel * DamageLevel)), SpecialShootingTime);
-
-                        return;
-                    }
-                }
-
-                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage + (DamageAddedPerLevel * DamageLevel)), AttackShootingTime);
-            }
-        }
 
         private void CheckTargets()
         {
@@ -123,7 +104,7 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime - (FireRateLevel * FireRateAddedPerLevel)))
+            if(AttackTimer >= (AttackShootingTime - UpgradedFireRate))
             {
                 CanAttack = true;
             }
@@ -131,7 +112,7 @@ namespace Tower
             {
                 AttackTimer += Time.deltaTime;
             }
-            if(SpecialTimer >= (SpecialShootingTime - (FireRateLevel * FireRateAddedPerLevel)))
+            if(SpecialTimer >= (SpecialShootingTime - UpgradedFireRate))
             {
                 CanUseSpecial = true;
             }
@@ -161,6 +142,35 @@ namespace Tower
 
             CanUseSpecial = false;
             SpecialTimer = 0;
+        }
+        public virtual void HandleShooting()
+        {
+            if(CanAttack)
+            {
+                if(CanUseSpecial)
+                {
+                    if(EnemiesInRange > SpecialAttackThresshold)
+                    {
+                        //The Attack
+
+                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage + UpgradedDamage), SpecialShootingTime);
+
+                        return;
+                    }
+                }
+
+                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage + UpgradedDamage), AttackShootingTime);
+            }
+        }
+
+        #endregion
+
+        #region Public Functions
+
+        public void UpdateDamageValues()
+        {
+            UpgradedDamage = (DamageAddedPerLevel * DamageLevel);
+            UpgradedFireRate = (FireRateLevel * FireRateAddedPerLevel);
         }
 
         #endregion

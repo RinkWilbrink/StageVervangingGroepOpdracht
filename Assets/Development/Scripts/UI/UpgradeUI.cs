@@ -81,6 +81,7 @@ namespace UI
             }
 
             UpdateButtonUI();
+            currentTower.UpdateDamageValues();
         }
 
         public void FireRateButton(GameObject button)
@@ -91,6 +92,7 @@ namespace UI
             }
 
             UpdateButtonUI();
+            currentTower.UpdateDamageValues();
         }
 
         private void UpdateButtonUI()

@@ -63,7 +63,7 @@ public class TowerPlacement : MonoBehaviour
                         Prefablist[TowerSelectedIndex].transform.position = hitPoint;
                     }
 
-                    Debug.Log(hitPoint);
+                    //Debug.Log(hitPoint);
                 }
             }
 

@@ -16,8 +16,16 @@ namespace UI
         [SerializeField] private float DamageIncrease;
         [SerializeField] private float FireRateIncrease;
 
-        [Space(2)]
-        [SerializeField] public Tower.TowerCore currentTower;
+        [Header("bruh")]
+        [SerializeField] private UpgradePanel DamageButtonPanel;
+        [SerializeField] private UpgradePanel FirerateButtonPanel;
+
+        [Space(6)]
+        [SerializeField] private float DamageGoldMultiplier;
+        [SerializeField] private float FirerateGoldMultiplier;
+
+        [Space(4)]
+        [HideInInspector] public Tower.TowerCore currentTower;
 
         void Start()
         {
@@ -30,6 +38,12 @@ namespace UI
 
             UpgradePanel.anchoredPosition = new Vector2(_x, _y);
             UpgradePanel.localScale = Vector3.zero;
+
+            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
+            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
+
+            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
+            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
 
             StartCoroutine(LerpUI());
         }
@@ -45,14 +59,56 @@ namespace UI
             }
         }
 
-        public void DamageButton()
+        private bool PayGold(int Amount)
         {
-            currentTower.DamageMultiplier += DamageIncrease;
+            if(GameController.Gold >= Amount)
+            {
+                GameController.Gold -= Amount;
+            }
+            else
+            {
+                //Update UI That there is not enough gold.
+                return false;
+            }
+            return true;
         }
 
-        public void FireRateButton()
+        public void DamageButton(GameObject button)
         {
-            currentTower.FireRateMutliplier += FireRateIncrease;
+            if(PayGold(0))
+            {
+                currentTower.DamageMultiplier += DamageIncrease;
+
+                Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
+            }
+
+            UpdateButtonUI();
+        }
+
+        public void FireRateButton(GameObject button)
+        {
+            if(PayGold(0))
+            {
+                currentTower.FireRateMutliplier += FireRateIncrease;
+
+                Debug.Log(button.GetComponent<UpgradePanel>().UpgradeMultiplier_Text);
+            }
+
+            UpdateButtonUI();
+        }
+
+        private void UpdateButtonUI()
+        {
+            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
+            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageMultiplier);
+
+            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
+            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateMutliplier);
+        }
+
+        public void CleanUpAfterClosing()
+        {
+            currentTower = null;
         }
     }
 }

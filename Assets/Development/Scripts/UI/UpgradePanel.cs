@@ -6,24 +6,29 @@ public class UpgradePanel : MonoBehaviour
 {
     // Variables
     //[SerializeField] private string UpgradeName;
+    [SerializeField] private string IDK1;
+    [SerializeField] private string IDK2;
 
-    private TMPro.TextMeshProUGUI UpgradeName_Text;
-    private TMPro.TextMeshProUGUI UpgradeMultiplier_Text;
+    //[HideInInspector] public TMPro.TextMeshProUGUI UpgradeName_Text;
+    [HideInInspector] public TMPro.TextMeshProUGUI UpgradeMultiplier_Text;
+    [HideInInspector] public TMPro.TextMeshProUGUI UpgradeCost_Text;
     
-    void Start()
+    void Awake()
     {
         foreach (var go in gameObject.GetComponentsInChildren<TMPro.TextMeshProUGUI>())
         {
-            if (go.name == "UpgradeName_Text")
-            {
-                UpgradeName_Text = go;
-                //UpgradeName_Text.text = UpgradeName;
-            }
+            //if (go.name == "UpgradeName_Text")
+            //{
+            //    UpgradeName_Text = go;
+            //}
 
-            if (go.name == "UpgradeLevel_Text")
+            if (go.name == "Upgrade_Level")
             {
                 UpgradeMultiplier_Text = go;
-                //UpgradeMultiplier_Text.text = "x1";
+            }
+            if(go.name == "UpgradeCost")
+            {
+                UpgradeCost_Text = go;
             }
         }
     }

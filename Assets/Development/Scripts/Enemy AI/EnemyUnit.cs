@@ -15,7 +15,7 @@ public class EnemyUnit : MonoBehaviour
 
     public event Action OnDeath;
 
-    private WaypointManager WayPointManager;
+    public Transform[] wayPoints;
     private int waypointIndex;
 
     public void Initialize( EnemyData e ) {
@@ -26,16 +26,17 @@ public class EnemyUnit : MonoBehaviour
     }
 
     private void Start() {
-        WayPointManager = FindObjectOfType<WaypointManager>();
+        //wayPoints = FindObjectOfType<WaypointManager>();
+
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
 
     private void Update() {
-        transform.position = Vector3.MoveTowards(transform.position, WayPointManager.waypoints[waypointIndex].position, Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
 
         // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(WayPointManager.waypoints[waypointIndex].position - transform.position);
+        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
 
         //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
@@ -44,8 +45,8 @@ public class EnemyUnit : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.E) )
             TakeDamage(1);
 
-        if ( Vector3.Distance(transform.position, WayPointManager.waypoints[waypointIndex].position) < WayPointManager.waypointDeadZone )
-            if ( waypointIndex < WayPointManager.waypoints.Length - 1 ) {
+        if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
+            if ( waypointIndex < wayPoints.Length - 1 ) {
                 waypointIndex++;
             } else {
                 Death();

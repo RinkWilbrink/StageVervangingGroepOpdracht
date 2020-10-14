@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +9,7 @@ namespace ResourceBuilding
     }
     public class ResourceBuildingCore : MonoBehaviour
     {
-        // Variables
+        // Resource Variables
         [Header("Resource Type")]
         [SerializeField] public ResourceType Resource;
 
@@ -28,16 +25,19 @@ namespace ResourceBuilding
         [Header("Storage")]
         [SerializeField] private int ResourcesInStorage;
 
-        // Private variables
-        [HideInInspector] public bool CanCollectResources = false;
-        [SerializeField] public GameObject UIPopUp;
+        //Buiding Variables
+        [Header("Building Variables")]
+        [SerializeField] public int BuildingHealth;
 
+        [Header("Special Variables")]
+        [SerializeField] public GameObject UIPopUp;
         [SerializeField] private Button button;
+
+        [HideInInspector] public bool CanCollectResources = false;
 
         private void Start()
         {
-            //
-            button.onClick.AddListener(delegate { CollectResources(); } );
+            button.onClick.AddListener(delegate { CollectResources(); });
         }
 
         public void CollectResources()
@@ -56,12 +56,17 @@ namespace ResourceBuilding
 
         private void Update()
         {
+            if(BuildingHealth <= 0)
+            {
+                Destroy(button.gameObject);
+                Destroy(gameObject);
+            }
+
             if(ResourcesInStorage < MaximumStorageCount)
             {
                 if(ResourceCollectTimer >= ResourceCollectionTime)
                 {
                     ResourcesInStorage += AmountAddedPerInterval;
-
                     ResourceCollectTimer = 0f;
                 }
                 else
@@ -73,13 +78,11 @@ namespace ResourceBuilding
             if(ResourcesInStorage >= MinimumCollectionCount)
             {
                 CanCollectResources = true;
-
                 UIPopUp.SetActive(true);
             }
             else if(ResourcesInStorage < MinimumCollectionCount)
             {
                 CanCollectResources = false;
-
                 UIPopUp.SetActive(false);
             }
         }

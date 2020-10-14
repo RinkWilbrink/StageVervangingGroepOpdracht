@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Tower;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ namespace UI
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
-        void Start()
+        private void Start()
         {
             UpgradePanel.gameObject.SetActive(false);
         }
@@ -45,9 +44,9 @@ namespace UI
             StartCoroutine(LerpUI());
         }
 
-        IEnumerator LerpUI()
+        private IEnumerator LerpUI()
         {
-            while (Vector3.Distance(UpgradePanel.anchoredPosition, Vector2.zero) > 0.05f)
+            while(Vector3.Distance(UpgradePanel.anchoredPosition, Vector2.zero) > 0.05f)
             {
                 UpgradePanel.anchoredPosition = Vector3.Lerp(UpgradePanel.anchoredPosition, Vector2.zero, UILerpSpeed * Time.deltaTime);
                 UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * Time.deltaTime);
@@ -64,7 +63,6 @@ namespace UI
             }
             else
             {
-                //Update UI That there is not enough gold.
                 return false;
             }
 

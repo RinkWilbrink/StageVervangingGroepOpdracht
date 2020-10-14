@@ -1,12 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-
-public enum GridBlockType
-{
-    Ground = 0, Path, Tower, MainTower = 3
-}
 
 public class TowerPlacement : MonoBehaviour
 {
@@ -26,7 +18,6 @@ public class TowerPlacement : MonoBehaviour
     private bool PlacingTowers = true;
 
     // private variables
-    private GridBlockType[,] grid = new GridBlockType[20, 20];
     private Vector3 hitPoint = Vector3.zero;
     private RaycastHit hit;
 
@@ -79,7 +70,6 @@ public class TowerPlacement : MonoBehaviour
                         {
                             if(hit.collider.tag == "PlaceableGround")
                             {
-                                //Debug.Log(hitPoint);
                                 GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
 
                                 CanPlaceTowers = false;
@@ -109,9 +99,6 @@ public class TowerPlacement : MonoBehaviour
                         if(_hit.collider.tag == "Tower")
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<Tower.TowerCore>();
-
-                            Debug.LogFormat("BRUH!", _hit.collider.GetComponent<Tower.TowerCore>().name);
-
                             upgradeUI.UpdateUIPosition(_hit.point.x, _hit.point.z);
                         }
                     }
@@ -128,7 +115,6 @@ public class TowerPlacement : MonoBehaviour
 
     public void SetCanPlaceTowers(bool _x)
     {
-        //Debug.Log("BANAAAN!");
         CanRaycast = _x;
     }
 

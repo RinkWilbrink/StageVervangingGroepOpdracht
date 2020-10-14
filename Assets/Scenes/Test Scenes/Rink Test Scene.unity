@@ -466,7 +466,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213190211
 GameObject:
@@ -666,7 +666,7 @@ Transform:
   - {fileID: 1808642139}
   - {fileID: 144108372}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239601916
 GameObject:
@@ -1710,6 +1710,7 @@ MonoBehaviour:
   GoldButtonParent: {fileID: 1420382294}
   ManaButtonParent: {fileID: 1112549195}
   upgradeUI: {fileID: 213190215}
+  resourceManager: {fileID: 1489471885}
   CanRaycast: 1
 --- !u!4 &486239119
 Transform:

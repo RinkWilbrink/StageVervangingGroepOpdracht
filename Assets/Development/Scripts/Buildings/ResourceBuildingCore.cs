@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,8 +31,10 @@ namespace ResourceBuilding
         [SerializeField] public int BuildingHealth;
 
         [Header("Special Variables")]
-        [SerializeField] public GameObject UIPopUp;
+        //[SerializeField] public GameObject UIPopUp;
         [SerializeField] public Button button;
+
+        [SerializeField] public ResourceUIManager resourceManager;
 
         [HideInInspector] public bool CanCollectResources = false;
 
@@ -52,6 +55,10 @@ namespace ResourceBuilding
             {
                 GameController.Mana += ResourcesInStorage;
             }
+
+            resourceManager.UpdateResourceUI();
+
+            ResourcesInStorage = 0;
         }
 
         private void Update()
@@ -78,12 +85,12 @@ namespace ResourceBuilding
             if(ResourcesInStorage >= MinimumCollectionCount)
             {
                 CanCollectResources = true;
-                UIPopUp.SetActive(true);
+                button.gameObject.SetActive(true);
             }
             else if(ResourcesInStorage < MinimumCollectionCount)
             {
                 CanCollectResources = false;
-                UIPopUp.SetActive(false);
+                button.gameObject.SetActive(false);
             }
         }
 

@@ -31,8 +31,9 @@ public class TowerPlacement : MonoBehaviour
 
     private BuildingTypes CurrentBuildingType;
 
-    [Space(6)]
+    [Header("Script References")]
     [SerializeField] private UI.UpgradeUI upgradeUI;
+    [SerializeField] private ResourceUIManager resourceManager;
 
     [HideInInspector] public bool CanRaycast = true;
     private bool CanPlaceTowers = true;
@@ -134,9 +135,13 @@ public class TowerPlacement : MonoBehaviour
                                         
                                     }
 
-                                    GameObject button = Instantiate(ResourceCollectButtonPrefab, new Vector2(hitPoint.x, hitPoint.z), Quaternion.identity, t);
+                                    GameObject boi = Instantiate(ResourceCollectButtonPrefab, t);
+                                    boi.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
+                                    boi.SetActive(false);
+
                                     // Settings for the Button
-                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = ResourceCollectButtonPrefab.GetComponent<Button>();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = boi.GetComponent<Button>();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
                                 }
 

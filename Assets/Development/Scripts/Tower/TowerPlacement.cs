@@ -7,6 +7,13 @@ enum BuildingTypes
     Tower = 0, ResourceBuilding = 1
 }
 
+/*
+ * TODO:
+ * 
+ * 15 OCT: Pay to place towers
+ * 
+*/
+
 public class TowerPlacement : MonoBehaviour
 {
     // Variables

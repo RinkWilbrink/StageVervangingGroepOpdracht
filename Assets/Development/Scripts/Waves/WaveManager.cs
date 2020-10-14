@@ -29,34 +29,58 @@ public class WaveManager : MonoBehaviour
 
     }
 
+    //float spawnTimer;
+    int spawnCurveIndex;
     private void Update() {
         //print("Wave: " + currentWaveNum);
 
         if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
-            enemiesLeftToSpawn--;
+            SpawnEnemy();
+        }
+
+        //spawnTimer += Time.deltaTime;
+        //spawnNext = currentWave.curve.Evaluate(spawnTimer);
+        //Debug.Log(spawnNext);
+        //print(currentWave.curve.Evaluate(Time.time));
+    }
+
+    private void SpawnEnemy() {
+        //yield return new WaitForSeconds(currentWave.curve.Evaluate(Time.timeSinceLevelLoad));
+        spawnCurveIndex++;
+        //int enemiesToSpawn = (int)currentWave.curve.Evaluate(spawnCurveIndex);
+
+        //for ( int e = 0; e < enemiesToSpawn; e++ ) {
+        enemiesLeftToSpawn--;
+        Debug.Log(enemiesLeftToSpawn);
+
+        if ( currentWave.spawnIntensity.length < 1 )
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
+        else
+            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnCurveIndex);
 
-            int random = UnityEngine.Random.Range(0, 100);
-            int lowestPercentage;
-            int highestPercentage = 0;
+        //print("Time until next spawn: " + currentWave.curve.Evaluate(Time.time));
 
-            for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
-                //currentWave.enemies[currentWaveNum - 1].chance
-                lowestPercentage = highestPercentage;
-                highestPercentage += currentWave.enemies[i].chance;
+        int random = UnityEngine.Random.Range(0, 100);
+        int lowestPercentage;
+        int highestPercentage = 0;
 
-                if ( random >= lowestPercentage && random < highestPercentage ) {
-                    //print("Random: " + random);
-                    //print("Lowest: " + lowestPercentage);
-                    //print("Highest: " + highestPercentage);
+        for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
+            //currentWave.enemies[currentWaveNum - 1].chance
+            lowestPercentage = highestPercentage;
+            highestPercentage += currentWave.enemies[i].chance;
 
-                    EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
-                    enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
+            if ( random >= lowestPercentage && random < highestPercentage ) {
+                //print("Random: " + random);
+                //print("Lowest: " + lowestPercentage);
+                //print("Highest: " + highestPercentage);
 
-                    enemy.OnDeath += OnEnemyDeath;
-                }
+                EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
+                enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
+
+                enemy.OnDeath += OnEnemyDeath;
             }
         }
+        //}
     }
 
     IEnumerator updateWave;
@@ -80,6 +104,8 @@ public class WaveManager : MonoBehaviour
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
 
+        //spawnTimer = 0f;
+
         GameController.Gold += currentWave.goldReward;
     }
 
@@ -88,6 +114,7 @@ public class WaveManager : MonoBehaviour
     {
         public int enemyCount;
         public int goldReward;
+        public AnimationCurve spawnIntensity;
         public float minSpawnTime;
         public float maxSpawnTime;
         public EnemyStructure[] enemies;

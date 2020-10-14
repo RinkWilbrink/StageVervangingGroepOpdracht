@@ -198,45 +198,9 @@ MonoBehaviour:
   waves:
   - enemyCount: 10
     goldReward: 20
-    animationCurve:
+    spawnIntensity:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.6987152
-        value: 0.80255127
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1.5566691
-        value: 2.0720534
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 2.513238
-        value: 0.03680253
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -249,7 +213,7 @@ MonoBehaviour:
       waypointManager: {fileID: 117424195}
   - enemyCount: 20
     goldReward: 0
-    animationCurve:
+    spawnIntensity:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -268,7 +232,7 @@ MonoBehaviour:
       waypointManager: {fileID: 117424195}
   - enemyCount: 20
     goldReward: 0
-    animationCurve:
+    spawnIntensity:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -285,7 +249,7 @@ MonoBehaviour:
         type: 3}
       chance: 40
       waypointManager: {fileID: 0}
-  waveCooldown: 2
+  waveCooldown: 20
 --- !u!114 &46010333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +359,7 @@ Transform:
   - {fileID: 1325411138}
   - {fileID: 1696246879}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &149097203
 GameObject:
@@ -2336,7 +2300,7 @@ Transform:
   m_LocalScale: {x: 2.5428, y: 2.5428, z: 2.5428}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370387628
 GameObject:
@@ -2928,7 +2892,7 @@ Transform:
   - {fileID: 1687252945}
   - {fileID: 151548656}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696246878
 GameObject:

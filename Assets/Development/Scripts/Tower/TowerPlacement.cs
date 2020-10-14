@@ -1,14 +1,35 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
+enum BuildingTypes
+{
+    Tower = 0, ResourceBuilding = 1
+}
 
 public class TowerPlacement : MonoBehaviour
 {
     // Variables
     [SerializeField] private Camera camera;
     [Space(6)]
+    [Header("Tower Buildings")]
     [SerializeField] private Transform TowerParent;
     [SerializeField] private GameObject[] TowerList;
     private int TowerSelectedIndex;
-    private GameObject[] Prefablist;
+    private GameObject[] TowerPrefablist;
+
+    [Header("Resource Building")]
+    [SerializeField] private Transform BuildingParent;
+    [SerializeField] private GameObject[] BuildingList;
+    private int BuildingSelectedIndex;
+    private GameObject[] BuildingPrefablist;
+
+    [Space(4)]
+    [SerializeField] private GameObject ResourceCollectButtonPrefab;
+    [SerializeField] private Transform GoldButtonParent;
+    [SerializeField] private Transform ManaButtonParent;
+
+    private BuildingTypes CurrentBuildingType;
 
     [Space(6)]
     [SerializeField] private UI.UpgradeUI upgradeUI;
@@ -23,15 +44,29 @@ public class TowerPlacement : MonoBehaviour
 
     private void Start()
     {
-        Prefablist = new GameObject[TowerList.Length];
+        // Create Template Towers
+        TowerPrefablist = new GameObject[TowerList.Length];
         for(int i = 0; i < TowerList.Length; i++)
         {
-            Prefablist[i] = Instantiate(TowerList[i], Vector3.zero, Quaternion.identity, transform);
-            Prefablist[i].SetActive(false);
-            Prefablist[i].name = Prefablist[i].name.Replace("Clone", "Template");
-            Prefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
+            TowerPrefablist[i] = Instantiate(TowerList[i], Vector3.zero, Quaternion.identity, transform);
+            TowerPrefablist[i].SetActive(false);
+            TowerPrefablist[i].name = TowerPrefablist[i].name.Replace("Clone", "Template");
+            TowerPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
+            TowerPrefablist[i].GetComponentInChildren<Tower.TowerCore>().enabled = false;
         }
 
+        // Create Template Buildings
+        BuildingPrefablist = new GameObject[BuildingList.Length];
+        for(int i = 0; i < TowerList.Length; i++)
+        {
+            BuildingPrefablist[i] = Instantiate(BuildingList[i], Vector3.zero, Quaternion.identity, transform);
+            BuildingPrefablist[i].SetActive(false);
+            BuildingPrefablist[i].name = BuildingPrefablist[i].name.Replace("Clone", "Template");
+            BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
+            BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
+        }
+
+        // Set Booleans for placing towers and buildings
         CanRaycast = true;
         CanPlaceTowers = false;
         PlacingTowers = true;
@@ -56,8 +91,17 @@ public class TowerPlacement : MonoBehaviour
 
                         if(hit.collider.tag == "PlaceableGround")
                         {
-                            Prefablist[TowerSelectedIndex].SetActive(true);
-                            Prefablist[TowerSelectedIndex].transform.position = hitPoint;
+                            if(CurrentBuildingType == BuildingTypes.Tower)
+                            {
+                                TowerPrefablist[TowerSelectedIndex].SetActive(true);
+                                TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
+                            }
+                            else
+                            {
+                                BuildingPrefablist[BuildingSelectedIndex].SetActive(true);
+                                BuildingPrefablist[BuildingSelectedIndex].transform.position = hitPoint;
+                            }
+                            
                         }
                     }
                 }
@@ -70,7 +114,31 @@ public class TowerPlacement : MonoBehaviour
                         {
                             if(hit.collider.tag == "PlaceableGround")
                             {
-                                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+                                if(CurrentBuildingType == BuildingTypes.Tower)
+                                {
+                                    GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+                                }
+                                else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+                                {
+                                    GameObject go = Instantiate(BuildingList[BuildingSelectedIndex], hitPoint, Quaternion.identity, BuildingParent);
+
+                                    Transform t;
+                                    switch(BuildingSelectedIndex)
+                                    {
+                                        default:
+                                            t = GoldButtonParent;
+                                            break;
+                                        case 1:
+                                            t = ManaButtonParent;
+                                            break;
+                                        
+                                    }
+
+                                    GameObject button = Instantiate(ResourceCollectButtonPrefab, new Vector2(hitPoint.x, hitPoint.z), Quaternion.identity, t);
+                                    // Settings for the Button
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = ResourceCollectButtonPrefab.GetComponent<Button>();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
+                                }
 
                                 CanPlaceTowers = false;
                                 PlacingTowers = false;
@@ -82,8 +150,12 @@ public class TowerPlacement : MonoBehaviour
                         }
                     }
 
-                    Prefablist[TowerSelectedIndex].SetActive(false);
-                    Prefablist[TowerSelectedIndex].transform.position = Vector3.zero;
+                    // Reset Show off Prefabs
+                    TowerPrefablist[TowerSelectedIndex].SetActive(false);
+                    TowerPrefablist[TowerSelectedIndex].transform.position = Vector3.zero;
+
+                    BuildingPrefablist[BuildingSelectedIndex].SetActive(false);
+                    BuildingPrefablist[BuildingSelectedIndex].transform.position = Vector3.zero;
                 }
             }
             else
@@ -107,9 +179,17 @@ public class TowerPlacement : MonoBehaviour
         }
     }
 
-    public void OnButtonClick(int _i)
+    public void SelectTower(int _i)
     {
         TowerSelectedIndex = _i;
+        CurrentBuildingType = BuildingTypes.Tower;
+        CanPlaceTowers = true;
+    }
+
+    public void SelectBuilding(int _i)
+    {
+        BuildingSelectedIndex = _i;
+        CurrentBuildingType = BuildingTypes.ResourceBuilding;
         CanPlaceTowers = true;
     }
 

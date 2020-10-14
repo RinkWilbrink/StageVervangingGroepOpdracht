@@ -31,11 +31,11 @@ namespace ResourceBuilding
 
         [Header("Special Variables")]
         [SerializeField] public GameObject UIPopUp;
-        [SerializeField] private Button button;
+        [SerializeField] public Button button;
 
         [HideInInspector] public bool CanCollectResources = false;
 
-        private void Start()
+        public void AddButtonListener()
         {
             button.onClick.AddListener(delegate { CollectResources(); });
         }

@@ -19,6 +19,7 @@ public class WaypointManager : MonoBehaviour
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
+
         for ( int i = 0; i < waypoints.Length - 1; i++ ) {
             Gizmos.DrawLine(waypoints[i].position, waypoints[i + 1].position);
         }

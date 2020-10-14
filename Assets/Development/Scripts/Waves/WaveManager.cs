@@ -50,12 +50,12 @@ public class WaveManager : MonoBehaviour
                     //print("Lowest: " + lowestPercentage);
                     //print("Highest: " + highestPercentage);
 
-                    EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, WaypointManager.waypoints[0].position, Quaternion.identity);
+                    EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
+                    enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
+
                     enemy.OnDeath += OnEnemyDeath;
                 }
             }
-
-
         }
     }
 
@@ -79,12 +79,15 @@ public class WaveManager : MonoBehaviour
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
+
+        GameController.Gold += currentWave.goldReward;
     }
 
     [Serializable]
     public struct WaveData
     {
         public int enemyCount;
+        public int goldReward;
         public float minSpawnTime;
         public float maxSpawnTime;
         public EnemyStructure[] enemies;
@@ -95,5 +98,6 @@ public class WaveManager : MonoBehaviour
     {
         public EnemyUnit enemy;
         public int chance;
+        public WaypointManager waypointManager;
     }
 }

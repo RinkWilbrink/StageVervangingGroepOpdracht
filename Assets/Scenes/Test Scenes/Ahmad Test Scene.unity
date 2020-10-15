@@ -204,35 +204,17 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.5
+        outSlope: -0.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 0.012448209
-        outSlope: 0.012448209
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.20471036
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 2
-        value: 2
-        inSlope: -0.25
-        outSlope: -0.25
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 3
         value: 0.5
-        inSlope: -1.5
-        outSlope: -1.5
+        inSlope: -0.5
+        outSlope: -0.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -240,6 +222,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 3
     enemies:
@@ -255,6 +238,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 2
     enemies:
@@ -274,6 +258,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 2
     enemies:

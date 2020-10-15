@@ -89,14 +89,19 @@ public class EnemyUnit : MonoBehaviour
 
     bool slowDebuffActive = false;
     float slowDownSpeed;
+    float slowDownTotalSpeed;
     float slowDebuffTime;
     float slowDebuffTimer = 0;
     public void SlowDown( float speedDebuff, float time ) {
-        Speed -= speedDebuff;
-        slowDownSpeed = speedDebuff;
-        slowDebuffTime = time;
+        if ( Speed > slowDownTotalSpeed ) {
+            Speed -= speedDebuff;
 
-        slowDebuffActive = true;
+            slowDownTotalSpeed = Speed;
+            slowDownSpeed = speedDebuff;
+            slowDebuffTime = time;
+
+            slowDebuffActive = true;
+        }
     }
 
     private void Death() {

@@ -200,7 +200,43 @@ MonoBehaviour:
     goldReward: 20
     spawnIntensity:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.012448209
+        outSlope: 0.012448209
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20471036
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2
+        value: 2
+        inSlope: -0.25
+        outSlope: -0.25
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 3
+        value: 0.5
+        inSlope: -1.5
+        outSlope: -1.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -210,7 +246,7 @@ MonoBehaviour:
     - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
         type: 3}
       chance: 100
-      waypointManager: {fileID: 117424195}
+      waypointManager: {fileID: 1979271444}
   - enemyCount: 20
     goldReward: 0
     spawnIntensity:
@@ -249,7 +285,7 @@ MonoBehaviour:
         type: 3}
       chance: 40
       waypointManager: {fileID: 0}
-  waveCooldown: 20
+  waveCooldown: 1
 --- !u!114 &46010333
 MonoBehaviour:
   m_ObjectHideFlags: 0

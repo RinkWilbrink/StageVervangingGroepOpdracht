@@ -24,7 +24,6 @@ namespace Tower
         [HideInInspector] public float AttackTimer;
         [HideInInspector] public bool CanAttack = true;
 
-
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] public float DamageAddedPerLevel;
         [SerializeField] public float FireRateAddedPerLevel;

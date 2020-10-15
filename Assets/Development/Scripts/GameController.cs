@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     // Resources
-    public static int Gold = 10;
+    //[SerializeField] public 
+
+    public static int Gold = 15;
     public static int Mana = 10;
 
     // Other things

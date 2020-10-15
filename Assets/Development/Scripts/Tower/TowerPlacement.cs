@@ -41,6 +41,7 @@ public class TowerPlacement : MonoBehaviour
     [Header("Script References")]
     [SerializeField] private UI.UpgradeUI upgradeUI;
     [SerializeField] private ResourceUIManager resourceManager;
+    [SerializeField] private ItemCost itemCosts;
 
     [HideInInspector] public bool CanRaycast = true;
     private bool CanPlaceTowers = true;
@@ -109,7 +110,6 @@ public class TowerPlacement : MonoBehaviour
                                 BuildingPrefablist[BuildingSelectedIndex].SetActive(true);
                                 BuildingPrefablist[BuildingSelectedIndex].transform.position = hitPoint;
                             }
-                            
                         }
                     }
                 }
@@ -122,9 +122,21 @@ public class TowerPlacement : MonoBehaviour
                         {
                             if(hit.collider.tag == "PlaceableGround")
                             {
+                                int goldToPay = 0;
+
                                 if(CurrentBuildingType == BuildingTypes.Tower)
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+
+                                    switch(TowerSelectedIndex)
+                                    {
+                                        default:
+                                            goldToPay = itemCosts.ArcherTowerCost;
+                                            break;
+                                        case 1:
+                                            goldToPay = itemCosts.WizardTowerCost;
+                                            break;
+                                    }
                                 }
                                 else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
                                 {
@@ -135,22 +147,26 @@ public class TowerPlacement : MonoBehaviour
                                     {
                                         default:
                                             t = GoldButtonParent;
+                                            goldToPay = itemCosts.GoldMineCost;
                                             break;
                                         case 1:
                                             t = ManaButtonParent;
+                                            goldToPay = itemCosts.ManaWellCost;
                                             break;
                                         
                                     }
 
-                                    GameObject boi = Instantiate(ResourceCollectButtonPrefab, t);
-                                    boi.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
-                                    boi.SetActive(false);
+                                    GameObject bu = Instantiate(ResourceCollectButtonPrefab, t);
+                                    bu.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
+                                    bu.SetActive(false);
 
                                     // Settings for the Button
-                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = boi.GetComponent<Button>();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
                                 }
+
+                                upgradeUI.PayGold(goldToPay);
 
                                 CanPlaceTowers = false;
                                 PlacingTowers = false;

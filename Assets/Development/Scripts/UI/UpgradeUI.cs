@@ -24,6 +24,9 @@ namespace UI
         [SerializeField] private float FirerateGoldMultiplier;
         [SerializeField] private ResourceUIManager ResourceManager;
 
+        [Header("a")]
+        [SerializeField] private TowerSelectionButtonManager TowerSelectionManager;
+
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
@@ -55,7 +58,7 @@ namespace UI
             }
         }
 
-        private bool PayGold(int Amount)
+        public bool PayGold(int Amount)
         {
             if(GameController.Gold >= Amount)
             {
@@ -65,6 +68,8 @@ namespace UI
             {
                 return false;
             }
+
+            TowerSelectionManager.UpdateTowerButtonUI();
 
             ResourceManager.UpdateResourceUI();
 

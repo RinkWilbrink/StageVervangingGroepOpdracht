@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893043397780587038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1893043398620508191}
@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resource: 1
-  ResourceCollectionTime: 2
-  MinimumCollectionCount: 1
+  ResourceCollectionTime: 3
+  MinimumCollectionCount: 2
   MaximumStorageCount: 10
   AmountAddedPerInterval: 1
   ResourcesInStorage: 0
-  BuildingHealth: 0
-  UIPopUp: {fileID: 1893043397841135458}
+  BuildingHealth: 5
   button: {fileID: 0}
+  resourceManager: {fileID: 0}
   CanCollectResources: 0
 --- !u!65 &1893043397780587036
 BoxCollider:

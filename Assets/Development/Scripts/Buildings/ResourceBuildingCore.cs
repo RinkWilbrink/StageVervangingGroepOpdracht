@@ -28,7 +28,7 @@ namespace ResourceBuilding
 
         //Buiding Variables
         [Header("Building Variables")]
-        [SerializeField] public int BuildingHealth;
+        [SerializeField] public int BuildingHealth = 1;
 
         [Header("Special Variables")]
         //[SerializeField] public GameObject UIPopUp;
@@ -67,6 +67,8 @@ namespace ResourceBuilding
             {
                 Destroy(button.gameObject);
                 Destroy(gameObject);
+
+                Debug.LogFormat("{0} Died!!!", gameObject.name);
             }
 
             if(ResourcesInStorage < MaximumStorageCount)

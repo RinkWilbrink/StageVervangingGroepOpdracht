@@ -118,17 +118,6 @@ public class TowerPlacement : MonoBehaviour
                 {
                     if(hit.collider != null)
                     {
-                        //if(PlacingTowers)
-                        //{
-                        //    
-                        //}
-                        //else
-                        //{
-                        //    PlacingTowers = true;
-                        //}
-
-                        Debug.Log("Bruh1");
-
                         if(hit.collider.tag == "PlaceableGround")
                         {
                             int goldToPay = 0;
@@ -176,9 +165,6 @@ public class TowerPlacement : MonoBehaviour
                             }
 
                             upgradeUI.PayGold(goldToPay);
-
-                            //CanPlaceTowers = false;
-                            //PlacingTowers = false;
                         }
                     }
 
@@ -192,12 +178,8 @@ public class TowerPlacement : MonoBehaviour
             }
             else
             {
-                Debug.Log("help");
-
                 if(Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("upgrade press");
-
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
                     RaycastHit _hit = new RaycastHit();

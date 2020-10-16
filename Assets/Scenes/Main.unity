@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 182d4165754ece945ab7cce613da2f6c,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -978,12 +978,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595773246}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &611725816 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6744916390399811802, guid: ccb36cbf498d5f64fa950cf98c3229f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6744916390943122057}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620937456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1239,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840738615}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1dec4f12c09feb49a4509856c83568b, type: 3}
   m_Name: 
@@ -1259,6 +1253,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 3
     enemies:
@@ -1274,6 +1269,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 2
     enemies:
@@ -1289,6 +1285,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 2
     enemies:
@@ -4078,11 +4075,6 @@ PrefabInstance:
       propertyPath: towerPlacement
       value: 
       objectReference: {fileID: 1789378038}
-    - target: {fileID: 5988708106066495220, guid: ccb36cbf498d5f64fa950cf98c3229f5,
-        type: 3}
-      propertyPath: NotificationObject
-      value: 
-      objectReference: {fileID: 611725816}
     - target: {fileID: 6744916390367550885, guid: ccb36cbf498d5f64fa950cf98c3229f5,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4108,16 +4100,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1789378038}
-    - target: {fileID: 6744916390399811802, guid: ccb36cbf498d5f64fa950cf98c3229f5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6744916390399811805, guid: ccb36cbf498d5f64fa950cf98c3229f5,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -20
-      objectReference: {fileID: 0}
     - target: {fileID: 6744916390533022291, guid: ccb36cbf498d5f64fa950cf98c3229f5,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4187,11 +4169,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6744916390894334348, guid: ccb36cbf498d5f64fa950cf98c3229f5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6744916391219449420, guid: ccb36cbf498d5f64fa950cf98c3229f5,
         type: 3}

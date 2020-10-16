@@ -44,8 +44,7 @@ public class TowerPlacement : MonoBehaviour
     [SerializeField] private ItemCost itemCosts;
 
     [HideInInspector] public bool CanRaycast = true;
-    private bool CanPlaceTowers = true;
-    private bool PlacingTowers = true;
+    [HideInInspector] public bool CanPlaceTowers = true;
 
     // private variables
     private Vector3 hitPoint = Vector3.zero;
@@ -78,7 +77,6 @@ public class TowerPlacement : MonoBehaviour
         // Set Booleans for placing towers and buildings
         CanRaycast = true;
         CanPlaceTowers = false;
-        PlacingTowers = true;
     }
 
     private void Update()
@@ -87,6 +85,8 @@ public class TowerPlacement : MonoBehaviour
         {
             if(CanPlaceTowers)
             {
+                Debug.Log("buy press");
+
                 if(Input.GetMouseButton(0))
                 {
                     var ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -118,63 +118,67 @@ public class TowerPlacement : MonoBehaviour
                 {
                     if(hit.collider != null)
                     {
-                        if(PlacingTowers)
+                        //if(PlacingTowers)
+                        //{
+                        //    
+                        //}
+                        //else
+                        //{
+                        //    PlacingTowers = true;
+                        //}
+
+                        Debug.Log("Bruh1");
+
+                        if(hit.collider.tag == "PlaceableGround")
                         {
-                            if(hit.collider.tag == "PlaceableGround")
+                            int goldToPay = 0;
+
+                            if(CurrentBuildingType == BuildingTypes.Tower)
                             {
-                                int goldToPay = 0;
+                                GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
 
-                                if(CurrentBuildingType == BuildingTypes.Tower)
+                                switch(TowerSelectedIndex)
                                 {
-                                    GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
-
-                                    switch(TowerSelectedIndex)
-                                    {
-                                        default:
-                                            goldToPay = itemCosts.ArcherTowerCost;
-                                            break;
-                                        case 1:
-                                            goldToPay = itemCosts.WizardTowerCost;
-                                            break;
-                                    }
+                                    default:
+                                        goldToPay = itemCosts.ArcherTowerCost;
+                                        break;
+                                    case 1:
+                                        goldToPay = itemCosts.WizardTowerCost;
+                                        break;
                                 }
-                                else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
-                                {
-                                    GameObject go = Instantiate(BuildingList[BuildingSelectedIndex], hitPoint, Quaternion.identity, BuildingParent);
-
-                                    Transform t;
-                                    switch(BuildingSelectedIndex)
-                                    {
-                                        default:
-                                            t = GoldButtonParent;
-                                            goldToPay = itemCosts.GoldMineCost;
-                                            break;
-                                        case 1:
-                                            t = ManaButtonParent;
-                                            goldToPay = itemCosts.ManaWellCost;
-                                            break;
-                                        
-                                    }
-
-                                    GameObject bu = Instantiate(ResourceCollectButtonPrefab, t);
-                                    bu.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
-                                    bu.SetActive(false);
-
-                                    // Settings for the Button
-                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
-                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
-                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
-                                }
-
-                                upgradeUI.PayGold(goldToPay);
-
-                                CanPlaceTowers = false;
-                                PlacingTowers = false;
                             }
-                        }
-                        else
-                        {
-                            PlacingTowers = true;
+                            else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+                            {
+                                GameObject go = Instantiate(BuildingList[BuildingSelectedIndex], hitPoint, Quaternion.identity, BuildingParent);
+
+                                Transform t;
+                                switch(BuildingSelectedIndex)
+                                {
+                                    default:
+                                        t = GoldButtonParent;
+                                        goldToPay = itemCosts.GoldMineCost;
+                                        break;
+                                    case 1:
+                                        t = ManaButtonParent;
+                                        goldToPay = itemCosts.ManaWellCost;
+                                        break;
+
+                                }
+
+                                GameObject bu = Instantiate(ResourceCollectButtonPrefab, t);
+                                bu.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
+                                bu.SetActive(false);
+
+                                // Settings for the Button
+                                go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
+                                go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
+                                go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
+                            }
+
+                            upgradeUI.PayGold(goldToPay);
+
+                            //CanPlaceTowers = false;
+                            //PlacingTowers = false;
                         }
                     }
 
@@ -188,8 +192,12 @@ public class TowerPlacement : MonoBehaviour
             }
             else
             {
+                Debug.Log("help");
+
                 if(Input.GetMouseButtonDown(0))
                 {
+                    Debug.Log("upgrade press");
+
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
                     RaycastHit _hit = new RaycastHit();

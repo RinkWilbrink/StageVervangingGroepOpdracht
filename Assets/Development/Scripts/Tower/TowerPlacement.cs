@@ -85,8 +85,6 @@ public class TowerPlacement : MonoBehaviour
         {
             if(CanPlaceTowers)
             {
-                Debug.Log("buy press");
-
                 if(Input.GetMouseButton(0))
                 {
                     var ray = camera.ScreenPointToRay(Input.mousePosition);

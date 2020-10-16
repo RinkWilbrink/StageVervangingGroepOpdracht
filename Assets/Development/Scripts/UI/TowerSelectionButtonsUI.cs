@@ -17,7 +17,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     private void Start()
     {
         ButtonsPanel.gameObject.SetActive(true);
-        ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width, 0f);
+        ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f);
     }
 
     public void UISlideIn()
@@ -26,17 +26,15 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         {
             if(IsOpened)
             {
-                ButtonsPanel.anchoredPosition = Vector2.zero;
-                StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width, 0f)));
-
+                ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
+                StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f)));
                 IsOpened = false;
                 towerPlacement.CanPlaceTowers = false;
             }
             else
             {
-                ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width, 0f);
-                StartCoroutine(buttonSlide(Vector2.zero));
-
+                ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f);
+                StartCoroutine(buttonSlide(new Vector2(-5f, 0)));
                 IsOpened = true;
                 towerPlacement.SelectTower(0);
             }

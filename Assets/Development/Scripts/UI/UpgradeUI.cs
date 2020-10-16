@@ -60,7 +60,7 @@ namespace UI
 
         public bool PayGold(int Amount)
         {
-            if(GameController.Gold >= Amount)
+            if(Amount <= GameController.Gold)
             {
                 GameController.Gold -= Amount;
             }

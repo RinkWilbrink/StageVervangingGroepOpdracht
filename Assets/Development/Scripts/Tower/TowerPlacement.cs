@@ -165,6 +165,8 @@ public class TowerPlacement : MonoBehaviour
                             {
                                 Destroy(hit.collider.gameObject);
                                 DestroyTowerMode = false;
+
+                                upgradeUI.PayGold(-5);
                             }
                             catch
                             {

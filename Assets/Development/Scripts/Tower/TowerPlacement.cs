@@ -152,15 +152,11 @@ public class TowerPlacement : MonoBehaviour
                         }
                         else if(CurrentBuildingType == BuildingTypes.Destroy)
                         {
-                            try
+                            if(hit.collider.tag == "Tower" || hit.collider.tag == "Building")
                             {
                                 Destroy(hit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
                                 upgradeUI.PayGold(-5);
-                            }
-                            catch
-                            {
-                                Debug.Log("Couldnt destroy tower!");
                             }
                         }
                     }

@@ -33,7 +33,6 @@ public class UINotificationManager : MonoBehaviour
             {
                 Timer += Time.deltaTime;
             }
-
         }
     }
 }

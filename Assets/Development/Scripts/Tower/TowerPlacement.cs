@@ -254,10 +254,5 @@ public class TowerPlacement : MonoBehaviour
         CanRaycast = _x;
     }
 
-    public void ResetUpgradeUI(bool _x)
-    {
-        SetCanPlaceTowers(_x);
-    }
-
     #endregion
 }

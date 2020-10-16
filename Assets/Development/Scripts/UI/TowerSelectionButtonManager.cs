@@ -14,8 +14,6 @@ public class TowerSelectionButtonManager : MonoBehaviour
 
     private int[] cost;
 
-    private bool baaan = true;
-
     private void Awake()
     {
         cost = new int[4];

@@ -4,15 +4,8 @@ using UnityEngine.UI;
 
 enum BuildingTypes
 {
-    Tower = 0, ResourceBuilding = 1
+    Tower = 0, ResourceBuilding = 1, Destroy
 }
-
-/*
- * TODO:
- * 
- * 15 OCT: Pay to place towers
- * 
-*/
 
 public class TowerPlacement : MonoBehaviour
 {
@@ -31,8 +24,6 @@ public class TowerPlacement : MonoBehaviour
     private int BuildingSelectedIndex;
     private GameObject[] BuildingPrefablist;
 
-    private bool DestroyTowerMode = false;
-
     [SerializeField] private UINotificationManager notificationManager;
 
     [Space(4)]
@@ -41,6 +32,7 @@ public class TowerPlacement : MonoBehaviour
     [SerializeField] private Transform ManaButtonParent;
 
     private BuildingTypes CurrentBuildingType;
+    private BuildingTypes PreviousBuildingType;
 
     [Header("Script References")]
     [SerializeField] private UI.UpgradeUI upgradeUI;
@@ -81,7 +73,6 @@ public class TowerPlacement : MonoBehaviour
         // Set Booleans for placing towers and buildings
         CanRaycast = true;
         CanPlaceTowers = false;
-        DestroyTowerMode = false;
     }
 
     private void Update()
@@ -159,13 +150,12 @@ public class TowerPlacement : MonoBehaviour
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        else if(DestroyTowerMode == true)
+                        else if(CurrentBuildingType == BuildingTypes.Destroy)
                         {
                             try
                             {
                                 Destroy(hit.collider.gameObject);
-                                DestroyTowerMode = false;
-
+                                CurrentBuildingType = PreviousBuildingType;
                                 upgradeUI.PayGold(-5);
                             }
                             catch
@@ -248,7 +238,8 @@ public class TowerPlacement : MonoBehaviour
 
     public void SetDeleteBuilding()
     {
-        DestroyTowerMode = true;
+        PreviousBuildingType = CurrentBuildingType;
+        CurrentBuildingType = BuildingTypes.Destroy;
     }
 
     public void SetCanPlaceTowers(bool _x)

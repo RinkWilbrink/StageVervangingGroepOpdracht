@@ -225,6 +225,8 @@ public class TowerPlacement : MonoBehaviour
     public void SetCanRayCast(bool _can)
     {
         CanRaycast = _can;
+
+        // Other pause things that need to be called.
     }
 
     public void SetSelectedButtonAttributes(int _index)

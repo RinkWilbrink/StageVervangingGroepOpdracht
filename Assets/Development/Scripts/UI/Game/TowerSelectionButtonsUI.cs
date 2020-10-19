@@ -22,9 +22,11 @@ public class TowerSelectionButtonsUI : MonoBehaviour
 
     public void UISlideIn()
     {
-        if(!IsOpening)
+        if (!IsOpening)
         {
-            if(IsOpened)
+            towerPlacement.SetSelectedButtonAttributes(0);
+
+            if (IsOpened)
             {
                 ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
                 StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f)));
@@ -45,7 +47,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     {
         IsOpening = true;
 
-        while(Vector3.Distance(ButtonsPanel.anchoredPosition, NewPosition) > 0.05f)
+        while (Vector3.Distance(ButtonsPanel.anchoredPosition, NewPosition) > 0.05f)
         {
             ButtonsPanel.anchoredPosition = Vector3.Lerp(ButtonsPanel.anchoredPosition, NewPosition, UILerpSpeed * Time.deltaTime);
 

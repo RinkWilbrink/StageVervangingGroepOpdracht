@@ -31,6 +31,10 @@ public class TowerPlacement : MonoBehaviour
     [SerializeField] private Transform GoldButtonParent;
     [SerializeField] private Transform ManaButtonParent;
 
+    [Space(6)]
+    [SerializeField] private Button[] buildingButtons;
+    [SerializeField] private int buildingButtonsIndex = 0;
+
     private BuildingTypes CurrentBuildingType;
     private BuildingTypes PreviousBuildingType;
 
@@ -50,7 +54,7 @@ public class TowerPlacement : MonoBehaviour
     {
         // Create Template Towers
         TowerPrefablist = new GameObject[TowerList.Length];
-        for(int i = 0; i < TowerList.Length; i++)
+        for (int i = 0; i < TowerList.Length; i++)
         {
             TowerPrefablist[i] = Instantiate(TowerList[i], Vector3.zero, Quaternion.identity, transform);
             TowerPrefablist[i].SetActive(false);
@@ -61,7 +65,7 @@ public class TowerPlacement : MonoBehaviour
 
         // Create Template Buildings
         BuildingPrefablist = new GameObject[BuildingList.Length];
-        for(int i = 0; i < TowerList.Length; i++)
+        for (int i = 0; i < TowerList.Length; i++)
         {
             BuildingPrefablist[i] = Instantiate(BuildingList[i], Vector3.zero, Quaternion.identity, transform);
             BuildingPrefablist[i].SetActive(false);
@@ -77,24 +81,24 @@ public class TowerPlacement : MonoBehaviour
 
     private void Update()
     {
-        if(CanRaycast)
+        if (CanRaycast)
         {
-            if(CanPlaceTowers)
+            if (CanPlaceTowers)
             {
-                if(Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0))
                 {
                     var ray = camera.ScreenPointToRay(Input.mousePosition);
 
                     hit = new RaycastHit();
 
-                    if(Physics.Raycast(ray, out hit, 100f))
+                    if (Physics.Raycast(ray, out hit, 100f))
                     {
                         hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
                         hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
 
-                        if(hit.collider.tag == "PlaceableGround")
+                        if (hit.collider.tag == "PlaceableGround")
                         {
-                            if(CurrentBuildingType == BuildingTypes.Tower)
+                            if (CurrentBuildingType == BuildingTypes.Tower)
                             {
                                 TowerPrefablist[TowerSelectedIndex].SetActive(true);
                                 TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
@@ -108,22 +112,22 @@ public class TowerPlacement : MonoBehaviour
                     }
                 }
 
-                if(Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0))
                 {
-                    if(hit.collider != null)
+                    if (hit.collider != null)
                     {
-                        if(hit.collider.tag == "PlaceableGround")
+                        if (hit.collider.tag == "PlaceableGround")
                         {
-                            if(upgradeUI.PayGold(GetCostAmount()))
+                            if (upgradeUI.PayGold(GetCostAmount()))
                             {
-                                if(CurrentBuildingType == BuildingTypes.Tower)
+                                if (CurrentBuildingType == BuildingTypes.Tower)
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                 }
-                                else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+                                else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
                                 {
                                     Transform t;
-                                    switch(BuildingSelectedIndex)
+                                    switch (BuildingSelectedIndex)
                                     {
                                         default:
                                             t = GoldButtonParent;
@@ -150,9 +154,9 @@ public class TowerPlacement : MonoBehaviour
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        else if(CurrentBuildingType == BuildingTypes.Destroy)
+                        else if (CurrentBuildingType == BuildingTypes.Destroy)
                         {
-                            if(hit.collider.tag == "Tower" || hit.collider.tag == "Building")
+                            if (hit.collider.tag == "Tower" || hit.collider.tag == "Building")
                             {
                                 Destroy(hit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
@@ -171,15 +175,15 @@ public class TowerPlacement : MonoBehaviour
             }
             else
             {
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
                     RaycastHit _hit = new RaycastHit();
 
-                    if(Physics.Raycast(ray, out _hit, 100f))
+                    if (Physics.Raycast(ray, out _hit, 100f))
                     {
-                        if(_hit.collider.tag == "Tower")
+                        if (_hit.collider.tag == "Tower")
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<Tower.TowerCore>();
                             upgradeUI.UpdateUIPosition(_hit.point.x, _hit.point.z);
@@ -192,9 +196,9 @@ public class TowerPlacement : MonoBehaviour
 
     private int GetCostAmount()
     {
-        if(CurrentBuildingType == BuildingTypes.Tower)
+        if (CurrentBuildingType == BuildingTypes.Tower)
         {
-            switch(TowerSelectedIndex)
+            switch (TowerSelectedIndex)
             {
                 default:
                     return itemCosts.ArcherTowerCost;
@@ -202,9 +206,9 @@ public class TowerPlacement : MonoBehaviour
                     return itemCosts.WizardTowerCost;
             }
         }
-        else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+        else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
         {
-            switch(BuildingSelectedIndex)
+            switch (BuildingSelectedIndex)
             {
                 default:
                     return itemCosts.GoldMineCost;
@@ -217,6 +221,18 @@ public class TowerPlacement : MonoBehaviour
     }
 
     #region Public Functions
+
+    public void SetSelectedButtonAttributes(int _index)
+    {
+        // Reset the previous button
+        buildingButtons[buildingButtonsIndex].transform.localScale = Vector2.one;
+
+        // Set the new Button
+        buildingButtons[_index].transform.localScale = new Vector2(1.1f, 1.1f);
+
+        // set variable to remember this button index for next time.
+        buildingButtonsIndex = _index;
+    }
 
     public void SelectTower(int _i)
     {

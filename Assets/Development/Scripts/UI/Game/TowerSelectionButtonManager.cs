@@ -10,13 +10,13 @@ public class TowerSelectionButtonManager : MonoBehaviour
     [SerializeField] private Button[] buttons;
 
     [Header("Scriptable Object")]
-    [SerializeField] private ItemCost itemCosts;   
+    [SerializeField] private ItemCost itemCosts;
 
     private int[] cost;
 
     private void Awake()
     {
-        cost = new int[4];
+        cost = new int[5];
 
         cost[0] = itemCosts.ArcherTowerCost;
         cost[1] = itemCosts.WizardTowerCost;

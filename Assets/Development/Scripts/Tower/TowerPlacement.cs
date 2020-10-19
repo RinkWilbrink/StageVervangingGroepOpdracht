@@ -222,6 +222,11 @@ public class TowerPlacement : MonoBehaviour
 
     #region Public Functions
 
+    public void SetCanRayCast(bool _can)
+    {
+        CanRaycast = _can;
+    }
+
     public void SetSelectedButtonAttributes(int _index)
     {
         // Reset the previous button

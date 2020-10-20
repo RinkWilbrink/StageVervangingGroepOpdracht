@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 341408206199449655}
   m_Layer: 0
   m_Name: EnemyUnit2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,3 +202,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 60
   enemyData: {fileID: 11400000, guid: 038e9afce40d4c548a99aa281dba469f, type: 2}
+  wayPoints: []

@@ -10,21 +10,21 @@ namespace Tower
     {
         // Variables
 
-        public override void PrimairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected override void PrimairyAttack()
         {
-            base.PrimairyAttack(_target, _damage, _attackTime);
+            base.PrimairyAttack();
 
             Debug.Log("Archer Primairy");
         }
 
-        public override void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected override void SecondairyAttack()
         {
-            base.SecondairyAttack(_target, _damage, _attackTime);
+            base.SecondairyAttack();
 
             Debug.Log("Archer Secondairy");
         }
 
-        public override void HandleShooting()
+        protected override void HandleShooting()
         {
             base.HandleShooting();
         }

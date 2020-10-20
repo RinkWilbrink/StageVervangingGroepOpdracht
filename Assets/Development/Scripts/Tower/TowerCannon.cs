@@ -14,19 +14,19 @@ namespace Tower
         // Variables
         SpecialAttack SpecialUnlocked;
 
-        public override void HandleShooting()
+        protected override void HandleShooting()
         {
             base.HandleShooting();
         }
 
-        public override void PrimairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected override void PrimairyAttack()
         {
-            base.PrimairyAttack(_target, _damage, _attackTime);
+            base.PrimairyAttack();
         }
 
-        public override void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected override void SecondairyAttack()
         {
-            //base.SecondairyAttack(_target, _damage, _attackTime);
+            //base.SecondairyAttack();
 
             switch (SpecialUnlocked)
             {

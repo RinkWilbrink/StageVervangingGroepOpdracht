@@ -13,6 +13,9 @@ namespace Tower
         [SerializeField] private int banaan;
         [SerializeField] private GameObject lightningStrike;
 
+        [Header("Special Attack Timing")]
+        [SerializeField] private float LightningTime;
+
         protected override void PrimairyAttack()
         {
             base.PrimairyAttack();
@@ -30,9 +33,9 @@ namespace Tower
 
             Vector3 newPos = CurrentTarget.transform.position;
 
-            for (float i = 0; i < 1.2f; i += Time.deltaTime)
+            for (float i = 0; i < 1f; i += Time.deltaTime)
             {
-                if (i >= 0f && i < 0.9f)
+                if (i >= 0f && i < 0.7f)
                 {
                     go.transform.position = (transform.position + newPos) / 2;
                 }

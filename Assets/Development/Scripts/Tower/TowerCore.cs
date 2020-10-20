@@ -28,8 +28,7 @@ namespace Tower
         protected float UpgradedFireRate;
 
         // Hidden Secondairy Attack Variables
-        [HideInInspector] private float SpecialTimer;
-        [HideInInspector] private bool CanUseSpecial = false;
+        [HideInInspector] public bool CanUseSpecial = false;
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
@@ -106,14 +105,6 @@ namespace Tower
             {
                 AttackTimer += Time.deltaTime;
             }
-            if (SpecialTimer >= (SpecialShootingTime - UpgradedFireRate))
-            {
-                CanUseSpecial = true;
-            }
-            else
-            {
-                SpecialTimer += Time.deltaTime;
-            }
         }
 
         #region Virtual Functions
@@ -133,7 +124,6 @@ namespace Tower
             Debug.Log("Core Secondairy");
 
             CanUseSpecial = false;
-            SpecialTimer = 0;
         }
 
         protected virtual void HandleShooting()

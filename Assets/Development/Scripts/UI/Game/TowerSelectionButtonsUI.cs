@@ -9,7 +9,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     [SerializeField] private RectTransform ButtonsPanel;
     [SerializeField] private float UILerpSpeed;
 
-    [SerializeField] private TowerPlacement towerPlacement;
+    [SerializeField] private Tower.TowerInteraction towerPlacement;
 
     private bool IsOpened = false;
     private bool IsOpening = false;
@@ -31,7 +31,8 @@ public class TowerSelectionButtonsUI : MonoBehaviour
                 ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
                 StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f)));
                 IsOpened = false;
-                towerPlacement.CanPlaceTowers = false;
+                //towerPlacement.CanPlaceTowers = false;
+                towerPlacement.CurrentInteractionMode = Tower.TowerInteractionMode.Upgrade;
             }
             else
             {

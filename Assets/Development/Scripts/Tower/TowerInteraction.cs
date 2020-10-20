@@ -244,7 +244,6 @@ namespace Tower
         {
             TowerSelectedIndex = _i;
             CurrentBuildingType = BuildingTypes.Tower;
-            //CanPlaceTowers = true;
             CurrentInteractionMode = TowerInteractionMode.Placement;
         }
 
@@ -252,7 +251,6 @@ namespace Tower
         {
             BuildingSelectedIndex = _i;
             CurrentBuildingType = BuildingTypes.ResourceBuilding;
-            //CanPlaceTowers = true;
             CurrentInteractionMode = TowerInteractionMode.Placement;
         }
 

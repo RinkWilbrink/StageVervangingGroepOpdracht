@@ -131,12 +131,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_MethodName: SetCanRayCast
-        m_Mode: 6
+        m_MethodName: SetInteractionMode
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -1413,8 +1413,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_MethodName: SetCanRayCast
-        m_Mode: 6
+        m_MethodName: SetInteractionMode
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1587,8 +1587,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -9.10083, y: 10}
-  m_SizeDelta: {x: 130, y: 130}
+  m_AnchoredPosition: {x: -9.10083, y: 150}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.9999999, y: 0}
 --- !u!222 &3881098431918256825
 CanvasRenderer:
@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c312b57c6d02ea044a4ea3714e3bdebe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9ae120a4f42e294fba513e3e30070a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1670,13 +1670,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 738435035464086186}
-        m_MethodName: UISlideIn
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_MethodName: SetInteractionMode
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

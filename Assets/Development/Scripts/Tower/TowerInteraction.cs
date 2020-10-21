@@ -12,7 +12,7 @@ namespace Tower
 {
     public enum TowerInteractionMode
     {
-        None = 0, Placement = 1, Upgrade = 2, SpecialAbilitySelect = 3
+        None = 0, PlacementMode = 1, UpgradeMode = 2, SpecialAbilitySelectMode = 3
     }
 
     public class TowerInteraction : MonoBehaviour
@@ -87,7 +87,7 @@ namespace Tower
 
         private void Update()
         {
-            if(CurrentInteractionMode == TowerInteractionMode.Placement)
+            if(CurrentInteractionMode == TowerInteractionMode.PlacementMode)
             {
                 if (Input.GetMouseButton(0))
                 {
@@ -177,7 +177,7 @@ namespace Tower
                     BuildingPrefablist[BuildingSelectedIndex].transform.position = Vector3.zero;
                 }
             }
-            else if(CurrentInteractionMode == TowerInteractionMode.Upgrade)
+            else if(CurrentInteractionMode == TowerInteractionMode.UpgradeMode)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -196,11 +196,26 @@ namespace Tower
                     }
                 }
             }
-            else if(CurrentInteractionMode == TowerInteractionMode.SpecialAbilitySelect)
+            else if(CurrentInteractionMode == TowerInteractionMode.SpecialAbilitySelectMode)
             {
                 for (int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
                 {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
+                        RaycastHit _hit = new RaycastHit();
+
+                        if (Physics.Raycast(ray, out _hit, 100f))
+                        {
+                            if (_hit.collider.tag == "Tower")
+                            {
+                                hit.collider.GetComponent<Tower.TowerCore>().StartSecondairyAttack();
+
+                                CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -249,14 +264,14 @@ namespace Tower
         {
             TowerSelectedIndex = _i;
             CurrentBuildingType = BuildingTypes.Tower;
-            CurrentInteractionMode = TowerInteractionMode.Placement;
+            CurrentInteractionMode = TowerInteractionMode.PlacementMode;
         }
 
         public void SelectBuilding(int _i)
         {
             BuildingSelectedIndex = _i;
             CurrentBuildingType = BuildingTypes.ResourceBuilding;
-            CurrentInteractionMode = TowerInteractionMode.Placement;
+            CurrentInteractionMode = TowerInteractionMode.PlacementMode;
         }
 
         public void SetDeleteBuilding()

@@ -29,7 +29,7 @@ namespace Tower
         protected float UpgradedFireRate;
 
         // Hidden Secondairy Attack Variables
-        [HideInInspector] public bool CanUseSpecial = false;
+        //[HideInInspector] public bool CanUseSpecial = false;
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
@@ -122,9 +122,7 @@ namespace Tower
         }
         protected virtual void SecondairyAttack()
         {
-            Debug.Log("Core Secondairy");
-
-            CanUseSpecial = false;
+            Debug.Log("Core Secondairy");;
         }
 
         protected virtual void HandleShooting()
@@ -148,6 +146,11 @@ namespace Tower
         {
             UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
             UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
+        }
+
+        public void StartSecondairyAttack()
+        {
+            SecondairyAttack();
         }
 
         #endregion

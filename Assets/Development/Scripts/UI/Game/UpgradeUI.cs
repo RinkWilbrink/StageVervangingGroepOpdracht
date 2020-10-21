@@ -83,6 +83,24 @@ namespace UI
             return true;
         }
 
+        public bool PayMana(int Amount)
+        {
+            if (Amount <= GameController.Mana)
+            {
+                GameController.Mana -= Amount;
+            }
+            else
+            {
+                return false;
+            }
+
+            TowerSelectionManager.UpdateTowerButtonUI();
+
+            ResourceManager.UpdateResourceUI();
+
+            return true;
+        }
+
         public void UpgradeTower()
         {
             if (PayGold(1))

@@ -10,11 +10,12 @@ namespace Tower
     {
         [Header("")]
         // Variables
-        [SerializeField] private int banaan;
         [SerializeField] private GameObject lightningStrike;
 
         [Header("Special Attack Timing")]
-        [SerializeField] private float LightningTime;
+        //[SerializeField] private float LightningTime;
+        [SerializeField] private float LightningBetweenTime;
+        [SerializeField] private float LightningFinishTime;
 
         protected override void PrimairyAttack()
         {
@@ -35,16 +36,16 @@ namespace Tower
 
             for (float i = 0; i < 1f; i += Time.deltaTime)
             {
-                if (i >= 0f && i < 0.7f)
+                if(i < LightningBetweenTime)
                 {
                     go.transform.position = (transform.position + newPos) / 2;
                 }
-                else if (i >= 0.7f && i < 1f)
+                else if (i >= LightningBetweenTime && i < LightningFinishTime)
                 {
                     go.transform.position = newPos;
                     DoDamage(newPos);
                 }
-                else if (i >= 1f)
+                else if (i >= LightningFinishTime)
                 {
                     go.SetActive(false);
                     i = 5f;

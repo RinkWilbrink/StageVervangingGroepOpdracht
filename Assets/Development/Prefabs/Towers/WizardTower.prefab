@@ -53,15 +53,15 @@ MonoBehaviour:
   SpecialAttackThresshold: 5
   DamageAddedPerLevel: 1
   FireRateAddedPerLevel: 0.1
-  TowerLevelToUnlockSpecial: 4
+  TowerLevelToUnlockSpecial: 2
   TowerLevel: 1
-  CanUseSpecial: 0
   ShootOrigin: {fileID: 2727193884480791051}
   CurrentTarget: {fileID: 0}
   ShootingRange: 3
-  banaan: 0
-  lightningStrike: {fileID: 0}
-  LightningTime: 0
+  lightningStrike: {fileID: 3962775702580216195, guid: 7e0a3647f1cdf2544b906ad5781f3988,
+    type: 3}
+  LightningBetweenTime: 0.4
+  LightningFinishTime: 0.4
 --- !u!65 &8437573251633843400
 BoxCollider:
   m_ObjectHideFlags: 0

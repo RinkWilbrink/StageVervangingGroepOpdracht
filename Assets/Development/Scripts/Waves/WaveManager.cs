@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start() {
         WaypointManager = FindObjectOfType<WaypointManager>();
-        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
+        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("{0}", currentWaveNum);
 
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);

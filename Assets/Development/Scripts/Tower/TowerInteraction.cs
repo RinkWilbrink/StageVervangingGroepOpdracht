@@ -32,16 +32,20 @@ namespace Tower
         private int BuildingSelectedIndex;
         private GameObject[] BuildingPrefablist;
 
+        [Space(6)]
+
         [SerializeField] private UINotificationManager notificationManager;
 
-        [Space(4)]
+        [Space(6)]
         [SerializeField] private GameObject ResourceCollectButtonPrefab;
+
+        [Header("Building Collection Button Parents")]
         [SerializeField] private Transform GoldButtonParent;
         [SerializeField] private Transform ManaButtonParent;
 
         [Space(6)]
-        [SerializeField] private Button[] buildingButtons;
-        [SerializeField] private int buildingButtonsIndex = 0;
+        [SerializeField] private Button[] SelectionButtons;
+        [SerializeField] private int SelectionButtonsIndex = 0;
 
         private BuildingTypes CurrentBuildingType;
         private BuildingTypes PreviousBuildingType;
@@ -53,12 +57,12 @@ namespace Tower
 
         // private variables
         private Vector3 hitPoint = Vector3.zero;
-        private RaycastHit hit;
+        private RaycastHit TowerHit;
 
         // Set Current tower interaction mode
         [HideInInspector] public TowerInteractionMode CurrentInteractionMode;
 
-        [HideInInspector] private List<TowerCore> SpecialAbilityUnlockedTowerList;
+        [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         private void Start()
         {
@@ -93,14 +97,14 @@ namespace Tower
                 {
                     var ray = camera.ScreenPointToRay(Input.mousePosition);
 
-                    hit = new RaycastHit();
+                    TowerHit = new RaycastHit();
 
-                    if (Physics.Raycast(ray, out hit, 100f))
+                    if (Physics.Raycast(ray, out TowerHit, 100f))
                     {
-                        hitPoint.x = Mathf.Ceil(hit.point.x) - 0.5f;
-                        hitPoint.z = Mathf.Ceil(hit.point.z) - 0.5f;
+                        hitPoint.x = Mathf.Ceil(TowerHit.point.x) - 0.5f;
+                        hitPoint.z = Mathf.Ceil(TowerHit.point.z) - 0.5f;
 
-                        if (hit.collider.tag == "PlaceableGround")
+                        if (TowerHit.collider.tag == "PlaceableGround")
                         {
                             if (CurrentBuildingType == BuildingTypes.Tower)
                             {
@@ -118,9 +122,9 @@ namespace Tower
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (hit.collider != null)
+                    if (TowerHit.collider != null)
                     {
-                        if (hit.collider.tag == "PlaceableGround")
+                        if (TowerHit.collider.tag == "PlaceableGround")
                         {
                             if (upgradeUI.PayGold(GetCostAmount()))
                             {
@@ -160,9 +164,9 @@ namespace Tower
                         }
                         else if (CurrentBuildingType == BuildingTypes.Destroy)
                         {
-                            if (hit.collider.tag == "Tower" || hit.collider.tag == "Building")
+                            if (TowerHit.collider.tag == "Tower" || TowerHit.collider.tag == "Building")
                             {
-                                Destroy(hit.collider.gameObject);
+                                Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
                                 upgradeUI.PayGold(-5);
                             }
@@ -210,9 +214,14 @@ namespace Tower
                         {
                             if (_hit.collider.tag == "Tower")
                             {
-                                hit.collider.GetComponent<Tower.TowerCore>().StartSecondairyAttack();
+                                if (upgradeUI.PayMana(2))
+                                {
+                                    _hit.collider.GetComponent<Tower.TowerCore>().StartSecondairyAttack();
 
-                                CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+                                    CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+
+                                    SetSelectedButtonAttributes(0);
+                                }
                             }
                         }
                     }
@@ -251,13 +260,13 @@ namespace Tower
         public void SetSelectedButtonAttributes(int _index)
         {
             // Reset the previous button
-            buildingButtons[buildingButtonsIndex].transform.localScale = Vector2.one;
+            SelectionButtons[SelectionButtonsIndex].transform.localScale = Vector2.one;
 
             // Set the new Button
-            buildingButtons[_index].transform.localScale = new Vector2(1.1f, 1.1f);
+            SelectionButtons[_index].transform.localScale = new Vector2(1.2f, 1.2f);
 
             // set variable to remember this button index for next time.
-            buildingButtonsIndex = _index;
+            SelectionButtonsIndex = _index;
         }
 
         public void SelectTower(int _i)

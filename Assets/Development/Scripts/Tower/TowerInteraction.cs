@@ -1,3 +1,4 @@
+using Boo.Lang;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,6 @@ enum BuildingTypes
 {
     Tower = 0, ResourceBuilding = 1, Destroy
 }
-
-
 
 namespace Tower
 {
@@ -58,6 +57,8 @@ namespace Tower
 
         // Set Current tower interaction mode
         [HideInInspector] public TowerInteractionMode CurrentInteractionMode;
+
+        [HideInInspector] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         private void Start()
         {
@@ -189,7 +190,8 @@ namespace Tower
                         if (_hit.collider.tag == "Tower")
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
-                            upgradeUI.UpdateUIPosition(_hit.point.x, _hit.point.z);
+                            upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
+                            CurrentInteractionMode = TowerInteractionMode.None;
                         }
                     }
                 }
@@ -263,6 +265,16 @@ namespace Tower
         public void SetInteractionMode(int _i)
         {
             CurrentInteractionMode = (TowerInteractionMode)_i;
+        }
+
+        public void AddTowerToSpecialAbilityUnlockedList(TowerCore core)
+        {
+            if(SpecialAbilityUnlockedTowerList == null)
+            {
+                SpecialAbilityUnlockedTowerList = new List<TowerCore>();
+            }
+
+            SpecialAbilityUnlockedTowerList.Add(core);
         }
 
         #endregion

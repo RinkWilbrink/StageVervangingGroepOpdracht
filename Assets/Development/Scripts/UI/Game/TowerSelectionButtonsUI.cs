@@ -31,7 +31,6 @@ public class TowerSelectionButtonsUI : MonoBehaviour
                 ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
                 StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f)));
                 IsOpened = false;
-                //towerPlacement.CanPlaceTowers = false;
                 towerPlacement.CurrentInteractionMode = Tower.TowerInteractionMode.Upgrade;
             }
             else

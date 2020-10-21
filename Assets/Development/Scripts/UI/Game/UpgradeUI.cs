@@ -42,20 +42,21 @@ namespace UI
             UpgradePanel.anchoredPosition = new Vector2(_x, _y);
             UpgradePanel.localScale = Vector3.zero;
 
-            UpdateButtonUI();
+            //UpdateButtonUI();
 
             StartCoroutine(LerpUI());
         }
 
         private IEnumerator LerpUI()
         {
-            while(Vector3.Distance(UpgradePanel.anchoredPosition, Vector2.zero) > 0.05f)
+            while (Vector3.Distance(UpgradePanel.localScale, Vector3.one) > 0.005f)
             {
-                UpgradePanel.anchoredPosition = Vector3.Lerp(UpgradePanel.anchoredPosition, Vector2.zero, UILerpSpeed * Time.deltaTime);
                 UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * Time.deltaTime);
 
                 yield return null;
             }
+
+            yield return 0;
         }
 
         public bool PayGold(int Amount)
@@ -83,7 +84,7 @@ namespace UI
                 currentTower.DamageLevel += 1;
             }
 
-            UpdateButtonUI();
+            //UpdateButtonUI();
             currentTower.UpdateDamageValues();
         }
 
@@ -94,7 +95,7 @@ namespace UI
                 currentTower.FireRateLevel += 1;
             }
 
-            UpdateButtonUI();
+            //UpdateButtonUI();
             currentTower.UpdateDamageValues();
         }
 

@@ -22,8 +22,9 @@ namespace Tower
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
         [SerializeField] private float FireRateAddedPerLevel;
-        [SerializeField] public int DamageLevel = 0;
-        [SerializeField] public int FireRateLevel = 0;
+        [Space(2)]
+        [SerializeField] public int TowerLevelToUnlockSpecial;
+        [SerializeField] public int TowerLevel = 1;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
@@ -145,8 +146,8 @@ namespace Tower
 
         public void UpdateDamageValues()
         {
-            UpgradedDamage = (DamageAddedPerLevel * DamageLevel);
-            UpgradedFireRate = (FireRateLevel * FireRateAddedPerLevel);
+            UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
+            UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
         }
 
         #endregion

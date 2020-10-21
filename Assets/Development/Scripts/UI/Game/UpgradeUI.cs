@@ -24,15 +24,21 @@ namespace UI
         [SerializeField] private float FirerateGoldMultiplier;
         [SerializeField] private ResourceUIManager ResourceManager;
 
-        [Header("a")]
+        [Header("Script References")]
         [SerializeField] private TowerSelectionButtonManager TowerSelectionManager;
+        [SerializeField] private Tower.TowerInteraction TowerInteraction;
+
+        [Space(6)]
+
+        [SerializeField] private UnityEngine.UI.Button SpecialAbilityModeButton;
 
         [Space(4)]
-        [HideInInspector] public TowerCore currentTower;
+        [HideInInspector] public Tower.TowerCore currentTower;
 
         private void Start()
         {
             UpgradePanel.gameObject.SetActive(false);
+            SpecialAbilityModeButton.interactable = false;
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -77,35 +83,19 @@ namespace UI
             return true;
         }
 
-        public void DamageButton(GameObject button)
+        public void UpgradeTower()
         {
-            if(PayGold(1))
+            if (PayGold(1))
             {
-                currentTower.DamageLevel += 1;
+                currentTower.TowerLevel += 1;
+                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
+                {
+                    TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
+                    SpecialAbilityModeButton.interactable = true;
+                }
             }
 
-            //UpdateButtonUI();
             currentTower.UpdateDamageValues();
-        }
-
-        public void FireRateButton(GameObject button)
-        {
-            if(PayGold(1))
-            {
-                currentTower.FireRateLevel += 1;
-            }
-
-            //UpdateButtonUI();
-            currentTower.UpdateDamageValues();
-        }
-
-        private void UpdateButtonUI()
-        {
-            DamageButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.DamageLevel + 1);
-            DamageButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.DamageLevel);
-
-            FirerateButtonPanel.UpgradeCost_Text.text = string.Format("{0}", currentTower.FireRateLevel + 1);
-            FirerateButtonPanel.UpgradeMultiplier_Text.text = string.Format("{0}", currentTower.FireRateLevel);
         }
 
         public void CleanUpAfterClosing()

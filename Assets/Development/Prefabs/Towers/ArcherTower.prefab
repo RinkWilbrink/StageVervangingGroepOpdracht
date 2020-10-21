@@ -48,19 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackShootingTime: 2
   AttackDamage: 1
-  AttackTimer: 0
-  CanAttack: 1
   SpecialShootingTime: 6
   SpecialDamage: 2
   SpecialAttackThresshold: 4
   DamageAddedPerLevel: 1
   FireRateAddedPerLevel: 0.1
-  DamageLevel: 0
-  FireRateLevel: 0
-  SpecialTimer: 0
+  TowerLevelToUnlockSpecial: 4
+  TowerLevel: 1
   CanUseSpecial: 0
   ShootOrigin: {fileID: 3603336421924493691}
-  EnemiesInRange: 0
   CurrentTarget: {fileID: 0}
   ShootingRange: 4
 --- !u!65 &5989073579745361871

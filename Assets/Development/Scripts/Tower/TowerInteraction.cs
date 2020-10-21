@@ -198,7 +198,10 @@ namespace Tower
             }
             else if(CurrentInteractionMode == TowerInteractionMode.SpecialAbilitySelect)
             {
-                Debug.Log("Cool!");
+                for (int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
+                {
+
+                }
             }
         }
 

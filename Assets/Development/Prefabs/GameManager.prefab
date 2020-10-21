@@ -74,16 +74,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
   TowerParent: {fileID: 0}
-  TowerList: []
+  TowerList:
+  - {fileID: 3603336420261006996, guid: c0214eecb0d536744b7f9293af6f64a1, type: 3}
+  - {fileID: 2727193882764642312, guid: 78ba586f68db6f740926c9b1f0c7f393, type: 3}
   BuildingParent: {fileID: 0}
-  BuildingList: []
+  BuildingList:
+  - {fileID: 3603336420261006996, guid: c0214eecb0d536744b7f9293af6f64a1, type: 3}
+  - {fileID: 0}
   notificationManager: {fileID: 0}
-  ResourceCollectButtonPrefab: {fileID: 0}
+  ResourceCollectButtonPrefab: {fileID: 2571995776109023052, guid: ca79cf15e15e6f141acfbf6d6d9a35e3,
+    type: 3}
   GoldButtonParent: {fileID: 0}
   ManaButtonParent: {fileID: 0}
-  SelectionButtons: []
+  SelectionButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   SelectionButtonsIndex: 0
   upgradeUI: {fileID: 0}
   resourceManager: {fileID: 0}
-  itemCosts: {fileID: 0}
+  itemCosts: {fileID: 11400000, guid: c45f4a969f02e0444988f37839f9bcf3, type: 2}
   CurrentInteractionMode: 0

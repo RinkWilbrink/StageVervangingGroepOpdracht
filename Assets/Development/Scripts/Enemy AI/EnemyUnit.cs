@@ -45,6 +45,20 @@ public class EnemyUnit : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.E) )
             TakeDamage(1);
 
+        if ( slowDebuffActive ) {
+            slowDebuffTimer += Time.deltaTime;
+
+            if ( slowDebuffTimer > slowDebuffTime ) {
+                Speed += slowDownSpeed;
+                slowDebuffTimer = 0f;
+                slowDebuffActive = false;
+            }
+        }
+
+        // Test
+        if ( Input.GetKeyDown(KeyCode.S) )
+            SlowDown(1.5f, 4f);
+
         if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
             if ( waypointIndex < wayPoints.Length - 1 ) {
                 waypointIndex++;
@@ -60,6 +74,34 @@ public class EnemyUnit : MonoBehaviour
 
         if ( Health < 1 )
             Death();
+    }
+
+    //bool takeDamageOTActive = false;
+    //int takeDamageOT;
+    //float takeDamageOTTime;
+    //float takeDamageOTTimer = 0;
+    //public void TakeDamageOverTime( int totalDamage, float time ) {
+    //    takeDamageOT = totalDamage;
+    //    takeDamageOTTime = time;
+
+    //    takeDamageOTActive = true;
+    //}
+
+    bool slowDebuffActive = false;
+    float slowDownSpeed;
+    float slowDownTotalSpeed;
+    float slowDebuffTime;
+    float slowDebuffTimer = 0;
+    public void SlowDown( float speedDebuff, float time ) {
+        if ( Speed > slowDownTotalSpeed ) {
+            Speed -= speedDebuff;
+
+            slowDownTotalSpeed = Speed;
+            slowDownSpeed = speedDebuff;
+            slowDebuffTime = time;
+
+            slowDebuffActive = true;
+        }
     }
 
     private void Death() {

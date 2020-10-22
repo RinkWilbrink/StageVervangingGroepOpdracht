@@ -83,8 +83,7 @@ public class NinjaDash : MonoBehaviour
             line.enabled = false;
             stopTest = false;
 
-            worldAbilities.FinishedNinjaDash();
-            //WorldAbilities.ninjaDashAbilityActive = false;
+            worldAbilities.ResetNinjaDash();
         }
     }
 }

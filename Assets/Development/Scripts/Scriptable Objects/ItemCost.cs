@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuildingCosts", menuName = "ItemCosts")]
+[CreateAssetMenu(fileName = "ItemCosts", menuName = "ItemCosts")]
 public class ItemCost : ScriptableObject
 {
     // Variables
@@ -13,4 +13,8 @@ public class ItemCost : ScriptableObject
 
     [SerializeField] public int GoldMineCost;
     [SerializeField] public int ManaWellCost;
+
+    [Header("Mana Costs")]
+    [SerializeField] public int WizardSpecialCost;
+    [SerializeField] public int ArcherSpecialCost;
 }

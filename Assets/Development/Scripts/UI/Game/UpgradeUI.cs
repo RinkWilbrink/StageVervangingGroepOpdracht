@@ -25,7 +25,7 @@ namespace UI
         [SerializeField] private ResourceUIManager ResourceManager;
 
         [Header("Script References")]
-        [SerializeField] private TowerSelectionButtonManager TowerSelectionManager;
+        [SerializeField] private SelectionButtonManager TowerSelectionManager;
         [SerializeField] private Tower.TowerInteraction TowerInteraction;
 
         [Space(6)]

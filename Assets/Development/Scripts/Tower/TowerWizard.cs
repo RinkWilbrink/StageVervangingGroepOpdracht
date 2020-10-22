@@ -13,7 +13,6 @@ namespace Tower
         [SerializeField] private GameObject lightningStrike;
 
         [Header("Special Attack Timing")]
-        //[SerializeField] private float LightningTime;
         [SerializeField] private float LightningBetweenTime;
         [SerializeField] private float LightningFinishTime;
 
@@ -70,25 +69,9 @@ namespace Tower
             base.SecondairyAttack();
         }
 
-        private void OnDrawGizmos()
-        {
-            if (base.CurrentTarget != null)
-            {
-                Gizmos.DrawWireSphere(base.CurrentTarget.transform.position, 1f);
-            }
-        }
-
         protected override void HandleShooting()
         {
-            //base.HandleShooting();
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                SecondairyAttack();
-            }
-
-            //PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage + base.UpgradedDamage), base.AttackShootingTime);
-            //SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage + base.UpgradedDamage), base.SpecialShootingTime);
+            
         }
     }
 }

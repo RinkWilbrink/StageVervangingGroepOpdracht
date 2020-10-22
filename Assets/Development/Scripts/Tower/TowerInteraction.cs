@@ -204,6 +204,10 @@ namespace Tower
             {
                 for (int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
                 {
+                    // Go through all towers that can use their special ability and display what they are about to do and where to
+                }
+                if(SpecialAbilityUnlockedTowerList.Count > 0)
+                {
                     if (Input.GetMouseButtonDown(0))
                     {
                         Ray ray = camera.ScreenPointToRay(Input.mousePosition);

@@ -46,39 +46,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyCount: 1
-    goldReward: 5
+  - enemyCount: 10
+    goldReward: 20
     spawnIntensity:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
+        value: 1
+        inSlope: -0.5
+        outSlope: -0.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
+        value: 0.5
+        inSlope: -0.5
+        outSlope: -0.5
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 0
+      m_RotationOrder: 4
+    normalizeCurve: 0
+    minSpawnTime: 1
+    maxSpawnTime: 3
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 100
+      waypointManager: {fileID: 0}
+  - enemyCount: 20
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     normalizeCurve: 0
     minSpawnTime: 1
     maxSpawnTime: 2
     enemies:
     - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
         type: 3}
-      chance: 100
+      chance: 50
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 50
+      waypointManager: {fileID: 0}
+  - enemyCount: 20
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 0
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 34f03df14fddaca41a8cbc0d944299f8,
+        type: 3}
+      chance: 60
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: f3db3767aadc83d4e8627ddc5b2e0427,
+        type: 3}
+      chance: 40
       waypointManager: {fileID: 0}
   waveCooldown: 5
 --- !u!114 &6682590823350285528

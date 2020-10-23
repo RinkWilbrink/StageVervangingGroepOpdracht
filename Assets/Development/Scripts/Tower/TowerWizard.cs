@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEditor.UIElements;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Tower
         [Header("")]
         // Variables
         [SerializeField] private GameObject lightningStrike;
+
+        [SerializeField] private GameObject UI;
 
         [Header("Special Attack Timing")]
         [SerializeField] private float LightningBetweenTime;
@@ -72,6 +75,16 @@ namespace Tower
         protected override void HandleShooting()
         {
             
+        }
+
+        public void ShowSpecialAttackUI()
+        {
+            if (!GameObject.Find(UI.name))
+            {
+                UI.SetActive(true);
+            }
+
+            UI.transform.LookAt(CurrentTarget.transform.position);
         }
     }
 }

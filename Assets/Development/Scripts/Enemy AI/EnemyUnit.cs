@@ -26,24 +26,16 @@ public class EnemyUnit : MonoBehaviour
     }
 
     private void Start() {
-        //wayPoints = FindObjectOfType<WaypointManager>();
-
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
 
     private void Update() {
-        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
-
-        // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
-
-        //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
-        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
-
-        if ( Input.GetKeyDown(KeyCode.E) )
-            TakeDamage(1);
+        //transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
+        //
+        //// Need to test the rotation more
+        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
 
         if ( slowDebuffActive ) {
             slowDebuffTimer += Time.deltaTime;
@@ -56,17 +48,17 @@ public class EnemyUnit : MonoBehaviour
         }
 
         // Test
-        if ( Input.GetKeyDown(KeyCode.S) )
-            SlowDown(1.5f, 4f);
+        //if ( Input.GetKeyDown(KeyCode.S) )
+        //    SlowDown(1.5f, 4f);
 
-        if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
-            if ( waypointIndex < wayPoints.Length - 1 ) {
-                waypointIndex++;
-            } else {
-                Death();
-                GameController.MainTowerHP -= AttackDamage;
-                // Do damage to the main structure
-            }
+        //if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
+        //    if ( waypointIndex < wayPoints.Length - 1 ) {
+        //        waypointIndex++;
+        //    } else {
+        //        Death();
+        //        GameController.MainTowerHP -= AttackDamage;
+        //        // Do damage to the main structure
+        //    }
     }
 
     public void TakeDamage( int damage ) {

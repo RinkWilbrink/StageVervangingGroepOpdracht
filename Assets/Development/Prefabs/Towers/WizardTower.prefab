@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2727193882764642318}
   - component: {fileID: 2727193882764642313}
   - component: {fileID: 8437573251633843400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WizardTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -61,8 +61,10 @@ MonoBehaviour:
   lightningStrike: {fileID: 3962775702580216195, guid: 7e0a3647f1cdf2544b906ad5781f3988,
     type: 3}
   LightningRadius: 1
+  LightningChainLimit: 0
   LightningUI: {fileID: 0}
   FrostRadius: 2
+  SlowDownTime: 0
   LightningBetweenTime: 0.4
   LightningFinishTime: 0.4
 --- !u!65 &8437573251633843400
@@ -90,7 +92,7 @@ GameObject:
   - component: {fileID: 2727193882833703313}
   - component: {fileID: 2727193882833703312}
   - component: {fileID: 2727193882833703315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2727193884480791048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

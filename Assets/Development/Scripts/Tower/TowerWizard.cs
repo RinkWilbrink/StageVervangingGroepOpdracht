@@ -13,6 +13,7 @@ namespace Tower
         // Variables
         [SerializeField] private GameObject lightningStrike;
         [SerializeField] private int LightningRadius;
+        [SerializeField] private int LightningChainLimit;
         [SerializeField] private GameObject LightningUI;
 
         [Header("Frost Attack")]
@@ -39,8 +40,6 @@ namespace Tower
                 case SpecialAttack.Special2:
                     FrostAttack();
                     break;
-                default:
-                    break;
             }
             
         }
@@ -51,33 +50,67 @@ namespace Tower
 
             Vector3 newPos = CurrentTarget.transform.position;
 
-            for (float i = 0; i < 1f; i += Time.deltaTime)
+            for (float time = 0; time < 1f; time += Time.deltaTime)
             {
-                if(i < LightningBetweenTime)
+                if(time < LightningBetweenTime)
                 {
                     go.transform.position = (transform.position + newPos) / 2;
                 }
-                else if (i >= LightningBetweenTime && i < LightningFinishTime)
+                else if (time >= LightningBetweenTime && time < LightningFinishTime)
                 {
                     go.transform.position = newPos;
-                    //DoDamage(newPos);
 
-                    Collider[] cool = Physics.OverlapSphere(newPos, LightningRadius);
+                    Collider[] ChainLightning = new Collider[LightningChainLimit];
 
-                    for (int x = 0; x < cool.Length; x++)
+                    ChainLightning[0] = CurrentTarget.GetComponent<Collider>();
+
+                    for (int x = 0; x < ChainLightning.Length; x++)
                     {
-                        if (cool[x].GetComponent<EnemyUnit>())
+                        Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, LightningRadius);
+                        if(EnemiesInRange.Length > 0)
                         {
-                            //cool[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                            GameObject _GO = null;
+                            float B = float.MaxValue;
+
+                            for (int y = 0; y < EnemiesInRange.Length; y++)
+                            {
+                                float distance = Mathf.Pow(Mathf.Sqrt(
+                                    (CurrentTarget.transform.position.x - EnemiesInRange[y].transform.position.x) +
+                                    (CurrentTarget.transform.position.z - EnemiesInRange[y].transform.position.z)), 2f);
+
+                                if (distance < B)
+                                {
+                                    B = distance;
+
+                                    _GO = EnemiesInRange[y].gameObject;
+                                }
+                            }
+
+                            if(_GO != null)
+                            {
+                                ChainLightning[x] = _GO.GetComponent<Collider>();
+                            }
+                            else
+                            {
+                                x = int.MaxValue;
+                            }
                         }
                     }
 
+                    //for (int x = 0; x < cool.Length; x++)
+                    //{
+                    //    if (cool[x].GetComponent<EnemyUnit>())
+                    //    {
+                    //        //cool[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                    //    }
+                    //}
+
                     base.SecondairyAttack();
                 }
-                else if (i >= LightningFinishTime)
+                else if (time >= LightningFinishTime)
                 {
                     go.SetActive(false);
-                    i = 5f;
+                    time = 5f;
                 }
 
                 yield return null;
@@ -94,7 +127,7 @@ namespace Tower
             {
                 if (cool[i].GetComponent<EnemyUnit>())
                 {
-                    cool[i].GetComponent<EnemyUnit>().SlowDown(100, SlowDownTime);
+                    cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
                 }
             }
         }

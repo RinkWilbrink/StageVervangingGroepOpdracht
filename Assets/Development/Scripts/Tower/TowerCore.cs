@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Tower
@@ -49,47 +50,76 @@ namespace Tower
 
         private void Update()
         {
-            if (CurrentTarget != null)
+            //if (CurrentTarget != null)
+            //{
+            //    Debug.DrawRay(ShootOrigin.transform.position, (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized, Color.red);
+            //
+            //    HandleAttackTiming();
+            //
+            //    HandleShooting();
+            //}
+            //else
+            //{
+            //    CheckTargets();
+            //}
+
+            CheckTargets();
+
+            //HandleAttackTiming();
+            //HandleShooting();
+
+            if (Input.GetKeyDown(KeyCode.O))
             {
-                Debug.DrawRay(ShootOrigin.transform.position, (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized, Color.red);
-
-                HandleAttackTiming();
-
-                HandleShooting();
+                PrimairyAttack();
+                Debug.Log("PrimairyAttack");
             }
-            else
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                CheckTargets();
+                SecondairyAttack();
+                Debug.Log("SecondairyAttack");
             }
         }
 
-
         private void CheckTargets()
         {
-            Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange);
+            Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
 
-            foreach (Collider go in enemies)
+            Debug.LogFormat("Lenght = {0}", enemies.Length);
+
+            for (int i = 0; i < enemies.Length; i++)
             {
-                if (go.tag == "Enemy")
+                Debug.Log(enemies[i].name);
+            }
+
+            if(enemies.Length == 0)
+            {
+                CurrentTarget = null;
+
+                Debug.Log("A");
+            }
+            else
+            {
+                foreach (Collider go in enemies)
                 {
-                    if (CurrentTarget == null)
+                    if (go.tag == "Enemy")
                     {
-                        CurrentTarget = go.gameObject;
+                        float Distance1 = ShootingRange + 1f;
 
-                        return;
-                    }
+                        if (CurrentTarget != null)
+                        {
+                            Distance1 = Mathf.Sqrt(
+                            Mathf.Pow((CurrentTarget.transform.position.x - ShootOrigin.transform.position.x), 2f) +
+                            Mathf.Pow((CurrentTarget.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                        }
 
-                    float Distance1 = Mathf.Pow(Mathf.Sqrt(
-                        (CurrentTarget.transform.position.x - ShootOrigin.transform.position.x) +
-                        (CurrentTarget.transform.position.z - ShootOrigin.transform.position.z)), 2);
+                        float Distance2 = Mathf.Sqrt(
+                            Mathf.Pow((go.transform.transform.position.x - ShootOrigin.transform.position.x), 2f) +
+                            Mathf.Pow((go.transform.transform.position.z - ShootOrigin.transform.position.z), 2f));
 
-                    float Distance2 = Mathf.Pow(Mathf.Sqrt(
-                        (go.transform.transform.position.x - ShootOrigin.transform.position.x) +
-                        (go.transform.transform.position.z - ShootOrigin.transform.position.z)), 2);
-
-                    if (Distance2 < Distance1)
-                    {
-                        CurrentTarget = go.gameObject;
+                        if (Distance2 < Distance1)
+                        {
+                            CurrentTarget = go.gameObject;
+                        }
                     }
                 }
             }

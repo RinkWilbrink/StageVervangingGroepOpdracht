@@ -9,11 +9,15 @@ namespace Tower
     [SelectionBase]
     public class TowerWizard : TowerCore
     {
-        [Header("")]
+        [Header("Lightning Strike Attack")]
         // Variables
         [SerializeField] private GameObject lightningStrike;
+        [SerializeField] private int LightningRadius;
+        [SerializeField] private GameObject LightningUI;
 
-        [SerializeField] private GameObject UI;
+        [Header("Frost Attack")]
+        [SerializeField] private int FrostRadius;
+        [SerializeField] private float SlowDownTime;
 
         [Header("Special Attack Timing")]
         [SerializeField] private float LightningBetweenTime;
@@ -27,7 +31,18 @@ namespace Tower
 
         protected override void SecondairyAttack()
         {
-            StartCoroutine(LightningAttack());
+            switch (SpecialUnlocked)
+            {
+                case SpecialAttack.Special1:
+                    StartCoroutine(LightningAttack());
+                    break;
+                case SpecialAttack.Special2:
+                    FrostAttack();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         IEnumerator LightningAttack()
@@ -45,7 +60,19 @@ namespace Tower
                 else if (i >= LightningBetweenTime && i < LightningFinishTime)
                 {
                     go.transform.position = newPos;
-                    DoDamage(newPos);
+                    //DoDamage(newPos);
+
+                    Collider[] cool = Physics.OverlapSphere(newPos, LightningRadius);
+
+                    for (int x = 0; x < cool.Length; x++)
+                    {
+                        if (cool[x].GetComponent<EnemyUnit>())
+                        {
+                            //cool[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                        }
+                    }
+
+                    base.SecondairyAttack();
                 }
                 else if (i >= LightningFinishTime)
                 {
@@ -57,19 +84,19 @@ namespace Tower
             }
         }
 
-        private void DoDamage(Vector3 newPos)
+        private void FrostAttack()
         {
-            Collider[] cool = Physics.OverlapSphere(newPos, 1f);
+            Vector3 newPos = CurrentTarget.transform.position;
+
+            Collider[] cool = Physics.OverlapSphere(newPos, FrostRadius);
 
             for (int i = 0; i < cool.Length; i++)
             {
                 if (cool[i].GetComponent<EnemyUnit>())
                 {
-                    cool[i].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                    cool[i].GetComponent<EnemyUnit>().SlowDown(100, SlowDownTime);
                 }
             }
-
-            base.SecondairyAttack();
         }
 
         protected override void HandleShooting()
@@ -79,12 +106,12 @@ namespace Tower
 
         public void ShowSpecialAttackUI()
         {
-            if (!GameObject.Find(UI.name))
+            if (!GameObject.Find(LightningUI.name))
             {
-                UI.SetActive(true);
+                LightningUI.SetActive(true);
             }
 
-            UI.transform.LookAt(CurrentTarget.transform.position);
+            LightningUI.transform.LookAt(CurrentTarget.transform.position);
         }
     }
 }

@@ -60,6 +60,9 @@ MonoBehaviour:
   ShootingRange: 3
   lightningStrike: {fileID: 3962775702580216195, guid: 7e0a3647f1cdf2544b906ad5781f3988,
     type: 3}
+  LightningRadius: 1
+  LightningUI: {fileID: 0}
+  FrostRadius: 2
   LightningBetweenTime: 0.4
   LightningFinishTime: 0.4
 --- !u!65 &8437573251633843400

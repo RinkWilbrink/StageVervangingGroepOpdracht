@@ -4,15 +4,9 @@ using UnityEngine;
 
 namespace Tower
 {
-    enum SpecialAttack
-    {
-        Special1 = 0, Special2 = 1, Special3 = 2
-    }
-
     public class TowerCannon : TowerCore
     {
         // Variables
-        SpecialAttack SpecialUnlocked;
 
         protected override void HandleShooting()
         {
@@ -34,9 +28,6 @@ namespace Tower
 
                     break;
                 case SpecialAttack.Special2:
-
-                    break;
-                case SpecialAttack.Special3:
 
                     break;
             }

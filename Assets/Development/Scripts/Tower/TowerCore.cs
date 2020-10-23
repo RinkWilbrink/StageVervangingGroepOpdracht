@@ -2,6 +2,11 @@ using UnityEngine;
 
 namespace Tower
 {
+    public enum SpecialAttack
+    {
+        Special1 = 0, Special2 = 1
+    }
+
     public class TowerCore : MonoBehaviour
     {
         // Variables
@@ -28,13 +33,10 @@ namespace Tower
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
-        // Hidden Secondairy Attack Variables
-        //[HideInInspector] public bool CanUseSpecial = false;
+        protected SpecialAttack SpecialUnlocked;
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
-
-        [HideInInspector] private int EnemiesInRange = 0;
         [HideInInspector] private RaycastHit hit;
 
         [Header("Targets")]
@@ -65,14 +67,11 @@ namespace Tower
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange);
-            EnemiesInRange = 0;
 
             foreach (Collider go in enemies)
             {
                 if (go.tag == "Enemy")
                 {
-                    EnemiesInRange += 1;
-
                     if (CurrentTarget == null)
                     {
                         CurrentTarget = go.gameObject;

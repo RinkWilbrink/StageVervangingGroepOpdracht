@@ -7,7 +7,6 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private WaveData[] waves;
     [Space(10)]
-    //[SerializeField] private EnemyUnit testUnit;
     [SerializeField] private float waveCooldown = 10;
 
     private WaypointManager WaypointManager;
@@ -21,9 +20,6 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         WaypointManager = FindObjectOfType<WaypointManager>();
-        //GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
-
-        Debug.Log("TIP: Press Spacebar to Instantiate a test unit...");
 
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
@@ -34,35 +30,26 @@ public class WaveManager : MonoBehaviour
     int spawnCurveIndex;
     private void Update()
     {
-        //print("Wave: " + currentWaveNum);
-
-        if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext)
+        if (enemiesLeftToSpawn > 0 && Time.time > spawnNext)
         {
             SpawnEnemy();
         }
-
-        //spawnTimer += Time.deltaTime;
-        //spawnNext = currentWave.curve.Evaluate(spawnTimer);
-        //Debug.Log(spawnNext);
-        //print(currentWave.curve.Evaluate(Time.time));
     }
 
     private void SpawnEnemy()
     {
-        //yield return new WaitForSeconds(currentWave.curve.Evaluate(Time.timeSinceLevelLoad));
         spawnCurveIndex++;
-        //int enemiesToSpawn = (int)currentWave.curve.Evaluate(spawnCurveIndex);
-
-        //for ( int e = 0; e < enemiesToSpawn; e++ ) {
         enemiesLeftToSpawn--;
         Debug.Log(enemiesLeftToSpawn);
 
         if (currentWave.spawnIntensity.length < 1)
+        {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
+        }
         else
+        {
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnCurveIndex);
-
-        //print("Time until next spawn: " + currentWave.curve.Evaluate(Time.time));
+        }
 
         int random = UnityEngine.Random.Range(0, 100);
         int lowestPercentage;
@@ -70,7 +57,6 @@ public class WaveManager : MonoBehaviour
 
         for (int i = 0; i < currentWave.enemies.Length; i++)
         {
-            //currentWave.enemies[currentWaveNum - 1].chance
             lowestPercentage = highestPercentage;
             highestPercentage += currentWave.enemies[i].chance;
 
@@ -83,7 +69,6 @@ public class WaveManager : MonoBehaviour
                 enemy.OnDeath += OnEnemyDeath;
             }
         }
-        //}
     }
 
     IEnumerator updateWave;
@@ -105,12 +90,8 @@ public class WaveManager : MonoBehaviour
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
-        //GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
-
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
-
-        //spawnTimer = 0f;
 
         GameController.Gold += currentWave.goldReward;
     }

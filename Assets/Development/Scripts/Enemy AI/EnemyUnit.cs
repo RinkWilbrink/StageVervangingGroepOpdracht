@@ -52,7 +52,6 @@ public class EnemyUnit : MonoBehaviour
             }
         }
 
-        // Test
         if (Input.GetKeyDown(KeyCode.S))
         {
             SlowDown(1.5f, 4f);
@@ -68,7 +67,6 @@ public class EnemyUnit : MonoBehaviour
             {
                 Death();
                 GameController.MainTowerHP -= AttackDamage;
-                // Do damage to the main structure
             }
         }
     }

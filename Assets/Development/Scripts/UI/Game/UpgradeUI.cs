@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Tower;
 using UnityEngine;
@@ -19,6 +20,11 @@ namespace UI
         [Header("Special Button")]
         [SerializeField] private Button buttonSpecial1;
         [SerializeField] private Button buttonSpecial2;
+
+        [Space(4)]
+        [SerializeField] private images[] Towers;
+
+        [Space(6)]
 
         [Header("Resources")]
         [SerializeField] private float DamageGoldMultiplier;
@@ -122,10 +128,22 @@ namespace UI
             currentTower = null;
         }
 
-        public void SpecialButton()
+        public void SpecialButton(int _i)
         {
-            buttonSpecial1.image = image1;
-            buttonSpecial2.image = image2;
+            if(_i >= Towers.Length)
+            {
+                _i = 0;
+            }
+
+            buttonSpecial1.image.sprite = Towers[_i].image1;
+            buttonSpecial2.image.sprite = Towers[_i].image2;
+        }
+
+        [Serializable]
+        public struct images
+        {
+            [SerializeField] public Sprite image1;
+            [SerializeField] public Sprite image2;
         }
     }
 }

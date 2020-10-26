@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 enum BuildingTypes
 {
-    Tower = 0, ResourceBuilding = 1, Destroy
+    Tower = 0, ResourceBuilding = 1, Destroy = 2
 }
 
 namespace Tower
@@ -195,7 +195,7 @@ namespace Tower
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
-                            upgradeUI.SpecialButton();
+                            upgradeUI.SpecialButton(0);
                             CurrentInteractionMode = TowerInteractionMode.None;
                         }
                     }

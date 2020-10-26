@@ -50,41 +50,26 @@ namespace Tower
 
         private void Update()
         {
-            //if (CurrentTarget != null)
-            //{
-            //    Debug.DrawRay(ShootOrigin.transform.position, (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized, Color.red);
-            //
-            //    HandleAttackTiming();
-            //
-            //    HandleShooting();
-            //}
-            //else
-            //{
-            //    CheckTargets();
-            //}
-
             CheckTargets();
 
-            //HandleAttackTiming();
-            //HandleShooting();
+            HandleAttackTiming();
+            HandleShooting();
 
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                PrimairyAttack();
-                Debug.Log("PrimairyAttack");
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                SecondairyAttack();
-                Debug.Log("SecondairyAttack");
-            }
+            //if (Input.GetKeyDown(KeyCode.O))
+            //{
+            //    PrimairyAttack();
+            //    Debug.Log("PrimairyAttack");
+            //}
+            //if (Input.GetKeyDown(KeyCode.P))
+            //{
+            //    SecondairyAttack();
+            //    Debug.Log("SecondairyAttack");
+            //}
         }
 
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
-
-            Debug.LogFormat("Lenght = {0}", enemies.Length);
 
             for (int i = 0; i < enemies.Length; i++)
             {
@@ -94,8 +79,6 @@ namespace Tower
             if(enemies.Length == 0)
             {
                 CurrentTarget = null;
-
-                Debug.Log("A");
             }
             else
             {
@@ -158,7 +141,10 @@ namespace Tower
         {
             if (CanAttack)
             {
-                PrimairyAttack();
+                if(CurrentTarget != null)
+                {
+                    PrimairyAttack();
+                }
             }
         }
 

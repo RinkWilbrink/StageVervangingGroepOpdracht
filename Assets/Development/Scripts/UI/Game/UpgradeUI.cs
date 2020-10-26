@@ -1,6 +1,7 @@
 using System.Collections;
 using Tower;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -15,9 +16,9 @@ namespace UI
         [SerializeField] private float DamageIncrease;
         [SerializeField] private float FireRateIncrease;
 
-        [Header("bruh")]
-        [SerializeField] private UpgradePanel DamageButtonPanel;
-        [SerializeField] private UpgradePanel FirerateButtonPanel;
+        [Header("Special Button")]
+        [SerializeField] private Button buttonSpecial1;
+        [SerializeField] private Button buttonSpecial2;
 
         [Header("Resources")]
         [SerializeField] private float DamageGoldMultiplier;
@@ -26,14 +27,14 @@ namespace UI
 
         [Header("Script References")]
         [SerializeField] private SelectionButtonManager TowerSelectionManager;
-        [SerializeField] private Tower.TowerInteraction TowerInteraction;
+        [SerializeField] private TowerInteraction TowerInteraction;
 
         [Space(6)]
 
-        [SerializeField] private UnityEngine.UI.Button SpecialAbilityModeButton;
+        [SerializeField] private Button SpecialAbilityModeButton;
 
         [Space(4)]
-        [HideInInspector] public Tower.TowerCore currentTower;
+        [HideInInspector] public TowerCore currentTower;
 
         private void Start()
         {
@@ -119,6 +120,12 @@ namespace UI
         public void CleanUpAfterClosing()
         {
             currentTower = null;
+        }
+
+        public void SpecialButton()
+        {
+            buttonSpecial1.image = image1;
+            buttonSpecial2.image = image2;
         }
     }
 }

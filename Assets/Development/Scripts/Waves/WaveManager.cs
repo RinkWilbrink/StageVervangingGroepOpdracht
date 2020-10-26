@@ -18,7 +18,8 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
-    private void Start() {
+    private void Start()
+    {
         WaypointManager = FindObjectOfType<WaypointManager>();
         //GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
 
@@ -31,10 +32,12 @@ public class WaveManager : MonoBehaviour
 
     //float spawnTimer;
     int spawnCurveIndex;
-    private void Update() {
+    private void Update()
+    {
         //print("Wave: " + currentWaveNum);
 
-        if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
+        if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext)
+        {
             SpawnEnemy();
         }
 
@@ -44,7 +47,8 @@ public class WaveManager : MonoBehaviour
         //print(currentWave.curve.Evaluate(Time.time));
     }
 
-    private void SpawnEnemy() {
+    private void SpawnEnemy()
+    {
         //yield return new WaitForSeconds(currentWave.curve.Evaluate(Time.timeSinceLevelLoad));
         spawnCurveIndex++;
         //int enemiesToSpawn = (int)currentWave.curve.Evaluate(spawnCurveIndex);
@@ -53,7 +57,7 @@ public class WaveManager : MonoBehaviour
         enemiesLeftToSpawn--;
         Debug.Log(enemiesLeftToSpawn);
 
-        if ( currentWave.spawnIntensity.length < 1 )
+        if (currentWave.spawnIntensity.length < 1)
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
         else
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnCurveIndex);
@@ -64,15 +68,14 @@ public class WaveManager : MonoBehaviour
         int lowestPercentage;
         int highestPercentage = 0;
 
-        for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
+        for (int i = 0; i < currentWave.enemies.Length; i++)
+        {
             //currentWave.enemies[currentWaveNum - 1].chance
             lowestPercentage = highestPercentage;
             highestPercentage += currentWave.enemies[i].chance;
 
-            if ( random >= lowestPercentage && random < highestPercentage ) {
-                //print("Random: " + random);
-                //print("Lowest: " + lowestPercentage);
-                //print("Highest: " + highestPercentage);
+            if (random >= lowestPercentage && random < highestPercentage)
+            {
 
                 EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
                 enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
@@ -84,16 +87,19 @@ public class WaveManager : MonoBehaviour
     }
 
     IEnumerator updateWave;
-    private void OnEnemyDeath() {
+    private void OnEnemyDeath()
+    {
         enemiesLeftAlive--;
 
-        if ( enemiesLeftAlive <= 0 ) {
+        if (enemiesLeftAlive <= 0)
+        {
             updateWave = UpdateWave(waveCooldown);
             StartCoroutine(updateWave);
         }
     }
 
-    private IEnumerator UpdateWave( float waitTime ) {
+    private IEnumerator UpdateWave(float waitTime)
+    {
         yield return new WaitForSeconds(waitTime);
 
         currentWaveNum++;

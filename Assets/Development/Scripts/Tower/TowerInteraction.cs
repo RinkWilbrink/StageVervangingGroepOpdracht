@@ -195,6 +195,7 @@ namespace Tower
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
+                            upgradeUI.SpecialButton();
                             CurrentInteractionMode = TowerInteractionMode.None;
                         }
                     }

@@ -45,6 +45,9 @@ public class EnemyUnit : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.E) )
             TakeDamage(1);
 
+        if ( Speed < 0 )
+            Speed = 0;
+
         if ( slowDebuffActive ) {
             slowDebuffTimer += Time.deltaTime;
 
@@ -57,7 +60,7 @@ public class EnemyUnit : MonoBehaviour
 
         // Test
         if ( Input.GetKeyDown(KeyCode.S) )
-            SlowDown(1.5f, 4f);
+            SlowDown(80f, 4f);
 
         if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
             if ( waypointIndex < wayPoints.Length - 1 ) {
@@ -94,10 +97,12 @@ public class EnemyUnit : MonoBehaviour
     float slowDebuffTimer = 0;
     public void SlowDown( float speedDebuff, float time ) {
         if ( Speed > slowDownTotalSpeed ) {
-            Speed -= speedDebuff;
+            slowDownSpeed = ( speedDebuff / 100 ) * Speed;
+
+            print(( speedDebuff / 100 ) * Speed);
+            Speed -= ( speedDebuff / 100 ) * Speed;
 
             slowDownTotalSpeed = Speed;
-            slowDownSpeed = speedDebuff;
             slowDebuffTime = time;
 
             slowDebuffActive = true;

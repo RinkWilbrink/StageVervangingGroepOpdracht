@@ -55,13 +55,14 @@ MonoBehaviour:
   FireRateAddedPerLevel: 0.1
   TowerLevelToUnlockSpecial: 2
   TowerLevel: 1
+  towerType: 1
   ShootOrigin: {fileID: 2727193884480791051}
   CurrentTarget: {fileID: 0}
   ShootingRange: 3
   lightningStrike: {fileID: 3962775702580216195, guid: 7e0a3647f1cdf2544b906ad5781f3988,
     type: 3}
   LightningRadius: 1
-  LightningChainLimit: 0
+  LightningChainLimit: 5
   LightningUI: {fileID: 0}
   FrostRadius: 2
   SlowDownTime: 0

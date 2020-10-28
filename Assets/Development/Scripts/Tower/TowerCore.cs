@@ -1,11 +1,15 @@
-using System.Linq;
 using UnityEngine;
 
 namespace Tower
 {
     public enum SpecialAttack
     {
-        Special1 = 0, Special2 = 1
+        None = 0, Special1 = 1, Special2 = 2
+    }
+
+    public enum TowerType
+    {
+        ArcherTower = 0, WizardTower = 1, CannonTower = 2
     }
 
     public class TowerCore : MonoBehaviour
@@ -19,7 +23,7 @@ namespace Tower
 
         [SerializeField] protected int SpecialShootingTime;
         [SerializeField] protected int SpecialDamage;
-        [SerializeField] protected int SpecialAttackThresshold;
+        //[SerializeField] protected int SpecialAttackThresshold;
 
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
@@ -34,7 +38,8 @@ namespace Tower
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
-        protected SpecialAttack SpecialUnlocked;
+        [SerializeField] public TowerType towerType;
+        [HideInInspector] public SpecialAttack SpecialUnlocked = SpecialAttack.None;
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
@@ -46,32 +51,19 @@ namespace Tower
         // Private Variables
         [SerializeField] private float ShootingRange = 0;
 
-        // Hits and Shooting
-
         private void Update()
         {
             CheckTargets();
 
             HandleAttackTiming();
             HandleShooting();
-
-            //if (Input.GetKeyDown(KeyCode.O))
-            //{
-            //    PrimairyAttack();
-            //    Debug.Log("PrimairyAttack");
-            //}
-            //if (Input.GetKeyDown(KeyCode.P))
-            //{
-            //    SecondairyAttack();
-            //    Debug.Log("SecondairyAttack");
-            //}
         }
 
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
 
-            for (int i = 0; i < enemies.Length; i++)
+            for(int i = 0; i < enemies.Length; i++)
             {
                 Debug.Log(enemies[i].name);
             }
@@ -82,24 +74,24 @@ namespace Tower
             }
             else
             {
-                foreach (Collider go in enemies)
+                foreach(Collider go in enemies)
                 {
-                    if (go.tag == "Enemy")
+                    if(go.tag == "Enemy")
                     {
                         float Distance1 = ShootingRange + 1f;
 
-                        if (CurrentTarget != null)
+                        if(CurrentTarget != null)
                         {
                             Distance1 = Mathf.Sqrt(
-                            Mathf.Pow((CurrentTarget.transform.position.x - ShootOrigin.transform.position.x), 2f) +
-                            Mathf.Pow((CurrentTarget.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                                Mathf.Pow((CurrentTarget.transform.position.x - ShootOrigin.transform.position.x), 2f) +
+                                Mathf.Pow((CurrentTarget.transform.position.z - ShootOrigin.transform.position.z), 2f));
                         }
 
                         float Distance2 = Mathf.Sqrt(
                             Mathf.Pow((go.transform.transform.position.x - ShootOrigin.transform.position.x), 2f) +
                             Mathf.Pow((go.transform.transform.position.z - ShootOrigin.transform.position.z), 2f));
 
-                        if (Distance2 < Distance1)
+                        if(Distance2 < Distance1)
                         {
                             CurrentTarget = go.gameObject;
                         }
@@ -110,7 +102,7 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+            if(AttackTimer >= (AttackShootingTime - UpgradedFireRate))
             {
                 CanAttack = true;
             }
@@ -134,12 +126,12 @@ namespace Tower
         }
         protected virtual void SecondairyAttack()
         {
-            Debug.Log("Core Secondairy");;
+            Debug.Log("Core Secondairy"); ;
         }
 
         protected virtual void HandleShooting()
         {
-            if (CanAttack)
+            if(CanAttack)
             {
                 if(CurrentTarget != null)
                 {

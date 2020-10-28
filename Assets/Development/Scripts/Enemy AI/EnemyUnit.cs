@@ -21,7 +21,7 @@ public class EnemyUnit : MonoBehaviour
     public void Initialize(EnemyData e)
     {
         this.Health = e.health;
-        this.Speed = 0;//e.speed;
+        this.Speed = e.speed;
         this.GoldReward = e.goldReward;
         this.AttackDamage = e.attackDamage;
     }

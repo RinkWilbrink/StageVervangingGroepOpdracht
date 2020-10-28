@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Reflection.Emit;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 namespace Tower
@@ -45,11 +48,65 @@ namespace Tower
 
         IEnumerator LightningAttack()
         {
+            Vector3 newPos = CurrentTarget.transform.position;
+
+            //go.transform.position = newPos;
+
+            Collider[] ChainLightning = new Collider[LightningChainLimit];
+
+            ChainLightning[0] = CurrentTarget.GetComponent<Collider>();
+
+            for(int x = 0; x < ChainLightning.Length; x++)
+            {
+                Collider[] EnemiesInRange = Physics.OverlapSphere(ChainLightning[x].transform.position, LightningRadius, 1 << 9);
+                if(EnemiesInRange.Length > 0)
+                {
+                    float B = float.MaxValue;
+
+                    for(int y = 0; y < EnemiesInRange.Length; y++)
+                    {
+                        Debug.LogFormat("x ={1} | y = {0}", y, x);
+                        if(EnemiesInRange[y] != null)
+                        {
+                            float distance = Mathf.Pow(Mathf.Sqrt(
+                                (ChainLightning[x].transform.position.x - EnemiesInRange[y].transform.position.x) +
+                                (ChainLightning[x].transform.position.z - EnemiesInRange[y].transform.position.z)), 2f);
+
+                            if(distance > 0 && distance < B)
+                            {
+                                B = distance;
+
+                                ChainLightning[x + 1] = EnemiesInRange[y];
+                            }
+                        }
+                    }
+
+                    Debug.Log(x);
+
+                    if(ChainLightning[x] != null)
+                    {
+                        ChainLightning[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+
+                        GameObject go = new GameObject();
+
+                        go.transform.position = ChainLightning[x].transform.position;
+                        go.name = string.Format("name{0}", x);
+                    }
+                }
+                else
+                {
+                    x = ChainLightning.Length;
+                }
+
+                yield return null;
+            }
+
+            /*
             GameObject go = Instantiate(lightningStrike, transform.position, Quaternion.identity);
 
             Vector3 newPos = CurrentTarget.transform.position;
 
-            for (float time = 0; time < 1f; time += Time.deltaTime)
+            for (float time = 1; time < 1f; time += Time.deltaTime)
             {
                 if(time < LightningBetweenTime)
                 {
@@ -57,54 +114,7 @@ namespace Tower
                 }
                 else if (time >= LightningBetweenTime && time < LightningFinishTime)
                 {
-                    go.transform.position = newPos;
-
-                    Collider[] ChainLightning = new Collider[LightningChainLimit];
-
-                    ChainLightning[0] = CurrentTarget.GetComponent<Collider>();
-
-                    for (int x = 0; x < ChainLightning.Length; x++)
-                    {
-                        Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, LightningRadius);
-                        if(EnemiesInRange.Length > 0)
-                        {
-                            GameObject _GO = null;
-                            float B = float.MaxValue;
-
-                            for (int y = 0; y < EnemiesInRange.Length; y++)
-                            {
-                                float distance = Mathf.Pow(Mathf.Sqrt(
-                                    (CurrentTarget.transform.position.x - EnemiesInRange[y].transform.position.x) +
-                                    (CurrentTarget.transform.position.z - EnemiesInRange[y].transform.position.z)), 2f);
-
-                                if (distance < B)
-                                {
-                                    B = distance;
-
-                                    _GO = EnemiesInRange[y].gameObject;
-                                }
-                            }
-
-                            if(_GO != null)
-                            {
-                                ChainLightning[x] = _GO.GetComponent<Collider>();
-                            }
-                            else
-                            {
-                                x = int.MaxValue;
-                            }
-                        }
-                    }
-
-                    //for (int x = 0; x < cool.Length; x++)
-                    //{
-                    //    if (cool[x].GetComponent<EnemyUnit>())
-                    //    {
-                    //        //cool[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
-                    //    }
-                    //}
-
-                    base.SecondairyAttack();
+                    
                 }
                 else if (time >= LightningFinishTime)
                 {
@@ -113,7 +123,7 @@ namespace Tower
                 }
 
                 yield return null;
-            }
+            }*/
         }
 
         private void FrostAttack()
@@ -133,7 +143,7 @@ namespace Tower
 
         protected override void HandleShooting()
         {
-            
+            //base.HandleShooting();
         }
 
         public void ShowSpecialAttackUI()

@@ -120,7 +120,7 @@ namespace UI
             buttonSpecial1.interactable = false;
             buttonSpecial2.interactable = false;
 
-            if(currentTower.TowerLevel >= 4)
+            if(currentTower.TowerLevel >= currentTower.TowerLevelToUnlockSpecial)
             {
                 if(currentTower.SpecialUnlocked == SpecialAttack.None)
                 {

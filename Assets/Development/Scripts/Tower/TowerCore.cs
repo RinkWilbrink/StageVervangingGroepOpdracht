@@ -23,7 +23,6 @@ namespace Tower
 
         [SerializeField] protected int SpecialShootingTime;
         [SerializeField] protected int SpecialDamage;
-        //[SerializeField] protected int SpecialAttackThresshold;
 
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
@@ -39,7 +38,7 @@ namespace Tower
         protected float UpgradedFireRate;
 
         [SerializeField] public TowerType towerType;
-        [HideInInspector] public SpecialAttack SpecialUnlocked = SpecialAttack.None;
+        [SerializeField] public SpecialAttack SpecialUnlocked;
 
         [Header("Shooting and Range")]
         [SerializeField] private GameObject ShootOrigin;
@@ -62,11 +61,6 @@ namespace Tower
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
-
-            for(int i = 0; i < enemies.Length; i++)
-            {
-                Debug.Log(enemies[i].name);
-            }
 
             if(enemies.Length == 0)
             {
@@ -126,7 +120,7 @@ namespace Tower
         }
         protected virtual void SecondairyAttack()
         {
-            Debug.Log("Core Secondairy"); ;
+            //Debug.Log("Core Secondairy"); ;
         }
 
         protected virtual void HandleShooting()

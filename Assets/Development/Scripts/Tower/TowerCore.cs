@@ -24,9 +24,27 @@ namespace Tower
         [SerializeField] protected int SpecialShootingTime;
         [SerializeField] protected int SpecialDamage;
 
-        // Hidden Primairy Attack Variables
-        [HideInInspector] protected float AttackTimer;
-        [HideInInspector] protected bool CanAttack = true;
+        [Header("Damage and Firerate Upgrades")]
+        [SerializeField] private float DamageAddedPerLevel;
+        [SerializeField] private float FireRateAddedPerLevel;
+
+        [Header("Shooting and Range")]
+        [SerializeField] private float ShootingRange = 0;
+        [SerializeField] private GameObject ShootOrigin;
+        [HideInInspector] private RaycastHit hit;
+
+        [Header("Upgrades and Special Abilities")]
+        [SerializeField] public int TowerLevelToUnlockSpecial;
+        [HideInInspector] public int TowerLevel = 1;
+        [HideInInspector] public int TowerSpecialLevel = 0;
+        protected float UpgradedDamage;
+        protected float UpgradedFireRate;
+
+        [SerializeField] public TowerType towerType;
+        [HideInInspector] public SpecialAttack SpecialUnlocked;
+
+        [Header("Targets")]
+        [SerializeField] protected GameObject CurrentTarget;
 
         [Header("Sprites And Art")]
         [SerializeField] private SpriteRenderer spriteRenderer;
@@ -34,28 +52,9 @@ namespace Tower
         [SerializeField] private Sprite[] Special1ModeSprites;
         [SerializeField] private Sprite[] Special2ModeSprites;
 
-        [Header("Damage and Firerate Upgrades")]
-        [SerializeField] private float DamageAddedPerLevel;
-        [SerializeField] private float FireRateAddedPerLevel;
-        [Space(2)]
-        [SerializeField] public int TowerLevelToUnlockSpecial;
-        [SerializeField] public int TowerLevel = 1;
-        [SerializeField] public int TowerSpecialLevel = 0;
-        protected float UpgradedDamage;
-        protected float UpgradedFireRate;
-
-        [SerializeField] public TowerType towerType;
-        [SerializeField] public SpecialAttack SpecialUnlocked;
-
-        [Header("Shooting and Range")]
-        [SerializeField] private GameObject ShootOrigin;
-        [HideInInspector] private RaycastHit hit;
-
-        [Header("Targets")]
-        [SerializeField] protected GameObject CurrentTarget;
-
-        // Private Variables
-        [SerializeField] private float ShootingRange = 0;
+        // Hidden Primairy Attack Variables
+        [HideInInspector] protected float AttackTimer;
+        [HideInInspector] protected bool CanAttack = true;
 
         private void Update()
         {

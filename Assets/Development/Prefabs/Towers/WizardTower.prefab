@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1693307945941028173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3523257916895029059}
+  - component: {fileID: 7295474383001403779}
+  m_Layer: 8
+  m_Name: SpriteRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3523257916895029059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693307945941028173}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2727193882764642318}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!212 &7295474383001403779
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693307945941028173}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 70b36825dc27d8345a66916197c6e551, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.18, y: 2.98}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2727193882764642312
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +112,7 @@ Transform:
   m_Children:
   - {fileID: 2727193882833703314}
   - {fileID: 2727193884480791048}
+  - {fileID: 3523257916895029059}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,15 +134,26 @@ MonoBehaviour:
   SpecialDamage: 8
   DamageAddedPerLevel: 1
   FireRateAddedPerLevel: 0.1
-  TowerLevelToUnlockSpecial: 2
-  TowerLevel: 1
-  towerType: 1
-  SpecialUnlocked: 1
-  ShootOrigin: {fileID: 2727193884480791051}
-  CurrentTarget: {fileID: 0}
   ShootingRange: 3
-  lightningStrike: {fileID: 3962775702580216195, guid: 7e0a3647f1cdf2544b906ad5781f3988,
-    type: 3}
+  ShootOrigin: {fileID: 2727193884480791051}
+  TowerLevelToUnlockSpecial: 4
+  TowerLevel: 1
+  TowerSpecialLevel: 0
+  towerType: 1
+  SpecialUnlocked: 0
+  CurrentTarget: {fileID: 0}
+  spriteRenderer: {fileID: 7295474383001403779}
+  NoSpecialModeSprites:
+  - {fileID: 21300000, guid: bc14727a2d1fd574bbc64659decbfddc, type: 3}
+  - {fileID: 21300000, guid: 06a41318d6d159f48b982c4424069eb3, type: 3}
+  - {fileID: 21300000, guid: aaae4899422cf7a4293ea4ed9d99ad55, type: 3}
+  Special1ModeSprites:
+  - {fileID: 21300000, guid: 2e2a750f2acf8a14d9493d423489f01a, type: 3}
+  - {fileID: 21300000, guid: c97684a0f818cbd41944933ba1837508, type: 3}
+  Special2ModeSprites:
+  - {fileID: 21300000, guid: 2e2a750f2acf8a14d9493d423489f01a, type: 3}
+  - {fileID: 21300000, guid: c97684a0f818cbd41944933ba1837508, type: 3}
+  lightningStrike: {fileID: 0}
   LightningRadius: 4
   LightningChainLimit: 5
   LightningUI: {fileID: 0}
@@ -99,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2727193882833703314
 Transform:
   m_ObjectHideFlags: 0

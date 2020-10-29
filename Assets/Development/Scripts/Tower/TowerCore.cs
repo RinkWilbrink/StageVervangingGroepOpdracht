@@ -53,7 +53,6 @@ namespace Tower
         private void Update()
         {
             CheckTargets();
-
             HandleAttackTiming();
             HandleShooting();
         }

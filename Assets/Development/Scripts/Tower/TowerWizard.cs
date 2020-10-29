@@ -103,59 +103,6 @@ namespace Tower
                 LightningChainCount++;
                 yield return new WaitForSecondsRealtime(0.5f);
             }
-            /*
-            Collider[] ChainLightning = new Collider[LightningChainLimit + 1];
-            
-            ChainLightning[0] = CurrentTarget.GetComponent<Collider>();
-            for(int x = 0; x < ChainLightning.Length; x++)
-            {
-                Debug.LogFormat("{0} : {1} | Length:{2} | LightningRadius:{3}", x, ChainLightning[x], ChainLightning.Length, LightningRadius);
-                
-                if(x < ChainLightning.Length - 1)
-                {
-                    try
-                    {
-                        Collider[] EnemiesInRange = Physics.OverlapSphere(ChainLightning[x].transform.position, LightningRadius, 1 << 9);
-
-                        Debug.Log(EnemiesInRange);
-
-                        if(EnemiesInRange.Length > 0)
-                        {
-                            float B = float.MaxValue;
-
-                            for(int y = 0; y < EnemiesInRange.Length; y++)
-                            {
-                                if(EnemiesInRange[y] != null)
-                                {
-                                    float distance = Mathf.Pow(Mathf.Sqrt(
-                                        (ChainLightning[x].transform.position.x - EnemiesInRange[y].transform.position.x) +
-                                        (ChainLightning[x].transform.position.z - EnemiesInRange[y].transform.position.z)), 2f);
-
-                                    if(distance > 0 && distance < B)
-                                    {
-                                        B = distance;
-
-                                        ChainLightning[x + 1] = EnemiesInRange[y];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        x = 10000;
-                    }
-                }
-                
-                if(ChainLightning[x] != null)
-                {
-                    ChainLightning[x].GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
-                }
-                
-                yield return new WaitForSecondsRealtime(0.5f);
-            }
-            
-            */
         }
 
         private void FrostAttack()

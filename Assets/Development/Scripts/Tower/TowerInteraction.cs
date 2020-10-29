@@ -131,6 +131,7 @@ namespace Tower
                                 if (CurrentBuildingType == BuildingTypes.Tower)
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
+                                    go.GetComponent<TowerCore>().SetNewSprite();
                                 }
                                 else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
                                 {

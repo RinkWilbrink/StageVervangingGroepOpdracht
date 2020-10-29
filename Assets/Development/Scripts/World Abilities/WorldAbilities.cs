@@ -6,10 +6,24 @@ using UnityEngine.UI;
 public class WorldAbilities : MonoBehaviour
 {
     private TMPro.TextMeshProUGUI interactionText;
+    [SerializeField] private Color notEnoughManaColor;
+
+    private void NotEnoughMana( int manaCost, Button button ) {
+        if ( GameController.Mana < manaCost )
+            button.image.color = notEnoughManaColor;
+        else
+            button.image.color = Color.white;
+    }
 
     private void Update() {
         //print("Mana: " + GameController.Mana);
         //print(ninjaDashTimer);
+        if ( !thousandCranesInUse )
+            NotEnoughMana(thousandCranesManaCost, thousandCranesButton);
+        if ( !ninjaDash.activeInHierarchy )
+            NotEnoughMana(ninjaDashManaCost, ninjaDashButton);
+        if ( !fireworkRocket.activeInHierarchy )
+            NotEnoughMana(fireworkManaCost, fireworkButton);
 
         if ( ninjaDashTimer < ninjaDashCooldown ) {
             ninjaDashButton.interactable = false;
@@ -18,9 +32,16 @@ public class WorldAbilities : MonoBehaviour
             ninjaDashButton.interactable = true;
         }
 
-        if ( thousandCranesAbilityOn ) {
-            if ( thousandCranesTimerAbilityOn < thousandCranes.speedDebuffTime ) {
-                thousandCranesTimerAbilityOn += Time.deltaTime;
+        if ( fireworkTimer < fireworkCooldown ) {
+            fireworkButton.interactable = false;
+            fireworkTimer += Time.deltaTime;
+        } else {
+            fireworkButton.interactable = true;
+        }
+
+        if ( thousandCranesInUse ) {
+            if ( thousandCranesInUseTimer < thousandCranes.speedDebuffTime ) {
+                thousandCranesInUseTimer += Time.deltaTime;
                 thousandCranesButton.image.color = thousandCranesActiveColor;
             } else {
                 ResetThousandCranes();
@@ -36,6 +57,7 @@ public class WorldAbilities : MonoBehaviour
 
     }
 
+    [Space(10)]
     [SerializeField] private ThousandCranes thousandCranes;
     [SerializeField] private Color thousandCranesActiveColor;
     [SerializeField] private Button thousandCranesButton;
@@ -43,33 +65,55 @@ public class WorldAbilities : MonoBehaviour
     [SerializeField] private int thousandCranesManaCost = 8;
     private float thousandCranesTimer;
     private bool thousandCranesAbilityActive = false;
-    private float thousandCranesTimerAbilityOn;
-    private bool thousandCranesAbilityOn = false;
+    private float thousandCranesInUseTimer;
+    private bool thousandCranesInUse = false;
     public void ThousandCranes() {
         thousandCranesAbilityActive = !thousandCranesAbilityActive;
 
-        if ( !thousandCranesAbilityOn && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
+        if ( !thousandCranesInUse && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
             thousandCranes.ThousandCranesAbility();
-            thousandCranesAbilityOn = true;
-            print("oasjtaojtw");
+            thousandCranesInUse = true;
         }
     }
 
     private void ResetThousandCranes() {
         thousandCranesAbilityActive = false;
-        thousandCranesAbilityOn = false;
+        thousandCranesInUse = false;
         thousandCranesTimer = 0;
-        thousandCranesTimerAbilityOn = 0;
+        thousandCranesInUseTimer = 0;
         GameController.Mana -= thousandCranesManaCost;
         thousandCranesButton.image.color = Color.white;
     }
 
-    //[SerializeField] private GameObject fireworkRocket;
-    //private bool fireworkAbilityActive = false;
-    //public void FireworkRocket() {
-    //    fireworkAbilityActive = !fireworkAbilityActive;
-    //}
+    [Space(20)]
+    [SerializeField] private GameObject fireworkRocket;
+    [SerializeField] private Color fireworkActiveColor;
+    [SerializeField] private Button fireworkButton;
+    [SerializeField] private float fireworkCooldown = 10;
+    [SerializeField] private int fireworkManaCost = 5;
+    private float fireworkTimer;
+    private bool fireworkAbilityActive = false;
+    public void FireworkRocket() {
+        if ( fireworkRocket.gameObject.activeInHierarchy ) {
+            fireworkRocket.SetActive(false);
+            fireworkAbilityActive = false;
+            fireworkButton.image.color = Color.white;
+        } else if ( !fireworkRocket.gameObject.activeInHierarchy && GameController.Mana >= fireworkManaCost && fireworkTimer > fireworkCooldown ) {
+            fireworkRocket.SetActive(true);
+            fireworkAbilityActive = true;
+            fireworkButton.image.color = fireworkActiveColor;
+        }
+    }
 
+    public void ResetFireworkRocket() {
+        fireworkAbilityActive = false;
+        fireworkRocket.SetActive(false);
+        fireworkTimer = 0f;
+        GameController.Mana -= fireworkManaCost;
+        fireworkButton.image.color = Color.white;
+    }
+
+    [Space(20)]
     [SerializeField] private GameObject ninjaDash;
     [SerializeField] private Color ninjaDashActiveColor;
     [SerializeField] private Button ninjaDashButton;
@@ -91,8 +135,8 @@ public class WorldAbilities : MonoBehaviour
 
     public void ResetNinjaDash() {
         ninjaDashAbilityActive = false;
-        ninjaDash.gameObject.SetActive(false);
-        ninjaDashTimer = 0;
+        ninjaDash.SetActive(false);
+        ninjaDashTimer = 0f;
         GameController.Mana -= ninjaDashManaCost;
         ninjaDashButton.image.color = Color.white;
         print("FINISHED NINJA DASH");

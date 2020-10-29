@@ -2918,68 +2918,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: NoSpecialModeSprites.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special1ModeSprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special2ModeSprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: spriteRenderer
-      value: 
-      objectReference: {fileID: 1377706383}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: NoSpecialModeSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 70b36825dc27d8345a66916197c6e551,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: NoSpecialModeSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 38d9a8e81374937478f2a7a5d49f675a,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: NoSpecialModeSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3cbfc1081054b754fb58ac08fd534db0,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special1ModeSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 33af964cd998d1645984b4a7016678b1,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special1ModeSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 83c07f0a8551e7b48ad90f73c49772bf,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special2ModeSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: f00464fee4b28974a9071eb644bd0578,
-        type: 3}
-    - target: {fileID: 3603336420261006985, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: Special2ModeSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: db3b60ea5f1d1884096e51025f3b77d5,
-        type: 3}
     - target: {fileID: 3603336420261006987, guid: c0214eecb0d536744b7f9293af6f64a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3040,19 +2978,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherTower
       objectReference: {fileID: 0}
-    - target: {fileID: 3603336421730273036, guid: c0214eecb0d536744b7f9293af6f64a1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0214eecb0d536744b7f9293af6f64a1, type: 3}
---- !u!4 &1285149274 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3603336420261006987, guid: c0214eecb0d536744b7f9293af6f64a1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1285149273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1321240013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,87 +3282,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34f03df14fddaca41a8cbc0d944299f8, type: 3}
---- !u!1 &1377706381
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1377706382}
-  - component: {fileID: 1377706383}
-  m_Layer: 8
-  m_Name: SpriteRenderer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1377706382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377706381}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1285149274}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!212 &1377706383
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377706381}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 70b36825dc27d8345a66916197c6e551, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 3.18, y: 2.98}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!4 &1382705127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 341408206199449652, guid: 34f03df14fddaca41a8cbc0d944299f8,

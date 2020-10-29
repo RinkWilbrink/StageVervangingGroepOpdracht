@@ -40,6 +40,7 @@ namespace Tower
         [Space(2)]
         [SerializeField] public int TowerLevelToUnlockSpecial;
         [SerializeField] public int TowerLevel = 1;
+        [SerializeField] public int TowerSpecialLevel = 0;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
@@ -165,18 +166,26 @@ namespace Tower
             switch(SpecialUnlocked)
             {
                 case SpecialAttack.None:
-                    if(TowerLevel < NoSpecialModeSprites.Length)
+                    if(TowerLevel <= NoSpecialModeSprites.Length)
                     {
-                        spriteRenderer.sprite = NoSpecialModeSprites[TowerLevel];
+                        spriteRenderer.sprite = NoSpecialModeSprites[TowerLevel - 1];
                     }
                     break;
                 case SpecialAttack.Special1:
-                    spriteRenderer.sprite = Special1ModeSprites[TowerLevel - NoSpecialModeSprites.Length];
+                    if(TowerSpecialLevel < Special1ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special1ModeSprites[TowerSpecialLevel];
+                    }
                     break;
                 case SpecialAttack.Special2:
-                    spriteRenderer.sprite = Special2ModeSprites[TowerLevel - NoSpecialModeSprites.Length];
+                    if(TowerSpecialLevel < Special2ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special2ModeSprites[TowerSpecialLevel];
+                    }
                     break;
             }
+
+            Debug.Log(TowerLevel);
         }
 
         #endregion

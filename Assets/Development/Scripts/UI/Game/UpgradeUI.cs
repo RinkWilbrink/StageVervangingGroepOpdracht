@@ -184,11 +184,10 @@ namespace UI
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
                     SetSpecialButtons();
-                    currentTower.SetNewSprite();
                 }
+                currentTower.SetNewSprite();
+                currentTower.UpdateDamageValues();
             }
-
-            currentTower.UpdateDamageValues();
         }
 
         public void CloseUpgradePanel()

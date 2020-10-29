@@ -28,6 +28,12 @@ namespace Tower
         [HideInInspector] protected float AttackTimer;
         [HideInInspector] protected bool CanAttack = true;
 
+        [Header("Sprites And Art")]
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Sprite[] NoSpecialModeSprites;
+        [SerializeField] private Sprite[] Special1ModeSprites;
+        [SerializeField] private Sprite[] Special2ModeSprites;
+
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
         [SerializeField] private float FireRateAddedPerLevel;
@@ -151,6 +157,26 @@ namespace Tower
         public void StartSecondairyAttack()
         {
             SecondairyAttack();
+        }
+
+        /// <summary>Set a new sprite</summary>
+        public void SetNewSprite()
+        {
+            switch(SpecialUnlocked)
+            {
+                case SpecialAttack.None:
+                    if(TowerLevel < NoSpecialModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = NoSpecialModeSprites[TowerLevel];
+                    }
+                    break;
+                case SpecialAttack.Special1:
+                    spriteRenderer.sprite = Special1ModeSprites[TowerLevel - NoSpecialModeSprites.Length];
+                    break;
+                case SpecialAttack.Special2:
+                    spriteRenderer.sprite = Special2ModeSprites[TowerLevel - NoSpecialModeSprites.Length];
+                    break;
+            }
         }
 
         #endregion

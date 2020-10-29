@@ -184,6 +184,7 @@ namespace UI
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
                     SetSpecialButtons();
+                    currentTower.SetNewSprite();
                 }
             }
 
@@ -215,6 +216,7 @@ namespace UI
             currentTower.SpecialUnlocked = (SpecialAttack)_i;
 
             SetSpecialButtons();
+            currentTower.SetNewSprite();
         }
 
         [Serializable]

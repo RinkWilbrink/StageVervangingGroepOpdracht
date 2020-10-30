@@ -1,3 +1,4 @@
+using ResourceBuilding;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -165,11 +166,19 @@ namespace Tower
                         }
                         else if (CurrentBuildingType == BuildingTypes.Destroy)
                         {
-                            if (TowerHit.collider.tag == "Tower" || TowerHit.collider.tag == "Building")
+                            if (TowerHit.collider.tag == "Tower")
                             {
+                                Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
                                 upgradeUI.PayGold(-5);
+                            }
+                            else if(TowerHit.collider.tag == "Building")
+                            {
+                                Destroy(TowerHit.collider.GetComponent<ResourceBuildingCore>().button);
+                                Destroy(TowerHit.collider.gameObject);
+                                CurrentBuildingType = PreviousBuildingType;
+                                upgradeUI.PayGold(-10);
                             }
                         }
                     }

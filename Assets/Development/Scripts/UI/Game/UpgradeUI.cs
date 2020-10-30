@@ -38,6 +38,10 @@ namespace UI
         [SerializeField] private float FirerateGoldMultiplier;
         [SerializeField] private ResourceUIManager ResourceManager;
 
+        [Space(4)]
+        [SerializeField] private TMPro.TextMeshProUGUI HealthText;
+        [SerializeField] private GameObject DeathScreen;
+
         [Header("Script References")]
         [SerializeField] private SelectionButtonManager TowerSelectionManager;
         [SerializeField] private TowerInteraction TowerInteraction;
@@ -133,6 +137,19 @@ namespace UI
         #endregion
 
         #region PayResources
+
+        public void DoMainTowerDamage(int _dmg)
+        {
+            GameController.MainTowerHP -= _dmg;
+
+            if(GameController.MainTowerHP < 1)
+            {
+                Debug.Log("GAME OVER");
+                DeathScreen.SetActive(true);
+            }
+
+            HealthText.text = string.Format("{0}", GameController.MainTowerHP);
+        }
 
         public bool PayGold(int Amount)
         {

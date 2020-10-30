@@ -66,8 +66,7 @@ public class EnemyUnit : MonoBehaviour
             else
             {
                 Death();
-                GameController.MainTowerHP -= AttackDamage;
-                // Do damage to the main structure
+                upgradeUi.DoMainTowerDamage(AttackDamage);
             }
     }
 

@@ -10,16 +10,16 @@ namespace Tower
     {
         // Variables
 
-        protected override void PrimairyAttack()
+        protected override void PrimaryAttack()
         {
-            base.PrimairyAttack();
+            base.PrimaryAttack();
 
             Debug.Log("Archer Primairy");
         }
 
-        protected override void SecondairyAttack()
+        protected override void SecondaryAttack()
         {
-            base.SecondairyAttack();
+            base.SecondaryAttack();
 
             Debug.Log("Archer Secondairy");
         }

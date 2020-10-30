@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     // Resources
-    //[SerializeField] public 
+    [SerializeField] private TMPro.TextMeshProUGUI HealthText;
     [SerializeField] private GameObject DeathScreen;
 
     public static int Gold = 15;
@@ -21,9 +21,7 @@ public class GameController : MonoBehaviour
             Debug.Log("GAME OVER");
             DeathScreen.SetActive(true);
         }
-        else
-        {
-            //Debug.LogFormat("Main Tower HP: {0}", MainTowerHP);
-        }
+
+        HealthText.text = string.Format("{0}", HealthText);
     }
 }

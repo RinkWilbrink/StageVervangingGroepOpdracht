@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
     {
         spawnCurveIndex++;
         enemiesLeftToSpawn--;
-        Debug.Log(enemiesLeftToSpawn);
+        //Debug.Log(enemiesLeftToSpawn);
 
         if (currentWave.spawnIntensity.length < 1)
         {

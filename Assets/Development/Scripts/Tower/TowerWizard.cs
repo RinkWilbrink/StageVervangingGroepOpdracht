@@ -26,13 +26,13 @@ namespace Tower
         [SerializeField] private float LightningBetweenTime;
         [SerializeField] private float LightningFinishTime;
 
-        protected override void PrimairyAttack()
+        protected override void PrimaryAttack()
         {
-            base.PrimairyAttack();
+            base.PrimaryAttack();
             Debug.Log("Wizard Primairy");
         }
 
-        protected override void SecondairyAttack()
+        protected override void SecondaryAttack()
         {
             switch(SpecialUnlocked)
             {
@@ -122,7 +122,7 @@ namespace Tower
 
         protected override void HandleShooting()
         {
-            //base.HandleShooting();
+            base.HandleShooting();
         }
 
         public override void LookAt()

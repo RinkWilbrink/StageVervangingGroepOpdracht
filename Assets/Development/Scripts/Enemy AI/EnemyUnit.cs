@@ -20,16 +20,14 @@ public class EnemyUnit : MonoBehaviour
 
     public void Initialize(EnemyData e)
     {
-        this.Health = e.health;
-        this.Speed = e.speed;
-        this.GoldReward = e.goldReward;
-        this.AttackDamage = e.attackDamage;
+        Health = e.health;
+        Speed = e.speed;
+        GoldReward = e.goldReward;
+        AttackDamage = e.attackDamage;
     }
 
     private void Start()
     {
-        //wayPoints = FindObjectOfType<WaypointManager>();
-
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
@@ -41,12 +39,6 @@ public class EnemyUnit : MonoBehaviour
         // Need to test the rotation more
         Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
-
-        //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
-        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
-
-        if(Input.GetKeyDown(KeyCode.E))
-            TakeDamage(1);
 
         if(Speed < 0)
             Speed = 0;
@@ -62,10 +54,6 @@ public class EnemyUnit : MonoBehaviour
                 slowDebuffActive = false;
             }
         }
-
-        // Test
-        if(Input.GetKeyDown(KeyCode.S))
-            SlowDown(80f, 4f);
 
         if(Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f)
             if(waypointIndex < wayPoints.Length - 1)
@@ -87,7 +75,6 @@ public class EnemyUnit : MonoBehaviour
         if(Health < 1)
         {
             Death();
-            GameController.Gold += GoldReward;
         }
     }
 
@@ -114,9 +101,11 @@ public class EnemyUnit : MonoBehaviour
 
     private void Death()
     {
-        Destroy(gameObject);
+        GameController.Gold += GoldReward;
 
         if(OnDeath != null)
             OnDeath();
+
+        Destroy(gameObject);
     }
 }

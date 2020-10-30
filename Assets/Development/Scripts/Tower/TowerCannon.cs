@@ -13,12 +13,12 @@ namespace Tower
             base.HandleShooting();
         }
 
-        protected override void PrimairyAttack()
+        protected override void PrimaryAttack()
         {
-            base.PrimairyAttack();
+            base.PrimaryAttack();
         }
 
-        protected override void SecondairyAttack()
+        protected override void SecondaryAttack()
         {
             //base.SecondairyAttack();
 

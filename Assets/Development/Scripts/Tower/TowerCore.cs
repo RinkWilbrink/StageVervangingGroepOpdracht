@@ -116,7 +116,7 @@ namespace Tower
         #region Virtual Functions
 
         // Virtual functions for shooting and special abilities
-        protected virtual void PrimairyAttack()
+        protected virtual void PrimaryAttack()
         {
             Debug.Log("Core Primairy");
 
@@ -125,7 +125,7 @@ namespace Tower
             CanAttack = false;
             AttackTimer = 0;
         }
-        protected virtual void SecondairyAttack()
+        protected virtual void SecondaryAttack()
         {
             //Debug.Log("Core Secondairy"); ;
         }
@@ -136,7 +136,7 @@ namespace Tower
             {
                 if(CurrentTarget != null)
                 {
-                    PrimairyAttack();
+                    PrimaryAttack();
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace Tower
 
         public void StartSecondairyAttack()
         {
-            SecondairyAttack();
+            SecondaryAttack();
         }
 
         /// <summary>Set a new sprite</summary>

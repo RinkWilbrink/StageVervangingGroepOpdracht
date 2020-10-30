@@ -32,7 +32,7 @@ namespace Tower
         [Header("Shooting and Range")]
         [SerializeField] private float ShootingRange = 0;
         [SerializeField] private GameObject ShootOrigin;
-        [SerializeField] private GameObject specialDirectionUI;
+        [SerializeField] public GameObject specialDirectionUI;
         [HideInInspector] private RaycastHit hit;
 
         [Header("Upgrades and Special Abilities")]
@@ -184,6 +184,14 @@ namespace Tower
                         spriteRenderer.sprite = Special2ModeSprites[TowerSpecialLevel];
                     }
                     break;
+            }
+        }
+
+        public virtual void LookAt()
+        {
+            if(CurrentTarget != null)
+            {
+                specialDirectionUI.transform.LookAt(CurrentTarget.transform.position);
             }
         }
 

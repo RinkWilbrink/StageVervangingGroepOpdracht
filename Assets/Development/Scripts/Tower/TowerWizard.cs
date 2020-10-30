@@ -125,6 +125,11 @@ namespace Tower
             //base.HandleShooting();
         }
 
+        public override void LookAt()
+        {
+            base.LookAt();
+        }
+
         public void ShowSpecialAttackUI()
         {
             if(!GameObject.Find(LightningUI.name))

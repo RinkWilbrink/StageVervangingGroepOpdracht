@@ -132,6 +132,17 @@ MonoBehaviour:
   AttackDamage: 1
   SpecialShootingTime: 6
   SpecialDamage: 2
+  DamageAddedPerLevel: 1
+  FireRateAddedPerLevel: 0.1
+  ShootingRange: 4
+  ShootOrigin: {fileID: 3603336421924493691}
+  specialDirectionUI: {fileID: 0}
+  TowerLevelToUnlockSpecial: 4
+  TowerLevel: 1
+  TowerSpecialLevel: 0
+  towerType: 0
+  SpecialUnlocked: 0
+  CurrentTarget: {fileID: 0}
   spriteRenderer: {fileID: 1377706383}
   NoSpecialModeSprites:
   - {fileID: 21300000, guid: 70b36825dc27d8345a66916197c6e551, type: 3}
@@ -143,16 +154,6 @@ MonoBehaviour:
   Special2ModeSprites:
   - {fileID: 21300000, guid: f00464fee4b28974a9071eb644bd0578, type: 3}
   - {fileID: 21300000, guid: db3b60ea5f1d1884096e51025f3b77d5, type: 3}
-  DamageAddedPerLevel: 1
-  FireRateAddedPerLevel: 0.1
-  TowerLevelToUnlockSpecial: 4
-  TowerLevel: 1
-  TowerSpecialLevel: 0
-  towerType: 0
-  SpecialUnlocked: 0
-  ShootOrigin: {fileID: 3603336421924493691}
-  CurrentTarget: {fileID: 0}
-  ShootingRange: 4
 --- !u!65 &5989073579745361871
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -51,6 +51,12 @@ namespace Tower
         private BuildingTypes CurrentBuildingType;
         private BuildingTypes PreviousBuildingType;
 
+        [Space(6)]
+        [SerializeField] private Transform TowerSpecialUIParent;
+        [SerializeField] private GameObject ArcherSpecialAttackUIPrefab;
+        [SerializeField] private GameObject WizardSpecialAttackUIPrefab;
+        [SerializeField] private GameObject CannonSpecialAttackUIPrefab;
+
         [Header("Script References")]
         [SerializeField] private UI.UpgradeUI upgradeUI;
         [SerializeField] private ResourceUIManager resourceManager;
@@ -133,6 +139,25 @@ namespace Tower
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                     go.GetComponent<TowerCore>().SetNewSprite();
+
+                                    // Create UI
+                                    switch(go.GetComponent<TowerCore>().towerType)
+                                    {
+                                        case TowerType.ArcherTower:
+                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                                Instantiate(ArcherSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
+                                            break;
+                                        case TowerType.WizardTower:
+                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                                Instantiate(WizardSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
+                                            break;
+                                        case TowerType.CannonTower:
+                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                                Instantiate(CannonSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
+                                            break;
+                                    }
+
+                                    go.GetComponent<TowerCore>().specialDirectionUI.SetActive(false);
                                 }
                                 else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
                                 {
@@ -217,6 +242,7 @@ namespace Tower
                 {
                     // Go through all towers that can use their special ability and display what they are about to do and where to
                     //Debug.Log("Cool! " + i);
+                    SpecialAbilityUnlockedTowerList[i].LookAt();
                 }
                 if(SpecialAbilityUnlockedTowerList.Count > 0)
                 {
@@ -272,6 +298,14 @@ namespace Tower
         }
 
         #region Public Functions
+
+        public void OnSpecialMode(bool OnOrOff)
+        {
+            for(int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
+            {
+                SpecialAbilityUnlockedTowerList[i].specialDirectionUI.SetActive(OnOrOff);
+            }
+        }
 
         public void SetSelectedButtonAttributes(int _index)
         {

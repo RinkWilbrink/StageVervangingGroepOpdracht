@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class NinjaDash : MonoBehaviour
@@ -16,10 +14,12 @@ public class NinjaDash : MonoBehaviour
 
     private WorldAbilities worldAbilities;
 
-    private void Start() {
-        //line = GetComponent<LineRenderer>();
-        if ( worldAbilities == null )
+    private void Start()
+    {
+        if(worldAbilities == null)
+        {
             worldAbilities = FindObjectOfType<WorldAbilities>();
+        }
 
         line.sortingOrder = 1;
         line.material = new Material(Shader.Find("Sprites/Default"));
@@ -29,52 +29,54 @@ public class NinjaDash : MonoBehaviour
         mainCam = Camera.main;
         camZ = mainCam.transform.position.y;
 
-        if ( gameObject.active )
+        if(gameObject.active)
+        {
             gameObject.SetActive(false);
-        //line.gameObject.SetActive(false);
-        //line.enabled = false;
+        }
     }
 
-    bool stopTest = false;
-    private void Update() {
-        if ( Input.GetMouseButtonDown(0) ) {
+    private bool stopTest = false;
+    private void Update1()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
             print("Down");
             line.enabled = true;
 
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
             startPos = mainCam.ScreenToWorldPoint(mousePos);
-            //startPos.y = 0;
             line.SetPosition(0, startPos);
         }
-        if ( Input.GetMouseButton(0) ) {
-            print("Drag");
-
+        if(Input.GetMouseButton(0))
+        {
             Vector3 dist = startPos - endPos;
 
-            if ( !stopTest ) {
+            if(!stopTest)
+            {
                 Vector3 mousePos = Input.mousePosition;
                 mousePos.z = camZ;
                 endPos = mainCam.ScreenToWorldPoint(mousePos);
-                //endPos.y = 0;
                 line.SetPosition(1, endPos);
             }
 
-            //Debug.Log("StartPos: " + startPos + " / EndPos: " + endPos);
-            if ( Vector3.Distance(startPos, endPos) > dragRange ) {
+            if(Vector3.Distance(startPos, endPos) > dragRange)
+            {
                 stopTest = true;
             }
         }
-        if ( Input.GetMouseButtonUp(0) ) {
-            print("Up");
+        if(Input.GetMouseButtonUp(0))
+        {
             float thickness = 1f;
 
             RaycastHit[] hits;
 
             hits = Physics.SphereCastAll(startPos, thickness, endPos - startPos);
 
-            for ( int i = 0; i < hits.Length; i++ ) {
-                if ( hits[i].transform.GetComponent<EnemyUnit>() ) {
+            for(int i = 0; i < hits.Length; i++)
+            {
+                if(hits[i].transform.GetComponent<EnemyUnit>())
+                {
                     hits[i].transform.GetComponent<EnemyUnit>().TakeDamage(damage);
                     Debug.Log("An Enemy is hit");
                 }

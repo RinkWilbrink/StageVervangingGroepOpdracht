@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 public class EnemyUnit : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 60;
     [SerializeField] private EnemyData enemyData;
+
+    [HideInInspector] public UpgradeUI upgradeUi;
 
     public int Health { get; private set; }
     public float Speed { get; private set; }
@@ -101,11 +104,11 @@ public class EnemyUnit : MonoBehaviour
 
     private void Death()
     {
-        GameController.Gold += GoldReward;
+        upgradeUi.PayGold(-GoldReward);
+
+        Destroy(gameObject);
 
         if(OnDeath != null)
             OnDeath();
-
-        Destroy(gameObject);
     }
 }

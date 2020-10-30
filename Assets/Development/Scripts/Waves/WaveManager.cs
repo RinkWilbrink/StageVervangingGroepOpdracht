@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
+
+    [Space(6)]
+    [SerializeField] private UpgradeUI upgradeUI;
 
     private WaypointManager WaypointManager;
 
@@ -65,6 +69,7 @@ public class WaveManager : MonoBehaviour
 
                 EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
                 enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
+                enemy.upgradeUi = upgradeUI;
 
                 enemy.OnDeath += OnEnemyDeath;
             }

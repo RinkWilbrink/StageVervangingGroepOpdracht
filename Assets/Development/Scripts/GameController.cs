@@ -22,6 +22,6 @@ public class GameController : MonoBehaviour
             DeathScreen.SetActive(true);
         }
 
-        HealthText.text = string.Format("{0}", HealthText);
+        HealthText.text = string.Format("{0}", MainTowerHP);
     }
 }

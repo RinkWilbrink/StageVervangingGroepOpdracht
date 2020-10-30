@@ -28,5 +28,10 @@ namespace Tower
         {
             base.HandleShooting();
         }
+
+        public override void LookAt()
+        {
+            //base.LookAt();
+        }
     }
 }

@@ -89,10 +89,8 @@ namespace UI
 
         private void SetSpecialButtonTransform(int Index)
         {
-            Vector2 Special1Scale = Vector2.one;
-            Vector2 Special2Scale = Vector2.one;
-            Vector2 Special1Position = new Vector2(-1, 0);
-            Vector2 Special2Position = new Vector2(1, 0);
+            Vector2 Special1Scale = Vector2.one; Vector2 Special2Scale = Vector2.one;
+            Vector2 Special1Position = new Vector2(-1, 0); Vector2 Special2Position = new Vector2(1, 0);
 
             if(Index == 1)
             {
@@ -105,13 +103,13 @@ namespace UI
             {
                 Special2Scale = new Vector2(1.2f, 1.2f);
                 Special2Position = new Vector2(
-                        Special2Position.x - (buttonSpecial2.GetComponent<RectTransform>().rect.width * 0.1f),
+                        Special2Position.x + (buttonSpecial2.GetComponent<RectTransform>().rect.width * 0.1f),
                         Special2Position.y + (buttonSpecial2.GetComponent<RectTransform>().rect.height * 0.1f));
             }
 
-            buttonSpecial1.transform.localScale = Special1Scale;
+            buttonSpecial1.transform.localScale = Special1Scale; 
             buttonSpecial2.transform.localScale = Special2Scale;
-            buttonSpecial1.GetComponent<RectTransform>().anchoredPosition = Special1Position;
+            buttonSpecial1.GetComponent<RectTransform>().anchoredPosition = Special1Position; 
             buttonSpecial2.GetComponent<RectTransform>().anchoredPosition = Special2Position;
         }
 
@@ -183,11 +181,16 @@ namespace UI
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
+                    buttonUpgrade.interactable = false;
                     SetSpecialButtons();
                 }
+                if(currentTower.SpecialUnlocked != SpecialAttack.None)
+                {
+                    currentTower.TowerSpecialLevel += 1;
+                }
+                currentTower.SetNewSprite();
+                currentTower.UpdateDamageValues();
             }
-
-            currentTower.UpdateDamageValues();
         }
 
         public void CloseUpgradePanel()
@@ -214,7 +217,12 @@ namespace UI
             }
             currentTower.SpecialUnlocked = (SpecialAttack)_i;
 
+            buttonUpgrade.interactable = true;
+            buttonSpecial1.interactable = false;
+            buttonSpecial2.interactable = false;
+
             SetSpecialButtons();
+            currentTower.SetNewSprite();
         }
 
         [Serializable]

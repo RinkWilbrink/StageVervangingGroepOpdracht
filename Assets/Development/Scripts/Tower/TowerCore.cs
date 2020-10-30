@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Tower
@@ -24,31 +25,38 @@ namespace Tower
         [SerializeField] protected int SpecialShootingTime;
         [SerializeField] protected int SpecialDamage;
 
-        // Hidden Primairy Attack Variables
-        [HideInInspector] protected float AttackTimer;
-        [HideInInspector] protected bool CanAttack = true;
-
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
         [SerializeField] private float FireRateAddedPerLevel;
-        [Space(2)]
+
+        [Header("Shooting and Range")]
+        [SerializeField] private float ShootingRange = 0;
+        [SerializeField] private GameObject ShootOrigin;
+        [SerializeField] public GameObject specialDirectionUI;
+        [HideInInspector] private RaycastHit hit;
+
+        [Header("Upgrades and Special Abilities")]
         [SerializeField] public int TowerLevelToUnlockSpecial;
-        [SerializeField] public int TowerLevel = 1;
+        [HideInInspector] public int TowerLevel = 1;
+        [HideInInspector] public int TowerSpecialLevel = 0;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
         [SerializeField] public TowerType towerType;
-        [SerializeField] public SpecialAttack SpecialUnlocked;
-
-        [Header("Shooting and Range")]
-        [SerializeField] private GameObject ShootOrigin;
-        [HideInInspector] private RaycastHit hit;
+        [HideInInspector] public SpecialAttack SpecialUnlocked;
 
         [Header("Targets")]
         [SerializeField] protected GameObject CurrentTarget;
 
-        // Private Variables
-        [SerializeField] private float ShootingRange = 0;
+        [Header("Sprites And Art")]
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Sprite[] NoSpecialModeSprites;
+        [SerializeField] private Sprite[] Special1ModeSprites;
+        [SerializeField] private Sprite[] Special2ModeSprites;
+
+        // Hidden Primairy Attack Variables
+        [HideInInspector] protected float AttackTimer;
+        [HideInInspector] protected bool CanAttack = true;
 
         private void Update()
         {
@@ -151,6 +159,40 @@ namespace Tower
         public void StartSecondairyAttack()
         {
             SecondairyAttack();
+        }
+
+        /// <summary>Set a new sprite</summary>
+        public void SetNewSprite()
+        {
+            switch(SpecialUnlocked)
+            {
+                case SpecialAttack.None:
+                    if(TowerLevel <= NoSpecialModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = NoSpecialModeSprites[TowerLevel - 1];
+                    }
+                    break;
+                case SpecialAttack.Special1:
+                    if(TowerSpecialLevel < Special1ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special1ModeSprites[TowerSpecialLevel];
+                    }
+                    break;
+                case SpecialAttack.Special2:
+                    if(TowerSpecialLevel < Special2ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special2ModeSprites[TowerSpecialLevel];
+                    }
+                    break;
+            }
+        }
+
+        public virtual void LookAt()
+        {
+            if(CurrentTarget != null)
+            {
+                specialDirectionUI.transform.LookAt(CurrentTarget.transform.position);
+            }
         }
 
         #endregion

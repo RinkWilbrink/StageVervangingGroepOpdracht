@@ -32,5 +32,10 @@ namespace Tower
                     break;
             }
         }
+
+        public override void LookAt()
+        {
+            base.LookAt();
+        }
     }
 }

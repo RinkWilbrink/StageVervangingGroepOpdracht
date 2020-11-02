@@ -91,13 +91,14 @@ public class WorldAbilities : MonoBehaviour
         //Vector3 cranePos = new Vector3(-screenSize, screenSize, screenSize);
         //cranePos = Camera.main.WorldToScreenPoint(cranePos);
 
-        for ( int y = 0; y < 8; y++ ) {
-            for ( int x = 0; x < 15; x++ ) {
+        for ( int y = 0; y < 10; y++ ) {
+            for ( int x = 0; x < 18; x++ ) {
                 int rand = Random.Range(0, craneSprites.Length);
                 GameObject go = Instantiate(cranePrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
 
-                go.transform.position = new Vector3(( screenSize * Camera.main.aspect ) - Camera.main.transform.position.x + ( x * 3 ), 10,
-                    screenSize + Camera.main.transform.position.z + (y * 3));
+                print(( screenSize * Camera.main.aspect ) - Camera.main.transform.position.x);
+                go.transform.position = new Vector3(( -screenSize * Camera.main.aspect ) + Camera.main.transform.position.x + ( x * 3 ), 10,
+                    -screenSize + Camera.main.transform.position.z + ( y * 3 ));
 
                 go.transform.SetParent(thousandCranes.transform);
 

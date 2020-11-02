@@ -92,9 +92,6 @@ public class WaveManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         currentWaveNum++;
-
-        Debug.LogFormat("Wave: {0}", currentWaveNum - 1);
-
         currentWave = waves[currentWaveNum - 1];
 
 

@@ -9,7 +9,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private float rotateSpeed = 60;
     [SerializeField] private EnemyData enemyData;
 
-    [HideInInspector] public UpgradeUI upgradeUi;
+    [SerializeField] public UpgradeUI upgradeUi;
 
     public int Health { get; private set; }
     public float Speed { get; private set; }
@@ -33,6 +33,8 @@ public class EnemyUnit : MonoBehaviour
     {
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
+
+
     }
 
     private void Update()

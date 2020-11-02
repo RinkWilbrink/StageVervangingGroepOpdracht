@@ -20,6 +20,8 @@ namespace Tower
         [SerializeField] protected int AttackShootingTime;
         [SerializeField] protected int AttackDamage;
 
+        [HideInInspector] protected bool SpecialAttackMode = false;
+
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
         [SerializeField] private float FireRateAddedPerLevel;
@@ -96,13 +98,16 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+            if(SpecialAttackMode == false)
             {
-                CanAttack = true;
-            }
-            else
-            {
-                AttackTimer += Time.deltaTime;
+                if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+                {
+                    CanAttack = true;
+                }
+                else
+                {
+                    AttackTimer += Time.deltaTime;
+                }
             }
         }
 
@@ -149,6 +154,9 @@ namespace Tower
         public void StartSecondairyAttack()
         {
             SecondaryAttack();
+
+            SpecialAttackMode = true;
+            AttackTimer = 0;
         }
 
         /// <summary>Set a new sprite</summary>

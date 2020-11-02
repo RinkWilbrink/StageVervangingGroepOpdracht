@@ -8,6 +8,7 @@ public class ItemCost : ScriptableObject
     // Variables
     [SerializeField] public int ArcherTowerCost;
     [SerializeField] public int WizardTowerCost;
+    [SerializeField] public int CannonTowerCost;
 
     [Space(6)]
 
@@ -17,4 +18,5 @@ public class ItemCost : ScriptableObject
     [Header("Mana Costs")]
     [SerializeField] public int WizardSpecialCost;
     [SerializeField] public int ArcherSpecialCost;
+    [SerializeField] public int CannonSpecialCost;
 }

@@ -10,6 +10,7 @@ namespace Tower
         [Header("Big Bomb")]
         [SerializeField] private int ExplosionDamage;
         [SerializeField] private float ExplosionRadius;
+        [SerializeField] private GameObject ExplosionPrefab;
 
         [Header("Fire Bomb")]
         [SerializeField] private int DamagePerSecond;
@@ -31,10 +32,10 @@ namespace Tower
             switch(SpecialUnlocked)
             {
                 case SpecialAttack.Special1:
-                    BigBomb();
+                    StartCoroutine(BigBomb());
                     break;
                 case SpecialAttack.Special2:
-                    FireBomb();
+                    StartCoroutine(FireBomb());
                     break;
             }
 
@@ -48,14 +49,43 @@ namespace Tower
 
         #region Special Attacks
 
-        private void BigBomb()
+        private IEnumerator BigBomb()
         {
+            Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+            //GameObject go = Instantiate(ExplosionPrefab, CurrentTarget.transform);
 
+            for (int i = 0; i < EnemiesInRange.Length; i++)
+            {
+                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
+
+                yield return null;
+            }
+
+            SpecialAttackMode = false;
         }
 
-        private void FireBomb()
+        private IEnumerator FireBomb()
         {
+            float timer = 0f;
 
+            while(timer < FireTime)
+            {
+                if(CurrentTarget != null)
+                {
+                    Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+                    for (int i = 0; i < EnemiesInRange.Length; i++)
+                    {
+                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
+
+                        //yield return null;
+                    }
+                    timer += Time.deltaTime;
+                }
+
+                yield return new WaitForSeconds(1f);
+            }
+
+            SpecialAttackMode = false;
         }
 
         #endregion

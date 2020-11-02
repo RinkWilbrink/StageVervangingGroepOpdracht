@@ -86,7 +86,7 @@ namespace Tower
 
             // Create Template Buildings
             BuildingPrefablist = new GameObject[BuildingList.Length];
-            for(int i = 0; i < TowerList.Length; i++)
+            for(int i = 0; i < BuildingList.Length; i++)
             {
                 BuildingPrefablist[i] = Instantiate(BuildingList[i], Vector3.zero, Quaternion.identity, transform);
                 BuildingPrefablist[i].SetActive(false);

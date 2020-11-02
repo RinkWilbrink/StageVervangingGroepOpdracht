@@ -105,6 +105,8 @@ namespace Tower
                 LightningChainCount++;
                 yield return new WaitForSecondsRealtime(0.5f);
             }
+
+            SpecialAttackMode = false;
         }
 
         private void FrostAttack()
@@ -120,6 +122,8 @@ namespace Tower
                     cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
                 }
             }
+
+            SpecialAttackMode = false;
         }
 
         protected override void HandleShooting()

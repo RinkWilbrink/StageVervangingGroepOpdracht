@@ -9,6 +9,13 @@ namespace Tower
     public class TowerArcher : TowerCore
     {
         // Variables
+        [Header("Ballista")]
+        [SerializeField] private int Damage;
+
+        [Header("Poison Darts")]
+        [SerializeField] private int InitialHitDamage;
+        [SerializeField] private int PoisonDamage;
+        [SerializeField] private float PoisonTime;
 
         protected override void PrimaryAttack()
         {
@@ -22,10 +29,10 @@ namespace Tower
             switch(SpecialUnlocked)
             {
                 case SpecialAttack.Special1:
-
+                    StartCoroutine(BallistaBolts());
                     break;
                 case SpecialAttack.Special2:
-
+                    StartCoroutine(PoisonDarts());
                     break;
             }
 
@@ -40,6 +47,30 @@ namespace Tower
         public override void LookAt()
         {
             //base.LookAt();
+        }
+
+        private IEnumerator BallistaBolts()
+        {
+            // if(Physics.RayCast(direction, length))
+
+            yield return null;
+
+            SpecialAttackMode = false;
+        }
+
+        private IEnumerator PoisonDarts()
+        {
+            List<EnemyUnit> poisonedEnemies = new List<EnemyUnit>();
+            float timer = 0f;
+
+            while(timer < PoisonTime)
+            {
+                yield return null;
+            }
+
+            // idk
+
+            SpecialAttackMode = false;
         }
     }
 }

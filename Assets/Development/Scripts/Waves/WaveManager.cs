@@ -44,7 +44,6 @@ public class WaveManager : MonoBehaviour
     {
         spawnCurveIndex++;
         enemiesLeftToSpawn--;
-        //Debug.Log(enemiesLeftToSpawn);
 
         if (currentWave.spawnIntensity.length < 1)
         {
@@ -93,7 +92,11 @@ public class WaveManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         currentWaveNum++;
+
+        Debug.LogFormat("Wave: {0}", currentWaveNum - 1);
+
         currentWave = waves[currentWaveNum - 1];
+
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;

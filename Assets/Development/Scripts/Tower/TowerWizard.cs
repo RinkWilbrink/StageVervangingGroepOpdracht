@@ -45,6 +45,7 @@ namespace Tower
                     break;
             }
 
+            base.SecondaryAttack();
         }
 
         IEnumerator LightningAttack()

@@ -19,9 +19,17 @@ namespace Tower
 
         protected override void SecondaryAttack()
         {
-            base.SecondaryAttack();
+            switch(SpecialUnlocked)
+            {
+                case SpecialAttack.Special1:
 
-            Debug.Log("Archer Secondairy");
+                    break;
+                case SpecialAttack.Special2:
+
+                    break;
+            }
+
+            base.SecondaryAttack();
         }
 
         protected override void HandleShooting()

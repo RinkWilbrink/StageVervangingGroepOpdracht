@@ -78,14 +78,12 @@ namespace Tower
 
                         if(CurrentTarget != null)
                         {
-                            Distance1 = Mathf.Sqrt(
-                                Mathf.Pow((CurrentTarget.transform.position.x - ShootOrigin.transform.position.x), 2f) +
-                                Mathf.Pow((CurrentTarget.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                            Distance1 = Mathf.Sqrt(Mathf.Pow(CurrentTarget.transform.position.x - ShootOrigin.transform.position.x, 2f) + 
+                                                   Mathf.Pow(CurrentTarget.transform.position.z - ShootOrigin.transform.position.z, 2f));
                         }
 
-                        float Distance2 = Mathf.Sqrt(
-                            Mathf.Pow((go.transform.transform.position.x - ShootOrigin.transform.position.x), 2f) +
-                            Mathf.Pow((go.transform.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                        float Distance2 = Mathf.Sqrt(Mathf.Pow(go.transform.transform.position.x - ShootOrigin.transform.position.x, 2f) +
+                                                     Mathf.Pow(go.transform.transform.position.z - ShootOrigin.transform.position.z, 2f));
 
                         if(Distance2 < Distance1)
                         {
@@ -110,11 +108,8 @@ namespace Tower
 
         #region Virtual Functions
 
-        // Virtual functions for shooting and special abilities
         protected virtual void PrimaryAttack()
         {
-            Debug.Log("Core Primairy");
-
             CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage);
 
             CanAttack = false;
@@ -122,7 +117,7 @@ namespace Tower
         }
         protected virtual void SecondaryAttack()
         {
-            //Debug.Log("Core Secondairy"); ;
+            specialDirectionUI.SetActive(false);
         }
 
         protected virtual void HandleShooting()

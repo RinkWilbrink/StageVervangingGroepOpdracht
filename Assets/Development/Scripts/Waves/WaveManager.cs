@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+
+    [Header("Waves")]
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
@@ -25,8 +28,6 @@ public class WaveManager : MonoBehaviour
     float spawnCurveIndex;
     private void Update()
     {
-        print("Wave: " + currentWaveNum);
-
         if(enemiesLeftToSpawn > 0 && Time.time > spawnNext)
         {
             SpawnEnemy();
@@ -93,6 +94,8 @@ public class WaveManager : MonoBehaviour
 
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
+
+        WaveText.text = string.Format("{0}", currentWaveNum);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;

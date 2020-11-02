@@ -20,11 +20,6 @@ namespace Tower
         [SerializeField] protected int AttackShootingTime;
         [SerializeField] protected int AttackDamage;
 
-        [Space(4)]
-
-        [SerializeField] protected int SpecialShootingTime;
-        [SerializeField] protected int SpecialDamage;
-
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
         [SerializeField] private float FireRateAddedPerLevel;

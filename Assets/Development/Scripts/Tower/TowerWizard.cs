@@ -13,6 +13,7 @@ namespace Tower
     {
         [Header("Lightning Strike Attack")]
         // Variables
+        [SerializeField] private int LightningDamage;
         [SerializeField] private GameObject lightningStrike;
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
@@ -89,7 +90,7 @@ namespace Tower
                     {
                         LightningChainCount = LightningChainLimit + 1;
 
-                        col.GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                        col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
 
                         yield return null;
                     }
@@ -97,7 +98,7 @@ namespace Tower
 
                 if(col != null)
                 {
-                    col.GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                    col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
                 }
 
                 LightningChainCount++;
@@ -128,16 +129,6 @@ namespace Tower
         public override void LookAt()
         {
             base.LookAt();
-        }
-
-        public void ShowSpecialAttackUI()
-        {
-            if(!GameObject.Find(LightningUI.name))
-            {
-                LightningUI.SetActive(true);
-            }
-
-            LightningUI.transform.LookAt(CurrentTarget.transform.position);
         }
     }
 }

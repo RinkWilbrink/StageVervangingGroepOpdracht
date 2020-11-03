@@ -116,7 +116,8 @@ namespace Tower
 
                 for (int i = 0; i < EnemiesInRange.Length; i++)
                 {
-                    //EnemiesInRange[i].Poisoned(PoisonTime);
+                    //EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDebuff(PoisonTime);
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
                 }
 
                 timer += Time.deltaTime;

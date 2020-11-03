@@ -62,6 +62,9 @@ public class EnemyUnit : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.S) )
             SlowDown(80f, 4f);
 
+        if ( Input.GetKeyDown(KeyCode.G) )
+            StartCoroutine(TakeDamageOverTime(1, 2));
+
         if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
             if ( waypointIndex < wayPoints.Length - 1 ) {
                 waypointIndex++;
@@ -79,16 +82,22 @@ public class EnemyUnit : MonoBehaviour
             Death();
     }
 
-    //bool takeDamageOTActive = false;
-    //int takeDamageOT;
-    //float takeDamageOTTime;
-    //float takeDamageOTTimer = 0;
-    //public void TakeDamageOverTime( int totalDamage, float time ) {
-    //    takeDamageOT = totalDamage;
-    //    takeDamageOTTime = time;
+    [NonSerialized] public int takeDamageOTTimer = 0;
+    private bool takeDamageOTActive = false;
+    public IEnumerator TakeDamageOverTime( int dps, int damageTime, int timeUntilDamageTaken = 1 ) {
+        takeDamageOTActive = true;
 
-    //    takeDamageOTActive = true;
-    //}
+        while ( takeDamageOTTimer < damageTime ) {
+            Health -= dps;
+            yield return new WaitForSeconds(timeUntilDamageTaken);
+            takeDamageOTTimer++;
+        }
+
+        takeDamageOTActive = false;
+
+        if ( Health < 1 )
+            Death();
+    }
 
     bool slowDebuffActive = false;
     float slowDownSpeed;

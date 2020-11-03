@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackShootingTime: 1
-  AttackDamage: 1
+  AttackDamage: 0
   DamageAddedPerLevel: 1
   FireRateAddedPerLevel: 0.1
   ShootingRange: 4
@@ -151,6 +151,10 @@ MonoBehaviour:
   Special2ModeSprites:
   - {fileID: 21300000, guid: f00464fee4b28974a9071eb644bd0578, type: 3}
   - {fileID: 21300000, guid: db3b60ea5f1d1884096e51025f3b77d5, type: 3}
+  Damage: 0
+  InitialHitDamage: 0
+  PoisonDamage: 0
+  PoisonTime: 0
 --- !u!65 &5989073579745361871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -188,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3603336421924493691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3603336420261006987}

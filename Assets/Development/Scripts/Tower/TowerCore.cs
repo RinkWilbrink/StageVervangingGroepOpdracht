@@ -28,7 +28,7 @@ namespace Tower
 
         [Header("Shooting and Range")]
         [SerializeField] private float ShootingRange = 0;
-        [SerializeField] private GameObject ShootOrigin;
+        [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [HideInInspector] private RaycastHit hit;
 

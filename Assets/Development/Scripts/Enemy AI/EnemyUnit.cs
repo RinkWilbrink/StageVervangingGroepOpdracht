@@ -90,14 +90,13 @@ public class EnemyUnit : MonoBehaviour
 
         while ( takeDamageOTTimer < damageTime ) {
             Health -= dps;
+            if ( Health < 1 )
+                Death();
             yield return new WaitForSeconds(timeUntilDamageTaken);
             takeDamageOTTimer++;
         }
 
         takeDamageOTActive = false;
-
-        if ( Health < 1 )
-            Death();
     }
 
     bool slowDebuffActive = false;

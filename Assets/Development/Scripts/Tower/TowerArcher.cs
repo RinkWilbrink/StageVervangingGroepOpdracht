@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Tower
@@ -16,15 +15,15 @@ namespace Tower
         [SerializeField] private int InitialHitDamage;
         [SerializeField] private int PoisonDamage;
         [SerializeField] private float PoisonCloudRange;
-        [SerializeField] private float PoisonTime;
+        [SerializeField] private int PoisonTimeInSeconds;
 
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
 
-            if(SpecialUnlocked == SpecialAttack.Special2)
+            if (SpecialUnlocked == SpecialAttack.Special2)
             {
-                CurrentTarget.GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, (int)PoisonTime);
+                CurrentTarget.GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
             }
 
             Debug.Log("Archer Primairy");
@@ -32,7 +31,7 @@ namespace Tower
 
         protected override void SecondaryAttack()
         {
-            switch(SpecialUnlocked)
+            switch (SpecialUnlocked)
             {
                 case SpecialAttack.Special1:
                     StartCoroutine(BallistaBolts());
@@ -108,10 +107,9 @@ namespace Tower
 
         private IEnumerator PoisonCloud()
         {
-            List<EnemyUnit> poisonedEnemies = new List<EnemyUnit>();
             float timer = 0f;
 
-            while(timer < PoisonTime)
+            while (timer < PoisonTimeInSeconds)
             {
                 yield return new WaitForSeconds(1f);
 
@@ -119,14 +117,12 @@ namespace Tower
 
                 for (int i = 0; i < EnemiesInRange.Length; i++)
                 {
-                    EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, (int)PoisonTime);
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
                     EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
                 }
 
                 timer += Time.deltaTime;
             }
-
-            // idk
 
             SpecialAttackMode = false;
         }

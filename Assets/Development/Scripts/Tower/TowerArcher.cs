@@ -22,7 +22,10 @@ namespace Tower
         {
             base.PrimaryAttack();
 
-            //CurrentTarget.GetComponent<EnemyUnit>().Poison;
+            if(SpecialUnlocked == SpecialAttack.Special2)
+            {
+                CurrentTarget.GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, (int)PoisonTime);
+            }
 
             Debug.Log("Archer Primairy");
         }
@@ -116,7 +119,7 @@ namespace Tower
 
                 for (int i = 0; i < EnemiesInRange.Length; i++)
                 {
-                    //EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDebuff(PoisonTime);
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, (int)PoisonTime);
                     EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
                 }
 

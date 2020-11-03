@@ -85,15 +85,12 @@ public class EnemyUnit : MonoBehaviour
 
     public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)
     {
-        if(takeDamageOTActive == false)
+        takeDamageOTTimer = 0;
+        if (takeDamageOTActive == false)
         {
             takeDamageOTActive = true;
-            takeDamageOTTimer = 0;
+            
             StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));
-        }
-        else
-        {
-            takeDamageOTTimer = 0;
         }
     }
     private IEnumerator TakeDamageOverTime(int dps, int damageTime, int timeUntilDamageTaken = 1)
@@ -139,6 +136,8 @@ public class EnemyUnit : MonoBehaviour
         Destroy(gameObject);
 
         if (OnDeath != null)
+        {
             OnDeath();
+        }
     }
 }

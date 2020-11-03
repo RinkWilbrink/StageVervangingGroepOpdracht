@@ -86,6 +86,7 @@ public class EnemyUnit : MonoBehaviour
     private bool takeDamageOTActive = false;
     public IEnumerator TakeDamageOverTime( int dps, int damageTime, int timeUntilDamageTaken = 1 ) {
         takeDamageOTActive = true;
+        takeDamageOTTimer = 0;
 
         while ( takeDamageOTTimer < damageTime ) {
             Health -= dps;

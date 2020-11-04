@@ -18,17 +18,19 @@ public class SelectionButtonManager : MonoBehaviour
 
     private void Awake()
     {
-        BuildingCosts = new int[4];
+        BuildingCosts = new int[5];
 
         BuildingCosts[0] = itemCosts.ArcherTowerCost;
         BuildingCosts[1] = itemCosts.WizardTowerCost;
-        BuildingCosts[2] = itemCosts.GoldMineCost;
-        BuildingCosts[3] = itemCosts.ManaWellCost;
+        BuildingCosts[2] = itemCosts.CannonTowerCost;
+        BuildingCosts[3] = itemCosts.GoldMineCost;
+        BuildingCosts[4] = itemCosts.ManaWellCost;
 
-        AbilityManaCost = new int[2];
+        AbilityManaCost = new int[3];
 
         AbilityManaCost[0] = itemCosts.ArcherSpecialCost;
         AbilityManaCost[1] = itemCosts.WizardSpecialCost;
+        AbilityManaCost[2] = itemCosts.CannonSpecialCost;
 
         UpdateTowerButtonUI();
     }
@@ -46,16 +48,5 @@ public class SelectionButtonManager : MonoBehaviour
                 buttons[i].interactable = false;
             }
         }
-
-        //int b = int.MaxValue;
-        //for (int i = 0; i < AbilityManaCost.Length; i++)
-        //{
-        //    if(AbilityManaCost[i] < b)
-        //    {
-        //        b = AbilityManaCost[i];
-        //    }
-        //}
-        //
-        //SpecialAbilityButton
     }
 }

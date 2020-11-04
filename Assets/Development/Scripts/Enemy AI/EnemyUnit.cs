@@ -35,7 +35,10 @@ public class EnemyUnit : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
+        if(GameController.GameIsPaused == false)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
+        }
 
         // Need to test the rotation more
         Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);

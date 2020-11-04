@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public static int Gold = 15;
     public static int Mana = 10;
 
+    public static bool GameIsPaused = false;
+
     // Other things
     public static int MainTowerHP = 50;
 }

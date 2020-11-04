@@ -75,7 +75,7 @@ namespace Tower
         {
             // Create Template Towers
             TowerPrefablist = new GameObject[TowerList.Length];
-            for (int i = 0; i < TowerList.Length; i++)
+            for(int i = 0; i < TowerList.Length; i++)
             {
                 TowerPrefablist[i] = Instantiate(TowerList[i], Vector3.zero, Quaternion.identity, transform);
                 TowerPrefablist[i].SetActive(false);
@@ -86,7 +86,7 @@ namespace Tower
 
             // Create Template Buildings
             BuildingPrefablist = new GameObject[BuildingList.Length];
-            for (int i = 0; i < TowerList.Length; i++)
+            for(int i = 0; i < BuildingList.Length; i++)
             {
                 BuildingPrefablist[i] = Instantiate(BuildingList[i], Vector3.zero, Quaternion.identity, transform);
                 BuildingPrefablist[i].SetActive(false);
@@ -100,20 +100,19 @@ namespace Tower
         {
             if(CurrentInteractionMode == TowerInteractionMode.PlacementMode)
             {
-                if (Input.GetMouseButton(0))
+                if(Input.GetMouseButton(0))
                 {
                     var ray = camera.ScreenPointToRay(Input.mousePosition);
-
                     TowerHit = new RaycastHit();
 
-                    if (Physics.Raycast(ray, out TowerHit, 100f))
+                    if(Physics.Raycast(ray, out TowerHit, 100f))
                     {
                         hitPoint.x = Mathf.Ceil(TowerHit.point.x) - 0.5f;
                         hitPoint.z = Mathf.Ceil(TowerHit.point.z) - 0.5f;
 
-                        if (TowerHit.collider.tag == "PlaceableGround")
+                        if(TowerHit.collider.tag == "PlaceableGround")
                         {
-                            if (CurrentBuildingType == BuildingTypes.Tower)
+                            if(CurrentBuildingType == BuildingTypes.Tower)
                             {
                                 TowerPrefablist[TowerSelectedIndex].SetActive(true);
                                 TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
@@ -127,15 +126,15 @@ namespace Tower
                     }
                 }
 
-                if (Input.GetMouseButtonUp(0))
+                if(Input.GetMouseButtonUp(0))
                 {
-                    if (TowerHit.collider != null)
+                    if(TowerHit.collider != null)
                     {
-                        if (TowerHit.collider.tag == "PlaceableGround")
+                        if(TowerHit.collider.tag == "PlaceableGround")
                         {
-                            if (upgradeUI.PayGold(GetCostAmount()))
+                            if(upgradeUI.PayGold(GetCostAmount()))
                             {
-                                if (CurrentBuildingType == BuildingTypes.Tower)
+                                if(CurrentBuildingType == BuildingTypes.Tower)
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                     go.GetComponent<TowerCore>().SetNewSprite();
@@ -144,25 +143,25 @@ namespace Tower
                                     switch(go.GetComponent<TowerCore>().towerType)
                                     {
                                         case TowerType.ArcherTower:
-                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                            go.GetComponent<TowerCore>().specialDirectionUI =
                                                 Instantiate(ArcherSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
                                             break;
                                         case TowerType.WizardTower:
-                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                            go.GetComponent<TowerCore>().specialDirectionUI =
                                                 Instantiate(WizardSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
                                             break;
                                         case TowerType.CannonTower:
-                                            go.GetComponent<TowerCore>().specialDirectionUI = 
+                                            go.GetComponent<TowerCore>().specialDirectionUI =
                                                 Instantiate(CannonSpecialAttackUIPrefab, new Vector3(hitPoint.x, TowerSpecialUIParent.position.y, hitPoint.z), new Quaternion(0, 0, 0, 0), TowerSpecialUIParent);
                                             break;
                                     }
 
                                     go.GetComponent<TowerCore>().specialDirectionUI.SetActive(false);
                                 }
-                                else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
+                                else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
                                 {
                                     Transform t;
-                                    switch (BuildingSelectedIndex)
+                                    switch(BuildingSelectedIndex)
                                     {
                                         default:
                                             t = GoldButtonParent;
@@ -189,9 +188,9 @@ namespace Tower
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        else if (CurrentBuildingType == BuildingTypes.Destroy)
+                        else if(CurrentBuildingType == BuildingTypes.Destroy)
                         {
-                            if (TowerHit.collider.tag == "Tower")
+                            if(TowerHit.collider.tag == "Tower")
                             {
                                 Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                 Destroy(TowerHit.collider.gameObject);
@@ -211,22 +210,20 @@ namespace Tower
                     // Reset Show off Prefabs
                     TowerPrefablist[TowerSelectedIndex].SetActive(false);
                     TowerPrefablist[TowerSelectedIndex].transform.position = Vector3.zero;
-
                     BuildingPrefablist[BuildingSelectedIndex].SetActive(false);
                     BuildingPrefablist[BuildingSelectedIndex].transform.position = Vector3.zero;
                 }
             }
             else if(CurrentInteractionMode == TowerInteractionMode.UpgradeMode)
             {
-                if (Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0))
                 {
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
                     RaycastHit _hit = new RaycastHit();
 
-                    if (Physics.Raycast(ray, out _hit, 100f))
+                    if(Physics.Raycast(ray, out _hit, 100f))
                     {
-                        if (_hit.collider.tag == "Tower")
+                        if(_hit.collider.tag == "Tower")
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
@@ -238,30 +235,26 @@ namespace Tower
             }
             else if(CurrentInteractionMode == TowerInteractionMode.SpecialAbilitySelectMode)
             {
-                for (int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
+                for(int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
                 {
-                    // Go through all towers that can use their special ability and display what they are about to do and where to
-                    //Debug.Log("Cool! " + i);
                     SpecialAbilityUnlockedTowerList[i].LookAt();
                 }
                 if(SpecialAbilityUnlockedTowerList.Count > 0)
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if(Input.GetMouseButtonDown(0))
                     {
                         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
                         RaycastHit _hit = new RaycastHit();
 
-                        if (Physics.Raycast(ray, out _hit, 100f))
+                        if(Physics.Raycast(ray, out _hit, 100f))
                         {
-                            if (_hit.collider.tag == "Tower")
+                            if(_hit.collider.tag == "Tower")
                             {
-                                if (upgradeUI.PayMana(2))
+                                if(upgradeUI.PayMana(2))
                                 {
                                     _hit.collider.GetComponent<Tower.TowerCore>().StartSecondairyAttack();
-
                                     CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
-
                                     SetSelectedButtonAttributes(0);
                                 }
                             }
@@ -273,9 +266,9 @@ namespace Tower
 
         private int GetCostAmount()
         {
-            if (CurrentBuildingType == BuildingTypes.Tower)
+            if(CurrentBuildingType == BuildingTypes.Tower)
             {
-                switch (TowerSelectedIndex)
+                switch(TowerSelectedIndex)
                 {
                     default:
                         return itemCosts.ArcherTowerCost;
@@ -283,9 +276,9 @@ namespace Tower
                         return itemCosts.WizardTowerCost;
                 }
             }
-            else if (CurrentBuildingType == BuildingTypes.ResourceBuilding)
+            else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
             {
-                switch (BuildingSelectedIndex)
+                switch(BuildingSelectedIndex)
                 {
                     default:
                         return itemCosts.GoldMineCost;

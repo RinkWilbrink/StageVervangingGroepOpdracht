@@ -13,6 +13,7 @@ namespace Tower
     {
         [Header("Lightning Strike Attack")]
         // Variables
+        [SerializeField] private int LightningDamage;
         [SerializeField] private GameObject lightningStrike;
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
@@ -26,13 +27,13 @@ namespace Tower
         [SerializeField] private float LightningBetweenTime;
         [SerializeField] private float LightningFinishTime;
 
-        protected override void PrimairyAttack()
+        protected override void PrimaryAttack()
         {
-            base.PrimairyAttack();
+            base.PrimaryAttack();
             Debug.Log("Wizard Primairy");
         }
 
-        protected override void SecondairyAttack()
+        protected override void SecondaryAttack()
         {
             switch(SpecialUnlocked)
             {
@@ -44,6 +45,7 @@ namespace Tower
                     break;
             }
 
+            base.SecondaryAttack();
         }
 
         IEnumerator LightningAttack()
@@ -89,7 +91,7 @@ namespace Tower
                     {
                         LightningChainCount = LightningChainLimit + 1;
 
-                        col.GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                        col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
 
                         yield return null;
                     }
@@ -97,12 +99,14 @@ namespace Tower
 
                 if(col != null)
                 {
-                    col.GetComponent<EnemyUnit>().TakeDamage(SpecialDamage);
+                    col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
                 }
 
                 LightningChainCount++;
                 yield return new WaitForSecondsRealtime(0.5f);
             }
+
+            SpecialAttackMode = false;
         }
 
         private void FrostAttack()
@@ -118,26 +122,18 @@ namespace Tower
                     cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
                 }
             }
+
+            SpecialAttackMode = false;
         }
 
         protected override void HandleShooting()
         {
-            //base.HandleShooting();
+            base.HandleShooting();
         }
 
         public override void LookAt()
         {
             base.LookAt();
-        }
-
-        public void ShowSpecialAttackUI()
-        {
-            if(!GameObject.Find(LightningUI.name))
-            {
-                LightningUI.SetActive(true);
-            }
-
-            LightningUI.transform.LookAt(CurrentTarget.transform.position);
         }
     }
 }

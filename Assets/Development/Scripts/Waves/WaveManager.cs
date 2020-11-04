@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+
+    [Header("Waves")]
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
-
-    private WaypointManager WaypointManager;
 
     private WaveData currentWave;
     private int currentWaveNum;
@@ -19,18 +20,15 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        WaypointManager = FindObjectOfType<WaypointManager>();
-
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
-
     }
 
     //float spawnTimer;
-    int spawnCurveIndex;
+    float spawnCurveIndex;
     private void Update()
     {
-        if (enemiesLeftToSpawn > 0 && Time.time > spawnNext)
+        if(enemiesLeftToSpawn > 0 && Time.time > spawnNext)
         {
             SpawnEnemy();
         }
@@ -42,25 +40,32 @@ public class WaveManager : MonoBehaviour
         enemiesLeftToSpawn--;
         Debug.Log(enemiesLeftToSpawn);
 
-        if (currentWave.spawnIntensity.length < 1)
+        if(currentWave.spawnIntensity.length < 1)
         {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
         }
-        else
+        else if(currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
         {
-            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnCurveIndex);
+            float spawnTime = spawnCurveIndex / currentWave.enemyCount;
+            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
+            Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
+        }
+        else if(!currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
+        {
+            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate((int)spawnCurveIndex);
+            Debug.Log("Next Spawn: " + (spawnNext - Time.time));
         }
 
         int random = UnityEngine.Random.Range(0, 100);
         int lowestPercentage;
         int highestPercentage = 0;
 
-        for (int i = 0; i < currentWave.enemies.Length; i++)
+        for(int i = 0; i < currentWave.enemies.Length; i++)
         {
             lowestPercentage = highestPercentage;
             highestPercentage += currentWave.enemies[i].chance;
 
-            if (random >= lowestPercentage && random < highestPercentage)
+            if(random >= lowestPercentage && random < highestPercentage)
             {
 
                 EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
@@ -76,7 +81,7 @@ public class WaveManager : MonoBehaviour
     {
         enemiesLeftAlive--;
 
-        if (enemiesLeftAlive <= 0)
+        if(enemiesLeftAlive <= 0)
         {
             updateWave = UpdateWave(waveCooldown);
             StartCoroutine(updateWave);
@@ -90,6 +95,8 @@ public class WaveManager : MonoBehaviour
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
+        WaveText.text = string.Format("{0}", currentWaveNum);
+
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
 
@@ -102,6 +109,7 @@ public class WaveManager : MonoBehaviour
         public int enemyCount;
         public int goldReward;
         public AnimationCurve spawnIntensity;
+        public bool normalizeCurve;
         public float minSpawnTime;
         public float maxSpawnTime;
         public EnemyStructure[] enemies;

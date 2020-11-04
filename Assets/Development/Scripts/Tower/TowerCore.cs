@@ -20,10 +20,7 @@ namespace Tower
         [SerializeField] protected int AttackShootingTime;
         [SerializeField] protected int AttackDamage;
 
-        [Space(4)]
-
-        [SerializeField] protected int SpecialShootingTime;
-        [SerializeField] protected int SpecialDamage;
+        [HideInInspector] protected bool SpecialAttackMode = false;
 
         [Header("Damage and Firerate Upgrades")]
         [SerializeField] private float DamageAddedPerLevel;
@@ -31,7 +28,7 @@ namespace Tower
 
         [Header("Shooting and Range")]
         [SerializeField] private float ShootingRange = 0;
-        [SerializeField] private GameObject ShootOrigin;
+        [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [HideInInspector] private RaycastHit hit;
 
@@ -83,14 +80,12 @@ namespace Tower
 
                         if(CurrentTarget != null)
                         {
-                            Distance1 = Mathf.Sqrt(
-                                Mathf.Pow((CurrentTarget.transform.position.x - ShootOrigin.transform.position.x), 2f) +
-                                Mathf.Pow((CurrentTarget.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                            Distance1 = Mathf.Sqrt(Mathf.Pow(CurrentTarget.transform.position.x - ShootOrigin.transform.position.x, 2f) + 
+                                                   Mathf.Pow(CurrentTarget.transform.position.z - ShootOrigin.transform.position.z, 2f));
                         }
 
-                        float Distance2 = Mathf.Sqrt(
-                            Mathf.Pow((go.transform.transform.position.x - ShootOrigin.transform.position.x), 2f) +
-                            Mathf.Pow((go.transform.transform.position.z - ShootOrigin.transform.position.z), 2f));
+                        float Distance2 = Mathf.Sqrt(Mathf.Pow(go.transform.transform.position.x - ShootOrigin.transform.position.x, 2f) +
+                                                     Mathf.Pow(go.transform.transform.position.z - ShootOrigin.transform.position.z, 2f));
 
                         if(Distance2 < Distance1)
                         {
@@ -103,31 +98,31 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+            if(SpecialAttackMode == false)
             {
-                CanAttack = true;
-            }
-            else
-            {
-                AttackTimer += Time.deltaTime;
+                if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+                {
+                    CanAttack = true;
+                }
+                else
+                {
+                    AttackTimer += Time.deltaTime;
+                }
             }
         }
 
         #region Virtual Functions
 
-        // Virtual functions for shooting and special abilities
-        protected virtual void PrimairyAttack()
+        protected virtual void PrimaryAttack()
         {
-            Debug.Log("Core Primairy");
-
             CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage);
 
             CanAttack = false;
             AttackTimer = 0;
         }
-        protected virtual void SecondairyAttack()
+        protected virtual void SecondaryAttack()
         {
-            //Debug.Log("Core Secondairy"); ;
+            specialDirectionUI.SetActive(false);
         }
 
         protected virtual void HandleShooting()
@@ -136,7 +131,7 @@ namespace Tower
             {
                 if(CurrentTarget != null)
                 {
-                    PrimairyAttack();
+                    PrimaryAttack();
                 }
             }
         }
@@ -158,7 +153,10 @@ namespace Tower
 
         public void StartSecondairyAttack()
         {
-            SecondairyAttack();
+            SecondaryAttack();
+
+            SpecialAttackMode = true;
+            AttackTimer = 0;
         }
 
         /// <summary>Set a new sprite</summary>

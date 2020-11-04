@@ -56,4 +56,9 @@ public class TowerSelectionButtonsUI : MonoBehaviour
 
         IsOpening = false;
     }
+
+    public void PauseGame(float TimeScale)
+    {
+        GameTime.SetGameTime(TimeScale);
+    }
 }

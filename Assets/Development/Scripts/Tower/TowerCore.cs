@@ -98,18 +98,15 @@ namespace Tower
 
         private void HandleAttackTiming()
         {
-            if(GameController.GameIsPaused == false)
+            if (SpecialAttackMode == false)
             {
-                if (SpecialAttackMode == false)
+                if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
                 {
-                    if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
-                    {
-                        CanAttack = true;
-                    }
-                    else
-                    {
-                        AttackTimer += Time.deltaTime;
-                    }
+                    CanAttack = true;
+                }
+                else
+                {
+                    AttackTimer += GameTime.deltaTime;
                 }
             }
         }

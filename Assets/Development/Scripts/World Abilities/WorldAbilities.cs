@@ -30,21 +30,21 @@ public class WorldAbilities : MonoBehaviour
 
         if ( ninjaDashTimer < ninjaDashCooldown ) {
             ninjaDashButton.interactable = false;
-            ninjaDashTimer += Time.deltaTime;
+            ninjaDashTimer += GameTime.deltaTime;
         } else {
             ninjaDashButton.interactable = true;
         }
 
         if ( fireworkTimer < fireworkCooldown ) {
             fireworkButton.interactable = false;
-            fireworkTimer += Time.deltaTime;
+            fireworkTimer += GameTime.deltaTime;
         } else {
             fireworkButton.interactable = true;
         }
 
         if ( thousandCranesInUse ) {
             if ( thousandCranesInUseTimer < thousandCranes.speedDebuffTime ) {
-                thousandCranesInUseTimer += Time.deltaTime;
+                thousandCranesInUseTimer += GameTime.deltaTime;
                 thousandCranesButton.image.color = thousandCranesActiveColor;
             } else {
                 ResetThousandCranes();
@@ -53,7 +53,7 @@ public class WorldAbilities : MonoBehaviour
 
         if ( thousandCranesTimer < thousandCranesCooldown ) {
             thousandCranesButton.interactable = false;
-            thousandCranesTimer += Time.deltaTime;
+            thousandCranesTimer += GameTime.deltaTime;
         } else {
             thousandCranesButton.interactable = true;
         }

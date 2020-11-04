@@ -80,7 +80,7 @@ namespace ResourceBuilding
                 }
                 else
                 {
-                    ResourceCollectTimer += Time.deltaTime;
+                    ResourceCollectTimer += GameTime.deltaTime;
                 }
             }
 

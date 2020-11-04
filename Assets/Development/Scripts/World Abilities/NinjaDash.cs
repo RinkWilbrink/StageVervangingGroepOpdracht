@@ -83,7 +83,7 @@ public class NinjaDash : MonoBehaviour
         }
 
         if ( moveNinja ) {
-            ninja.transform.position = Vector3.MoveTowards(ninja.transform.position, endPos, 20 * Time.deltaTime);
+            ninja.transform.position = Vector3.MoveTowards(ninja.transform.position, endPos, 20 * GameTime.deltaTime);
 
             if ( Vector3.Distance(ninja.transform.position, endPos) < .1f ) {
                 DamageEnemies();

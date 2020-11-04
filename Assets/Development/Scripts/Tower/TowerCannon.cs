@@ -79,7 +79,7 @@ namespace Tower
 
                         //yield return null;
                     }
-                    timer += Time.deltaTime;
+                    timer += GameTime.deltaTime;
                 }
 
                 yield return new WaitForSeconds(1f);

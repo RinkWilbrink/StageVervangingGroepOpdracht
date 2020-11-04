@@ -35,14 +35,11 @@ public class EnemyUnit : MonoBehaviour
 
     private void Update()
     {
-        if(GameController.GameIsPaused == false)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
-        }
+        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
 
         // Need to test the rotation more
         Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
 
         if (Speed < 0)
         {
@@ -51,7 +48,7 @@ public class EnemyUnit : MonoBehaviour
 
         if (slowDebuffActive)
         {
-            slowDebuffTimer += Time.deltaTime;
+            slowDebuffTimer += GameTime.deltaTime;
 
             if (slowDebuffTimer > slowDebuffTime)
             {
@@ -102,7 +99,7 @@ public class EnemyUnit : MonoBehaviour
         {
             Health -= dps;
             yield return new WaitForSeconds(timeUntilDamageTaken);
-            takeDamageOTTimer++;
+            takeDamageOTTimer += (1 * (int)GameTime.deltaTime);
         }
 
         takeDamageOTActive = false;

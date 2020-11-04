@@ -121,7 +121,7 @@ namespace Tower
                     EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
                 }
 
-                timer += Time.deltaTime;
+                timer += GameTime.deltaTime;
             }
 
             SpecialAttackMode = false;

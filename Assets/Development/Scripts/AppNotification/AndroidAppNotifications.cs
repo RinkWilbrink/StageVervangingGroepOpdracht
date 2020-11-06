@@ -54,13 +54,13 @@ public class AndroidAppNotifications : MonoBehaviour
         #endregion
     }
 
-    private void OnApplicationQuit()
+    private void OnApplicationPause(bool pause)
     {
-        if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
+        if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
         {
             AndroidNotification newNotification = new AndroidNotification()
             {
-                Title = "exit Notification",
+                Title = "pause Notification",
                 Text = "help mij please!",
                 SmallIcon = "app_icon_small",
                 LargeIcon = "app_icon_large",
@@ -71,15 +71,15 @@ public class AndroidAppNotifications : MonoBehaviour
 
             AndroidNotificationCenter.UpdateScheduledNotification(identifier, newNotification, "default_channel");
         }
-        else if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Delivered)
+        else if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Delivered)
         {
             AndroidNotificationCenter.CancelNotification(identifier);
         }
-        else if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Unknown)
+        else if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Unknown)
         {
             AndroidNotification notification = new AndroidNotification()
             {
-                Title = "exit Notification",
+                Title = "pause Notification 2",
                 Text = "help mij please!",
                 SmallIcon = "app_icon_small",
                 LargeIcon = "app_icon_large",

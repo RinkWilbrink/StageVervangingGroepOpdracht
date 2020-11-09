@@ -16,6 +16,7 @@ namespace Tower
 
         [Header("Frost Attack")]
         [SerializeField] private int FrostRadius;
+        [SerializeField] private float SlowDownAmount;
         [SerializeField] private float SlowDownTime;
 
         [Header("Special Attack Timing")]
@@ -106,13 +107,14 @@ namespace Tower
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
-            Collider[] cool = Physics.OverlapSphere(newPos, FrostRadius);
+            Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
 
-            for (int i = 0; i < cool.Length; i++)
+            for (int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {
-                if (cool[i].GetComponent<EnemyUnit>())
+                if (EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>())
                 {
-                    cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
+                    EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().SlowDown(SlowDownAmount, SlowDownTime);
+                    StartCoroutine(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().FrostOverlay(SlowDownTime));
                 }
             }
 

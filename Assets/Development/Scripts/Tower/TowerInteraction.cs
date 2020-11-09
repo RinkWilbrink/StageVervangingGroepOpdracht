@@ -1,16 +1,14 @@
 using ResourceBuilding;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum BuildingTypes
-{
-    Tower = 0, ResourceBuilding = 1, Destroy = 2
-}
-
 namespace Tower
 {
+    enum BuildingTypes
+    {
+        Tower = 0, ResourceBuilding = 1, Destroy = 2
+    }
     public enum TowerInteractionMode
     {
         None = 0, PlacementMode = 1, UpgradeMode = 2, SpecialAbilitySelectMode = 3
@@ -73,6 +71,8 @@ namespace Tower
 
         private void Start()
         {
+            CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+
             // Create Template Towers
             TowerPrefablist = new GameObject[TowerList.Length];
             for(int i = 0; i < TowerList.Length; i++)
@@ -81,7 +81,7 @@ namespace Tower
                 TowerPrefablist[i].SetActive(false);
                 TowerPrefablist[i].name = TowerPrefablist[i].name.Replace("Clone", "Template");
                 TowerPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
-                TowerPrefablist[i].GetComponentInChildren<Tower.TowerCore>().enabled = false;
+                TowerPrefablist[i].GetComponent<TowerCore>().enabled = false;
             }
 
             // Create Template Buildings
@@ -92,7 +92,7 @@ namespace Tower
                 BuildingPrefablist[i].SetActive(false);
                 BuildingPrefablist[i].name = BuildingPrefablist[i].name.Replace("Clone", "Template");
                 BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
-                BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
+                BuildingPrefablist[i].GetComponent<ResourceBuildingCore>().enabled = false;
             }
         }
 

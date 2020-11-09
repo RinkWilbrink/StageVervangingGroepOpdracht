@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,22 @@ namespace MainMenuUI
     public class MainMenuLevelSelectButtons : MonoBehaviour
     {
         // Variables
-        [SerializeField] private CoolStuff[] LevelButtonInformation;
+        [SerializeField] private ButtonInformation[] LevelButtonInformation;
+
+        [Header("Timers etc")]
+        [SerializeField] private float FadeTime;
+        [SerializeField] private float InbetweenTime;
+
+        private int ButtonToFadeIndex = 0;
+        private float timer = 0f;
 
         void Awake()
         {
+            for (int x = 0; x < LevelButtonInformation.Length; x++)
+            {
+                LevelButtonInformation[x].buttonBackgroundImage = LevelButtonInformation[x].Parent.GetComponentsInChildren<Image>();
+            }
+
             for (int i = 0; i < LevelButtonInformation.Length; i++)
             {
                 for (int x = 0; x < LevelButtonInformation[i].buttonBackgroundImage.Length; x++)
@@ -29,6 +42,27 @@ namespace MainMenuUI
             }
         }
 
+        private void Update()
+        {
+            if(timer >= FadeTime && ButtonToFadeIndex == 0)
+            {
+                StartFade(0);
+
+                ButtonToFadeIndex += 1;
+            }
+            else if(timer > FadeTime + InbetweenTime && ButtonToFadeIndex == 1)
+            {
+                StartFade(1);
+            
+                ButtonToFadeIndex = 0;
+                timer = 0f;
+            }
+            else
+            {
+                timer += Time.deltaTime;
+            }
+        }
+
         #region Fade Coroutine
 
         public void StartFade(int _levelIndex)
@@ -38,13 +72,13 @@ namespace MainMenuUI
             {
                 local = LevelButtonInformation[_levelIndex].imageIndex;
             }
-
+            
             if (LevelButtonInformation[_levelIndex].imageIndex < LevelButtonInformation[_levelIndex].buttonBackgroundImage.Length - 1)
             {
                 LevelButtonInformation[_levelIndex].buttonBackgroundImage[local + 1].gameObject.SetActive(true);
-
+            
                 StartCoroutine(FadeImage(LevelButtonInformation[_levelIndex].buttonBackgroundImage[local + 1], LevelButtonInformation[_levelIndex].buttonBackgroundImage[local], false));
-
+            
                 LevelButtonInformation[_levelIndex].imageIndex += 1;
             }
             else
@@ -52,7 +86,7 @@ namespace MainMenuUI
                 LevelButtonInformation[_levelIndex].buttonBackgroundImage[0].gameObject.SetActive(true);
                 StartCoroutine(
                 FadeImage(LevelButtonInformation[_levelIndex].buttonBackgroundImage[LevelButtonInformation[_levelIndex].imageIndex], LevelButtonInformation[_levelIndex].buttonBackgroundImage[0], true));
-
+            
                 LevelButtonInformation[_levelIndex].imageIndex = 0;
             }
         }
@@ -83,9 +117,10 @@ namespace MainMenuUI
     }
 
     [Serializable]
-    public struct CoolStuff
+    public struct ButtonInformation
     {
-        public Image[] buttonBackgroundImage;
+        public GameObject Parent;
+        [HideInInspector] public Image[] buttonBackgroundImage;
         public int imageIndex;
     }
 }

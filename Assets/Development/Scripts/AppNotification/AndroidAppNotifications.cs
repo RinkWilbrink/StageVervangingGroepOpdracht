@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Notifications.Android;
-//using UnityEngine.Assertions;
 
 public class AndroidAppNotifications : MonoBehaviour
 {
@@ -22,9 +21,13 @@ public class AndroidAppNotifications : MonoBehaviour
 
         AndroidNotificationCenter.RegisterNotificationChannel(defaultNotificationChannel);
 
+        AndroidNotificationCenter.CancelAllScheduledNotifications();
+
+        #region IDK notification
+
         AndroidNotification notification = new AndroidNotification()
         {
-            Title = "Test Notification",
+            Title = "Test Notification, help please",
             Text = "Banaan!",
             SmallIcon = "app_icon_small",
             LargeIcon = "app_icon_large",
@@ -47,33 +50,37 @@ public class AndroidAppNotifications : MonoBehaviour
         {
             Debug.Log("App was opened with Notification");
         }
+
+        #endregion
     }
 
     private void OnApplicationPause(bool pause)
     {
-        if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
+        if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
         {
             AndroidNotification newNotification = new AndroidNotification()
             {
-                Title = "Test Notification",
-                Text = "Banaan!",
+                Title = "pause Notification",
+                Text = "help mij please!",
                 SmallIcon = "app_icon_small",
                 LargeIcon = "app_icon_large",
                 FireTime = System.DateTime.Now.AddSeconds(5)
             };
 
+            AndroidNotification b = NewNotification();
+
             AndroidNotificationCenter.UpdateScheduledNotification(identifier, newNotification, "default_channel");
         }
-        else if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Delivered)
+        else if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Delivered)
         {
             AndroidNotificationCenter.CancelNotification(identifier);
         }
-        else if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Unknown)
+        else if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Unknown)
         {
             AndroidNotification notification = new AndroidNotification()
             {
-                Title = "Test Notification",
-                Text = "Banaan!",
+                Title = "pause Notification 2",
+                Text = "help mij please!",
                 SmallIcon = "app_icon_small",
                 LargeIcon = "app_icon_large",
                 FireTime = System.DateTime.Now.AddSeconds(5)
@@ -81,5 +88,25 @@ public class AndroidAppNotifications : MonoBehaviour
 
             AndroidNotificationCenter.SendNotification(notification, "default_channel");
         }
+    }
+
+    private AndroidNotification NewNotification(string _title = "", string _text = "", string _smallIcon = "", string _largeIcon = "", int _fireTime = 0,
+        string _group = "", GroupAlertBehaviours _groupBehaviour = GroupAlertBehaviours.GroupAlertAll, bool _groupSummary = true, 
+        string _intentData = "", string _sortKey = "", NotificationStyle _style = NotificationStyle.None, bool _usesStopwatch = false)
+    {
+        return new AndroidNotification()
+        {
+            Group = _group,
+            GroupAlertBehaviour = _groupBehaviour,
+            GroupSummary = _groupSummary,
+            IntentData = _intentData,
+            LargeIcon = _largeIcon,
+            SmallIcon = _smallIcon,
+            SortKey = _sortKey,
+            Style = _style,
+            Text = _text,
+            Title = _title,
+            UsesStopwatch = _usesStopwatch
+        };
     }
 }

@@ -10,12 +10,15 @@ namespace Tower
         [Header("Big Bomb")]
         [SerializeField] private int ExplosionDamage;
         [SerializeField] private float ExplosionRadius;
-        [SerializeField] private GameObject ExplosionPrefab;
 
         [Header("Fire Bomb")]
         [SerializeField] private int DamagePerSecond;
         [SerializeField] private float FireRadius;
         [SerializeField] private float FireTime;
+
+        [Header("Prefabs")]
+        [SerializeField] private GameObject BigBombPrefab;
+        [SerializeField] private GameObject FireBombPrefab;
 
         protected override void HandleShooting()
         {
@@ -52,7 +55,14 @@ namespace Tower
         private IEnumerator BigBomb()
         {
             Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
-            //GameObject go = Instantiate(ExplosionPrefab, CurrentTarget.transform);
+            GameObject go = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
+
+            while(Vector3.Distance(go.transform.position, CurrentTarget.transform.position) > 0.05f)
+            {
+                go.transform.position = Vector3.Lerp(go.transform.position, CurrentTarget.transform.position, 2f * GameTime.deltaTime);
+
+                yield return null;
+            }
 
             for (int i = 0; i < EnemiesInRange.Length; i++)
             {

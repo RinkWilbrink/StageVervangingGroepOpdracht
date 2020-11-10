@@ -23,6 +23,10 @@ namespace Tower
         [SerializeField] private float LightningBetweenTime;
         [SerializeField] private float LightningFinishTime;
 
+        [Header("Prefabs")]
+        [SerializeField] private GameObject LightningCloudPrefab;
+        [SerializeField] private GameObject FrostPrefab;
+
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();

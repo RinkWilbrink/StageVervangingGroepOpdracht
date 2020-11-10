@@ -17,6 +17,10 @@ namespace Tower
         [SerializeField] private float PoisonCloudRange;
         [SerializeField] private int PoisonTimeInSeconds;
 
+        [Header("Prefabs")]
+        [SerializeField] private GameObject ballistaShot;
+        [SerializeField] private GameObject PoisonsBombPrefab;
+
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();

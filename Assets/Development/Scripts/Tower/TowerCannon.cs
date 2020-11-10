@@ -20,6 +20,7 @@ namespace Tower
 
         [Header("Prefabs")]
         [SerializeField] private GameObject BigBombPrefab;
+        [SerializeField] private GameObject ExplosionPrefab;
         [SerializeField] private GameObject FireBombPrefab;
 
         protected override void HandleShooting()
@@ -70,7 +71,9 @@ namespace Tower
 
             go.transform.position = newPos;
 
-            Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+            Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
+
+            GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
 
             Debug.Log("Bautista Bomb!!");
 
@@ -83,6 +86,10 @@ namespace Tower
             }
 
             Destroy(go);
+
+            yield return new WaitForSeconds(2f);
+
+            Destroy(explosion);
 
             SpecialAttackMode = false;
         }

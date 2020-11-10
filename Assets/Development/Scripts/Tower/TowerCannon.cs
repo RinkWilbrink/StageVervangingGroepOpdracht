@@ -10,6 +10,8 @@ namespace Tower
         [Header("Big Bomb")]
         [SerializeField] private int ExplosionDamage;
         [SerializeField] private float ExplosionRadius;
+        [Tooltip("The higher the number, the quicker it will throw the ball")]
+        [SerializeField] private float BombThrowSpeed;
 
         [Header("Fire Bomb")]
         [SerializeField] private int DamagePerSecond;
@@ -54,22 +56,33 @@ namespace Tower
 
         private IEnumerator BigBomb()
         {
-            Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+            
             GameObject go = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
 
-            while(Vector3.Distance(go.transform.position, CurrentTarget.transform.position) > 0.05f)
+            Vector3 newPos = CurrentTarget.transform.position;
+
+            while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, CurrentTarget.transform.position, 2f * GameTime.deltaTime);
+                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
 
                 yield return null;
             }
+
+            go.transform.position = newPos;
+
+            Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+
+            Debug.Log("Bautista Bomb!!");
 
             for (int i = 0; i < EnemiesInRange.Length; i++)
             {
                 EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
 
+
                 yield return null;
             }
+
+            Destroy(go);
 
             SpecialAttackMode = false;
         }

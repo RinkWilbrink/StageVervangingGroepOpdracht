@@ -45,7 +45,8 @@ public class WorldAbilities : MonoBehaviour
 
         if ( thousandCranesInUse ) {
             ShowCraneFlock(true);
-            Vector3 vec = new Vector3(( Camera.main.transform.position.x + screenSize + 2 ) * 2, 0, 0);
+            Vector3 vec = new Vector3(( Camera.main.transform.position.x + screenSize + 2 ) * 2, 0,
+                ( Camera.main.transform.position.z - -screenSize + 5 ));
             craneParent.transform.position = Vector3.MoveTowards(craneParent.transform.position, vec, 50 * Time.deltaTime);
 
             if ( thousandCranesInUseTimer < thousandCranes.speedDebuffTime /*&& craneParent.transform.position.x >= vec.x*/ ) {
@@ -63,7 +64,6 @@ public class WorldAbilities : MonoBehaviour
         } else {
             thousandCranesButton.interactable = true;
         }
-
     }
 
     [Space(10)]
@@ -82,8 +82,8 @@ public class WorldAbilities : MonoBehaviour
         if ( !thousandCranesInUse && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
             thousandCranes.ThousandCranesAbility();
             thousandCranesInUse = true;
-            craneParent.transform.position = new Vector3(( ( Camera.main.transform.position.x + screenSize + 2 ) * 2 ) * -1, 0, 0);
-            print(craneParent.transform.position.x);
+            craneParent.transform.position = new Vector3(( ( Camera.main.transform.position.x + screenSize + 2 ) * 2 ) * -1, 0,
+                 ( Camera.main.transform.position.z + screenSize ) * -1);
         }
     }
 
@@ -105,25 +105,33 @@ public class WorldAbilities : MonoBehaviour
         if ( craneParent == null )
             craneParent = thousandCranes.transform.GetChild(0);
 
-        for ( int y = 0; y < 10; y++ ) {
-            for ( int x = 0; x < 18; x++ ) {
-                int rand = Random.Range(0, craneSprites.Length);
-                GameObject go = Instantiate(cranePrefab, Vector3.zero, Quaternion.Euler(90, 0, 0));
+        //for ( int y = 0; y < 10; y++ ) {
+        //    for ( int x = 0; x < 18; x++ ) {
+        GameObject go = Instantiate(cranePrefab, Vector3.zero, Quaternion.Euler(0, 0, 0));
+        for ( int i = 0; i < go.transform.childCount; i++ )
+            craneFlockList.Add(go.transform.GetChild(i).gameObject);
 
-                print(( screenSize * Camera.main.aspect ) - Camera.main.transform.position.x);
-                go.transform.position = new Vector3(( -screenSize * Camera.main.aspect ) + Camera.main.transform.position.x + ( x * 3 ), 10,
-                    -screenSize + Camera.main.transform.position.z + ( y * 3 ));
+        //print(( screenSize * Camera.main.aspect ) - Camera.main.transform.position.x);
+        //go.transform.position = new Vector3(( -screenSize * Camera.main.aspect ) + Camera.main.transform.position.x + ( x * 3 ), 10,
+        //    -screenSize + Camera.main.transform.position.z + ( y * 3 ));
 
-                int c = Random.Range(0, craneColors.Length);
-                go.GetComponent<SpriteRenderer>().color = craneColors[c];
+        go.transform.position = new Vector3(( -screenSize * Camera.main.aspect ) + Camera.main.transform.position.x, 10,
+            ( -screenSize * Camera.main.aspect ) + Camera.main.transform.position.z);
 
-                go.transform.SetParent(craneParent);
-
-                craneFlockList.Add(go);
-
-                go.GetComponent<SpriteRenderer>().sprite = craneSprites[rand];
-            }
+        for ( int i = 0; i < craneFlockList.Count; i++ ) {
+            int rand = Random.Range(0, craneSprites.Length);
+            craneFlockList[i].GetComponent<SpriteRenderer>().sprite = craneSprites[rand];
+            int c = Random.Range(0, craneColors.Length);
+            craneFlockList[i].GetComponent<SpriteRenderer>().color = craneColors[c];
         }
+
+        //go.transform.SetParent(craneParent);
+        craneParent = go.transform;
+
+        //craneFlockList.Add(go);
+
+        //    }
+        //}
     }
 
     private void ShowCraneFlock( bool showCranes ) {

@@ -19,6 +19,7 @@ namespace Tower
 
         [Header("Prefabs")]
         [SerializeField] private GameObject ballistaShot;
+        [Space(6)]
         [SerializeField] private GameObject PoisonsBombPrefab;
 
         protected override void PrimaryAttack()

@@ -17,7 +17,6 @@ namespace Tower
         [SerializeField] private int LightningDamage;
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
-        [SerializeField] private GameObject LightningUI;
         [SerializeField] private float LightningInBetweenTime;
 
         [Header("Frost Attack")]
@@ -25,12 +24,10 @@ namespace Tower
         [SerializeField] private float SlowDownAmount;
         [SerializeField] private float SlowDownTime;
 
-        [Header("Special Attack Timing")]
-        [SerializeField] private float LightningBetweenTime;
-        [SerializeField] private float LightningFinishTime;
-
         [Header("Prefabs")]
         [SerializeField] private GameObject LightningCloudPrefab;
+        [SerializeField] private GameObject LightningBoltPrefab;
+        [Space(6)]
         [SerializeField] private GameObject FrostPrefab;
 
         protected override void PrimaryAttack()

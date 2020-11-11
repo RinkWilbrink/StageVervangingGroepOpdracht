@@ -21,6 +21,7 @@ namespace Tower
         [Header("Prefabs")]
         [SerializeField] private GameObject BigBombPrefab;
         [SerializeField] private GameObject ExplosionPrefab;
+        [Space(6)]
         [SerializeField] private GameObject FireBombPrefab;
 
         protected override void HandleShooting()

@@ -156,6 +156,9 @@ MonoBehaviour:
   PoisonDamage: 1
   PoisonCloudRange: 3
   PoisonTimeInSeconds: 0
+  ballistaShot: {fileID: 8999546987061952605, guid: 5c000af2366ca9e4e9d6a8eb883bfba3,
+    type: 3}
+  PoisonsBombPrefab: {fileID: 0}
 --- !u!65 &5989073579745361871
 BoxCollider:
   m_ObjectHideFlags: 0

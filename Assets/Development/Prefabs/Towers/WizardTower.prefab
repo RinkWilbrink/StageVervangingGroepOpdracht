@@ -157,9 +157,14 @@ MonoBehaviour:
   LightningUI: {fileID: 0}
   LightningInBetweenTime: 0.5
   FrostRadius: 2
+  SlowDownAmount: 0
   SlowDownTime: 5
   LightningBetweenTime: 0.4
   LightningFinishTime: 0.4
+  LightningCloudPrefab: {fileID: 4151242053571582214, guid: a2f384e237b658b4d8f980530be33174,
+    type: 3}
+  FrostPrefab: {fileID: 7049167200491236686, guid: 1abefd54697424a45b5cd8c53849dc35,
+    type: 3}
 --- !u!65 &8437573251633843400
 BoxCollider:
   m_ObjectHideFlags: 0

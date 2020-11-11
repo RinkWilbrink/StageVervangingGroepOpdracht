@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+/* References
+ * 
+ * Splines: (For Chain Lightning)
+ * https://catlikecoding.com/unity/tutorials/curves-and-splines/
+*/
+
 namespace Tower
 {
     [SelectionBase]

@@ -44,7 +44,8 @@ namespace Tower
 
         [Space(6)]
         [SerializeField] private Button[] SelectionButtons;
-        [SerializeField] private int SelectionButtonsIndex = 0;
+        [SerializeField] public int ButtonSelectionIndex = 0;
+        private int previousButtonSelectionIndex = 0;
 
         private BuildingTypes CurrentBuildingType;
         private BuildingTypes PreviousBuildingType;
@@ -188,13 +189,14 @@ namespace Tower
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        else if(CurrentBuildingType == BuildingTypes.Destroy)
+                        if(CurrentBuildingType == BuildingTypes.Destroy)
                         {
                             if(TowerHit.collider.tag == "Tower")
                             {
                                 Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
+                                SetSelectedButtonAttributes(previousButtonSelectionIndex);
                                 upgradeUI.PayGold(-5);
                             }
                             else if(TowerHit.collider.tag == "Building")
@@ -202,6 +204,7 @@ namespace Tower
                                 Destroy(TowerHit.collider.GetComponent<ResourceBuildingCore>().button);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
+                                SetSelectedButtonAttributes(previousButtonSelectionIndex);
                                 upgradeUI.PayGold(-10);
                             }
                         }
@@ -303,13 +306,13 @@ namespace Tower
         public void SetSelectedButtonAttributes(int _index)
         {
             // Reset the previous button
-            SelectionButtons[SelectionButtonsIndex].transform.localScale = Vector2.one;
+            SelectionButtons[ButtonSelectionIndex].transform.localScale = Vector2.one;
 
             // Set the new Button
             SelectionButtons[_index].transform.localScale = new Vector2(1.2f, 1.2f);
 
             // set variable to remember this button index for next time.
-            SelectionButtonsIndex = _index;
+            ButtonSelectionIndex = _index;
         }
 
         public void SelectTower(int _i)
@@ -328,6 +331,7 @@ namespace Tower
 
         public void SetDeleteBuilding()
         {
+            previousButtonSelectionIndex = ButtonSelectionIndex;
             PreviousBuildingType = CurrentBuildingType;
             CurrentBuildingType = BuildingTypes.Destroy;
         }

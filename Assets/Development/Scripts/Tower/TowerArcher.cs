@@ -17,6 +17,18 @@ namespace Tower
         [SerializeField] private float PoisonCloudRange;
         [SerializeField] private int PoisonTimeInSeconds;
 
+        [Header("Prefabs")]
+        [SerializeField] private GameObject ballistaShot;
+        [Space(6)]
+        [SerializeField] private GameObject PoisonCloudSprite;
+        [SerializeField] private GameObject PoisonsBombPrefab;
+
+        public override void Init()
+        {
+            base.Init();
+            PoisonCloudSprite.SetActive(false);
+        }
+
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
@@ -58,17 +70,17 @@ namespace Tower
 
         private IEnumerator BallistaBolts()
         {
-            BallistaShot(ShootOrigin.transform.position, Vector3.forward, 15f);
-            BallistaShot(ShootOrigin.transform.position, Vector3.back, 15f);
-            BallistaShot(ShootOrigin.transform.position, Vector3.left, 15f);
-            BallistaShot(ShootOrigin.transform.position, Vector3.right, 15f);
+            StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.forward, 10f));
+            StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.back, 10f));
+            StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.left, 10f));
+            StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.right, 10f));
 
             yield return null;
 
             SpecialAttackMode = false;
         }
 
-        private void BallistaShot(Vector3 origin, Vector3 direction, float distance)
+        private IEnumerator BallistaShot(Vector3 origin, Vector3 direction, float distance)
         {
             byte index = 0;
             RaycastHit hit;
@@ -92,6 +104,18 @@ namespace Tower
                 index += 1;
             }
 
+            GameObject go = Instantiate(ballistaShot, origin, Quaternion.LookRotation(direction));
+            Vector3 newPos = origin += direction * distance;
+
+            while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
+            {
+                go.transform.position = Vector3.Lerp(go.transform.position, newPos, 6f * GameTime.deltaTime);
+
+                yield return null;
+            }
+
+            Destroy(go);
+
             for (int i = 0; i < list.Count; i++)
             {
                 list[i].enabled = true;
@@ -109,9 +133,10 @@ namespace Tower
         {
             float timer = 0f;
 
+            PoisonCloudSprite.SetActive(true);
+
             while (timer < PoisonTimeInSeconds)
             {
-                yield return new WaitForSeconds(1f);
 
                 Collider[] EnemiesInRange = Physics.OverlapSphere(ShootOrigin.transform.position, PoisonCloudRange, 1 << 9);
 
@@ -121,9 +146,11 @@ namespace Tower
                     EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
                 }
 
-                timer += GameTime.deltaTime;
+                timer += 1f;
+                yield return new WaitForSeconds(1f);
             }
 
+            PoisonCloudSprite.SetActive(false);
             SpecialAttackMode = false;
         }
     }

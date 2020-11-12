@@ -55,6 +55,11 @@ namespace Tower
         [HideInInspector] protected float AttackTimer;
         [HideInInspector] protected bool CanAttack = true;
 
+        public virtual void Init()
+        {
+
+        }
+
         private void Update()
         {
             CheckTargets();

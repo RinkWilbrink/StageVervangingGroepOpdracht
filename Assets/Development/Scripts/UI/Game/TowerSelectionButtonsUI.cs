@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class TowerSelectionButtonsUI : MonoBehaviour
@@ -8,6 +7,8 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     // Variables
     [SerializeField] private RectTransform ButtonsPanel;
     [SerializeField] private float UILerpSpeed;
+
+    [HideInInspector] public int ButtonIndex = 0;
 
     [SerializeField] private Tower.TowerInteraction towerPlacement;
 
@@ -24,7 +25,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     {
         if (!IsOpening)
         {
-            towerPlacement.SetSelectedButtonAttributes(0);
+            towerPlacement.SetSelectedButtonAttributes(towerPlacement.ButtonSelectionIndex);
 
             if (IsOpened)
             {
@@ -38,7 +39,8 @@ public class TowerSelectionButtonsUI : MonoBehaviour
                 ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f);
                 StartCoroutine(buttonSlide(new Vector2(-5f, 0)));
                 IsOpened = true;
-                towerPlacement.SelectTower(0);
+                //towerPlacement.SelectTower(0);
+                towerPlacement.CurrentInteractionMode = Tower.TowerInteractionMode.PlacementMode;
             }
         }
     }

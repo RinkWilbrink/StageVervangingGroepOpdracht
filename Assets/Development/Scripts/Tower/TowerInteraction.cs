@@ -1,16 +1,13 @@
-using ResourceBuilding;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum BuildingTypes
-{
-    Tower = 0, ResourceBuilding = 1, Destroy = 2
-}
-
 namespace Tower
 {
+    enum BuildingTypes
+    {
+        Tower = 0, ResourceBuilding = 1, Destroy = 2
+    }
     public enum TowerInteractionMode
     {
         None = 0, PlacementMode = 1, UpgradeMode = 2, SpecialAbilitySelectMode = 3
@@ -46,7 +43,8 @@ namespace Tower
 
         [Space(6)]
         [SerializeField] private Button[] SelectionButtons;
-        [SerializeField] private int SelectionButtonsIndex = 0;
+        [SerializeField] public int ButtonSelectionIndex = 0;
+        private int previousButtonSelectionIndex = 0;
 
         private BuildingTypes CurrentBuildingType;
         private BuildingTypes PreviousBuildingType;
@@ -73,6 +71,8 @@ namespace Tower
 
         private void Start()
         {
+            CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+
             // Create Template Towers
             TowerPrefablist = new GameObject[TowerList.Length];
             for(int i = 0; i < TowerList.Length; i++)
@@ -81,7 +81,7 @@ namespace Tower
                 TowerPrefablist[i].SetActive(false);
                 TowerPrefablist[i].name = TowerPrefablist[i].name.Replace("Clone", "Template");
                 TowerPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
-                TowerPrefablist[i].GetComponentInChildren<Tower.TowerCore>().enabled = false;
+                TowerPrefablist[i].GetComponent<TowerCore>().enabled = false;
             }
 
             // Create Template Buildings
@@ -156,6 +156,7 @@ namespace Tower
                                             break;
                                     }
 
+                                    go.GetComponent<TowerCore>().Init();
                                     go.GetComponent<TowerCore>().specialDirectionUI.SetActive(false);
                                 }
                                 else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
@@ -181,6 +182,7 @@ namespace Tower
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().Init();
                                 }
                             }
                             else
@@ -188,20 +190,22 @@ namespace Tower
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        else if(CurrentBuildingType == BuildingTypes.Destroy)
+                        if(CurrentBuildingType == BuildingTypes.Destroy)
                         {
                             if(TowerHit.collider.tag == "Tower")
                             {
                                 Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
+                                SetSelectedButtonAttributes(previousButtonSelectionIndex);
                                 upgradeUI.PayGold(-5);
                             }
                             else if(TowerHit.collider.tag == "Building")
                             {
-                                Destroy(TowerHit.collider.GetComponent<ResourceBuildingCore>().button);
+                                Destroy(TowerHit.collider.GetComponent<ResourceBuilding.ResourceBuildingCore>().button);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
+                                SetSelectedButtonAttributes(previousButtonSelectionIndex);
                                 upgradeUI.PayGold(-10);
                             }
                         }
@@ -303,13 +307,13 @@ namespace Tower
         public void SetSelectedButtonAttributes(int _index)
         {
             // Reset the previous button
-            SelectionButtons[SelectionButtonsIndex].transform.localScale = Vector2.one;
+            SelectionButtons[ButtonSelectionIndex].transform.localScale = Vector2.one;
 
             // Set the new Button
             SelectionButtons[_index].transform.localScale = new Vector2(1.2f, 1.2f);
 
             // set variable to remember this button index for next time.
-            SelectionButtonsIndex = _index;
+            ButtonSelectionIndex = _index;
         }
 
         public void SelectTower(int _i)
@@ -328,6 +332,7 @@ namespace Tower
 
         public void SetDeleteBuilding()
         {
+            previousButtonSelectionIndex = ButtonSelectionIndex;
             PreviousBuildingType = CurrentBuildingType;
             CurrentBuildingType = BuildingTypes.Destroy;
         }

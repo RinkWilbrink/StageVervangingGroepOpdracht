@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+/* References
+ * 
+ * Splines: (For Chain Lightning)
+ * https://catlikecoding.com/unity/tutorials/curves-and-splines/
+*/
+
 namespace Tower
 {
     [SelectionBase]
@@ -11,16 +17,25 @@ namespace Tower
         [SerializeField] private int LightningDamage;
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
-        [SerializeField] private GameObject LightningUI;
         [SerializeField] private float LightningInBetweenTime;
 
         [Header("Frost Attack")]
         [SerializeField] private int FrostRadius;
+        [SerializeField] private float SlowDownAmount;
         [SerializeField] private float SlowDownTime;
 
-        [Header("Special Attack Timing")]
-        [SerializeField] private float LightningBetweenTime;
-        [SerializeField] private float LightningFinishTime;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject LightningCloudPrefab;
+        [SerializeField] private GameObject LightningBoltPrefab;
+        [Space(6)]
+        [SerializeField] private GameObject FrostPrefab;
+
+        private CRSpline spline;
+
+        public override void Init()
+        {
+            base.Init();
+        }
 
         protected override void PrimaryAttack()
         {
@@ -102,17 +117,23 @@ namespace Tower
             SpecialAttackMode = false;
         }
 
+        private void Splines()
+        {
+
+        }
+
         private void FrostAttack()
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
-            Collider[] cool = Physics.OverlapSphere(newPos, FrostRadius);
+            Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
 
-            for (int i = 0; i < cool.Length; i++)
+            for (int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {
-                if (cool[i].GetComponent<EnemyUnit>())
+                if (EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>())
                 {
-                    cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
+                    EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().SlowDown(SlowDownAmount, SlowDownTime);
+                    StartCoroutine(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().FrostOverlay(SlowDownTime));
                 }
             }
 

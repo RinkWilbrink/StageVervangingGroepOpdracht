@@ -155,4 +155,9 @@ public class EnemyUnit : MonoBehaviour
 
         frostOverlayImage.SetActive(false);
     }
+
+    public IEnumerator FireOverlay(float maxTimer)
+    {
+        yield return null;
+    }
 }

@@ -24,6 +24,11 @@ namespace Tower
         [Space(6)]
         [SerializeField] private GameObject FireBombPrefab;
 
+        public override void Init()
+        {
+            base.Init();
+        }
+
         protected override void HandleShooting()
         {
             base.HandleShooting();
@@ -103,7 +108,7 @@ namespace Tower
             {
                 if(CurrentTarget != null)
                 {
-                    Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, ExplosionRadius, 1 << 9);
+                    Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
                     for (int i = 0; i < EnemiesInRange.Length; i++)
                     {
                         EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);

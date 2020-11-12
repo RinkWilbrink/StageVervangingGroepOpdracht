@@ -30,6 +30,13 @@ namespace Tower
         [Space(6)]
         [SerializeField] private GameObject FrostPrefab;
 
+        private CRSpline spline;
+
+        public override void Init()
+        {
+            base.Init();
+        }
+
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
@@ -108,6 +115,11 @@ namespace Tower
             }
 
             SpecialAttackMode = false;
+        }
+
+        private void Splines()
+        {
+
         }
 
         private void FrostAttack()

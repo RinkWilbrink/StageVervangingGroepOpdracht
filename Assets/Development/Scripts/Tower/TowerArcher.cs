@@ -20,7 +20,14 @@ namespace Tower
         [Header("Prefabs")]
         [SerializeField] private GameObject ballistaShot;
         [Space(6)]
+        [SerializeField] private GameObject PoisonCloudSprite;
         [SerializeField] private GameObject PoisonsBombPrefab;
+
+        public override void Init()
+        {
+            base.Init();
+            PoisonCloudSprite.SetActive(false);
+        }
 
         protected override void PrimaryAttack()
         {
@@ -126,6 +133,8 @@ namespace Tower
         {
             float timer = 0f;
 
+            PoisonCloudSprite.SetActive(true);
+
             while (timer < PoisonTimeInSeconds)
             {
 
@@ -141,6 +150,7 @@ namespace Tower
                 yield return new WaitForSeconds(1f);
             }
 
+            PoisonCloudSprite.SetActive(false);
             SpecialAttackMode = false;
         }
     }

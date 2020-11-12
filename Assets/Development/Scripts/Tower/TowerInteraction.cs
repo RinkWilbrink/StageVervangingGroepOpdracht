@@ -1,4 +1,3 @@
-using ResourceBuilding;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -93,7 +92,7 @@ namespace Tower
                 BuildingPrefablist[i].SetActive(false);
                 BuildingPrefablist[i].name = BuildingPrefablist[i].name.Replace("Clone", "Template");
                 BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
-                BuildingPrefablist[i].GetComponent<ResourceBuildingCore>().enabled = false;
+                BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
             }
         }
 
@@ -157,6 +156,7 @@ namespace Tower
                                             break;
                                     }
 
+                                    go.GetComponent<TowerCore>().Init();
                                     go.GetComponent<TowerCore>().specialDirectionUI.SetActive(false);
                                 }
                                 else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
@@ -182,6 +182,7 @@ namespace Tower
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
+                                    go.GetComponent<ResourceBuilding.ResourceBuildingCore>().Init();
                                 }
                             }
                             else
@@ -201,7 +202,7 @@ namespace Tower
                             }
                             else if(TowerHit.collider.tag == "Building")
                             {
-                                Destroy(TowerHit.collider.GetComponent<ResourceBuildingCore>().button);
+                                Destroy(TowerHit.collider.GetComponent<ResourceBuilding.ResourceBuildingCore>().button);
                                 Destroy(TowerHit.collider.gameObject);
                                 CurrentBuildingType = PreviousBuildingType;
                                 SetSelectedButtonAttributes(previousButtonSelectionIndex);

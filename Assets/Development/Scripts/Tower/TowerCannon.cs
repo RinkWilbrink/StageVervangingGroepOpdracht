@@ -14,7 +14,7 @@ namespace Tower
         [SerializeField] private float BombThrowSpeed;
 
         [Header("Fire Bomb")]
-        [SerializeField] private int DamagePerSecond;
+        [SerializeField] private int FireDamagePerSecond;
         [SerializeField] private float FireRadius;
         [SerializeField] private float FireTime;
 
@@ -23,6 +23,7 @@ namespace Tower
         [SerializeField] private GameObject ExplosionPrefab;
         [Space(6)]
         [SerializeField] private GameObject FireBombPrefab;
+        [SerializeField] private GameObject FireEffectPrefab;
 
         public override void Init()
         {
@@ -104,6 +105,8 @@ namespace Tower
         {
             float timer = 0f;
 
+            GameObject fireEffect = Instantiate(FireEffectPrefab, new Vector3(ShootOrigin.transform.position.x, 0, ShootOrigin.transform.position.z), Quaternion.LookRotation(CurrentTarget.transform.position));
+
             while(timer < FireTime)
             {
                 if(CurrentTarget != null)
@@ -111,13 +114,10 @@ namespace Tower
                     Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
                     for (int i = 0; i < EnemiesInRange.Length; i++)
                     {
-                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
-
-                        //yield return null;
+                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
                     }
-                    timer += GameTime.deltaTime;
                 }
-
+                timer += 1f;
                 yield return new WaitForSeconds(1f);
             }
 

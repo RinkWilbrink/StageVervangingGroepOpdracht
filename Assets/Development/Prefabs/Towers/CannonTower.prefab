@@ -73,7 +73,7 @@ MonoBehaviour:
   ExplosionDamage: 5
   ExplosionRadius: 2
   BombThrowSpeed: 5
-  DamagePerSecond: 1
+  FireDamagePerSecond: 0
   FireRadius: 1
   FireTime: 5
   BigBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
@@ -81,6 +81,8 @@ MonoBehaviour:
   ExplosionPrefab: {fileID: 913169524378796937, guid: 39fd1c5d0689f434cafd900f715a2272,
     type: 3}
   FireBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
+    type: 3}
+  FireEffectPrefab: {fileID: 210026217966000082, guid: ccf881c5c4a039147b7b582d58047f1c,
     type: 3}
 --- !u!65 &229345552153514528
 BoxCollider:

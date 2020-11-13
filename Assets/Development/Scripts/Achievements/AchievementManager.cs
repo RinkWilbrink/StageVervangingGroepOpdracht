@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* References
+ * 
+ * Events:
+ * https://www.youtube.com/watch?v=gx0Lt4tCDE0
+ * https://docs.unity3d.com/ScriptReference/Events.UnityEvent.html
+*/
+
 public class AchievementManager : MonoBehaviour
 {
     // Variables
     [Header("Text")]
     [SerializeField] private RectTransform AchievementPanel;
-    [SerializeField] private RectTransform MaskPanel;
-    [Space(4)]
+    [Space(6)]
     [SerializeField] private TMPro.TextMeshProUGUI AchievementName;
     [SerializeField] private TMPro.TextMeshProUGUI AchievementRequirements;
 
@@ -26,7 +32,7 @@ public class AchievementManager : MonoBehaviour
     {
         IsSliding = false;
 
-        SlideOutPosition = new Vector2(MaskPanel.rect.width + 10, 0);
+        SlideOutPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10, 0);
         AchievementPanel.anchoredPosition = SlideOutPosition;
     }
 
@@ -36,15 +42,18 @@ public class AchievementManager : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.P))
             {
-                dingSoundEffect.pitch = (1f + Random.Range(-0.02f, 0.02f));
-                dingSoundEffect.Play();
-                AchievementUnlocked();
+                AchievementUnlocked("");
             }
         }
     }
 
-    public void AchievementUnlocked()
+    public void AchievementUnlocked(string AchievementUnlocked)
     {
+        // Audio
+        dingSoundEffect.pitch = (1f + Random.Range(-0.02f, 0.02f));
+        dingSoundEffect.Play();
+
+        // Visual stuff
         SetAchievementText("Name", "Requirements");
         StartCoroutine(AchievementSlide());
     }
@@ -53,7 +62,7 @@ public class AchievementManager : MonoBehaviour
     {
         IsSliding = true;
 
-        while(Vector2.Distance(AchievementPanel.anchoredPosition, Vector2.zero) > 0.1f)
+        while(Vector2.Distance(AchievementPanel.anchoredPosition, Vector2.zero) > 1f)
         {
             AchievementPanel.anchoredPosition = Vector2.Lerp(AchievementPanel.anchoredPosition, Vector2.zero, SlideSpeed * Time.deltaTime);
 
@@ -64,7 +73,7 @@ public class AchievementManager : MonoBehaviour
 
         yield return new WaitForSeconds(SlideInBetweenTime);
 
-        while(Vector2.Distance(AchievementPanel.anchoredPosition, SlideOutPosition) > 0.1f)
+        while(Vector2.Distance(AchievementPanel.anchoredPosition, SlideOutPosition) > 1f)
         {
             AchievementPanel.anchoredPosition = Vector2.Lerp(AchievementPanel.anchoredPosition, SlideOutPosition, SlideSpeed * Time.deltaTime);
 

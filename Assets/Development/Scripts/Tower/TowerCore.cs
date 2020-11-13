@@ -81,16 +81,14 @@ namespace Tower
                 {
                     if(go.tag == "Enemy")
                     {
-                        float Distance1 = ShootingRange + 1f;
+                        float Distance1 = ShootingRange;
 
                         if(CurrentTarget != null)
                         {
-                            Distance1 = Mathf.Sqrt(Mathf.Pow(CurrentTarget.transform.position.x - ShootOrigin.transform.position.x, 2f) + 
-                                                   Mathf.Pow(CurrentTarget.transform.position.z - ShootOrigin.transform.position.z, 2f));
+                            Distance1 = Mathf.Sqrt((CurrentTarget.transform.position - ShootOrigin.transform.position).sqrMagnitude);
                         }
 
-                        float Distance2 = Mathf.Sqrt(Mathf.Pow(go.transform.transform.position.x - ShootOrigin.transform.position.x, 2f) +
-                                                     Mathf.Pow(go.transform.transform.position.z - ShootOrigin.transform.position.z, 2f));
+                        float Distance2 = Mathf.Sqrt((go.transform.position - ShootOrigin.transform.position).sqrMagnitude);
 
                         if(Distance2 < Distance1)
                         {

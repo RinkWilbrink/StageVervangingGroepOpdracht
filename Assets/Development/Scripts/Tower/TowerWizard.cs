@@ -83,13 +83,11 @@ namespace Tower
                         {
                             if (EnemiesInRange[y] != null)
                             {
-                                float NewPotentialTargetDistance = Mathf.Sqrt(
-                                    Mathf.Pow(collider.transform.position.x - EnemiesInRange[y].transform.position.x, 2f) +
-                                    Mathf.Pow(collider.transform.position.z - EnemiesInRange[y].transform.position.z, 2f));
+                                float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
 
-                                if (NewPotentialTargetDistance > 0 && NewPotentialTargetDistance < B)
+                                if (distance1 > 0 && distance1 < B)
                                 {
-                                    B = NewPotentialTargetDistance;
+                                    B = distance1;
 
                                     nextCollider = EnemiesInRange[y];
                                 }

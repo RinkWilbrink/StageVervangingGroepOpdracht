@@ -9,6 +9,20 @@ public class AndroidAppNotifications : MonoBehaviour
     private AndroidNotificationChannel defaultNotificationChannel;
     private int identifier;
 
+    public void ScheduleNotification(System.DateTime newTime)
+    {
+        AndroidNotification newNotification = new AndroidNotification()
+        {
+            Title = "Yokai Tower Defense",
+            Text = "New Daily Reward Available!",
+            SmallIcon = "app_icon_small",
+            LargeIcon = "app_icon_large",
+            FireTime = newTime
+        };
+
+        AndroidNotificationCenter.UpdateScheduledNotification(identifier, newNotification, "default_channel");
+    }
+
     void Start()
     {
         defaultNotificationChannel = new AndroidNotificationChannel()
@@ -23,8 +37,7 @@ public class AndroidAppNotifications : MonoBehaviour
 
         AndroidNotificationCenter.CancelAllScheduledNotifications();
 
-        #region IDK notification
-
+        /*
         AndroidNotification notification = new AndroidNotification()
         {
             Title = "Test Notification, help please",
@@ -34,7 +47,7 @@ public class AndroidAppNotifications : MonoBehaviour
             FireTime = System.DateTime.Now.AddSeconds(5)
         };
 
-        identifier = AndroidNotificationCenter.SendNotification(notification, "channel_default");
+        identifier = AndroidNotificationCenter.SendNotification(notification, "channel_default");*/
 
         AndroidNotificationCenter.NotificationReceivedCallback receiveCallbackHandler = delegate (AndroidNotificationIntentData data)
         {
@@ -50,10 +63,9 @@ public class AndroidAppNotifications : MonoBehaviour
         {
             Debug.Log("App was opened with Notification");
         }
-
-        #endregion
     }
 
+    /*
     private void OnApplicationPause(bool pause)
     {
         if (AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
@@ -66,8 +78,6 @@ public class AndroidAppNotifications : MonoBehaviour
                 LargeIcon = "app_icon_large",
                 FireTime = System.DateTime.Now.AddSeconds(5)
             };
-
-            AndroidNotification b = NewNotification();
 
             AndroidNotificationCenter.UpdateScheduledNotification(identifier, newNotification, "default_channel");
         }
@@ -89,24 +99,5 @@ public class AndroidAppNotifications : MonoBehaviour
             AndroidNotificationCenter.SendNotification(notification, "default_channel");
         }
     }
-
-    private AndroidNotification NewNotification(string _title = "", string _text = "", string _smallIcon = "", string _largeIcon = "", int _fireTime = 0,
-        string _group = "", GroupAlertBehaviours _groupBehaviour = GroupAlertBehaviours.GroupAlertAll, bool _groupSummary = true, 
-        string _intentData = "", string _sortKey = "", NotificationStyle _style = NotificationStyle.None, bool _usesStopwatch = false)
-    {
-        return new AndroidNotification()
-        {
-            Group = _group,
-            GroupAlertBehaviour = _groupBehaviour,
-            GroupSummary = _groupSummary,
-            IntentData = _intentData,
-            LargeIcon = _largeIcon,
-            SmallIcon = _smallIcon,
-            SortKey = _sortKey,
-            Style = _style,
-            Text = _text,
-            Title = _title,
-            UsesStopwatch = _usesStopwatch
-        };
-    }
+    */
 }

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6682590823350285530}
   - component: {fileID: 6682590823350285531}
-  - component: {fileID: 6682590823350285528}
   - component: {fileID: 6682590823350285529}
+  - component: {fileID: 6682590823350285528}
   - component: {fileID: 4516306292344205916}
   m_Layer: 0
   m_Name: GameManager
@@ -123,18 +123,6 @@ MonoBehaviour:
       chance: 40
       waypointManager: {fileID: 0}
   waveCooldown: 5
---- !u!114 &6682590823350285528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682590823350285534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da56e1dc7a950324e911cac14f1ec0ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6682590823350285529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +156,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  SelectionButtonsIndex: 0
+  ButtonSelectionIndex: 0
   TowerSpecialUIParent: {fileID: 0}
   ArcherSpecialAttackUIPrefab: {fileID: 0}
   WizardSpecialAttackUIPrefab: {fileID: 0}
@@ -178,6 +166,18 @@ MonoBehaviour:
   itemCosts: {fileID: 11400000, guid: c45f4a969f02e0444988f37839f9bcf3, type: 2}
   CurrentInteractionMode: 0
   SpecialAbilityUnlockedTowerList: []
+--- !u!114 &6682590823350285528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da56e1dc7a950324e911cac14f1ec0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4516306292344205916
 MonoBehaviour:
   m_ObjectHideFlags: 0

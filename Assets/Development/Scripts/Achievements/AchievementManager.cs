@@ -12,6 +12,9 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI AchievementName;
     [SerializeField] private TMPro.TextMeshProUGUI AchievementRequirements;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource dingSoundEffect;
+
     [Header("Slide In/Out Timing")]
     [SerializeField] private float SlideSpeed;
     [SerializeField] private float SlideInBetweenTime;
@@ -21,6 +24,8 @@ public class AchievementManager : MonoBehaviour
 
     private void Awake()
     {
+        IsSliding = false;
+
         SlideOutPosition = new Vector2(MaskPanel.rect.width + 10, 0);
         AchievementPanel.anchoredPosition = SlideOutPosition;
     }
@@ -31,16 +36,22 @@ public class AchievementManager : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.P))
             {
-                StartCoroutine(AchievementSlide());
+                dingSoundEffect.pitch = (1f + Random.Range(-0.02f, 0.02f));
+                dingSoundEffect.Play();
+                AchievementUnlocked();
             }
         }
     }
 
-    public IEnumerator AchievementSlide()
+    public void AchievementUnlocked()
+    {
+        SetAchievementText("Name", "Requirements");
+        StartCoroutine(AchievementSlide());
+    }
+
+    private IEnumerator AchievementSlide()
     {
         IsSliding = true;
-
-        SetAchievementText("Name", "Requirements");
 
         while(Vector2.Distance(AchievementPanel.anchoredPosition, Vector2.zero) > 0.1f)
         {

@@ -66,7 +66,7 @@ namespace Tower
 
         // Set Current tower interaction mode
         [HideInInspector] public TowerInteractionMode CurrentInteractionMode;
-
+        [Space(6)]
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         private void Start()

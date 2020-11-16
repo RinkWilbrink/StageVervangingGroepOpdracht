@@ -12,11 +12,16 @@ public class DailyReward : MonoBehaviour
     private bool waitingForReward = false;
     private ulong lastTime;
 
+<<<<<<< Updated upstream
     [SerializeField] private AndroidAppNotifications appNotifications;
 
     private void Start()
     {
         print("Time: " + GetNetworkTime().ToLocalTime());
+=======
+    private void Start() {
+        print("Time: " + NetworkTime.GetNetworkTime().ToLocalTime());
+>>>>>>> Stashed changes
 
         lastTime = ulong.Parse(PlayerPrefs.GetString("LastTimeStamp"));
 
@@ -42,6 +47,7 @@ public class DailyReward : MonoBehaviour
             UpdateTextTimer();
         }
 
+<<<<<<< Updated upstream
         if(Input.GetKeyDown(KeyCode.Y))
         {
             print("Time: " + GetNetworkTime().ToLocalTime());
@@ -51,6 +57,15 @@ public class DailyReward : MonoBehaviour
     private bool IsRewardReady()
     {
         ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
+=======
+        if ( Input.GetKeyDown(KeyCode.Y) ) {
+            print("Time: " + NetworkTime.GetNetworkTime().ToLocalTime());
+        }
+    }
+
+    private bool IsRewardReady() {
+        ulong diff = (ulong)NetworkTime.GetNetworkTime().Ticks - lastTime;
+>>>>>>> Stashed changes
         ulong ms = diff / TimeSpan.TicksPerMillisecond;
         float secondsLeft = (rewardTime - ms) / 1000f;
 
@@ -64,9 +79,14 @@ public class DailyReward : MonoBehaviour
         return false;
     }
 
+<<<<<<< Updated upstream
     private void UpdateTextTimer()
     {
         ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
+=======
+    private void UpdateTextTimer() {
+        ulong diff = (ulong)NetworkTime.GetNetworkTime().Ticks - lastTime;
+>>>>>>> Stashed changes
         ulong ms = diff / TimeSpan.TicksPerMillisecond;
         float secondsLeft = (rewardTime - ms) / 1000f;
         string t = "";
@@ -87,7 +107,7 @@ public class DailyReward : MonoBehaviour
     {
         Debug.Log("Setting up time...");
 
-        lastTime = (ulong)GetNetworkTime().Ticks;
+        lastTime = (ulong)NetworkTime.GetNetworkTime().Ticks;
         PlayerPrefs.SetString("LastTimeStamp", lastTime.ToString());
 
         rewardButton.interactable = false;
@@ -96,6 +116,7 @@ public class DailyReward : MonoBehaviour
         GameController.Gems += 5;
         PlayerPrefs.SetInt("Gems", GameController.Gems);
     }
+<<<<<<< Updated upstream
 
     public static DateTime GetNetworkTime()
     {
@@ -155,4 +176,6 @@ public class DailyReward : MonoBehaviour
                        ((x & 0x00ff0000) >> 8) +
                        ((x & 0xff000000) >> 24));
     }
+=======
+>>>>>>> Stashed changes
 }

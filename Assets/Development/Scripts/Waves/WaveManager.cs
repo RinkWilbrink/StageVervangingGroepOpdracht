@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
     {
         spawnCurveIndex++;
         enemiesLeftToSpawn--;
-        Debug.Log(enemiesLeftToSpawn);
+        //Debug.Log(enemiesLeftToSpawn);
 
         if (currentWave.spawnIntensity.length < 1)
         {
@@ -50,12 +50,12 @@ public class WaveManager : MonoBehaviour
         {
             float spawnTime = spawnCurveIndex / currentWave.enemyCount;
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
-            Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
+            //Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
         }
         else if (!currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
         {
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate((int)spawnCurveIndex);
-            Debug.Log("Next Spawn: " + (spawnNext - Time.time));
+            //Debug.Log("Next Spawn: " + (spawnNext - Time.time));
         }
 
         int random = UnityEngine.Random.Range(0, 100);

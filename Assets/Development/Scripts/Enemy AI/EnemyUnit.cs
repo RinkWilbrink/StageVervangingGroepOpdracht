@@ -124,4 +124,15 @@ public class EnemyUnit : MonoBehaviour
         if ( OnDeath != null )
             OnDeath();
     }
+
+    public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)
+    {
+        takeDamageOTTimer = 0;
+        if(takeDamageOTActive == false)
+        {
+            takeDamageOTActive = true;
+
+            StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));
+        }
+    }
 }

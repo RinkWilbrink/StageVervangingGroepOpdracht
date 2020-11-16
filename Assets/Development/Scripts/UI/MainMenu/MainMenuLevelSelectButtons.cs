@@ -52,7 +52,7 @@ namespace MainMenuUI
             }
             else if(timer > FadeTime + InbetweenTime && ButtonToFadeIndex == 1)
             {
-                StartFade(1);
+                //StartFade(1);
             
                 ButtonToFadeIndex = 0;
                 timer = 0f;
@@ -121,6 +121,6 @@ namespace MainMenuUI
     {
         public GameObject Parent;
         [HideInInspector] public Image[] buttonBackgroundImage;
-        public int imageIndex;
+        [HideInInspector] public int imageIndex;
     }
 }

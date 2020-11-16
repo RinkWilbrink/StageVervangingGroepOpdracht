@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 70b36825dc27d8345a66916197c6e551, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc14727a2d1fd574bbc64659decbfddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,15 +151,20 @@ MonoBehaviour:
   Special2ModeSprites:
   - {fileID: 21300000, guid: 2e2a750f2acf8a14d9493d423489f01a, type: 3}
   - {fileID: 21300000, guid: c97684a0f818cbd41944933ba1837508, type: 3}
-  LightningDamage: 0
-  lightningStrike: {fileID: 0}
-  LightningRadius: 4
+  LightningDamage: 5
+  LightningRadius: 3
   LightningChainLimit: 5
   LightningUI: {fileID: 0}
+  LightningInBetweenTime: 0.5
   FrostRadius: 2
+  SlowDownAmount: 0
   SlowDownTime: 5
   LightningBetweenTime: 0.4
   LightningFinishTime: 0.4
+  LightningCloudPrefab: {fileID: 4151242053571582214, guid: a2f384e237b658b4d8f980530be33174,
+    type: 3}
+  FrostPrefab: {fileID: 7049167200491236686, guid: 1abefd54697424a45b5cd8c53849dc35,
+    type: 3}
 --- !u!65 &8437573251633843400
 BoxCollider:
   m_ObjectHideFlags: 0

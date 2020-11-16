@@ -7,6 +7,7 @@ public class EnemyUnit : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 60;
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private GameObject frostOverlayImage;
 
     public int Health { get; private set; }
     public float Speed { get; private set; }
@@ -123,6 +124,25 @@ public class EnemyUnit : MonoBehaviour
 
         if ( OnDeath != null )
             OnDeath();
+    }
+
+    public IEnumerator FrostOverlay(float maxTimer)
+    {
+        float timer = 0;
+        frostOverlayImage.SetActive(true);
+        while(timer < maxTimer)
+        {
+            timer += GameTime.deltaTime;
+
+            yield return null;
+        }
+
+        frostOverlayImage.SetActive(false);
+    }
+
+    public IEnumerator FireOverlay(float maxTimer)
+    {
+        yield return null;
     }
 
     public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)

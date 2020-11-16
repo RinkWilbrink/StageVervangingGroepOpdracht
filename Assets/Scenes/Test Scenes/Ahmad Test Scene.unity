@@ -260,8 +260,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 482e028137b120a4b8870fa3d8bb22a0, type: 3}
   - {fileID: 21300000, guid: 67a6cfed1cf84584eb72fe90f10ba9b5, type: 3}
   - {fileID: 21300000, guid: 7867826a8f401d74db78d5837bf862b6, type: 3}
-  cranePrefab: {fileID: 8579917114470931237, guid: 25a5d71414ac4ad42ac2beb63d47f4ac,
+  cranePrefab: {fileID: 2250077598472368249, guid: 7af3c80780f23f94ead86dca340eb792,
     type: 3}
+  craneColors:
+  - {r: 0.9339623, g: 0.23349057, b: 0.23349057, a: 1}
+  - {r: 0.19223925, g: 0.7749284, b: 0.9056604, a: 1}
+  - {r: 0.9716981, g: 0.3254272, b: 0.9328211, a: 1}
+  - {r: 0.3362758, g: 1, b: 0.2688679, a: 1}
+  - {r: 1, g: 0.8255203, b: 0.25, a: 1}
   fireworkRocket: {fileID: 2001006893}
   fireworkActiveColor: {r: 0.8867924, g: 0.23843002, b: 0.23843002, a: 1}
   fireworkButton: {fileID: 495106521}
@@ -3793,6 +3799,36 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!1 &1271522742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271522743}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271522743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271522742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1315153737}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1284363494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,7 +3930,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1271522743}
   m_Father: {fileID: 1826430488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

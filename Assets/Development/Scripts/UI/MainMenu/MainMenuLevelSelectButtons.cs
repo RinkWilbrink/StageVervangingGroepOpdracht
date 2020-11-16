@@ -44,18 +44,21 @@ namespace MainMenuUI
 
         private void Update()
         {
-            if(timer >= FadeTime && ButtonToFadeIndex == 0)
+            if(timer > FadeTime + (InbetweenTime * ButtonToFadeIndex))
             {
-                StartFade(0);
+                StartFade(ButtonToFadeIndex);
 
-                ButtonToFadeIndex += 1;
-            }
-            else if(timer > FadeTime + InbetweenTime && ButtonToFadeIndex == 1)
-            {
-                //StartFade(1);
-            
-                ButtonToFadeIndex = 0;
-                timer = 0f;
+                Debug.Log(LevelButtonInformation.Length);
+
+                if(ButtonToFadeIndex < LevelButtonInformation.Length - 1)
+                {
+                    ButtonToFadeIndex += 1;
+                }
+                else
+                {
+                    ButtonToFadeIndex = 0;
+                    timer = 0f;
+                }
             }
             else
             {
@@ -84,8 +87,8 @@ namespace MainMenuUI
             else
             {
                 LevelButtonInformation[_levelIndex].buttonBackgroundImage[0].gameObject.SetActive(true);
-                StartCoroutine(
-                FadeImage(LevelButtonInformation[_levelIndex].buttonBackgroundImage[LevelButtonInformation[_levelIndex].imageIndex], LevelButtonInformation[_levelIndex].buttonBackgroundImage[0], true));
+                StartCoroutine(FadeImage(LevelButtonInformation[_levelIndex].buttonBackgroundImage[LevelButtonInformation[_levelIndex].imageIndex],
+                    LevelButtonInformation[_levelIndex].buttonBackgroundImage[0], true));
             
                 LevelButtonInformation[_levelIndex].imageIndex = 0;
             }
@@ -95,7 +98,7 @@ namespace MainMenuUI
         {
             if (fadeAway)
             {
-                for (float i = 1; i >= 0; i -= Time.deltaTime)
+                for (float i = 1; i >= 0; i -= 1f * Time.deltaTime)
                 {
                     img.color = new Color(1, 1, 1, i);
                     yield return null;
@@ -104,7 +107,7 @@ namespace MainMenuUI
             }
             else
             {
-                for (float i = 0; i <= 1; i += Time.deltaTime)
+                for (float i = 0; i <= 1; i += 1f * Time.deltaTime)
                 {
                     img.color = new Color(1, 1, 1, i);
                     yield return null;

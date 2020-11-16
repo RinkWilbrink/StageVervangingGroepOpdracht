@@ -240,8 +240,10 @@ MonoBehaviour:
   PoisonTimeInSeconds: 0
   ballistaShot: {fileID: 8999546987061952605, guid: 5c000af2366ca9e4e9d6a8eb883bfba3,
     type: 3}
-  PoisonCloudSprite: {fileID: 0}
-  PoisonsBombPrefab: {fileID: 0}
+  PoisonCloudSprite: {fileID: 7049167200491236686, guid: 1abefd54697424a45b5cd8c53849dc35,
+    type: 3}
+  PoisonsBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
+    type: 3}
 --- !u!65 &5989073579745361871
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ namespace Tower
 
         protected override void SecondaryAttack()
         {
-            switch (SpecialUnlocked)
+            switch(SpecialUnlocked)
             {
                 case SpecialAttack.Special1:
                     StartCoroutine(LightningAttack());
@@ -64,28 +64,28 @@ namespace Tower
             Collider nextCollider = null;
             int LightningChainCount = 0;
 
-            while (LightningChainCount < LightningChainLimit)
+            while(LightningChainCount < LightningChainLimit)
             {
-                if (LightningChainCount < LightningChainLimit)
+                if(LightningChainCount < LightningChainLimit)
                 {
-                    if (LightningChainCount > 0)
+                    if(LightningChainCount > 0)
                     {
                         collider = nextCollider;
                     }
 
                     Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
 
-                    if (EnemiesInRange.Length > 1)
+                    if(EnemiesInRange.Length > 1)
                     {
                         float B = float.MaxValue;
 
-                        for (int y = 0; y < EnemiesInRange.Length; y++)
+                        for(int y = 0; y < EnemiesInRange.Length; y++)
                         {
-                            if (EnemiesInRange[y] != null)
+                            if(EnemiesInRange[y] != null)
                             {
                                 float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
 
-                                if (distance1 > 0 && distance1 < B)
+                                if(distance1 > 0 && distance1 < B)
                                 {
                                     B = distance1;
 
@@ -103,7 +103,7 @@ namespace Tower
                     }
                 }
 
-                if (collider != null)
+                if(collider != null)
                 {
                     collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
                 }
@@ -115,20 +115,15 @@ namespace Tower
             SpecialAttackMode = false;
         }
 
-        private void Splines()
-        {
-
-        }
-
         private void FrostAttack()
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
             Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
 
-            for (int i = 0; i < EnemiesWithingFrostRange.Length; i++)
+            for(int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {
-                if (EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>())
+                if(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>())
                 {
                     EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().SlowDown(SlowDownAmount, SlowDownTime);
                     StartCoroutine(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().FrostOverlay(SlowDownTime));

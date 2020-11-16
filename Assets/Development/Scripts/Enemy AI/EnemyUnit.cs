@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class EnemyUnit : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 60;
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private GameObject frostOverlayImage;
 
     public int Health { get; private set; }
     public float Speed { get; private set; }
@@ -29,6 +28,8 @@ public class EnemyUnit : MonoBehaviour
 
     private void Start()
     {
+        //wayPoints = FindObjectOfType<WaypointManager>();
+
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
@@ -41,25 +42,36 @@ public class EnemyUnit : MonoBehaviour
         Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
 
-        if (Speed < 0)
-        {
-            Speed = 0;
-        }
+        //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
+        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
 
-        if (slowDebuffActive)
+        if(Input.GetKeyDown(KeyCode.E))
+            TakeDamage(1);
+
+        if(Speed < 0)
+            Speed = 0;
+
+        if(slowDebuffActive)
         {
             slowDebuffTimer += Time.deltaTime;
 
-            if (slowDebuffTimer > slowDebuffTime)
+            if(slowDebuffTimer > slowDebuffTime)
             {
                 Speed += slowDownSpeed;
                 slowDebuffTimer = 0f;
                 slowDebuffActive = false;
             }
         }
-        if (Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f)
-        {
-            if (waypointIndex < wayPoints.Length - 1)
+
+        // Test
+        if(Input.GetKeyDown(KeyCode.S))
+            SlowDown(80f, 4f);
+
+        if(Input.GetKeyDown(KeyCode.G))
+            StartCoroutine(TakeDamageOverTime(1, 2));
+
+        if(Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f)
+            if(waypointIndex < wayPoints.Length - 1)
             {
                 waypointIndex++;
             }
@@ -69,55 +81,43 @@ public class EnemyUnit : MonoBehaviour
                 GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
             }
-        }
     }
 
     public void TakeDamage(int damage)
     {
         Health -= damage;
 
-        if (Health < 1)
+        if(Health < 1)
             Death();
     }
 
     [NonSerialized] public int takeDamageOTTimer = 0;
     private bool takeDamageOTActive = false;
-
-    public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)
+    public IEnumerator TakeDamageOverTime(int dps, int damageTime, int timeUntilDamageTaken = 1)
     {
+        takeDamageOTActive = true;
         takeDamageOTTimer = 0;
-        if (takeDamageOTActive == false)
-        {
-            takeDamageOTActive = true;
-            
-            StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));
-        }
-    }
-    private IEnumerator TakeDamageOverTime(int dps, int damageTime, int timeUntilDamageTaken = 1)
-    {
-        while (takeDamageOTTimer < damageTime)
+
+        while(takeDamageOTTimer < damageTime)
         {
             Health -= dps;
+            if(Health < 1)
+                Death();
             yield return new WaitForSeconds(timeUntilDamageTaken);
             takeDamageOTTimer++;
         }
 
         takeDamageOTActive = false;
-
-        if (Health < 1)
-        {
-            Death();
-        }
     }
 
-    bool slowDebuffActive = false;
-    float slowDownSpeed;
-    float slowDownTotalSpeed;
-    float slowDebuffTime;
-    float slowDebuffTimer = 0;
+    private bool slowDebuffActive = false;
+    private float slowDownSpeed;
+    private float slowDownTotalSpeed;
+    private float slowDebuffTime;
+    private float slowDebuffTimer = 0;
     public void SlowDown(float speedDebuff, float time)
     {
-        if (Speed > slowDownTotalSpeed)
+        if(Speed > slowDownTotalSpeed)
         {
             slowDownSpeed = (speedDebuff / 100) * Speed;
 
@@ -135,9 +135,37 @@ public class EnemyUnit : MonoBehaviour
     {
         Destroy(gameObject);
 
-        if (OnDeath != null)
-        {
+        if(OnDeath != null)
             OnDeath();
+    }
+
+    public IEnumerator FrostOverlay(float maxTimer)
+    {
+        float timer = 0;
+        frostOverlayImage.SetActive(true);
+        while(timer < maxTimer)
+        {
+            timer += GameTime.deltaTime;
+
+            yield return null;
+        }
+
+        frostOverlayImage.SetActive(false);
+    }
+
+    public IEnumerator FireOverlay(float maxTimer)
+    {
+        yield return null;
+    }
+
+    public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)
+    {
+        takeDamageOTTimer = 0;
+        if(takeDamageOTActive == false)
+        {
+            takeDamageOTActive = true;
+
+            StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));
         }
     }
 }

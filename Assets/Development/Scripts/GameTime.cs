@@ -18,7 +18,7 @@ public class GameTime : MonoBehaviour
         time += GameTime.deltaTime;
     }
 
-    public static void SetGameTime(float timeScale)
+    public static void SetTimeScale(float timeScale)
     {
         TimeMultiplier = timeScale;
     }

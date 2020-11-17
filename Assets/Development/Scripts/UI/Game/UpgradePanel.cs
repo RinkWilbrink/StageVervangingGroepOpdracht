@@ -5,7 +5,6 @@ using UnityEngine;
 public class UpgradePanel : MonoBehaviour
 {
     // Variables
-    //[HideInInspector] public TMPro.TextMeshProUGUI UpgradeName_Text;
     [HideInInspector] public TMPro.TextMeshProUGUI UpgradeMultiplier_Text;
     [HideInInspector] public TMPro.TextMeshProUGUI UpgradeCost_Text;
     
@@ -13,11 +12,6 @@ public class UpgradePanel : MonoBehaviour
     {
         foreach (var go in gameObject.GetComponentsInChildren<TMPro.TextMeshProUGUI>())
         {
-            //if (go.name == "UpgradeName_Text")
-            //{
-            //    UpgradeName_Text = go;
-            //}
-
             if (go.name == "Upgrade_Level")
             {
                 UpgradeMultiplier_Text = go;

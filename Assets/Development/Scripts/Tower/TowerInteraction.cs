@@ -178,7 +178,7 @@ namespace Tower
                                     bu.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
                                     bu.SetActive(false);
 
-                                    // Settings for the Button
+                                    // Settings for the Collect Resource Building
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                     go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
@@ -241,7 +241,7 @@ namespace Tower
             {
                 for(int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
                 {
-                    SpecialAbilityUnlockedTowerList[i].LookAt();
+                    SpecialAbilityUnlockedTowerList[i].SpecialAttackDirectionLookAt();
                 }
                 if(SpecialAbilityUnlockedTowerList.Count > 0)
                 {
@@ -296,6 +296,7 @@ namespace Tower
 
         #region Public Functions
 
+        // Enable the UI Arrows for the Special Attacks
         public void OnSpecialMode(bool OnOrOff)
         {
             for(int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
@@ -304,6 +305,7 @@ namespace Tower
             }
         }
 
+        // Set the scale of the button that was just pressed to indicate what tower has been selected.
         public void SetSelectedButtonAttributes(int _index)
         {
             // Reset the previous button
@@ -316,6 +318,7 @@ namespace Tower
             ButtonSelectionIndex = _index;
         }
 
+        // Set the Tower that the user selects to build
         public void SelectTower(int _i)
         {
             TowerSelectedIndex = _i;
@@ -323,6 +326,7 @@ namespace Tower
             CurrentInteractionMode = TowerInteractionMode.PlacementMode;
         }
 
+        // Set the Building that the user selects to build
         public void SelectBuilding(int _i)
         {
             BuildingSelectedIndex = _i;
@@ -330,6 +334,7 @@ namespace Tower
             CurrentInteractionMode = TowerInteractionMode.PlacementMode;
         }
 
+        // Set Destroy towers/buildings mode
         public void SetDeleteBuilding()
         {
             previousButtonSelectionIndex = ButtonSelectionIndex;
@@ -337,11 +342,13 @@ namespace Tower
             CurrentBuildingType = BuildingTypes.Destroy;
         }
 
+        // Set the interaction mode like upgrade mode, special attack mode.
         public void SetInteractionMode(int _i)
         {
             CurrentInteractionMode = (TowerInteractionMode)_i;
         }
 
+        // Add a tower that has reached the Special Attack level to a list, the list will contain all towers that can use their special attack.
         public void AddTowerToSpecialAbilityUnlockedList(TowerCore core)
         {
             if(SpecialAbilityUnlockedTowerList == null)

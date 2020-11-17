@@ -6,6 +6,7 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
     [SerializeField] private GameObject EndScreen;
+    [SerializeField] private Tower.TowerInteraction towerIntreraction;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -31,6 +32,7 @@ public class WaveManager : MonoBehaviour
         if(currentWaveNum == waves.Length)
         {
             EndScreen.SetActive(true);
+            towerIntreraction.CurrentInteractionMode = Tower.InteractionMode.None;
 
             GameTime.SetTimeScale(0);
         }

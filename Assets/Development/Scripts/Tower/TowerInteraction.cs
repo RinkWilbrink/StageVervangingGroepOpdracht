@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 namespace Tower
 {
-    enum BuildingTypes
+    enum Types
     {
         Tower = 0, ResourceBuilding = 1, Destroy = 2
     }
-    public enum TowerInteractionMode
+    public enum InteractionMode
     {
         None = 0, PlacementMode = 1, UpgradeMode = 2, SpecialAbilitySelectMode = 3
     }
@@ -46,8 +46,8 @@ namespace Tower
         [SerializeField] public int ButtonSelectionIndex = 0;
         private int previousButtonSelectionIndex = 0;
 
-        private BuildingTypes CurrentBuildingType;
-        private BuildingTypes PreviousBuildingType;
+        private Types CurrentBuildingType;
+        private Types PreviousBuildingType;
 
         [Space(6)]
         [SerializeField] private Transform TowerSpecialUIParent;
@@ -65,13 +65,13 @@ namespace Tower
         private RaycastHit TowerHit;
 
         // Set Current tower interaction mode
-        [HideInInspector] public TowerInteractionMode CurrentInteractionMode;
+        [HideInInspector] public InteractionMode CurrentInteractionMode;
         [Space(6)]
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         private void Start()
         {
-            CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+            CurrentInteractionMode = InteractionMode.UpgradeMode;
 
             // Create Template Towers
             TowerPrefablist = new GameObject[TowerList.Length];
@@ -98,7 +98,7 @@ namespace Tower
 
         private void Update()
         {
-            if(CurrentInteractionMode == TowerInteractionMode.PlacementMode)
+            if(CurrentInteractionMode == InteractionMode.PlacementMode)
             {
                 if(Input.GetMouseButton(0))
                 {
@@ -112,7 +112,7 @@ namespace Tower
 
                         if(TowerHit.collider.tag == "PlaceableGround")
                         {
-                            if(CurrentBuildingType == BuildingTypes.Tower)
+                            if(CurrentBuildingType == Types.Tower)
                             {
                                 TowerPrefablist[TowerSelectedIndex].SetActive(true);
                                 TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
@@ -134,7 +134,7 @@ namespace Tower
                         {
                             if(upgradeUI.PayGold(GetCostAmount()))
                             {
-                                if(CurrentBuildingType == BuildingTypes.Tower)
+                                if(CurrentBuildingType == Types.Tower)
                                 {
                                     GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                     go.GetComponent<TowerCore>().SetNewSprite();
@@ -159,7 +159,7 @@ namespace Tower
                                     go.GetComponent<TowerCore>().Init();
                                     go.GetComponent<TowerCore>().specialDirectionUI.SetActive(false);
                                 }
-                                else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+                                else if(CurrentBuildingType == Types.ResourceBuilding)
                                 {
                                     Transform t;
                                     switch(BuildingSelectedIndex)
@@ -190,7 +190,7 @@ namespace Tower
                                 notificationManager.OpenGoldNotification();
                             }
                         }
-                        if(CurrentBuildingType == BuildingTypes.Destroy)
+                        if(CurrentBuildingType == Types.Destroy)
                         {
                             if(TowerHit.collider.tag == "Tower")
                             {
@@ -218,7 +218,7 @@ namespace Tower
                     BuildingPrefablist[BuildingSelectedIndex].transform.position = Vector3.zero;
                 }
             }
-            else if(CurrentInteractionMode == TowerInteractionMode.UpgradeMode)
+            else if(CurrentInteractionMode == InteractionMode.UpgradeMode)
             {
                 if(Input.GetMouseButtonDown(0))
                 {
@@ -232,12 +232,12 @@ namespace Tower
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
                             upgradeUI.SpecialButton();
-                            CurrentInteractionMode = TowerInteractionMode.None;
+                            CurrentInteractionMode = InteractionMode.None;
                         }
                     }
                 }
             }
-            else if(CurrentInteractionMode == TowerInteractionMode.SpecialAbilitySelectMode)
+            else if(CurrentInteractionMode == InteractionMode.SpecialAbilitySelectMode)
             {
                 for(int i = 0; i < SpecialAbilityUnlockedTowerList.Count; i++)
                 {
@@ -258,7 +258,7 @@ namespace Tower
                                 if(upgradeUI.PayMana(2))
                                 {
                                     _hit.collider.GetComponent<Tower.TowerCore>().StartSecondairyAttack();
-                                    CurrentInteractionMode = TowerInteractionMode.UpgradeMode;
+                                    CurrentInteractionMode = InteractionMode.UpgradeMode;
                                     SetSelectedButtonAttributes(0);
                                 }
                             }
@@ -270,7 +270,7 @@ namespace Tower
 
         private int GetCostAmount()
         {
-            if(CurrentBuildingType == BuildingTypes.Tower)
+            if(CurrentBuildingType == Types.Tower)
             {
                 switch(TowerSelectedIndex)
                 {
@@ -280,7 +280,7 @@ namespace Tower
                         return itemCosts.WizardTowerCost;
                 }
             }
-            else if(CurrentBuildingType == BuildingTypes.ResourceBuilding)
+            else if(CurrentBuildingType == Types.ResourceBuilding)
             {
                 switch(BuildingSelectedIndex)
                 {
@@ -322,16 +322,16 @@ namespace Tower
         public void SelectTower(int _i)
         {
             TowerSelectedIndex = _i;
-            CurrentBuildingType = BuildingTypes.Tower;
-            CurrentInteractionMode = TowerInteractionMode.PlacementMode;
+            CurrentBuildingType = Types.Tower;
+            CurrentInteractionMode = InteractionMode.PlacementMode;
         }
 
         // Set the Building that the user selects to build
         public void SelectBuilding(int _i)
         {
             BuildingSelectedIndex = _i;
-            CurrentBuildingType = BuildingTypes.ResourceBuilding;
-            CurrentInteractionMode = TowerInteractionMode.PlacementMode;
+            CurrentBuildingType = Types.ResourceBuilding;
+            CurrentInteractionMode = InteractionMode.PlacementMode;
         }
 
         // Set Destroy towers/buildings mode
@@ -339,13 +339,13 @@ namespace Tower
         {
             previousButtonSelectionIndex = ButtonSelectionIndex;
             PreviousBuildingType = CurrentBuildingType;
-            CurrentBuildingType = BuildingTypes.Destroy;
+            CurrentBuildingType = Types.Destroy;
         }
 
         // Set the interaction mode like upgrade mode, special attack mode.
         public void SetInteractionMode(int _i)
         {
-            CurrentInteractionMode = (TowerInteractionMode)_i;
+            CurrentInteractionMode = (InteractionMode)_i;
         }
 
         // Add a tower that has reached the Special Attack level to a list, the list will contain all towers that can use their special attack.

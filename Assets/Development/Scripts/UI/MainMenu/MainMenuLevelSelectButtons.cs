@@ -44,6 +44,7 @@ namespace MainMenuUI
 
         private void Update()
         {
+            // Timer to cycle the images shown on the Level select buttons
             if(timer > FadeTime + (InbetweenTime * ButtonToFadeIndex))
             {
                 StartFade(ButtonToFadeIndex);
@@ -68,6 +69,7 @@ namespace MainMenuUI
 
         #region Fade Coroutine
 
+        // Fade level select images, this will cycle the images when called in an update fuction.
         public void StartFade(int _levelIndex)
         {
             int local = 0;
@@ -94,6 +96,7 @@ namespace MainMenuUI
             }
         }
 
+        // This function will fade in a new image and can fade out the previous image.
         IEnumerator FadeImage(Image img, Image disableImage, bool fadeAway)
         {
             if (fadeAway)

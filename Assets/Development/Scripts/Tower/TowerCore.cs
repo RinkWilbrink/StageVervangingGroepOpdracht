@@ -55,6 +55,7 @@ namespace Tower
         [HideInInspector] protected float AttackTimer;
         [HideInInspector] protected bool CanAttack = true;
 
+        // Init function gets called when the tower gets destroyed
         public virtual void Init()
         {
 
@@ -67,6 +68,7 @@ namespace Tower
             HandleShooting();
         }
 
+        // Look for targets, set the target closest as CurrentTarget
         private void CheckTargets()
         {
             Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
@@ -99,6 +101,7 @@ namespace Tower
             }
         }
 
+        // Handle the attack timing for the primairy attack
         private void HandleAttackTiming()
         {
             if (SpecialAttackMode == false)
@@ -188,7 +191,7 @@ namespace Tower
             }
         }
 
-        public virtual void LookAt()
+        public virtual void SpecialAttackDirectionLookAt()
         {
             if(CurrentTarget != null)
             {

@@ -24,7 +24,7 @@ namespace Achievements
         public static AchievementManager current;
 
         [Header("Audio")]
-        [SerializeField] private AudioSource dingSoundEffect;
+        [SerializeField] private AudioSource dingSoundSource;
 
         [Header("Slide In/Out Timing")]
         [SerializeField] private float SlideSpeed;
@@ -57,18 +57,20 @@ namespace Achievements
         public void UnlockAchievement(string AchievementUnlocked)
         {
             // Audio
-            dingSoundEffect.pitch = (1f + UnityEngine.Random.Range(-0.02f, 0.02f));
-            dingSoundEffect.Play();
+            dingSoundSource.pitch = (1f + UnityEngine.Random.Range(-0.02f, 0.02f));
+            dingSoundSource.Play();
 
             // Visual stuff
             SetAchievementText("Name", "Requirements");
             StartCoroutine(AchievementSlide());
         }
 
+        /// <summary>Achievement Notification Message!</summary>
         private IEnumerator AchievementSlide()
         {
             IsSliding = true;
 
+            //Achievement Notification Slide In.
             while (Vector2.Distance(AchievementPanel.anchoredPosition, Vector2.zero) > 1f)
             {
                 AchievementPanel.anchoredPosition = Vector2.Lerp(AchievementPanel.anchoredPosition, Vector2.zero, SlideSpeed * Time.deltaTime);
@@ -80,6 +82,7 @@ namespace Achievements
 
             yield return new WaitForSeconds(SlideInBetweenTime);
 
+            //Achievement Notification Slide Out.
             while (Vector2.Distance(AchievementPanel.anchoredPosition, SlideOutPosition) > 1f)
             {
                 AchievementPanel.anchoredPosition = Vector2.Lerp(AchievementPanel.anchoredPosition, SlideOutPosition, SlideSpeed * Time.deltaTime);
@@ -91,6 +94,9 @@ namespace Achievements
             IsSliding = false;
         }
 
+        /// <summary>Set the Text of the Achievement Notification Message</summary>
+        /// <param name="_Name">Achievement Text</param>
+        /// <param name="_Requirements">Achievement Requirements text</param>
         private void SetAchievementText(string _Name, string _Requirements)
         {
             AchievementName.text = string.Format("{0} Unlocked", _Name);

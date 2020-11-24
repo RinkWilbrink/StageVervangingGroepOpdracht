@@ -172,11 +172,29 @@ MonoBehaviour:
     goldReward: 20
     spawnIntensity:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    normalizeCurve: 0
+    normalizeCurve: 1
     minSpawnTime: 0.5
     maxSpawnTime: 1.1
     enemies:
@@ -224,7 +242,7 @@ MonoBehaviour:
         type: 3}
       chance: 40
       waypointManager: {fileID: 1625405296}
-  waveCooldown: 1
+  waveCooldown: 2
 --- !u!114 &46010333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3524,7 +3542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.391, y: 215}
+  m_AnchoredPosition: {x: -846.609, y: 46}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148108175
@@ -4349,7 +4367,10 @@ MonoBehaviour:
   - {fileID: 3948878816728212435, guid: 8d60bea432626b8448fdf58e0d2cc79e, type: 3}
   - {fileID: 3948878816728212435, guid: 3d663b90107af1f4cbdec8a816bc89cd, type: 3}
   - {fileID: 3948878816728212435, guid: f6d674451005a8247974e5988ce9bdcf, type: 3}
-  rotationTime: 10000
+  - {fileID: 3948878816728212435, guid: a2b792920739f0a408542366d0483b92, type: 3}
+  challenageAmount: 1
+  challenge: {fileID: 0}
+  rotationTime: 30000
   timerText: {fileID: 1148108175}
 --- !u!4 &1446068346
 Transform:
@@ -5885,7 +5906,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000024796, y: -0.000015259}
+  m_AnchoredPosition: {x: -848, y: -169}
   m_SizeDelta: {x: 197.21802, y: 183.52414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097761052

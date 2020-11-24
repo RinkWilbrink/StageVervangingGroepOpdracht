@@ -6,38 +6,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DailyChallenges : MonoBehaviour
+public class DailyChallenges : NetworkTime
 {
     [SerializeField] private DailyChallenge[] challenges;
-    private DailyChallenge challenge;
+    [SerializeField] private int challenageAmount;
+    public DailyChallenge challenge;
     [SerializeField] private float rotationTime = 86400000f;
     [SerializeField] private TMPro.TextMeshProUGUI timerText;
     private bool waitingForNextChallenge = false;
     private ulong lastTime;
 
     private void Start() {
-        print("Time: " + NetworkTime.GetNetworkTime().ToLocalTime());
-        CheckTime();
+        //// Could try to call this only when starting the game instead
+        //DontDestroyOnLoad(this.gameObject);
+
+        print("Time: " + GetNetworkTime().ToLocalTime());
+        //CheckTime();
 
         lastTime = ulong.Parse(PlayerPrefs.GetString("ChallengeTimeStamp"));
 
         for ( int i = 0; i < challenges.Length; i++ ) {
-            if ( challenges[i].challengeName == PlayerPrefs.GetString("TestChallenge") )
+            //for ( int y = 0; y < challenageAmount; y++ ) {
+            if ( challenges[i].challengeName == PlayerPrefs.GetString("TestChallenge") ) {
                 challenge = challenges[i];
+            }
+            //}
         }
         print(challenge.challengeName);
 
-        if ( !IsRewardReady() ) {
+        if ( !IsChallengeReady() ) {
             waitingForNextChallenge = true;
         }
-
     }
 
     private void Update() {
         //Debug.Log("Gems: " + GameController.Gems);
 
         if ( waitingForNextChallenge ) {
-            if ( IsRewardReady() ) {
+            if ( IsChallengeReady() ) {
                 waitingForNextChallenge = false;
                 Debug.Log("Swapping challenge(s)!");
                 return;
@@ -47,12 +53,22 @@ public class DailyChallenges : MonoBehaviour
         }
 
         if ( Input.GetKeyDown(KeyCode.Y) ) {
-            print("Time: " + NetworkTime.GetNetworkTime().ToLocalTime());
+            print("Time: " + GetNetworkTime().ToLocalTime());
         }
     }
 
-    private bool IsRewardReady() {
-        ulong diff = (ulong)NetworkTime.GetNetworkTime().Ticks - lastTime;
+    public void UpdateChallenge( DailyChallenge dailyChallenge ) {
+        dailyChallenge.progress++;
+    }
+
+    private void OnDestroy() {
+        CheckTime();
+        // Save progress here
+
+    }
+
+    private bool IsChallengeReady() {
+        ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
         ulong ms = diff / TimeSpan.TicksPerMillisecond;
         float secondsLeft = ( rotationTime - ms ) / 1000f;
 
@@ -61,6 +77,7 @@ public class DailyChallenges : MonoBehaviour
             challenge = challenges[UnityEngine.Random.Range(0, challenges.Length)];
             print(challenge.challengeName);
             PlayerPrefs.SetString("TestChallenge", challenge.challengeName);
+            PlayerPrefs.SetInt("TestChallengeProg", challenge.progress);
             CheckTime();
             return true;
         }
@@ -69,7 +86,7 @@ public class DailyChallenges : MonoBehaviour
     }
 
     private void UpdateTextTimer() {
-        ulong diff = (ulong)NetworkTime.GetNetworkTime().Ticks - lastTime;
+        ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
         ulong ms = diff / TimeSpan.TicksPerMillisecond;
         float secondsLeft = ( rotationTime - ms ) / 1000f;
         string t = "";
@@ -84,10 +101,12 @@ public class DailyChallenges : MonoBehaviour
     }
 
     private void CheckTime() {
-        Debug.Log("Setting up time...");
+        Debug.Log("Setting up time for challenge...");
 
-        lastTime = (ulong)NetworkTime.GetNetworkTime().Ticks;
+        lastTime = (ulong)GetNetworkTime().Ticks;
         PlayerPrefs.SetString("ChallengeTimeStamp", lastTime.ToString());
+
+        challenge.progress = 0;
 
         waitingForNextChallenge = true;
     }

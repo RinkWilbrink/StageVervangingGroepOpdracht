@@ -1,10 +1,11 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Net;
 using System.Net.Sockets;
 
-public class NetworkTime
+public class NetworkTime : MonoBehaviour
 {
-    public static DateTime GetNetworkTime() {
+    public DateTime GetNetworkTime() {
         const string ntpServer = "time.windows.com";
 
         // NTP message size - 16 bytes of the digest (RFC 2030)
@@ -53,7 +54,7 @@ public class NetworkTime
     }
 
     // stackoverflow.com/a/3294698/162671
-    static uint SwapEndianness( ulong x ) {
+    public uint SwapEndianness( ulong x ) {
         return (uint)( ( ( x & 0x000000ff ) << 24 ) +
                        ( ( x & 0x0000ff00 ) << 8 ) +
                        ( ( x & 0x00ff0000 ) >> 8 ) +

@@ -109,7 +109,7 @@ namespace Tower
                 }
                 else
                 {
-                    AttackTimer += GameTime.deltaTime;
+                    AttackTimer += Time.deltaTime;
                 }
             }
         }

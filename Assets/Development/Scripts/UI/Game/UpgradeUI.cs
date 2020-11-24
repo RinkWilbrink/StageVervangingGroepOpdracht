@@ -83,7 +83,7 @@ namespace UI
         {
             while (Vector3.Distance(UpgradePanel.localScale, Vector3.one) > 0.005f)
             {
-                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * GameTime.deltaTime);
+                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * Time.deltaTime);
 
                 yield return null;
             }

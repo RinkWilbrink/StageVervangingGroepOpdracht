@@ -31,12 +31,16 @@ namespace ResourceBuilding
         [SerializeField] public int BuildingHealth = 1;
 
         [Header("Special Variables")]
-        //[SerializeField] public GameObject UIPopUp;
         [SerializeField] public Button button;
 
         [SerializeField] public ResourceUIManager resourceManager;
 
         [HideInInspector] public bool CanCollectResources = false;
+
+        public void Init()
+        {
+
+        }
 
         public void AddButtonListener()
         {
@@ -80,7 +84,7 @@ namespace ResourceBuilding
                 }
                 else
                 {
-                    ResourceCollectTimer += Time.deltaTime;
+                    ResourceCollectTimer += GameTime.deltaTime;
                 }
             }
 

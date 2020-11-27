@@ -1,2 +1,3 @@
 # StageVervangingGroepOpdracht
-Dit is een vervanging voor stage.
+Dit is een vervanging voor stage. ExtraText
+

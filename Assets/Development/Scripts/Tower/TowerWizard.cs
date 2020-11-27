@@ -1,10 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Reflection.Emit;
-using System.Runtime.ExceptionServices;
 using UnityEngine;
+
+/* References
+ * 
+ * Splines: (For Chain Lightning)
+ * https://catlikecoding.com/unity/tutorials/curves-and-splines/
+*/
 
 namespace Tower
 {
@@ -14,18 +15,27 @@ namespace Tower
         [Header("Lightning Strike Attack")]
         // Variables
         [SerializeField] private int LightningDamage;
-        [SerializeField] private GameObject lightningStrike;
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
-        [SerializeField] private GameObject LightningUI;
+        [SerializeField] private float LightningInBetweenTime;
 
         [Header("Frost Attack")]
         [SerializeField] private int FrostRadius;
+        [SerializeField] private float SlowDownAmount;
         [SerializeField] private float SlowDownTime;
 
-        [Header("Special Attack Timing")]
-        [SerializeField] private float LightningBetweenTime;
-        [SerializeField] private float LightningFinishTime;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject LightningCloudPrefab;
+        [SerializeField] private GameObject LightningBoltPrefab;
+        [Space(6)]
+        [SerializeField] private GameObject FrostPrefab;
+
+        private CRSpline spline;
+
+        public override void Init()
+        {
+            base.Init();
+        }
 
         protected override void PrimaryAttack()
         {
@@ -48,11 +58,10 @@ namespace Tower
             base.SecondaryAttack();
         }
 
-        IEnumerator LightningAttack()
+        private IEnumerator LightningAttack()
         {
-            Vector3 newPos = CurrentTarget.transform.position;
-            Collider col = CurrentTarget.GetComponent<Collider>();
-            Collider nextCol = null;
+            Collider collider = CurrentTarget.GetComponent<Collider>();
+            Collider nextCollider = null;
             int LightningChainCount = 0;
 
             while(LightningChainCount < LightningChainLimit)
@@ -61,10 +70,10 @@ namespace Tower
                 {
                     if(LightningChainCount > 0)
                     {
-                        col = nextCol;
+                        collider = nextCollider;
                     }
 
-                    Collider[] EnemiesInRange = Physics.OverlapSphere(col.transform.position, LightningRadius, 1 << 9);
+                    Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
 
                     if(EnemiesInRange.Length > 1)
                     {
@@ -74,15 +83,13 @@ namespace Tower
                         {
                             if(EnemiesInRange[y] != null)
                             {
-                                float distance = Mathf.Sqrt(
-                                    Mathf.Pow(col.transform.position.x - EnemiesInRange[y].transform.position.x, 2f) +
-                                    Mathf.Pow(col.transform.position.z - EnemiesInRange[y].transform.position.z, 2f));
+                                float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
 
-                                if(distance > 0 && distance < B)
+                                if(distance1 > 0 && distance1 < B)
                                 {
-                                    B = distance;
+                                    B = distance1;
 
-                                    nextCol = EnemiesInRange[y];
+                                    nextCollider = EnemiesInRange[y];
                                 }
                             }
                         }
@@ -90,20 +97,19 @@ namespace Tower
                     else
                     {
                         LightningChainCount = LightningChainLimit + 1;
-
-                        col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
+                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
 
                         yield return null;
                     }
                 }
 
-                if(col != null)
+                if(collider != null)
                 {
-                    col.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
+                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
                 }
 
                 LightningChainCount++;
-                yield return new WaitForSecondsRealtime(0.5f);
+                yield return new WaitForSecondsRealtime(LightningInBetweenTime);
             }
 
             SpecialAttackMode = false;
@@ -113,13 +119,14 @@ namespace Tower
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
-            Collider[] cool = Physics.OverlapSphere(newPos, FrostRadius);
+            Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
 
-            for(int i = 0; i < cool.Length; i++)
+            for(int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {
-                if(cool[i].GetComponent<EnemyUnit>())
+                if(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>())
                 {
-                    cool[i].GetComponent<EnemyUnit>().SlowDown(0.2f, SlowDownTime);
+                    EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().SlowDown(SlowDownAmount, SlowDownTime);
+                    StartCoroutine(EnemiesWithingFrostRange[i].GetComponent<EnemyUnit>().FrostOverlay(SlowDownTime));
                 }
             }
 

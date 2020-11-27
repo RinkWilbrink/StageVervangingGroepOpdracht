@@ -19,7 +19,11 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
+    private ResourceUIManager resourceUIManager;
+
     private void Start() {
+        resourceUIManager = FindObjectOfType<ResourceUIManager>();
+
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
@@ -88,6 +92,9 @@ public class WaveManager : MonoBehaviour
     private IEnumerator UpdateWave( float waitTime ) {
         yield return new WaitForSeconds(waitTime);
 
+        GameController.Gold += currentWave.goldReward;
+        resourceUIManager.UpdateResourceUI();
+
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
@@ -96,7 +103,6 @@ public class WaveManager : MonoBehaviour
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
 
-        GameController.Gold += currentWave.goldReward;
     }
 
     [Serializable]

@@ -64,7 +64,7 @@ public class FireworkRocket : MonoBehaviour
 
                 for ( int i = 0; i < enemies.Length; i++ ) {
                     if ( enemies[i].GetComponent<EnemyUnit>() ) {
-                        enemies[i].GetComponent<EnemyUnit>().TakeDamage(damage);
+                        enemies[i].GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
                     }
                 }
             }

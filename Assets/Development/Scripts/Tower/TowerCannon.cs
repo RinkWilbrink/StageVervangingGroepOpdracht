@@ -84,7 +84,7 @@ namespace Tower
 
             for (int i = 0; i < EnemiesInRange.Length; i++)
             {
-                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
+                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage, towerType);
 
 
                 yield return null;
@@ -111,7 +111,7 @@ namespace Tower
                     Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
                     for (int i = 0; i < EnemiesInRange.Length; i++)
                     {
-                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
+                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond, towerType);
                     }
                 }
                 timer += 1f;

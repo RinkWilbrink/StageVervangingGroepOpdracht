@@ -122,7 +122,7 @@ namespace Tower
             {
                 list[i].enabled = true;
 
-                list[i].gameObject.GetComponent<EnemyUnit>().TakeDamage(BallistaDamage);
+                list[i].gameObject.GetComponent<EnemyUnit>().TakeDamage(BallistaDamage, towerType);
             }
 
             // Clean up local variables
@@ -145,7 +145,7 @@ namespace Tower
                 for (int i = 0; i < EnemiesInRange.Length; i++)
                 {
                     EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
-                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage, towerType);
                 }
 
                 timer += 1f;

@@ -10,7 +10,7 @@ namespace Tower
 
     public enum TowerType
     {
-        ArcherTower = 0, WizardTower = 1, CannonTower = 2
+        ArcherTower = 0, WizardTower = 1, CannonTower = 2, NullValue = 3
     }
 
     public class TowerCore : MonoBehaviour
@@ -121,7 +121,7 @@ namespace Tower
 
         protected virtual void PrimaryAttack()
         {
-            CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage);
+            CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage, towerType);
 
             CanAttack = false;
             AttackTimer = 0;

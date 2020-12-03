@@ -11,6 +11,10 @@ public class GameController : MonoBehaviour
 
     private void Awake() {
         Gems = PlayerPrefs.GetInt("Gems");
+        MainTowerHP = 50;
+        Gold = 15;
+        Mana = 10;
+        GameTime.SetTimeScale(1);
     }
 
     //public static bool GameIsPaused = false;

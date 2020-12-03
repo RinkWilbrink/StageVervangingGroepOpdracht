@@ -21,6 +21,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         ButtonsPanel.anchoredPosition = new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f);
     }
 
+    // Set the Slide In or Out state.
     public void UISlideIn()
     {
         if (!IsOpening)
@@ -32,7 +33,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
                 ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
                 StartCoroutine(buttonSlide(new Vector2(gameObject.GetComponent<RectTransform>().rect.width + 10f, 0f)));
                 IsOpened = false;
-                towerPlacement.CurrentInteractionMode = Tower.TowerInteractionMode.UpgradeMode;
+                towerPlacement.CurrentInteractionMode = Tower.InteractionMode.UpgradeMode;
             }
             else
             {
@@ -40,11 +41,12 @@ public class TowerSelectionButtonsUI : MonoBehaviour
                 StartCoroutine(buttonSlide(new Vector2(-5f, 0)));
                 IsOpened = true;
                 //towerPlacement.SelectTower(0);
-                towerPlacement.CurrentInteractionMode = Tower.TowerInteractionMode.PlacementMode;
+                towerPlacement.CurrentInteractionMode = Tower.InteractionMode.PlacementMode;
             }
         }
     }
 
+    // Slide in or out the Tower and Building buttons
     IEnumerator buttonSlide(Vector2 NewPosition)
     {
         IsOpening = true;
@@ -59,6 +61,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         IsOpening = false;
     }
 
+    // Set the time scale for the GameTime.delta time
     public void PauseGame(float TimeScale)
     {
         GameTime.SetTimeScale(TimeScale);

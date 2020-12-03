@@ -26,7 +26,7 @@ namespace UI
 
         [Space(4)]
 
-        [SerializeField] private Dictionary<Tower.TowerType, images> Banaan = new Dictionary<TowerType, images>();
+        [SerializeField] private Dictionary<Tower.TowerType, images> TowerTypeImageDictionairy = new Dictionary<TowerType, images>();
 
         [Header("B")]
         [SerializeField] private images[] Towers;
@@ -57,7 +57,7 @@ namespace UI
         {
             for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length; i++)
             {
-                Banaan.Add((TowerType)i, Towers[i]);
+                TowerTypeImageDictionairy.Add((TowerType)i, Towers[i]);
             }
         }
 
@@ -65,6 +65,8 @@ namespace UI
         {
             UpgradePanel.gameObject.SetActive(false);
             SpecialAbilityModeButton.interactable = false;
+
+            HealthText.text = string.Format("{0}", GameController.MainTowerHP);
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -91,6 +93,7 @@ namespace UI
             yield return 0;
         }
 
+        // Set the size of the Special Attack Button when clicked
         private void SetSpecialButtonTransform(int Index)
         {
             Vector2 Special1Scale = Vector2.one; Vector2 Special2Scale = Vector2.one;
@@ -117,6 +120,7 @@ namespace UI
             buttonSpecial2.GetComponent<RectTransform>().anchoredPosition = Special2Position;
         }
 
+        // Enable or Disable the Special Attack button for the towers
         private void SetSpecialButtons()
         {
             buttonSpecial1.interactable = false;
@@ -146,6 +150,8 @@ namespace UI
             {
                 Debug.Log("GAME OVER");
                 DeathScreen.SetActive(true);
+
+                GameTime.SetTimeScale(0);
             }
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
@@ -210,6 +216,7 @@ namespace UI
             }
         }
 
+        // Cleanup function for when closing the Upgrade UI Panel
         public void CloseUpgradePanel()
         {
             currentTower = null;
@@ -218,7 +225,7 @@ namespace UI
         public void SpecialButton()
         {
             images b;
-            Banaan.TryGetValue(currentTower.towerType, out b);
+            TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
             buttonSpecial1.image.sprite = b.image1;
             buttonSpecial2.image.sprite = b.image2;
 
@@ -226,6 +233,7 @@ namespace UI
             SetSpecialButtons();
         }
 
+        // Unlock special ability for the tower that has just been upgraded.
         public void SetSpecialAbility(int _i)
         {
             if(_i > 2)

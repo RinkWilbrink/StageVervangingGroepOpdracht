@@ -65,6 +65,8 @@ namespace UI
         {
             UpgradePanel.gameObject.SetActive(false);
             SpecialAbilityModeButton.interactable = false;
+
+            HealthText.text = string.Format("{0}", GameController.MainTowerHP);
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -148,6 +150,8 @@ namespace UI
             {
                 Debug.Log("GAME OVER");
                 DeathScreen.SetActive(true);
+
+                GameTime.SetTimeScale(0);
             }
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);

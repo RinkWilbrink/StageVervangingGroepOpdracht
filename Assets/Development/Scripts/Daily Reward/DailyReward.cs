@@ -80,7 +80,7 @@ public class DailyReward : MonoBehaviour
         timerText.text = t;
 
         // Schedule Notification
-        appNotifications.ScheduleNotification(System.DateTime.Now.AddSeconds(secondsLeft));
+        //appNotifications.ScheduleNotification(System.DateTime.Now.AddSeconds(secondsLeft));
     }
 
     public void CheckTime()

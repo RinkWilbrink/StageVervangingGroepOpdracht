@@ -5,20 +5,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     // Resources
-    //[SerializeField] public 
-
     public static int Gold = 15;
     public static int Mana = 10;
+    public static int Gems;
+
+    private void Awake() {
+        Gems = PlayerPrefs.GetInt("Gems");
+    }
+
+    //public static bool GameIsPaused = false;
 
     // Other things
     public static int MainTowerHP = 50;
-
-    private void Update() {
-
-        if ( MainTowerHP < 1 ) {
-            Debug.Log("GAME OVER");
-        } else {
-            //Debug.LogFormat("Main Tower HP: {0}", MainTowerHP);
-        }
-    }
 }

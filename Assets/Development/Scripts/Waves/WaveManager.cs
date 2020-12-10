@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+    [SerializeField] private GameObject EndScreen;
+    [SerializeField] private Tower.TowerInteraction towerIntreraction;
+
+    [Header("Waves")]
     [SerializeField] private WaveData[] waves;
     [Space(10)]
-    //[SerializeField] private EnemyUnit testUnit;
     [SerializeField] private float waveCooldown = 10;
-
-    private WaypointManager WaypointManager;
 
     private WaveData currentWave;
     private int currentWaveNum;
@@ -18,61 +19,66 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
-    private void Start() {
-        WaypointManager = FindObjectOfType<WaypointManager>();
-        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
-
-        Debug.Log("TIP: Press Spacebar to Instantiate a test unit...");
-
+    private void Start()
+    {
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
-
     }
 
     //float spawnTimer;
-    int spawnCurveIndex;
-    private void Update() {
-        //print("Wave: " + currentWaveNum);
+    private float spawnCurveIndex;
+    private void Update()
+    {
+        if(currentWaveNum == waves.Length)
+        {
+            EndScreen.SetActive(true);
+            towerIntreraction.CurrentInteractionMode = Tower.InteractionMode.None;
 
-        if ( /*Input.GetKeyDown(KeyCode.Space) && */ enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
-            SpawnEnemy();
+            GameTime.SetTimeScale(0);
         }
 
-        //spawnTimer += Time.deltaTime;
-        //spawnNext = currentWave.curve.Evaluate(spawnTimer);
-        //Debug.Log(spawnNext);
-        //print(currentWave.curve.Evaluate(Time.time));
+        if(GameTime.deltaTime > 0)
+        {
+            if(enemiesLeftToSpawn > 0 && Time.time > spawnNext)
+            {
+                SpawnEnemy();
+            }
+        }
     }
 
-    private void SpawnEnemy() {
-        //yield return new WaitForSeconds(currentWave.curve.Evaluate(Time.timeSinceLevelLoad));
+    private void SpawnEnemy()
+    {
         spawnCurveIndex++;
-        //int enemiesToSpawn = (int)currentWave.curve.Evaluate(spawnCurveIndex);
-
-        //for ( int e = 0; e < enemiesToSpawn; e++ ) {
         enemiesLeftToSpawn--;
-        Debug.Log(enemiesLeftToSpawn);
+        //Debug.Log(enemiesLeftToSpawn);
 
-        if ( currentWave.spawnIntensity.length < 1 )
+        if(currentWave.spawnIntensity.length < 1)
+        {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
-        else
-            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnCurveIndex);
-
-        //print("Time until next spawn: " + currentWave.curve.Evaluate(Time.time));
+        }
+        else if(currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
+        {
+            float spawnTime = spawnCurveIndex / currentWave.enemyCount;
+            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
+            //Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
+        }
+        else if(!currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
+        {
+            spawnNext = Time.time + currentWave.spawnIntensity.Evaluate((int)spawnCurveIndex);
+            //Debug.Log("Next Spawn: " + (spawnNext - Time.time));
+        }
 
         int random = UnityEngine.Random.Range(0, 100);
         int lowestPercentage;
         int highestPercentage = 0;
 
-        for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
-            //currentWave.enemies[currentWaveNum - 1].chance
+        for(int i = 0; i < currentWave.enemies.Length; i++)
+        {
             lowestPercentage = highestPercentage;
             highestPercentage += currentWave.enemies[i].chance;
 
-            if ( random >= lowestPercentage && random < highestPercentage ) {
-                //print("Random: " + random);
-                //print("Lowest: " + lowestPercentage);
-                //print("Highest: " + highestPercentage);
+            if(random >= lowestPercentage && random < highestPercentage)
+            {
 
                 EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
                 enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
@@ -80,31 +86,31 @@ public class WaveManager : MonoBehaviour
                 enemy.OnDeath += OnEnemyDeath;
             }
         }
-        //}
     }
 
-    IEnumerator updateWave;
-    private void OnEnemyDeath() {
+    private IEnumerator updateWave;
+    private void OnEnemyDeath()
+    {
         enemiesLeftAlive--;
 
-        if ( enemiesLeftAlive <= 0 ) {
+        if(enemiesLeftAlive <= 0)
+        {
             updateWave = UpdateWave(waveCooldown);
             StartCoroutine(updateWave);
         }
     }
 
-    private IEnumerator UpdateWave( float waitTime ) {
+    private IEnumerator UpdateWave(float waitTime)
+    {
         yield return new WaitForSeconds(waitTime);
 
         currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
-        GameObject.Find("Wave Text").GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("Wave: {0}", currentWaveNum);
+        WaveText.text = string.Format("{0}", currentWaveNum);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
-
-        //spawnTimer = 0f;
 
         GameController.Gold += currentWave.goldReward;
     }
@@ -115,6 +121,7 @@ public class WaveManager : MonoBehaviour
         public int enemyCount;
         public int goldReward;
         public AnimationCurve spawnIntensity;
+        public bool normalizeCurve;
         public float minSpawnTime;
         public float maxSpawnTime;
         public EnemyStructure[] enemies;

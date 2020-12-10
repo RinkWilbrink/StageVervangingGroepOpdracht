@@ -1,0 +1,318 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6682590823350285534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6682590823350285530}
+  - component: {fileID: 6682590823350285531}
+  - component: {fileID: 6682590823350285529}
+  - component: {fileID: 6682590823350285528}
+  - component: {fileID: 4516306292344205916}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6682590823350285530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6682590823350285531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1dec4f12c09feb49a4509856c83568b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaveText: {fileID: 0}
+  EndScreen: {fileID: 0}
+  waves:
+  - enemyCount: 10
+    goldReward: 20
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.5
+        outSlope: -0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.5
+        inSlope: -0.5
+        outSlope: -0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 1
+    minSpawnTime: 1
+    maxSpawnTime: 3
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 715b77a2793e98548914223d31a06880,
+        type: 3}
+      chance: 100
+      waypointManager: {fileID: 0}
+  - enemyCount: 20
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 1
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: efe8a2bd8e74b3242a3ecabe97265951,
+        type: 3}
+      chance: 100
+      waypointManager: {fileID: 0}
+  - enemyCount: 20
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 1
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 715b77a2793e98548914223d31a06880,
+        type: 3}
+      chance: 60
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: efe8a2bd8e74b3242a3ecabe97265951,
+        type: 3}
+      chance: 40
+      waypointManager: {fileID: 0}
+  - enemyCount: 30
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 1
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 715b77a2793e98548914223d31a06880,
+        type: 3}
+      chance: 39
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: efe8a2bd8e74b3242a3ecabe97265951,
+        type: 3}
+      chance: 39
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: 597edf9d363250249bf9715b20715564,
+        type: 3}
+      chance: 22
+      waypointManager: {fileID: 0}
+  - enemyCount: 35
+    goldReward: 0
+    spawnIntensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalizeCurve: 1
+    minSpawnTime: 1
+    maxSpawnTime: 2
+    enemies:
+    - enemy: {fileID: 341408206199449655, guid: 715b77a2793e98548914223d31a06880,
+        type: 3}
+      chance: 25
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: efe8a2bd8e74b3242a3ecabe97265951,
+        type: 3}
+      chance: 25
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: 597edf9d363250249bf9715b20715564,
+        type: 3}
+      chance: 25
+      waypointManager: {fileID: 0}
+    - enemy: {fileID: 341408206199449655, guid: dda6ebadcc1e05b498b2e664359f4e59,
+        type: 3}
+      chance: 25
+      waypointManager: {fileID: 0}
+  waveCooldown: 2
+--- !u!114 &6682590823350285529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9340d1069bac2946a355e3769e7125d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  TowerParent: {fileID: 0}
+  TowerList:
+  - {fileID: 3603336420261006996, guid: c0214eecb0d536744b7f9293af6f64a1, type: 3}
+  - {fileID: 2727193882764642312, guid: 78ba586f68db6f740926c9b1f0c7f393, type: 3}
+  - {fileID: 6047899823298451168, guid: 78924f93429947a49a306d2825fa4b1e, type: 3}
+  BuildingParent: {fileID: 0}
+  BuildingList:
+  - {fileID: 4637088074827303202, guid: 50e1e549cd5382b4eb2700bea0b68793, type: 3}
+  - {fileID: 1893043397780587038, guid: bceea53ec4bc3194085178be0e596173, type: 3}
+  notificationManager: {fileID: 0}
+  ResourceCollectButtonPrefab: {fileID: 2571995776109023052, guid: ca79cf15e15e6f141acfbf6d6d9a35e3,
+    type: 3}
+  GoldButtonParent: {fileID: 0}
+  ManaButtonParent: {fileID: 0}
+  SelectionButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ButtonSelectionIndex: 0
+  TowerSpecialUIParent: {fileID: 0}
+  ArcherSpecialAttackUIPrefab: {fileID: 3328692352965057205, guid: 2c878edf757985247aacadbe10e61023,
+    type: 3}
+  WizardSpecialAttackUIPrefab: {fileID: 3328692352965057205, guid: 2c878edf757985247aacadbe10e61023,
+    type: 3}
+  CannonSpecialAttackUIPrefab: {fileID: 3328692352965057205, guid: 2c878edf757985247aacadbe10e61023,
+    type: 3}
+  upgradeUI: {fileID: 0}
+  resourceManager: {fileID: 0}
+  itemCosts: {fileID: 11400000, guid: c45f4a969f02e0444988f37839f9bcf3, type: 2}
+  CurrentInteractionMode: 0
+  SpecialAbilityUnlockedTowerList: []
+--- !u!114 &6682590823350285528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da56e1dc7a950324e911cac14f1ec0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4516306292344205916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682590823350285534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecd9381a4f9d5b45a325087f30871cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -31,18 +31,25 @@ namespace ResourceBuilding
         [SerializeField] public int BuildingHealth = 1;
 
         [Header("Special Variables")]
-        //[SerializeField] public GameObject UIPopUp;
         [SerializeField] public Button button;
 
         [SerializeField] public ResourceUIManager resourceManager;
 
         [HideInInspector] public bool CanCollectResources = false;
 
+        /// <summary>Init functions, This function gets called when the building gets created (like a start)</summary>
+        public void Init()
+        {
+
+        }
+
+        /// <summary>Add the CollectResource function to the OnButtonClick Event to collect the resource</summary>
         public void AddButtonListener()
         {
             button.onClick.AddListener(delegate { CollectResources(); });
         }
 
+        /// <summary>Collect the resource of the current building</summary>
         public void CollectResources()
         {
             Debug.Log(Resource);
@@ -80,7 +87,7 @@ namespace ResourceBuilding
                 }
                 else
                 {
-                    ResourceCollectTimer += Time.deltaTime;
+                    ResourceCollectTimer += GameTime.deltaTime;
                 }
             }
 

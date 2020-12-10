@@ -1,165 +1,150 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Tower
 {
+    public enum SpecialAttack
+    {
+        None = 0, Special1 = 1, Special2 = 2
+    }
+
+    public enum TowerType
+    {
+        ArcherTower = 0, WizardTower = 1, CannonTower = 2
+    }
+
     public class TowerCore : MonoBehaviour
     {
         // Variables
         [Header("Stats")]
-        [SerializeField] public int AttackShootingTime;
-        [SerializeField] public int AttackDamage;
+        [SerializeField] protected int AttackShootingTime;
+        [SerializeField] protected int AttackDamage;
 
-        [Space(4)]
-
-        [SerializeField] public int SpecialShootingTime;
-        [SerializeField] public int SpecialDamage;
-        [SerializeField] public int SpecialAttackThresshold;
-
-        // Hidden Primairy Attack Variables
-        [HideInInspector] public float AttackTimer;
-        [HideInInspector] public bool CanAttack = true;
+        [HideInInspector] protected bool SpecialAttackMode = false;
 
         [Header("Damage and Firerate Upgrades")]
-        [SerializeField] public float DamageAddedPerLevel;
-        [SerializeField] public float FireRateAddedPerLevel;
-        [SerializeField] public int DamageLevel = 0;
-        [SerializeField] public int FireRateLevel = 0;
-        private float UpgradedDamage;
-        private float UpgradedFireRate;
-
-        // Hidden Secondairy Attack Variables
-        [HideInInspector] public float SpecialTimer;
-        [HideInInspector] public bool CanUseSpecial = false;
+        [SerializeField] private float DamageAddedPerLevel;
+        [SerializeField] private float FireRateAddedPerLevel;
 
         [Header("Shooting and Range")]
-        [SerializeField] private GameObject ShootOrigin;
+        [SerializeField] private float ShootingRange = 0;
+        [SerializeField] protected GameObject ShootOrigin;
+        [SerializeField] public GameObject specialDirectionUI;
+        [HideInInspector] private RaycastHit hit;
 
-        [HideInInspector] public int EnemiesInRange = 0;
-        [HideInInspector] public RaycastHit hit;
+        [Header("Upgrades and Special Abilities")]
+        [SerializeField] public int TowerLevelToUnlockSpecial;
+        [HideInInspector] public int TowerLevel = 1;
+        [HideInInspector] public int TowerSpecialLevel = 0;
+        protected float UpgradedDamage;
+        protected float UpgradedFireRate;
+
+        [SerializeField] public TowerType towerType;
+        [HideInInspector] public SpecialAttack SpecialUnlocked;
 
         [Header("Targets")]
-        [SerializeField] public GameObject CurrentTarget;
+        [SerializeField] protected GameObject CurrentTarget;
 
-        // Private Variables
-        [SerializeField] private float ShootingRange = 0;
+        [Header("Sprites And Art")]
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Sprite[] NoSpecialModeSprites;
+        [SerializeField] private Sprite[] Special1ModeSprites;
+        [SerializeField] private Sprite[] Special2ModeSprites;
 
-        // Hits and Shooting
+        // Hidden Primairy Attack Variables
+        [HideInInspector] protected float AttackTimer;
+        [HideInInspector] protected bool CanAttack = true;
 
-        void Update()
+        // Init function gets called when the tower gets destroyed
+        public virtual void Init()
         {
-            if(CurrentTarget != null)
+
+        }
+
+        private void Update()
+        {
+            CheckTargets();
+            HandleAttackTiming();
+            HandleShooting();
+        }
+
+        // Look for targets, set the target closest as CurrentTarget
+        private void CheckTargets()
+        {
+            Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange, 1 << 9);
+
+            if(enemies.Length == 0)
             {
-                Debug.DrawRay(ShootOrigin.transform.position, (CurrentTarget.transform.position - ShootOrigin.transform.position).normalized, Color.red);
-
-                HandleAttackTiming();
-
-                HandleShooting();
+                CurrentTarget = null;
             }
             else
             {
-                CheckTargets();
-            }
-        }
-
-
-        private void CheckTargets()
-        {
-            Collider[] enemies = Physics.OverlapSphere(ShootOrigin.transform.position, ShootingRange);
-            EnemiesInRange = 0;
-
-            foreach(Collider go in enemies)
-            {
-                if(go.tag == "Enemy")
+                foreach(Collider go in enemies)
                 {
-                    EnemiesInRange += 1;
-
-                    if(CurrentTarget == null)
+                    if(go.tag == "Enemy")
                     {
-                        CurrentTarget = go.gameObject;
+                        float Distance1 = ShootingRange;
 
-                        return;
-                    }
+                        if(CurrentTarget != null)
+                        {
+                            Distance1 = Mathf.Sqrt((CurrentTarget.transform.position - ShootOrigin.transform.position).sqrMagnitude);
+                        }
 
-                    float Distance1 = Mathf.Pow(Mathf.Sqrt(
-                        (CurrentTarget.transform.position.x - ShootOrigin.transform.position.x) +
-                        (CurrentTarget.transform.position.z - ShootOrigin.transform.position.z)), 2);
+                        float Distance2 = Mathf.Sqrt((go.transform.position - ShootOrigin.transform.position).sqrMagnitude);
 
-                    float Distance2 = Mathf.Pow(Mathf.Sqrt(
-                        (go.transform.transform.position.x - ShootOrigin.transform.position.x) +
-                        (go.transform.transform.position.z - ShootOrigin.transform.position.z)), 2);
-
-                    if(Distance2 < Distance1)
-                    {
-                        CurrentTarget = go.gameObject;
+                        if(Distance2 < Distance1)
+                        {
+                            CurrentTarget = go.gameObject;
+                        }
                     }
                 }
             }
         }
 
+        // Handle the attack timing for the primairy attack
         private void HandleAttackTiming()
         {
-            if(AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+            if (SpecialAttackMode == false)
             {
-                CanAttack = true;
-            }
-            else
-            {
-                AttackTimer += Time.deltaTime;
-            }
-            if(SpecialTimer >= (SpecialShootingTime - UpgradedFireRate))
-            {
-                CanUseSpecial = true;
-            }
-            else
-            {
-                SpecialTimer += Time.deltaTime;
+                if (AttackTimer >= (AttackShootingTime - UpgradedFireRate))
+                {
+                    CanAttack = true;
+                }
+                else
+                {
+                    AttackTimer += GameTime.deltaTime;
+                }
             }
         }
 
         #region Virtual Functions
 
-        // Virtual functions for shooting and special abilities
-        public virtual void PrimairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected virtual void PrimaryAttack()
         {
-            Debug.Log("Core Primairy");
-
-            _target.TakeDamage(_damage);
+            CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage);
 
             CanAttack = false;
             AttackTimer = 0;
         }
-        public virtual void SecondairyAttack(EnemyUnit _target, int _damage, int _attackTime)
+        protected virtual void SecondaryAttack()
         {
-            Debug.Log("Core Secondairy");
-
-            _target.TakeDamage(_damage);
-
-            CanUseSpecial = false;
-            SpecialTimer = 0;
+            specialDirectionUI.SetActive(false);
         }
-        public virtual void HandleShooting()
+
+        protected virtual void HandleShooting()
         {
             if(CanAttack)
             {
-                if(CanUseSpecial)
+                if(CurrentTarget != null)
                 {
-                    if(EnemiesInRange > SpecialAttackThresshold)
-                    {
-                        //The Attack
-
-                        SecondairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(SpecialDamage + UpgradedDamage), SpecialShootingTime);
-
-                        return;
-                    }
+                    PrimaryAttack();
                 }
-
-                PrimairyAttack(CurrentTarget.GetComponent<EnemyUnit>(), Mathf.CeilToInt(AttackDamage + UpgradedDamage), AttackShootingTime);
             }
+        }
+
+        protected void PayMana(int _cost)
+        {
+            GameController.Mana -= _cost;
         }
 
         #endregion
@@ -168,8 +153,50 @@ namespace Tower
 
         public void UpdateDamageValues()
         {
-            UpgradedDamage = (DamageAddedPerLevel * DamageLevel);
-            UpgradedFireRate = (FireRateLevel * FireRateAddedPerLevel);
+            UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
+            UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
+        }
+
+        public void StartSecondairyAttack()
+        {
+            SecondaryAttack();
+
+            SpecialAttackMode = true;
+            AttackTimer = 0;
+        }
+
+        /// <summary>Set a new sprite</summary>
+        public void SetNewSprite()
+        {
+            switch(SpecialUnlocked)
+            {
+                case SpecialAttack.None:
+                    if(TowerLevel <= NoSpecialModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = NoSpecialModeSprites[TowerLevel - 1];
+                    }
+                    break;
+                case SpecialAttack.Special1:
+                    if(TowerSpecialLevel < Special1ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special1ModeSprites[TowerSpecialLevel];
+                    }
+                    break;
+                case SpecialAttack.Special2:
+                    if(TowerSpecialLevel < Special2ModeSprites.Length)
+                    {
+                        spriteRenderer.sprite = Special2ModeSprites[TowerSpecialLevel];
+                    }
+                    break;
+            }
+        }
+
+        public virtual void SpecialAttackDirectionLookAt()
+        {
+            if(CurrentTarget != null)
+            {
+                specialDirectionUI.transform.LookAt(CurrentTarget.transform.position);
+            }
         }
 
         #endregion

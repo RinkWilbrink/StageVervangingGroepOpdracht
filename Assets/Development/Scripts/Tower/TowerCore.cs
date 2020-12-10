@@ -17,7 +17,7 @@ namespace Tower
     {
         // Variables
         [Header("Stats")]
-        [SerializeField] protected int AttackShootingTime;
+        [SerializeField] protected float AttackShootingTime;
         [SerializeField] protected int AttackDamage;
 
         [HideInInspector] protected bool SpecialAttackMode = false;

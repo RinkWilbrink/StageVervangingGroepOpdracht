@@ -64,6 +64,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     // Set the time scale for the GameTime.delta time
     public void PauseGame(float TimeScale)
     {
-        GameTime.SetTimeScale(TimeScale);
+        //GameTime.SetTimeScale(TimeScale);
+        Time.timeScale = TimeScale;
     }
 }

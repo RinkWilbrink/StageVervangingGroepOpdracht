@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class WaveManager : MonoBehaviour
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
     [Space(10)]
+    [Header("Wave Cooldown")]
     [SerializeField] private float waveCooldown = 10;
 
     private WaveData currentWave;
@@ -34,8 +36,8 @@ public class WaveManager : MonoBehaviour
 
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
-                SpawnEnemy();
-            }
+            SpawnEnemy();
+        }
         //}
     }
 
@@ -91,17 +93,19 @@ public class WaveManager : MonoBehaviour
 
         WaveText.text = string.Format("{0}", currentWaveNum);
 
+        CSVWaveData waveData = ReadData(currentWaveNum - 1);
+        print(waveData.goldReward);
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
 
-        GameController.Gold += currentWave.goldReward;
+        GameController.Gold += waveData.goldReward;
     }
 
     [Serializable]
     public struct WaveData
     {
         public int enemyCount;
-        public int goldReward;
+        private int goldReward;
         public AnimationCurve spawnIntensity;
         public bool normalizeCurve;
         public float minSpawnTime;
@@ -115,5 +119,26 @@ public class WaveManager : MonoBehaviour
         public EnemyUnit enemy;
         public int chance;
         public WaypointManager waypointManager;
+    }
+
+    private CSVWaveData ReadData( int waveIndex ) {
+        string fileName = "Yokai TD - WaveData.csv";
+        string filePath = Application.dataPath + "/Development/Sheet Data/" + fileName;
+        string s = File.ReadAllText(filePath);
+        CSVWaveData data = new CSVWaveData();
+
+        string[] lines = s.Split('\n');
+        string[] fields = lines[waveIndex].Split(',');
+
+        data = new CSVWaveData() {
+            goldReward = int.Parse(fields[0])
+        };
+
+        return data;
+    }
+
+    public struct CSVWaveData
+    {
+        public int goldReward;
     }
 }

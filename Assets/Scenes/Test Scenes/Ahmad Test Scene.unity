@@ -169,7 +169,6 @@ MonoBehaviour:
   WaveText: {fileID: 621379731}
   waves:
   - enemyCount: 10
-    goldReward: 20
     spawnIntensity:
       serializedVersion: 2
       m_Curve:
@@ -203,7 +202,6 @@ MonoBehaviour:
       chance: 100
       waypointManager: {fileID: 117424195}
   - enemyCount: 20
-    goldReward: 0
     spawnIntensity:
       serializedVersion: 2
       m_Curve: []
@@ -223,7 +221,6 @@ MonoBehaviour:
       chance: 50
       waypointManager: {fileID: 117424195}
   - enemyCount: 20
-    goldReward: 0
     spawnIntensity:
       serializedVersion: 2
       m_Curve: []
@@ -4349,7 +4346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1446068345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4362,16 +4359,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6fca079c4c627478ff4d1ea62c3259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challenges:
-  - {fileID: 3948878816728212435, guid: b7ecb9d0d4e6d214389a09735c5e96e5, type: 3}
-  - {fileID: 3948878816728212435, guid: 8d60bea432626b8448fdf58e0d2cc79e, type: 3}
-  - {fileID: 3948878816728212435, guid: 3d663b90107af1f4cbdec8a816bc89cd, type: 3}
-  - {fileID: 3948878816728212435, guid: f6d674451005a8247974e5988ce9bdcf, type: 3}
-  - {fileID: 3948878816728212435, guid: a2b792920739f0a408542366d0483b92, type: 3}
-  challenageAmount: 1
+  challenges: []
+  challenageAmount: 0
   challenge: {fileID: 0}
-  rotationTime: 30000
-  timerText: {fileID: 1148108175}
+  rotationTime: 86400000
+  timerText: {fileID: 0}
 --- !u!4 &1446068346
 Transform:
   m_ObjectHideFlags: 0

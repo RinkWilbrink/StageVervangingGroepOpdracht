@@ -123,11 +123,11 @@ public class EnemyUnit : MonoBehaviour
     private void Death() {
         Destroy(gameObject);
 
-        if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
-            if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
-                dailyChallenges.challenge.progress++;
-            print("Progress: " + dailyChallenges.challenge.progress);
-        }
+        //if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
+        //    if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
+        //        dailyChallenges.challenge.progress++;
+        //    print("Progress: " + dailyChallenges.challenge.progress);
+        //}
 
         if ( OnDeath != null )
             OnDeath();

@@ -23,6 +23,6 @@ public class AudioManagement : MonoBehaviour
 
     public void PlayAudioClip(AudioClip audioClip)
     {
-        _Pooling.InstantiateItem(gameObject.transform, audioClip);
+        _Pooling.InstantiateItem(audioClip);
     }
 }

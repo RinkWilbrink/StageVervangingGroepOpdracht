@@ -31,7 +31,7 @@ public class Pooling : MonoBehaviour
         item.gameObject.SetActive(false);
     }
 
-    public GameObject InstantiateItem(Transform parent, AudioClip audioClip)
+    public GameObject InstantiateItem(AudioClip audioClip)
     {
         if (_Pool.Count <= 0)
         {

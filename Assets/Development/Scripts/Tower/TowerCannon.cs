@@ -22,8 +22,8 @@ namespace Tower
         [SerializeField] private GameObject BigBombPrefab;
         [SerializeField] private GameObject ExplosionPrefab;
         [Space(6)]
-        [SerializeField] private GameObject FireBombPrefab;
-        [SerializeField] private GameObject FireEffectPrefab;
+        [SerializeField] private GameObject OilBombPrefab;
+        [SerializeField] private GameObject OilSpillPrefab;
 
         public override void Init()
         {
@@ -66,18 +66,18 @@ namespace Tower
         private IEnumerator BigBomb()
         {
             
-            GameObject go = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
+            GameObject BombBullet = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
 
             Vector3 newPos = CurrentTarget.transform.position;
 
-            while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
+            while(Vector3.Distance(BombBullet.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
+                BombBullet.transform.position = Vector3.Lerp(BombBullet.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
 
                 yield return null;
             }
 
-            go.transform.position = newPos;
+            BombBullet.transform.position = newPos;
 
             Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
             GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
@@ -90,7 +90,7 @@ namespace Tower
                 yield return null;
             }
 
-            Destroy(go);
+            Destroy(BombBullet);
 
             yield return new WaitForSeconds(2f);
 
@@ -100,7 +100,25 @@ namespace Tower
 
         private IEnumerator FireBomb()
         {
-            float timer = 0f;
+            //als current target != null schiet oil spill op target
+
+            GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
+
+            Vector3 EnemyPosition = CurrentTarget.transform.position;
+
+            while (Vector3.Distance(OilBall.transform.position, EnemyPosition) > 0.1f)
+            {
+                OilBall.transform.position = Vector3.Lerp(OilBall.transform.position, EnemyPosition, BombThrowSpeed * GameTime.deltaTime);
+
+                yield return null;
+            }
+
+            OilBall.transform.position = EnemyPosition; 
+
+            GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
+            
+
+            /*float timer = 0f;
 
             GameObject fireEffect = Instantiate(FireEffectPrefab, new Vector3(ShootOrigin.transform.position.x, 0, ShootOrigin.transform.position.z), Quaternion.LookRotation(CurrentTarget.transform.position));
 
@@ -118,7 +136,9 @@ namespace Tower
                 yield return new WaitForSeconds(1f);
             }
 
+            Destroy(fireEffect);
             SpecialAttackMode = false;
+            */
         }
 
         #endregion

@@ -30,8 +30,9 @@ namespace Tower
         [SerializeField] private float ShootingRange = 0;
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
+        [SerializeField] public GameObject Bullet;
         [HideInInspector] private RaycastHit hit;
-
+        [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]
         [SerializeField] public int TowerLevelToUnlockSpecial;
         [HideInInspector] public int TowerLevel = 1;
@@ -138,7 +139,19 @@ namespace Tower
                 if(CurrentTarget != null)
                 {
                     PrimaryAttack();
+                    Shoot();
                 }
+            }
+        }
+        
+        void Shoot()
+        {
+            GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+            Projectile bullet = bulletGO.GetComponent<Projectile>();
+
+            if(bullet != null)
+            {
+                bullet.seek(CurrentTarget);
             }
         }
 

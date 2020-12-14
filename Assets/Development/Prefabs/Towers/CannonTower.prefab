@@ -53,6 +53,8 @@ MonoBehaviour:
   ShootingRange: 4
   ShootOrigin: {fileID: 6047899824778149091}
   specialDirectionUI: {fileID: 0}
+  Bullet: {fileID: 0}
+  FirePoint: {fileID: 0}
   TowerLevelToUnlockSpecial: 4
   TowerLevel: 1
   TowerSpecialLevel: 0
@@ -73,7 +75,7 @@ MonoBehaviour:
   ExplosionDamage: 5
   ExplosionRadius: 2
   BombThrowSpeed: 5
-  FireDamagePerSecond: 0
+  FireDamagePerSecond: 6
   FireRadius: 1
   FireTime: 5
   BigBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,

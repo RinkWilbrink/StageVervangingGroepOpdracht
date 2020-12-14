@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Pooling : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class Pooling : MonoBehaviour
         item.gameObject.SetActive(false);
     }
 
-    public GameObject InstantiateItem(AudioClip audioClip)
+    public GameObject InstantiateItem(AudioClip audioClip, AudioMixerGroup audioMixerGroup)
     {
         if (_Pool.Count <= 0)
         {
@@ -40,7 +41,7 @@ public class Pooling : MonoBehaviour
 
         _Pool[0].Initiate();
         GameObject item = _Pool[0].gameObject;
-        item.GetComponent<AudioObject>().PlayAudio(audioClip);
+        item.GetComponent<AudioObject>().PlayAudio(audioClip, audioMixerGroup);
         _Pool.RemoveAt(0);
         return item;
     }

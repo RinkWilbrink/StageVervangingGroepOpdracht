@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioObject : PoolItem
 {
@@ -11,10 +12,11 @@ public class AudioObject : PoolItem
     {
     }
 
-    public void PlayAudio(AudioClip audioClip)
+    public void PlayAudio(AudioClip audioClip, AudioMixerGroup audioMixerGroup)
     {
         _CurrentAudioClip = audioClip;
         _AudioSource.clip = _CurrentAudioClip;
+        _AudioSource.outputAudioMixerGroup = audioMixerGroup;
         _AudioSource.Play();
     }
 

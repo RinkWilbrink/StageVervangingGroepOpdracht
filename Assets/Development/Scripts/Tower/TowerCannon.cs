@@ -72,7 +72,7 @@ namespace Tower
 
             while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
+                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * Time.deltaTime);
 
                 yield return null;
             }

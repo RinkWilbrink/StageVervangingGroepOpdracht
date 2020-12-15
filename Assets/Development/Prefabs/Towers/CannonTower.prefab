@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1494638977380229111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569729468571131294}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1569729468571131294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494638977380229111}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6047899823298451174}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &6047899823298451168
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +61,7 @@ Transform:
   m_Children:
   - {fileID: 6047899824778149088}
   - {fileID: 5103604029012343211}
+  - {fileID: 1569729468571131294}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,8 +84,8 @@ MonoBehaviour:
   ShootingRange: 4
   ShootOrigin: {fileID: 6047899824778149091}
   specialDirectionUI: {fileID: 0}
-  Bullet: {fileID: 0}
-  FirePoint: {fileID: 0}
+  Bullet: {fileID: 7014403932099339953, guid: dabd4c5b5ee45b9409226eb84bb9b65e, type: 3}
+  FirePoint: {fileID: 1569729468571131294}
   TowerLevelToUnlockSpecial: 4
   TowerLevel: 1
   TowerSpecialLevel: 0
@@ -76,15 +107,15 @@ MonoBehaviour:
   ExplosionRadius: 2
   BombThrowSpeed: 5
   FireDamagePerSecond: 6
-  FireRadius: 1
+  FireRadius: 5
   FireTime: 5
   BigBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
     type: 3}
   ExplosionPrefab: {fileID: 913169524378796937, guid: 39fd1c5d0689f434cafd900f715a2272,
     type: 3}
-  FireBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
+  OilBombPrefab: {fileID: 8606811082770678977, guid: 5fddb6e81073aa945a7c5e1dc18d0a4f,
     type: 3}
-  FireEffectPrefab: {fileID: 7407340996474561856, guid: 68483c553c63ec044ae693c5f898395d,
+  OilSpillPrefab: {fileID: 2882337538003970148, guid: 94b7095e15513624c8931ebb0833a428,
     type: 3}
 --- !u!65 &229345552153514528
 BoxCollider:

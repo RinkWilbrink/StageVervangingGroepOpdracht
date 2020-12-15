@@ -25,6 +25,8 @@ namespace Tower
         [SerializeField] private GameObject OilBombPrefab;
         [SerializeField] private GameObject OilSpillPrefab;
 
+        public float vuurtijd = 2.0f;
+
         public override void Init()
         {
             base.Init();
@@ -102,6 +104,10 @@ namespace Tower
         {
             //als current target != null schiet oil spill op target
 
+            float timer = 0f;
+
+            float FireTimer = 1.5f;
+
             GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
 
             Vector3 EnemyPosition = CurrentTarget.transform.position;
@@ -116,7 +122,37 @@ namespace Tower
             OilBall.transform.position = EnemyPosition; 
 
             GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
-            
+
+            while(vuurtijd > 0f)
+            {
+                vuurtijd -= GameTime.deltaTime;
+            }
+
+            if (vuurtijd <= 0f)
+            {
+                Debug.Log("het werkt");
+                while (timer < FireTime)
+                {
+                    if (CurrentTarget != null)
+                    {
+                        Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
+                        for (int i = 0; i < EnemiesInRange.Length; i++)
+                        {
+                            Debug.Log(EnemiesInRange);
+                            EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
+                        }
+                    }
+                    timer += 1f;
+
+                }
+            }
+            Destroy(OilBall);
+
+            yield return new WaitForSeconds(2f);
+
+            Destroy(OilSpill);
+            SpecialAttackMode = false;
+
 
             /*float timer = 0f;
 

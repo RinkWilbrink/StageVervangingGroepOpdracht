@@ -48,16 +48,19 @@ public class AudioManagement : MonoBehaviour
 
     public void SetMusicVolume(float musicVolume)
     {
-        _MasterMixer.SetFloat("MusicVolume", musicVolume);
+        float temp;
+        _MasterMixer.SetFloat("MusicVolume", Mathf.Log10 (musicVolume) * 20);
+        _MasterMixer.GetFloat("MusicVolume", out temp);
+        Debug.Log(temp);
     }
     
     public void SetSFXVolume(float sfxVolume)
     {
-        _MasterMixer.SetFloat("SFXVolume", sfxVolume);
+        _MasterMixer.SetFloat("SFXVolume", Mathf.Log10(sfxVolume) * 20);
     }
 
     public void SetVoicelineVolume(float voicelineVolume)
     {
-        _MasterMixer.SetFloat("VoicelineVolume", voicelineVolume);
+        _MasterMixer.SetFloat("VoicelineVolume", Mathf.Log10(voicelineVolume) * 20);
     }
 }

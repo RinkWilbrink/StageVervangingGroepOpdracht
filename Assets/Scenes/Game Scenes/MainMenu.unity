@@ -277,10 +277,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1404908367}
   m_HandleRect: {fileID: 728158725}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1250,12 +1250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35523ab67ec3e674e8d0451954d5bd20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isOn: 0
-  toggleIndicator: {fileID: 0}
-  backgroundImage: {fileID: 0}
-  highColor: {r: 0, g: 0, b: 0, a: 0}
-  lowColor: {r: 0, g: 0, b: 0, a: 0}
-  tweenTime: 0.25
 --- !u!1 &487989692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,10 +1759,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2072942736}
   m_HandleRect: {fileID: 1301361608}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2321,10 +2315,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 559924513}
   m_HandleRect: {fileID: 1681485843}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3058,13 +3052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a52bfb73e44ff7489ef33a7e3dad082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHolder: {fileID: 92583470}
-  levelIcon: {fileID: 5228944910523965068, guid: ed4cdd0437994d54da7aa8489ee9e50a,
-    type: 3}
-  thisCanvas: {fileID: 2041362032}
-  PageManager: {fileID: 1226109647}
-  numberOfLevels: 60
-  iconSpacing: {x: 20, y: 60}
 --- !u!114 &1226109647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,10 +3064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46221d6390e300442b42eef36d81e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentPage: 0
-  Pages: []
-  NextButton: {fileID: 245883185}
-  PreviousButton: {fileID: 1329527964}
 --- !u!1 &1230170442
 GameObject:
   m_ObjectHideFlags: 0

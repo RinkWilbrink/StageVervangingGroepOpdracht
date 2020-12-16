@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+    [SerializeField] private SheetData SheetData;
     //[SerializeField] private GameObject EndScreen;
 
     [Header("Waves")]
@@ -49,7 +50,7 @@ public class WaveManager : MonoBehaviour
         if ( currentWave.spawnIntensity.length < 1 ) {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
         } else if ( currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
-            float spawnTime = spawnCurveIndex / currentWave.enemyCount;
+            float spawnTime = spawnCurveIndex / SheetData.EnemyCount[currentWaveNum - 1];
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
             //Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
         } else if ( !currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
@@ -93,18 +94,18 @@ public class WaveManager : MonoBehaviour
 
         WaveText.text = string.Format("{0}", currentWaveNum);
 
-        CSVWaveData waveData = ReadData(currentWaveNum - 1);
-        print(waveData.goldReward);
-        enemiesLeftToSpawn = currentWave.enemyCount;
+        //CSVWaveData waveData = ReadData(currentWaveNum - 1);
+        print(SheetData.GoldReward[currentWaveNum - 1]);
+        enemiesLeftToSpawn = SheetData.EnemyCount[currentWaveNum - 1];
         enemiesLeftAlive = enemiesLeftToSpawn;
 
-        GameController.Gold += waveData.goldReward;
+        GameController.Gold += SheetData.GoldReward[currentWaveNum - 1];
     }
 
     [Serializable]
     public struct WaveData
     {
-        public int enemyCount;
+        private int enemyCount;
         private int goldReward;
         public AnimationCurve spawnIntensity;
         public bool normalizeCurve;
@@ -121,6 +122,7 @@ public class WaveManager : MonoBehaviour
         public WaypointManager waypointManager;
     }
 
+    // Local data reading
     private CSVWaveData ReadData( int waveIndex ) {
         string fileName = "Yokai TD - WaveData.csv";
         string filePath = Application.dataPath + "/Development/Sheet Data/" + fileName;

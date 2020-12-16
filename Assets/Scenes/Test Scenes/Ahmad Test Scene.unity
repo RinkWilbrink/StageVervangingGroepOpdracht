@@ -167,9 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaveText: {fileID: 621379731}
+  SheetData: {fileID: 11400000, guid: 6e49997173539d7448dbaeadd983d529, type: 2}
   waves:
-  - enemyCount: 10
-    spawnIntensity:
+  - spawnIntensity:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -201,8 +201,7 @@ MonoBehaviour:
         type: 3}
       chance: 100
       waypointManager: {fileID: 117424195}
-  - enemyCount: 20
-    spawnIntensity:
+  - spawnIntensity:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
@@ -220,8 +219,7 @@ MonoBehaviour:
         type: 3}
       chance: 50
       waypointManager: {fileID: 117424195}
-  - enemyCount: 20
-    spawnIntensity:
+  - spawnIntensity:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2

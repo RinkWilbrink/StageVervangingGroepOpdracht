@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectThomas : MonoBehaviour{
     public GameObject levelHolder;
@@ -26,6 +27,7 @@ public class LevelSelectThomas : MonoBehaviour{
         amountPerPage = maxInARow * maxInACol;
         int totalPages = Mathf.CeilToInt((float)numberOfLevels / amountPerPage);
         LoadPanels(totalPages);
+        AddButtonListeners();
     }
     void LoadPanels(int numberOfPanels){
         GameObject panelClone = Instantiate(levelHolder) as GameObject;
@@ -65,12 +67,22 @@ public class LevelSelectThomas : MonoBehaviour{
             icon.transform.SetParent(parentObject.transform);
             icon.name = "Level " + i;
             icon.GetComponentInChildren<Text>().text = "" + currentLevelCount;
+            levelSelectButtons.Add(icon.GetComponent<Button>());
+            //icon.GetComponent<Button>().onClick.AddListener(() => LoadScene("Level" + i));
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public List<Button> levelSelectButtons = new List<Button>();
+    private void AddButtonListeners() {
+        for ( int i = 0; i < levelSelectButtons.Count; i++ ) {
+            Button button = levelSelectButtons[i];
+            button.onClick.RemoveAllListeners();
+            int j = i + 1;
+            button.onClick.AddListener(() => LoadScene(j));
+        }
+    }
+
+    private void LoadScene(int index ) {
+        SceneManager.LoadScene("Level" + index, LoadSceneMode.Single);
     }
 }

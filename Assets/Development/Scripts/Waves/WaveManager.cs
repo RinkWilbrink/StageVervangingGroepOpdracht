@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
-    //[SerializeField] private GameObject EndScreen;
+    [SerializeField] private GameObject EndScreen;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -26,12 +26,6 @@ public class WaveManager : MonoBehaviour
     //float spawnTimer;
     private float spawnCurveIndex;
     private void Update() {
-        //if ( currentWaveNum == waves.Length ) {
-        //    //EndScreen.SetActive(true);
-
-        //Time.SetTimeScale(0);
-        //}
-
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
                 SpawnEnemy();
@@ -84,12 +78,18 @@ public class WaveManager : MonoBehaviour
     }
 
     private IEnumerator UpdateWave( float waitTime ) {
+        currentWaveNum++;
+        if ( currentWaveNum == ( waves.Length + 1 ) ) {
+            EndScreen.SetActive(true);
+
+            Time.timeScale = 0;
+        }
         yield return new WaitForSeconds(waitTime);
 
-        currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
         WaveText.text = string.Format("{0}", currentWaveNum);
+        
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;

@@ -85,7 +85,7 @@ namespace UI
         {
             while (Vector3.Distance(UpgradePanel.localScale, Vector3.one) > 0.005f)
             {
-                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * GameTime.deltaTime);
+                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * Time.deltaTime);
 
                 yield return null;
             }
@@ -195,11 +195,13 @@ namespace UI
 
         #endregion
 
+        [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
             if (PayGold(1))
             {
                 currentTower.TowerLevel += 1;
+                FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
                 if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);

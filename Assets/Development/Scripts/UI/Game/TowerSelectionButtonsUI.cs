@@ -28,7 +28,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         {
             towerPlacement.SetSelectedButtonAttributes(towerPlacement.ButtonSelectionIndex);
 
-            FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[0], AudioMixerGroups.SFX);
+            FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[1], AudioMixerGroups.SFX);
 
             if (IsOpened)
             {

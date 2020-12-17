@@ -69,6 +69,8 @@ namespace Tower
         [Space(6)]
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
+        [SerializeField] private AudioClip constructionAudio;
+
         private void Start()
         {
             CurrentInteractionMode = InteractionMode.UpgradeMode;
@@ -144,6 +146,8 @@ namespace Tower
                                     {
                                         GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                         go.GetComponent<TowerCore>().SetNewSprite();
+
+                                        FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
                                         // Create UI
                                         switch (go.GetComponent<TowerCore>().towerType)

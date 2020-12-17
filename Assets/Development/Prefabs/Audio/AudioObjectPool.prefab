@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8665265554233605851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8665265554233605848}
+  - component: {fileID: 8665265554233605854}
+  - component: {fileID: 8665265554233605849}
+  m_Layer: 0
+  m_Name: AudioObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8665265554233605848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665265554233605851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8665265554233605854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665265554233605851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794ed03d69aaca4468b82ce009511382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Clip: {fileID: 8300000, guid: d0b02c6e7ecd5c34cb866a87daf402c7, type: 3}
+  _MasterMixer: {fileID: 24100000, guid: 80acedbd28f5d284bb2e3b7095552771, type: 2}
+  _AudioMixerGroupMusic: {fileID: -8535357275037238653, guid: 80acedbd28f5d284bb2e3b7095552771,
+    type: 2}
+  _AudioMixerGroupSFX: {fileID: 7636341052634252607, guid: 80acedbd28f5d284bb2e3b7095552771,
+    type: 2}
+  _AudioMixerGroupVoiceline: {fileID: 1287646742427488446, guid: 80acedbd28f5d284bb2e3b7095552771,
+    type: 2}
+--- !u!114 &8665265554233605849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665265554233605851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47a3b80b0d720847840bf348385e7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PooledObject: {fileID: 1757868662391914930, guid: db389325b09ae8d4197288a7c1acc6c4,
+    type: 3}
+  _PoolSize: 10

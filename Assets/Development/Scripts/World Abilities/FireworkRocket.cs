@@ -51,7 +51,7 @@ public class FireworkRocket : MonoBehaviour
 
         if ( rocketLaunched ) {
             if ( fireworkRocket.transform.localScale.x >= .1f )
-                fireworkRocket.transform.localScale -= new Vector3(1.6f * GameTime.deltaTime, 1.6f * GameTime.deltaTime);
+                fireworkRocket.transform.localScale -= new Vector3(1.6f * Time.deltaTime, 1.6f * Time.deltaTime);
 
             if ( fireworkRocket.transform.localScale.x < .6f ) {
                 fireworkRocket.SetActive(false);

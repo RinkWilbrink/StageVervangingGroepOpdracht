@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
-    [SerializeField] private GameObject EndScreen;
+    //[SerializeField] private GameObject EndScreen;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -18,50 +18,39 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
-    private void Start()
-    {
+    private void Start() {
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
 
     //float spawnTimer;
     private float spawnCurveIndex;
-    private void Update()
-    {
-        if(currentWaveNum == waves.Length)
-        {
-            EndScreen.SetActive(true);
+    private void Update() {
+        //if ( currentWaveNum == waves.Length ) {
+        //    //EndScreen.SetActive(true);
 
-            GameTime.SetTimeScale(0);
-        }
+        //Time.SetTimeScale(0);
+        //}
 
-        if(GameTime.deltaTime > 0)
-        {
-            if(enemiesLeftToSpawn > 0 && Time.time > spawnNext)
-            {
+        //if ( GameTime.deltaTime > 0 ) {
+        if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
                 SpawnEnemy();
             }
-        }
+        //}
     }
 
-    private void SpawnEnemy()
-    {
+    private void SpawnEnemy() {
         spawnCurveIndex++;
         enemiesLeftToSpawn--;
         //Debug.Log(enemiesLeftToSpawn);
 
-        if(currentWave.spawnIntensity.length < 1)
-        {
+        if ( currentWave.spawnIntensity.length < 1 ) {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
-        }
-        else if(currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
-        {
+        } else if ( currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
             float spawnTime = spawnCurveIndex / currentWave.enemyCount;
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
             //Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
-        }
-        else if(!currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1)
-        {
+        } else if ( !currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate((int)spawnCurveIndex);
             //Debug.Log("Next Spawn: " + (spawnNext - Time.time));
         }
@@ -70,13 +59,11 @@ public class WaveManager : MonoBehaviour
         int lowestPercentage;
         int highestPercentage = 0;
 
-        for(int i = 0; i < currentWave.enemies.Length; i++)
-        {
+        for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
             lowestPercentage = highestPercentage;
             highestPercentage += currentWave.enemies[i].chance;
 
-            if(random >= lowestPercentage && random < highestPercentage)
-            {
+            if ( random >= lowestPercentage && random < highestPercentage ) {
 
                 EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
                 enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
@@ -87,19 +74,16 @@ public class WaveManager : MonoBehaviour
     }
 
     private IEnumerator updateWave;
-    private void OnEnemyDeath()
-    {
+    private void OnEnemyDeath() {
         enemiesLeftAlive--;
 
-        if(enemiesLeftAlive <= 0)
-        {
+        if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
             StartCoroutine(updateWave);
         }
     }
 
-    private IEnumerator UpdateWave(float waitTime)
-    {
+    private IEnumerator UpdateWave( float waitTime ) {
         yield return new WaitForSeconds(waitTime);
 
         currentWaveNum++;

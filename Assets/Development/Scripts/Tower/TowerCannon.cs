@@ -55,9 +55,10 @@ namespace Tower
             base.SecondaryAttack();
         }
 
-        public override void LookAt()
+        /// <summary>Set where the Special Attack arrow points towards, the function overrides the base function in TowerCore.cs</summary>
+        public override void SpecialAttackDirectionLookAt()
         {
-            base.LookAt();
+            base.SpecialAttackDirectionLookAt();
         }
 
         #region Special Attacks
@@ -71,7 +72,7 @@ namespace Tower
 
             while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
+                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * Time.deltaTime);
 
                 yield return null;
             }
@@ -79,10 +80,7 @@ namespace Tower
             go.transform.position = newPos;
 
             Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
-
             GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
-
-            Debug.Log("Bautista Bomb!!");
 
             for (int i = 0; i < EnemiesInRange.Length; i++)
             {
@@ -97,7 +95,6 @@ namespace Tower
             yield return new WaitForSeconds(2f);
 
             Destroy(explosion);
-
             SpecialAttackMode = false;
         }
 

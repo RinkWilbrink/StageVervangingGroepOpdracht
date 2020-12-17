@@ -35,6 +35,7 @@ public class SelectionButtonManager : MonoBehaviour
         UpdateTowerButtonUI();
     }
 
+    // Set the tower buttons that can be build on and if there is not enough gold disable the buildings and towers that the user doesnt have enough gold for.
     public void UpdateTowerButtonUI()
     {
         for(int i = 0; i < buttons.Length; i++)

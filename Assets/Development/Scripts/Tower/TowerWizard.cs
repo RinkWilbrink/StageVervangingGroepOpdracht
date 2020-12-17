@@ -32,6 +32,7 @@ namespace Tower
 
         private CRSpline spline;
 
+        /// <summary>Override of the Init(Start) function</summary>
         public override void Init()
         {
             base.Init();
@@ -40,7 +41,6 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
-            Debug.Log("Wizard Primairy");
         }
 
         protected override void SecondaryAttack()
@@ -83,8 +83,10 @@ namespace Tower
                         {
                             if(EnemiesInRange[y] != null)
                             {
+                                // Check the distance of a new potential target, if its lower then the current target, that will be the new Target
                                 float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
 
+                                // Compare the distance of the Current target and the new potential target
                                 if(distance1 > 0 && distance1 < B)
                                 {
                                     B = distance1;
@@ -133,14 +135,15 @@ namespace Tower
             SpecialAttackMode = false;
         }
 
+        /// <summary>Handle the shooting of the Primairy Attack</summary>
         protected override void HandleShooting()
         {
             base.HandleShooting();
         }
 
-        public override void LookAt()
+        public override void SpecialAttackDirectionLookAt()
         {
-            base.LookAt();
+            base.SpecialAttackDirectionLookAt();
         }
     }
 }

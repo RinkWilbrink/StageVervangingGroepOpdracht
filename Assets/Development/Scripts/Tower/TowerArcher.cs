@@ -61,7 +61,8 @@ namespace Tower
             base.HandleShooting();
         }
 
-        public override void LookAt()
+        /// <summary>Set where the Special Attack arrow points towards, the function overrides the base function in TowerCore.cs</summary>
+        public override void SpecialAttackDirectionLookAt()
         {
             //base.LookAt();
         }
@@ -109,11 +110,12 @@ namespace Tower
 
             while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, newPos, 6f * GameTime.deltaTime);
+                go.transform.position = Vector3.Lerp(go.transform.position, newPos, 6f * Time.deltaTime);
 
                 yield return null;
             }
 
+            //Destroy the ballistaShot Arrow when the arrow has reached the max distance it will shoot at
             Destroy(go);
 
             for (int i = 0; i < list.Count; i++)

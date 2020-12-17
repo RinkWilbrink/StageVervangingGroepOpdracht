@@ -40,8 +40,10 @@ public class EnemyUnit : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
 
         // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
+        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
+
+        transform.rotation = Quaternion.Euler(transform.localRotation.x, 180f, transform.rotation.z);
 
         //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);

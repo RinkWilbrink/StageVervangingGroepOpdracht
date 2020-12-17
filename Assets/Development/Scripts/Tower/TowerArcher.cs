@@ -22,6 +22,13 @@ namespace Tower
         [Space(6)]
         [SerializeField] private GameObject PoisonCloudSprite;
         [SerializeField] private GameObject PoisonsBombPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip ArrowAudioSFX;
+        [SerializeField] private AudioClip BlowdartAudioSFX;
+        [SerializeField] private AudioClip BallistaAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip BallistaSpecialAudioSFX;
+        [SerializeField] private AudioClip PoisonCloudAudioSFX;
 
         public override void Init()
         {
@@ -33,9 +40,15 @@ namespace Tower
         {
             base.PrimaryAttack();
 
+
             if (SpecialUnlocked == SpecialAttack.Special2)
             {
                 CurrentTarget.GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
+                FindObjectOfType<AudioManagement>().PlayAudioClip(BlowdartAudioSFX, AudioMixerGroups.SFX);
+            } else if ( SpecialUnlocked != SpecialAttack.Special2 || SpecialUnlocked != SpecialAttack.Special1 ) {
+                FindObjectOfType<AudioManagement>().PlayAudioClip(ArrowAudioSFX, AudioMixerGroups.SFX);
+            } else if ( SpecialUnlocked == SpecialAttack.Special1 ) {
+                FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaAudioSFX, AudioMixerGroups.SFX);
             }
 
             Debug.Log("Archer Primairy");
@@ -71,6 +84,8 @@ namespace Tower
 
         private IEnumerator BallistaBolts()
         {
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
+
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.forward, 10f));
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.back, 10f));
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.left, 10f));
@@ -136,6 +151,8 @@ namespace Tower
             float timer = 0f;
 
             PoisonCloudSprite.SetActive(true);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(PoisonCloudAudioSFX, AudioMixerGroups.SFX);
 
             while (timer < PoisonTimeInSeconds)
             {

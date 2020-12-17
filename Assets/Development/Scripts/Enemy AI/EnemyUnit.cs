@@ -28,7 +28,7 @@ public class EnemyUnit : MonoBehaviour
         this.AttackDamage = e.attackDamage;
     }
 
-    private void Start() {
+    private void Awake() {
         //wayPoints = FindObjectOfType<WaypointManager>();
         resourceUIManager = FindObjectOfType<ResourceUIManager>();
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();

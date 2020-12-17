@@ -195,11 +195,13 @@ namespace UI
 
         #endregion
 
+        [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
             if (PayGold(1))
             {
                 currentTower.TowerLevel += 1;
+                FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
                 if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);

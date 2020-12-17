@@ -28,6 +28,8 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         {
             towerPlacement.SetSelectedButtonAttributes(towerPlacement.ButtonSelectionIndex);
 
+            FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[0], AudioMixerGroups.SFX);
+
             if (IsOpened)
             {
                 ButtonsPanel.anchoredPosition = new Vector2(-5f, 0);
@@ -61,10 +63,13 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         IsOpening = false;
     }
 
+    [SerializeField] private AudioClip[] buttonAudio;
     // Set the time scale for the GameTime.delta time
     public void PauseGame(float TimeScale)
     {
+        FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[1], AudioMixerGroups.SFX);
         //GameTime.SetTimeScale(TimeScale);
+        
         Time.timeScale = TimeScale;
     }
 }

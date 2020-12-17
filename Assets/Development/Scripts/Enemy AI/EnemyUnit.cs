@@ -27,7 +27,7 @@ public class EnemyUnit : MonoBehaviour
 
     private void Start() {
         //wayPoints = FindObjectOfType<WaypointManager>();
-        dailyChallenges = FindObjectOfType<DailyChallenges>();
+        //dailyChallenges = FindObjectOfType<DailyChallenges>();
 
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
@@ -123,11 +123,11 @@ public class EnemyUnit : MonoBehaviour
     private void Death() {
         Destroy(gameObject);
 
-        if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
-            if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
-                dailyChallenges.challenge.progress++;
-            print("Progress: " + dailyChallenges.challenge.progress);
-        }
+        //if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
+        //    if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
+        //        dailyChallenges.challenge.progress++;
+        //    print("Progress: " + dailyChallenges.challenge.progress);
+        //}
 
         if ( OnDeath != null )
             OnDeath();

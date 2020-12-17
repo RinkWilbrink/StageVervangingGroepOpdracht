@@ -10,13 +10,16 @@ public class EnemyUnit : MonoBehaviour
 
     public int Health; //{ get; private set; }
     public float Speed { get; private set; }
-    public float GoldReward { get; private set; }
+    public int GoldReward { get; private set; }
     public int AttackDamage { get; private set; }
 
     public event Action OnDeath;
 
     public Transform[] wayPoints;
     private int waypointIndex;
+
+    private ResourceUIManager resourceUIManager;
+    private UI.UpgradeUI upgradeUI;
 
     public void Initialize( EnemyData e ) {
         this.Health = e.health;
@@ -27,18 +30,20 @@ public class EnemyUnit : MonoBehaviour
 
     private void Start() {
         //wayPoints = FindObjectOfType<WaypointManager>();
-        //dailyChallenges = FindObjectOfType<DailyChallenges>();
-
+        resourceUIManager = FindObjectOfType<ResourceUIManager>();
+        upgradeUI = FindObjectOfType<UI.UpgradeUI>();
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
 
     private void Update() {
-        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
 
         // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
+        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
+
+        transform.rotation = Quaternion.Euler(transform.localRotation.x, 180f, transform.rotation.z);
 
         //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
@@ -50,7 +55,7 @@ public class EnemyUnit : MonoBehaviour
             Speed = 0;
 
         if ( slowDebuffActive ) {
-            slowDebuffTimer += Time.deltaTime;
+            slowDebuffTimer += GameTime.deltaTime;
 
             if ( slowDebuffTimer > slowDebuffTime ) {
                 Speed += slowDownSpeed;
@@ -71,8 +76,9 @@ public class EnemyUnit : MonoBehaviour
                 waypointIndex++;
             } else {
                 Death();
-                GameController.MainTowerHP -= AttackDamage;
+                //GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
+                upgradeUI.DoMainTowerDamage(AttackDamage);
             }
     }
 
@@ -119,15 +125,11 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
-    DailyChallenges dailyChallenges;
     private void Death() {
-        Destroy(gameObject);
+        GameController.Gold += GoldReward;
+        resourceUIManager.UpdateResourceUI();
 
-        //if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
-        //    if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
-        //        dailyChallenges.challenge.progress++;
-        //    print("Progress: " + dailyChallenges.challenge.progress);
-        //}
+        Destroy(gameObject);
 
         if ( OnDeath != null )
             OnDeath();
@@ -137,7 +139,7 @@ public class EnemyUnit : MonoBehaviour
         float timer = 0;
         frostOverlayImage.SetActive(true);
         while ( timer < maxTimer ) {
-            timer += Time.deltaTime;
+            timer += GameTime.deltaTime;
 
             yield return null;
         }

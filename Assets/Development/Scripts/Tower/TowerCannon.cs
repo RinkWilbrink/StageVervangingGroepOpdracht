@@ -24,6 +24,11 @@ namespace Tower
         [Space(6)]
         [SerializeField] private GameObject OilBombPrefab;
         [SerializeField] private GameObject OilSpillPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip[] CannonAudioSFX;
+        [SerializeField] private AudioClip[] FireCannonAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip BigBombSpecialAudioSFX;
 
         public float vuurtijd = 2.0f;
 
@@ -40,6 +45,11 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+
+            if (SpecialUnlocked == SpecialAttack.Special2 )
+                FindObjectOfType<AudioManagement>().PlayAudioClip(FireCannonAudioSFX[Random.Range(0, FireCannonAudioSFX.Length)], AudioMixerGroups.SFX);
+            else if (SpecialUnlocked != SpecialAttack.Special1 || SpecialUnlocked != SpecialAttack.Special2 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(CannonAudioSFX[Random.Range(0, CannonAudioSFX.Length)], AudioMixerGroups.SFX);
         }
 
         protected override void SecondaryAttack()
@@ -71,6 +81,7 @@ namespace Tower
             GameObject BombBullet = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
 
             Vector3 newPos = CurrentTarget.transform.position;
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BigBombSpecialAudioSFX, AudioMixerGroups.SFX);
 
             while(Vector3.Distance(BombBullet.transform.position, newPos) > 0.1f)
             {

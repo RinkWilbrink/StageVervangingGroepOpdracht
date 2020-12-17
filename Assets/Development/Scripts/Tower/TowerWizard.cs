@@ -29,6 +29,13 @@ namespace Tower
         [SerializeField] private GameObject LightningBoltPrefab;
         [Space(6)]
         [SerializeField] private GameObject FrostPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip[] MagicSpellAudioSFX;
+        [SerializeField] private AudioClip LightningAttackAudioSFX;
+        [SerializeField] private AudioClip FrostAttackAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip FrostSpecialAudioSFX;
+        [SerializeField] private AudioClip[] LightningSpecialAudioSFX;
 
         private CRSpline spline;
 
@@ -41,6 +48,13 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+
+            if ( SpecialUnlocked == SpecialAttack.Special2 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(FrostAttackAudioSFX, AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked != SpecialAttack.Special2 || SpecialUnlocked != SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(MagicSpellAudioSFX[Random.Range(0, MagicSpellAudioSFX.Length)], AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked == SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(LightningAttackAudioSFX, AudioMixerGroups.SFX);   
         }
 
         protected override void SecondaryAttack()
@@ -63,6 +77,8 @@ namespace Tower
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
             int LightningChainCount = 0;
+            
+            FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX[Random.Range(0, LightningSpecialAudioSFX.Length)], AudioMixerGroups.SFX);
 
             while(LightningChainCount < LightningChainLimit)
             {
@@ -122,6 +138,8 @@ namespace Tower
             Vector3 newPos = CurrentTarget.transform.position;
 
             Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(FrostSpecialAudioSFX, AudioMixerGroups.SFX);   
 
             for(int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {

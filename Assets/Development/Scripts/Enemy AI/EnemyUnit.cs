@@ -17,7 +17,7 @@ public class EnemyUnit : MonoBehaviour
 
     public Transform[] wayPoints;
     private int waypointIndex;
-    
+
     private SpriteRenderer spriteRenderer;
 
     private ResourceUIManager resourceUIManager;
@@ -36,9 +36,13 @@ public class EnemyUnit : MonoBehaviour
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
+        if ( walkSheet.Length > 0 )
+            StartCoroutine(AnimatedWalk());
+
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
+
     Vector3 lastPos;
     private void Update() {
         transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
@@ -95,6 +99,20 @@ public class EnemyUnit : MonoBehaviour
             }
 
         lastPos = transform.position;
+    }
+
+    [SerializeField] private Sprite[] walkSheet;
+    [SerializeField] private float animSpeed = .1f;
+    private IEnumerator AnimatedWalk() {
+        int i;
+        i = 0;
+        while ( i < walkSheet.Length ) {
+            spriteRenderer.sprite = walkSheet[i];
+            i++;
+            yield return new WaitForSeconds(animSpeed);
+            yield return 0;
+        }
+        StartCoroutine(AnimatedWalk());
     }
 
     public void TakeDamage( float damage ) {

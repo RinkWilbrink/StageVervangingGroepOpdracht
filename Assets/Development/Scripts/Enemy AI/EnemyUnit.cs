@@ -92,7 +92,7 @@ public class EnemyUnit : MonoBehaviour
             if ( waypointIndex < wayPoints.Length - 1 ) {
                 waypointIndex++;
             } else {
-                Death();
+                AttackDeath();
                 //GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
                 upgradeUI.DoMainTowerDamage(AttackDamage);
@@ -106,12 +106,14 @@ public class EnemyUnit : MonoBehaviour
     private IEnumerator AnimatedWalk() {
         int i;
         i = 0;
+
         while ( i < walkSheet.Length ) {
             spriteRenderer.sprite = walkSheet[i];
             i++;
             yield return new WaitForSeconds(animSpeed);
             yield return 0;
         }
+
         StartCoroutine(AnimatedWalk());
     }
 
@@ -162,6 +164,13 @@ public class EnemyUnit : MonoBehaviour
         GameController.Gold += GoldReward;
         resourceUIManager.UpdateResourceUI();
 
+        Destroy(gameObject);
+
+        if ( OnDeath != null )
+            OnDeath();
+    }
+
+    private void AttackDeath() {
         Destroy(gameObject);
 
         if ( OnDeath != null )

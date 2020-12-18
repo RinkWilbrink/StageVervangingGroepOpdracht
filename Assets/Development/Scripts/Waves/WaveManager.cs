@@ -75,8 +75,6 @@ public class WaveManager : MonoBehaviour
     private void OnEnemyDeath() {
         enemiesLeftAlive--;
 
-        FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[UnityEngine.Random.Range(1, coinDropAudio.Length)], AudioMixerGroups.SFX);
-
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
 

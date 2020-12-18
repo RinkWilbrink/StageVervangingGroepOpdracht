@@ -8,7 +8,7 @@ namespace Tower
     {
         private GameObject Target;
 
-        public float speed = 30f;
+        public float speed = 20f;
 
         public float smoothTime = 0.3f;
 
@@ -37,9 +37,9 @@ namespace Tower
                 return;
             }
 
-            transform.position = Vector3.SmoothDamp(transform.position, dir, ref velocity, smoothTime);
+            //transform.position = Vector3.SmoothDamp(transform.position, dir, ref velocity, smoothTime);
 
-            //transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+            transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         }
 
         void HitTarget()

@@ -198,7 +198,7 @@ namespace UI
         [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (PayGold(1))
+            if (PayGold(4))
             {
                 currentTower.TowerLevel += 1;
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);

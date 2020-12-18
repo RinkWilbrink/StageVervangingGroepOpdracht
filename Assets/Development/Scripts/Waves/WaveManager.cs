@@ -76,6 +76,11 @@ public class WaveManager : MonoBehaviour
 
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
+
+            GameController.Gold += currentWave.goldReward;
+            FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
+            FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
+
             StartCoroutine(updateWave);
         }
     }
@@ -96,10 +101,6 @@ public class WaveManager : MonoBehaviour
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
-
-        GameController.Gold += currentWave.goldReward;
-        FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
-        FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
     }
 
     [Serializable]

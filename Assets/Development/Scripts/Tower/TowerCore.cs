@@ -18,7 +18,7 @@ namespace Tower
         // Variables
         [Header("Stats")]
         [SerializeField] protected float AttackShootingTime;
-        [SerializeField] protected int AttackDamage;
+        [SerializeField] protected float AttackDamage;
 
         [HideInInspector] protected bool SpecialAttackMode = false;
 
@@ -166,8 +166,10 @@ namespace Tower
 
         public void UpdateDamageValues()
         {
-            UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
-            UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
+            AttackDamage += DamageAddedPerLevel;
+            AttackShootingTime += FireRateAddedPerLevel;
+            //UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
+            //UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
         }
 
         public void StartSecondairyAttack()

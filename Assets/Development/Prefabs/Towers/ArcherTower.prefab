@@ -159,10 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3140ddd907398b642b03eac41587aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 0.8
-  AttackDamage: 1
-  DamageAddedPerLevel: 1
-  FireRateAddedPerLevel: 0.1
+  AttackShootingTime: 0.9
+  AttackDamage: 0.4
+  DamageAddedPerLevel: 0.5
+  FireRateAddedPerLevel: 0.05
   ShootingRange: 4
   ShootOrigin: {fileID: 3603336421924493691}
   specialDirectionUI: {fileID: 0}

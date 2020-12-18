@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17269fd232a851843b718369c15a1414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 2
-  AttackDamage: 2
+  AttackShootingTime: 1.2
+  AttackDamage: 1.2
   DamageAddedPerLevel: 1
-  FireRateAddedPerLevel: 0.1
+  FireRateAddedPerLevel: 0.08
   ShootingRange: 3
   ShootOrigin: {fileID: 2727193884480791051}
   specialDirectionUI: {fileID: 0}

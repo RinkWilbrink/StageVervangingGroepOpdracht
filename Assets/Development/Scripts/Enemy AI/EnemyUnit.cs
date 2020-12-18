@@ -8,7 +8,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private GameObject frostOverlayImage;
 
-    public int Health; //{ get; private set; }
+    public float Health; //{ get; private set; }
     public float Speed { get; private set; }
     public int GoldReward { get; private set; }
     public int AttackDamage { get; private set; }
@@ -82,7 +82,7 @@ public class EnemyUnit : MonoBehaviour
             }
     }
 
-    public void TakeDamage( int damage ) {
+    public void TakeDamage( float damage ) {
         Health -= damage;
 
         if ( Health < 1 )

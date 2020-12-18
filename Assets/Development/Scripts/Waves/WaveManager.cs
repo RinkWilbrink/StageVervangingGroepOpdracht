@@ -27,6 +27,8 @@ public class WaveManager : MonoBehaviour
     //float spawnTimer;
     private float spawnCurveIndex;
     private void Update() {
+        //Debug.LogError(currentWaveNum);
+
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
             SpawnEnemy();
@@ -77,6 +79,7 @@ public class WaveManager : MonoBehaviour
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
 
+
             GameController.Gold += currentWave.goldReward;
             FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
             FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
@@ -87,7 +90,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator UpdateWave( float waitTime ) {
         currentWaveNum++;
-        if ( currentWaveNum == ( waves.Length + 1 ) ) {
+
+        if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
 
             Time.timeScale = 0;

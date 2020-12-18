@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private AudioClip[] coinDropAudio;
+    [SerializeField] private AudioClip[] waveAudio;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -79,6 +80,7 @@ public class WaveManager : MonoBehaviour
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
 
+            FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
 
             GameController.Gold += currentWave.goldReward;
             FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
@@ -102,6 +104,7 @@ public class WaveManager : MonoBehaviour
         currentWave = waves[currentWaveNum - 1];
 
         WaveText.text = string.Format("{0}", currentWaveNum);
+        FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;

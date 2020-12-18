@@ -3420,6 +3420,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
+      propertyPath: waveAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
       propertyPath: waves.Array.data[0].enemies.Array.data[0].waypointManager
       value: 
       objectReference: {fileID: 1963586533}
@@ -4465,8 +4470,18 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[0].enemies.Array.data[0].enemy
       value: 
-      objectReference: {fileID: 341408206199449655, guid: dda6ebadcc1e05b498b2e664359f4e59,
+      objectReference: {fileID: 341408206199449655, guid: 715b77a2793e98548914223d31a06880,
         type: 3}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waveAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fb97e7505cb9a8b4590fbf50041707ef, type: 3}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waveAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e61f1be5990c589498156ef9ab4c509e, type: 3}
     - target: {fileID: 6682590823350285534, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: m_Name
@@ -4752,7 +4767,7 @@ PrefabInstance:
         type: 3}
       propertyPath: constructionAudio
       value: 
-      objectReference: {fileID: 8300000, guid: 388c837575389ea488cf7fc6b94ce131, type: 3}
+      objectReference: {fileID: 8300000, guid: 7c87017108e85594ca3cdc16c3f44454, type: 3}
     - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalScale.x

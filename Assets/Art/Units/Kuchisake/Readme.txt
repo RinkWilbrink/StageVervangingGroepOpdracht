@@ -1,0 +1,2 @@
+Als de Kuchisake sterft, speel dan eerst "Kuchisake-Death-Anim"
+vervolgens sluit "Kuchisake-Death-Anim-Spirit" daar op aan. Deze kan worden gelooped en moet omhoog vliegen terwijl deze langzaam verdwijnt. 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +6,7 @@ public class DailyReward : NetworkTime
 {
     [SerializeField] private float rewardTime = 86400000f;
     [SerializeField] private Button rewardButton;
-    [SerializeField] private TMPro.TextMeshProUGUI timerText;
+    [SerializeField] private Text timerText;
     private bool waitingForReward = false;
     private ulong lastTime;
 
@@ -49,13 +47,12 @@ public class DailyReward : NetworkTime
 
         if ( secondsLeft < 0f ) {
             // Reward is ready to claim
-            timerText.text = "Reward ready!";
+            timerText.text = "";
             return true;
         }
 
         return false;
     }
-
     private void UpdateTextTimer() {
         ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
         ulong ms = diff / TimeSpan.TicksPerMillisecond;

@@ -33,6 +33,8 @@ namespace Achievements
         private bool IsSliding = false;
         private Vector2 SlideOutPosition;
 
+        public Action<int> AchivementUnlocked;
+
         private void Awake()
         {
             current = this;
@@ -49,19 +51,19 @@ namespace Achievements
             {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
-                    UnlockAchievement("");
+                    UnlockAchievement(0, "AchievementName", "Requirement");
                 }
             }
         }
 
-        public void UnlockAchievement(string AchievementUnlocked)
+        public void UnlockAchievement(int AchievementID, string AchievementName, string Requirement)
         {
             // Audio
             dingSoundSource.pitch = (1f + UnityEngine.Random.Range(-0.02f, 0.02f));
             dingSoundSource.Play();
 
             // Visual stuff
-            SetAchievementText("Name", "Requirements");
+            SetAchievementText(AchievementName, Requirement);
             StartCoroutine(AchievementSlide());
         }
 

@@ -24,7 +24,7 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     // Set the Slide In or Out state.
     public void UISlideIn()
     {
-        if (!IsOpening)
+        if (!IsOpening && !UI.UpgradeUI.UpgradeUIReady )
         {
             towerPlacement.SetSelectedButtonAttributes(towerPlacement.ButtonSelectionIndex);
 

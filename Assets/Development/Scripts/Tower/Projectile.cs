@@ -44,6 +44,7 @@ namespace Tower
 
         void HitTarget()
         {
+
             Debug.Log("hit");
             Destroy(gameObject);
         }

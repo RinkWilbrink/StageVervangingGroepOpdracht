@@ -9,7 +9,9 @@ namespace Tower
     {
         // Variables
         [Header("Ballista")]
-        [SerializeField] private int BallistaDamage;
+        [SerializeField] private float angle;
+        [SerializeField] private int amountToSpawn;
+        //[SerializeField] private int BallistaDamage;
 
         [Header("Poison Darts")]
         [SerializeField] private int InitialHitDamage;
@@ -80,9 +82,35 @@ namespace Tower
             //base.LookAt();
         }
 
-        #region Ballista Shot
-
+        #region balista bolts
         private IEnumerator BallistaBolts()
+        {
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                float bulDirX =  Mathf.Cos((angle * Mathf.PI) / 180f);
+                float bulDirZ =  Mathf.Sin((angle * Mathf.PI) / 180f);
+
+                Vector3 bulMoveVector = new Vector3(bulDirX, 0f, bulDirZ);
+                Vector2 bulDir = bulMoveVector.normalized;
+
+                GameObject bul = GenericPool.bulletPoolInstanse.GetBullet();
+                bul.transform.position = transform.position;
+                bul.transform.up = bulMoveVector;
+                bul.SetActive(true);
+                bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
+                angle += 10f;
+                yield return new WaitForSeconds(0.01f);
+
+            }
+        }
+
+
+        #endregion
+
+
+        #region not my code
+
+        /*private IEnumerator BallistaBolts()
         {
             FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
 
@@ -142,7 +170,7 @@ namespace Tower
 
             // Clean up local variables
             list = null;
-        }
+        }*/
 
         #endregion
 

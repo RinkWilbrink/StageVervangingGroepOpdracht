@@ -21,7 +21,7 @@ public class GenericBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }
 
     public void SetMoveDirection(Vector2 dir)

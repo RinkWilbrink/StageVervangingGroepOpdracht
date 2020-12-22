@@ -19,7 +19,6 @@ namespace Tower
         [Header("Stats")]
         [SerializeField] protected float AttackShootingTime;
         [SerializeField] protected int AttackDamage;
-
         [HideInInspector] protected bool SpecialAttackMode = false;
 
         [Header("Damage and Firerate Upgrades")]

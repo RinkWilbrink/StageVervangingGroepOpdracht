@@ -30,7 +30,7 @@ namespace Tower
         [Space(3)]
         [SerializeField] private AudioClip BigBombSpecialAudioSFX;
 
-        public float vuurtijd = 2.0f;
+        public float vuurtijd = 10f;
 
         public override void Init()
         {
@@ -154,8 +154,10 @@ namespace Tower
                         }
                     }
                     timer += 1f;
-
+                    
                 }
+
+                vuurtijd = 10f;
             }
             Destroy(OilBall);
 

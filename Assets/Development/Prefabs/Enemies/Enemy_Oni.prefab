@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 731b34a04cddbdd4380f9cc5d3ce8363, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,6 +145,17 @@ MonoBehaviour:
   frostOverlayImage: {fileID: 2089042610387478241}
   Health: 0
   wayPoints: []
+  walkSheet:
+  - {fileID: -2600459641238878590, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: -281674522602472326, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: 7145610723874244444, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: 4725960526563270111, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: 983517427322130782, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: -4270182624589192310, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: -2251711590773097080, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: -9134089961451739832, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  - {fileID: 5480631529837853177, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
+  animSpeed: 0.1
 --- !u!1 &2089042610387478241
 GameObject:
   m_ObjectHideFlags: 0

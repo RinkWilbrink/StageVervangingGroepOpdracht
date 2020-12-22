@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GenericBullet : MonoBehaviour
 {
-    private Vector2 moveDirection;
+    private Vector3 moveDirection;
     private float moveSpeed;
 
     private void OnEnable()
@@ -24,7 +24,7 @@ public class GenericBullet : MonoBehaviour
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }
 
-    public void SetMoveDirection(Vector2 dir)
+    public void SetMoveDirection(Vector3 dir)
     {
         moveDirection = dir;
     }

@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: bc14727a2d1fd574bbc64659decbfddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158,10 +158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17269fd232a851843b718369c15a1414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 2
-  AttackDamage: 2
+  AttackShootingTime: 1.2
+  AttackDamage: 1.2
   DamageAddedPerLevel: 1
-  FireRateAddedPerLevel: 0.1
+  FireRateAddedPerLevel: 0.08
   ShootingRange: 3
   ShootOrigin: {fileID: 2727193884480791051}
   specialDirectionUI: {fileID: 0}
@@ -196,6 +196,17 @@ MonoBehaviour:
   LightningBoltPrefab: {fileID: 0}
   FrostPrefab: {fileID: 7049167200491236686, guid: 1abefd54697424a45b5cd8c53849dc35,
     type: 3}
+  MagicSpellAudioSFX:
+  - {fileID: 8300000, guid: 46db583acc01fc74f896889db4abd462, type: 3}
+  - {fileID: 8300000, guid: 999884ff72b67724ebc51ede5e70410c, type: 3}
+  LightningAttackAudioSFX: {fileID: 8300000, guid: 3098aa6b77ad0ca408d83cccd50f4929,
+    type: 3}
+  FrostAttackAudioSFX: {fileID: 8300000, guid: c35cc5b7b3ed0864b9c774cbc8380c7e, type: 3}
+  FrostSpecialAudioSFX: {fileID: 8300000, guid: 5a8f85f50b0f71c4e9175c8519b3b242,
+    type: 3}
+  LightningSpecialAudioSFX:
+  - {fileID: 8300000, guid: c1a2d16877db11344a2b815c14c2bd5c, type: 3}
+  - {fileID: 8300000, guid: 1b1dfbb060b445744bc15ec492af103e, type: 3}
 --- !u!65 &8437573251633843400
 BoxCollider:
   m_ObjectHideFlags: 0

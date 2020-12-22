@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private AudioClip[] coinDropAudio;
+    [SerializeField] private AudioClip[] waveAudio;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -27,6 +28,8 @@ public class WaveManager : MonoBehaviour
     //float spawnTimer;
     private float spawnCurveIndex;
     private void Update() {
+        //Debug.LogError(currentWaveNum);
+
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
             SpawnEnemy();
@@ -72,17 +75,23 @@ public class WaveManager : MonoBehaviour
     private void OnEnemyDeath() {
         enemiesLeftAlive--;
 
-        FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[UnityEngine.Random.Range(1, coinDropAudio.Length)], AudioMixerGroups.SFX);
-
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
+
+            GameController.Gold += currentWave.goldReward;
+            FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
+            FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
+
             StartCoroutine(updateWave);
         }
     }
 
     private IEnumerator UpdateWave( float waitTime ) {
         currentWaveNum++;
-        if ( currentWaveNum == ( waves.Length + 1 ) ) {
+
+        if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
 
             Time.timeScale = 0;
@@ -93,13 +102,10 @@ public class WaveManager : MonoBehaviour
         currentWave = waves[currentWaveNum - 1];
 
         WaveText.text = string.Format("{0}", currentWaveNum);
+        FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
-
-        GameController.Gold += currentWave.goldReward;
-        FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
-        FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
     }
 
     [Serializable]

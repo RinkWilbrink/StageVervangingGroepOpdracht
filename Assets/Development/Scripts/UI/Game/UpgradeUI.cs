@@ -10,6 +10,7 @@ namespace UI
 {
     public class UpgradeUI : MonoBehaviour
     {
+        public static bool UpgradeUIReady;
         // Variables
         [SerializeField] private RectTransform UpgradePanel;
         [Header("UI Stuff")]
@@ -23,6 +24,7 @@ namespace UI
         [SerializeField] private Button buttonUpgrade;
         [SerializeField] private Button buttonSpecial1;
         [SerializeField] private Button buttonSpecial2;
+        [SerializeField] private Button closeUpgradeButton;
 
         [Space(4)]
 
@@ -53,6 +55,7 @@ namespace UI
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
+
         private void Awake()
         {
             for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length; i++)
@@ -65,6 +68,7 @@ namespace UI
         {
             UpgradePanel.gameObject.SetActive(false);
             SpecialAbilityModeButton.interactable = false;
+            UpgradeUIReady = false;
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
         }
@@ -85,7 +89,7 @@ namespace UI
         {
             while (Vector3.Distance(UpgradePanel.localScale, Vector3.one) > 0.005f)
             {
-                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * GameTime.deltaTime);
+                UpgradePanel.localScale = Vector3.Lerp(UpgradePanel.localScale, Vector3.one, UILerpSpeed * Time.deltaTime);
 
                 yield return null;
             }
@@ -195,16 +199,20 @@ namespace UI
 
         #endregion
 
+        [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (PayGold(1))
+            if (PayGold(4))
             {
                 currentTower.TowerLevel += 1;
+                FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
                 if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
                     buttonUpgrade.interactable = false;
+                    closeUpgradeButton.interactable = false;
+                    UpgradeUIReady = true;
                     SetSpecialButtons();
                 }
                 if(currentTower.SpecialUnlocked != SpecialAttack.None)
@@ -243,6 +251,8 @@ namespace UI
             currentTower.SpecialUnlocked = (SpecialAttack)_i;
 
             buttonUpgrade.interactable = true;
+            closeUpgradeButton.interactable = true;
+            UpgradeUIReady = false;
             buttonSpecial1.interactable = false;
             buttonSpecial2.interactable = false;
 

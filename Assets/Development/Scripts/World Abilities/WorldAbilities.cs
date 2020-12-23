@@ -7,6 +7,8 @@ public class WorldAbilities : MonoBehaviour
 {
     private TMPro.TextMeshProUGUI interactionText;
     [SerializeField] private Color notEnoughManaColor;
+    [SerializeField] private AudioClip buttonAudio;
+    [SerializeField] private AudioManagement audioManager;
 
     private void NotEnoughMana( int manaCost, Button button ) {
         if ( GameController.Mana < manaCost )
@@ -202,5 +204,9 @@ public class WorldAbilities : MonoBehaviour
         GameController.Mana -= ninjaDashManaCost;
         ninjaDashButton.image.color = Color.white;
         print("FINISHED NINJA DASH");
+    }
+
+    public void WorldAbilityAudio() {
+        audioManager.PlayAudioClip(buttonAudio, AudioMixerGroups.SFX);
     }
 }

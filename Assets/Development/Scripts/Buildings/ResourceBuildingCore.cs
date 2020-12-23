@@ -37,6 +37,9 @@ namespace ResourceBuilding
 
         [HideInInspector] public bool CanCollectResources = false;
 
+        [Header("Audio")]
+        [SerializeField] private AudioClip collectSFX;
+
         /// <summary>Init functions, This function gets called when the building gets created (like a start)</summary>
         public void Init()
         {
@@ -63,9 +66,13 @@ namespace ResourceBuilding
                 GameController.Mana += ResourcesInStorage;
             }
 
+
             resourceManager.UpdateResourceUI();
 
             ResourcesInStorage = 0;
+
+            if (collectSFX != null)
+                FindObjectOfType<AudioManagement>().PlayAudioClip(collectSFX, AudioMixerGroups.SFX);
         }
 
         private void Update()
@@ -87,7 +94,7 @@ namespace ResourceBuilding
                 }
                 else
                 {
-                    ResourceCollectTimer += GameTime.deltaTime;
+                    ResourceCollectTimer += Time.deltaTime;
                 }
             }
 

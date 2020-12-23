@@ -6,7 +6,8 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
     [SerializeField] private GameObject EndScreen;
-    [SerializeField] private Tower.TowerInteraction towerInteraction;
+    [SerializeField] private AudioClip[] coinDropAudio;
+    [SerializeField] private AudioClip[] waveAudio;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -19,11 +20,7 @@ public class WaveManager : MonoBehaviour
     private int enemiesLeftAlive;
     private float spawnNext;
 
-    private ResourceUIManager resourceUIManager;
-
     private void Start() {
-        resourceUIManager = FindObjectOfType<ResourceUIManager>();
-
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
@@ -31,18 +28,13 @@ public class WaveManager : MonoBehaviour
     //float spawnTimer;
     private float spawnCurveIndex;
     private void Update() {
-        if ( currentWaveNum == waves.Length ) {
-            EndScreen.SetActive(true);
-            towerInteraction.CurrentInteractionMode = Tower.InteractionMode.None;
+        //Debug.LogError(currentWaveNum);
 
-            GameTime.SetTimeScale(0);
+        //if ( GameTime.deltaTime > 0 ) {
+        if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
+            SpawnEnemy();
         }
-
-        if ( GameTime.deltaTime > 0 ) {
-            if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
-                SpawnEnemy();
-            }
-        }
+        //}
     }
 
     private void SpawnEnemy() {
@@ -85,24 +77,34 @@ public class WaveManager : MonoBehaviour
 
         if ( enemiesLeftAlive <= 0 ) {
             updateWave = UpdateWave(waveCooldown);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
+
+            GameController.Gold += currentWave.goldReward;
+            FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
+
             StartCoroutine(updateWave);
         }
     }
 
     private IEnumerator UpdateWave( float waitTime ) {
+        currentWaveNum++;
+
+        if ( currentWaveNum > waves.Length ) {
+            EndScreen.SetActive(true);
+
+            Time.timeScale = 0;
+        }
+
         yield return new WaitForSeconds(waitTime);
 
-        GameController.Gold += currentWave.goldReward;
-        resourceUIManager.UpdateResourceUI();
-
-        currentWaveNum++;
         currentWave = waves[currentWaveNum - 1];
 
         WaveText.text = string.Format("{0}", currentWaveNum);
+        FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
-
     }
 
     [Serializable]

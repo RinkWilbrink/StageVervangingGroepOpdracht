@@ -37,6 +37,8 @@ namespace Tower
         [SerializeField] public int TowerLevelToUnlockSpecial;
         [HideInInspector] public int TowerLevel = 1;
         [HideInInspector] public int TowerSpecialLevel = 0;
+        [Header("Attack delay for Audio")]
+        [SerializeField] public float AttackDelayTime;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 

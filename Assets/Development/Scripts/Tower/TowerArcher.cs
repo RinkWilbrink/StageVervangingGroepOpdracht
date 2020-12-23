@@ -85,6 +85,10 @@ namespace Tower
         #region balista bolts
         private IEnumerator BallistaBolts()
         {
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
+
             for (int i = 0; i < amountToSpawn; i++)
             {
                 float bulDirX =  Mathf.Cos((angle * Mathf.PI) / 180f);

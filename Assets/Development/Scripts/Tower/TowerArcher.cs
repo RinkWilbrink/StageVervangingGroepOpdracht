@@ -91,11 +91,13 @@ namespace Tower
                 float bulDirZ =  Mathf.Sin((angle * Mathf.PI) / 180f);
 
                 Vector3 bulMoveVector = new Vector3(bulDirX, 0f, bulDirZ);
-                Vector2 bulDir = bulMoveVector.normalized;
+                Vector3 bulDir = bulMoveVector.normalized;
 
                 GameObject bul = GenericPool.bulletPoolInstanse.GetBullet();
                 bul.transform.position = transform.position;
-                bul.transform.up = bulMoveVector;
+
+                bul.transform.rotation = Quaternion.LookRotation(bulDir, Vector3.down);
+
                 bul.SetActive(true);
                 bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
                 angle += 10f;

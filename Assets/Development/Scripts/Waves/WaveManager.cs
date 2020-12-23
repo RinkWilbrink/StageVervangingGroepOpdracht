@@ -81,7 +81,6 @@ public class WaveManager : MonoBehaviour
             FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
 
             GameController.Gold += currentWave.goldReward;
-            FindObjectOfType<AudioManagement>().PlayAudioClip(coinDropAudio[0], AudioMixerGroups.SFX);
             FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
 
             StartCoroutine(updateWave);

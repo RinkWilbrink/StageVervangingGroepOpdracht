@@ -8,7 +8,6 @@ using CryptSharp.Utility;
 
 public class SaveLoad : MonoBehaviour
 {
-    //GameManager _GameManager;
     System.Threading.Thread _SaveThread = null;
     System.Threading.Thread _LoadThread = null;
 
@@ -16,13 +15,15 @@ public class SaveLoad : MonoBehaviour
 
     private void Start()
     {
-        //_GameManager = GetComponent<GameManager>();
         _SaveThread = new System.Threading.Thread(SaveThread);
+        print(Application.persistentDataPath);
 
         _DataPath = Application.persistentDataPath + "/save.txt";
 
         _LoadThread = new System.Threading.Thread(LoadData);
         _LoadThread.Start();
+
+        DataManager._SaveLoad = this; 
     }
 
     public void SaveData()
@@ -48,21 +49,20 @@ public class SaveLoad : MonoBehaviour
 
             if(saveObject._Hash != GetHashCode(saveObject))
             {
-                EnterEmptyValues();
+                print("Hash not the same");
                 return;
             }
-            
-            //_GameManager.SetZap(saveObject._Zap);
-            //_GameManager.SetHighScore(saveObject._HighScore);
-            //_GameManager.SetColor(saveObject._ActiveColor);
 
-            CheckIfValuesEmpty(saveObject);
+            DataManager._LastLevelBeaten = saveObject._LastLevelBeaten;
+            DataManager._EnemiesKilled = saveObject._EnemiesKilled;
+            DataManager._ResourcesGathered = saveObject._ResourcesGathered;
+            DataManager._TowersPlaced = saveObject._TowersPlaced;
+
 
             print("loaded");
         }
         else
         {
-            EnterEmptyValues();
             print("no save");
         }
 
@@ -71,15 +71,9 @@ public class SaveLoad : MonoBehaviour
 
     private string GetHashCode(SaveObject saveObject)
     {
-        bool[] colorsBought = saveObject._ColorBought;
-        string hashCode = saveObject._HighScore.ToString() + saveObject._Zap.ToString() + saveObject._ActiveColor.ToString();
+        string hashCode = saveObject._LastLevelBeaten.ToString() + saveObject._EnemiesKilled.ToString() + saveObject._ResourcesGathered.ToString() + saveObject._ResourcesGathered.ToString();
 
-        for (int i = 0; i < colorsBought.Length; i++)
-        {
-            hashCode += colorsBought.ToString();
-        }
-
-        return Hash(hashCode, "NagitoLovesBagles");
+        return Hash(hashCode, "JapaneseBrushStrokes");
     }
 
     private string Hash(string secret, string salt)
@@ -100,10 +94,10 @@ public class SaveLoad : MonoBehaviour
     {
         SaveObject saveObject = new SaveObject
         {
-            //_HighScore = _GameManager.GetHighScore(),
-            //_Zap = _GameManager.GetZapAmount(),
-            //_ColorBought = _GameManager.GetShopColorValues(),
-            //_ActiveColor = _GameManager.GetColor(),
+            _LastLevelBeaten = DataManager._LastLevelBeaten,
+            _EnemiesKilled = DataManager._EnemiesKilled,
+            _ResourcesGathered = DataManager._ResourcesGathered,
+            _TowersPlaced = DataManager._TowersPlaced
         };
 
         saveObject._Hash = GetHashCode(saveObject);
@@ -116,27 +110,6 @@ public class SaveLoad : MonoBehaviour
         _SaveThread = new System.Threading.Thread(SaveThread);
     }
 
-
-    private void EnterEmptyValues()
-    {
-        //_GameManager.SetShopColorValues(new bool[3]);
-        //_GameManager.SetShopColorValue(0, true);
-        //_GameManager.SetColor(new Color(0.5058824f, 1, 0.4862745f, 1)); //Pastel Green
-    }
-
-    private void CheckIfValuesEmpty(SaveObject saveObject)
-    {
-        //if (_GameManager.GetShopColorValues() != saveObject._ColorBought)
-        //{
-        //    _GameManager.SetShopColorValues(new bool[3]);
-        //}
-
-        //if (_GameManager.GetColor() != saveObject._ActiveColor)
-        //{
-        //    _GameManager.SetColor(new Color(0.5058824f, 1, 0.4862745f, 1)); //Pastel Green
-        //}
-    }
-
     public bool GetLoadThread()
     {
         return _LoadThread.IsAlive;
@@ -146,11 +119,11 @@ public class SaveLoad : MonoBehaviour
 [Serializable]
 public struct SaveObject
 {
-    public int _HighScore;
-    public int _Zap;
+    public int _LastLevelBeaten;
 
-    public bool[] _ColorBought;
-    public Color _ActiveColor;
+    public int _EnemiesKilled;
+    public int _ResourcesGathered;
+    public int _TowersPlaced;
 
     public string _Hash;
 }

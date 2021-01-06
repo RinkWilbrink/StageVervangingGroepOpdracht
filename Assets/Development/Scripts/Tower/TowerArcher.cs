@@ -10,6 +10,7 @@ namespace Tower
         // Variables
         [Header("Ballista")]
         [SerializeField] private float angle;
+        [SerializeField] private float anglestep;
         [SerializeField] private int amountToSpawn;
         //[SerializeField] private int BallistaDamage;
 
@@ -100,7 +101,7 @@ namespace Tower
 
                 bul.SetActive(true);
                 bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
-                angle += 10f;
+                angle += anglestep;
                 yield return new WaitForSeconds(0.01f);
 
             }

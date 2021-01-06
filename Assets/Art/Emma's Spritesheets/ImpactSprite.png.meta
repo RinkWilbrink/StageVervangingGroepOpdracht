@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: b253bfb1ebcfb3c4dbf824909f6069a7
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6427848735169583247
+    second: ImpactSprite_0
+  - first:
+      213: 9036510154576096342
+    second: ImpactSprite_1
+  - first:
+      213: -523466637527485810
+    second: ImpactSprite_2
+  - first:
+      213: -1345043757785008301
+    second: ImpactSprite_3
+  - first:
+      213: 6766962439044073247
+    second: ImpactSprite_4
+  - first:
+      213: 7478817030006285152
+    second: ImpactSprite_5
+  - first:
+      213: -6943686659773320861
+    second: ImpactSprite_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,7 +130,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ImpactSprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 455
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f881ab15e5e443950800000000000000
+      internalID: 6427848735169583247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_1
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 455
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65ce7bcab12286d70800000000000000
+      internalID: 9036510154576096342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_2
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 455
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82f76addd54cb8f0800000000000000
+      internalID: -523466637527485810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_3
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 455
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3573ed124d1755de0800000000000000
+      internalID: -1345043757785008301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1702a34c7419ed50800000000000000
+      internalID: 6766962439044073247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_5
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 063aaadd6781ac760800000000000000
+      internalID: 7478817030006285152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ImpactSprite_6
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 455.75
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 361b79ca5c113af90800000000000000
+      internalID: -6943686659773320861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

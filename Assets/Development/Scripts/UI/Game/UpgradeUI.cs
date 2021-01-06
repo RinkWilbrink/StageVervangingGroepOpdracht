@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tower;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -55,6 +56,12 @@ namespace UI
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
+        
+        [SerializeField] private string Level1;
+        [SerializeField] private string Level2;
+        [SerializeField] private string Level3;
+
+        [SerializeField] private GameObject Errormssg;
 
         private void Awake()
         {
@@ -75,12 +82,22 @@ namespace UI
 
         public void UpdateUIPosition(float _x, float _y)
         {
-            UpgradePanel.gameObject.SetActive(true);
+            Scene level1 = SceneManager.GetActiveScene();
 
-            UpgradePanel.anchoredPosition = new Vector2(_x, _y);
-            UpgradePanel.localScale = Vector3.zero;
+            if (level1.name != Level1)
+            {
+                UpgradePanel.gameObject.SetActive(true);
 
-            StartCoroutine(LerpUI());
+                UpgradePanel.anchoredPosition = new Vector2(_x, _y);
+                UpgradePanel.localScale = Vector3.zero;
+
+                StartCoroutine(LerpUI());
+            }
+            else 
+            {
+                Errormssg.SetActive(true);
+            }
+            
         }
 
         #region Private Functions

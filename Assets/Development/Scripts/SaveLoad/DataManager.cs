@@ -60,6 +60,12 @@ public static class DataManager
             _LastLevelBeaten = levelNumber;
         }
 
+        if (_LastLevelBeaten == 3 && _AchivementCheck[3] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Level 3 Beaten", "You have completed the all 3 levels!");
+            _AchivementCheck[3] = true;
+        }
+
         _SaveLoad.SaveData();
     }
 }

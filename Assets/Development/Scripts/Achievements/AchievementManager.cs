@@ -24,7 +24,7 @@ namespace Achievements
         public static AchievementManager current;
 
         [Header("Audio")]
-        [SerializeField] private AudioSource dingSoundSource;
+        [SerializeField] AudioClip AchivementSound;
 
         [Header("Slide In/Out Timing")]
         [SerializeField] private float SlideSpeed;
@@ -51,16 +51,15 @@ namespace Achievements
             {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
-                    UnlockAchievement(0, "AchievementName", "Requirement");
+                    UnlockAchievement("AchievementName", "Requirement");
                 }
             }
         }
 
-        public void UnlockAchievement(int AchievementID, string AchievementName, string Requirement)
+        public void UnlockAchievement(string AchievementName, string Requirement)
         {
             // Audio
-            dingSoundSource.pitch = (1f + UnityEngine.Random.Range(-0.02f, 0.02f));
-            dingSoundSource.Play();
+            FindObjectOfType<AudioManagement>().PlayAudioClip(AchivementSound, AudioMixerGroups.SFX);
 
             // Visual stuff
             SetAchievementText(AchievementName, Requirement);

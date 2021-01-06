@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Achievements;
 
 public static class DataManager
 {
@@ -12,19 +13,39 @@ public static class DataManager
     public static int _ResourcesGathered;
     public static int _TowersPlaced;
 
-    public static void ResourcesGained(int amount)
-    {
-        _ResourcesGathered += amount;
-    }
+    public static bool[] _AchivementCheck = new bool[3];
 
     public static void EnemySlayed()
     {
         _EnemiesKilled += 1;
+
+        if (_EnemiesKilled >= 1 && _AchivementCheck[0] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Enemy's Slayed", "1 Enemy Slayed");
+            _AchivementCheck[0] = true;
+        }
+    }
+
+    public static void ResourcesGained(int amount)
+    {
+        _ResourcesGathered += amount;
+
+        if (_ResourcesGathered >= 1 && _AchivementCheck[1] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Resources Gathered", "Collect 1 resources");
+            _AchivementCheck[1] = true;
+        }
     }
 
     public static void TowerPlaced()
     {
         _TowersPlaced += 1;
+
+        if (_TowersPlaced >= 1 && _AchivementCheck[2] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Tower Place", "Place 1 Tower");
+            _AchivementCheck[2] = true;
+        }
     }
 
     public static void TowerRemoved()
@@ -40,10 +61,5 @@ public static class DataManager
         }
 
         _SaveLoad.SaveData();
-    }
-
-    public static void AchievementCheck(int achievementID, int amount)
-    {
-
     }
 }

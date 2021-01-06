@@ -57,6 +57,7 @@ public class SaveLoad : MonoBehaviour
             DataManager._EnemiesKilled = saveObject._EnemiesKilled;
             DataManager._ResourcesGathered = saveObject._ResourcesGathered;
             DataManager._TowersPlaced = saveObject._TowersPlaced;
+            DataManager._AchivementCheck = saveObject._AchivementCheck;
 
 
             print("loaded");
@@ -72,6 +73,11 @@ public class SaveLoad : MonoBehaviour
     private string GetHashCode(SaveObject saveObject)
     {
         string hashCode = saveObject._LastLevelBeaten.ToString() + saveObject._EnemiesKilled.ToString() + saveObject._ResourcesGathered.ToString() + saveObject._ResourcesGathered.ToString();
+
+        for (int i = 0; i < saveObject._AchivementCheck.Length; i++)
+        {
+            hashCode += saveObject._AchivementCheck[i].ToString();
+        }
 
         return Hash(hashCode, "JapaneseBrushStrokes");
     }
@@ -97,7 +103,8 @@ public class SaveLoad : MonoBehaviour
             _LastLevelBeaten = DataManager._LastLevelBeaten,
             _EnemiesKilled = DataManager._EnemiesKilled,
             _ResourcesGathered = DataManager._ResourcesGathered,
-            _TowersPlaced = DataManager._TowersPlaced
+            _TowersPlaced = DataManager._TowersPlaced,
+            _AchivementCheck = DataManager._AchivementCheck
         };
 
         saveObject._Hash = GetHashCode(saveObject);
@@ -126,4 +133,6 @@ public struct SaveObject
     public int _TowersPlaced;
 
     public string _Hash;
+
+    public bool[] _AchivementCheck;
 }

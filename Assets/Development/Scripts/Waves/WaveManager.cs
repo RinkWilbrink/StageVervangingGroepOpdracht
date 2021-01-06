@@ -95,7 +95,6 @@ public class WaveManager : MonoBehaviour
             EndScreen.SetActive(true);
 
             DataManager.LevelComplete(levelNummer);
-            DataManager._SaveLoad.SaveData();
 
             Time.timeScale = 0;
         }

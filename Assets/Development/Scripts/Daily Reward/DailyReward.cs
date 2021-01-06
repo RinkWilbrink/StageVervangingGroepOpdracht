@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class DailyReward : NetworkTime
 {
     [SerializeField] private float rewardTime = 86400000f;
+    [SerializeField] private float updateCooldown = 1f; 
     [SerializeField] private Button rewardButton;
     [SerializeField] private Text timerText;
     private bool waitingForReward = false;
@@ -23,8 +24,11 @@ public class DailyReward : NetworkTime
         }
     }
 
+    float updateCooldownTimer = 60f;
     private void Update() {
-        if ( waitingForReward ) {
+        updateCooldownTimer += Time.deltaTime;
+
+        if ( waitingForReward && updateCooldownTimer >= updateCooldown ) {
             if ( IsRewardReady() ) {
                 waitingForReward = false;
                 rewardButton.interactable = true;
@@ -33,6 +37,7 @@ public class DailyReward : NetworkTime
             }
 
             UpdateTextTimer();
+            updateCooldownTimer = 0f;
         }
 
         if ( Input.GetKeyDown(KeyCode.Y) ) {
@@ -53,6 +58,7 @@ public class DailyReward : NetworkTime
 
         return false;
     }
+
     private void UpdateTextTimer() {
         ulong diff = (ulong)GetNetworkTime().Ticks - lastTime;
         ulong ms = diff / TimeSpan.TicksPerMillisecond;

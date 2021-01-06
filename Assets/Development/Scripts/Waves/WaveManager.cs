@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private AudioClip[] coinDropAudio;
     [SerializeField] private AudioClip[] waveAudio;
+    [SerializeField] private GameObject beginWaveIcon;
 
     [Header("Waves")]
     [SerializeField] private WaveData[] waves;
@@ -90,6 +91,9 @@ public class WaveManager : MonoBehaviour
     private IEnumerator UpdateWave( float waitTime ) {
         currentWaveNum++;
 
+        beginWaveIcon.SetActive(true);
+
+
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
 
@@ -105,6 +109,10 @@ public class WaveManager : MonoBehaviour
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
+
+        new WaitForSeconds(0.01f);
+
+        beginWaveIcon.SetActive(false);
     }
 
     [Serializable]

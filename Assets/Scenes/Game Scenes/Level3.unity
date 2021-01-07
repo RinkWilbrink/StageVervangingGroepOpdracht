@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9505,7 +9505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28f493152a635a4fa9cd93916f1e9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledBullet: {fileID: 8952695988396575050, guid: 4e0dbaf011f0c4349ad6d2a20b685a25,
+  pooledBullet: {fileID: 8999546987061952605, guid: 5c000af2366ca9e4e9d6a8eb883bfba3,
     type: 3}
 --- !u!4 &1695546095
 Transform:

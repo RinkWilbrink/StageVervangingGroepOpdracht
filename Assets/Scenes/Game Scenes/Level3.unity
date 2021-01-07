@@ -5323,6 +5323,27 @@ PrefabInstance:
       propertyPath: closeUpgradeButton
       value: 
       objectReference: {fileID: 900721089}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: lockedImage
+      value: 
+      objectReference: {fileID: 21300000, guid: a6cdd2f75f4e3ca4b90423e9ca9be702,
+        type: 3}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: Level1
+      value: Level1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: Level2
+      value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: Level3
+      value: Level3
+      objectReference: {fileID: 0}
     - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -9014,7 +9035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28f493152a635a4fa9cd93916f1e9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledBullet: {fileID: 8952695988396575050, guid: 4e0dbaf011f0c4349ad6d2a20b685a25,
+  pooledBullet: {fileID: 8999546987061952605, guid: 5c000af2366ca9e4e9d6a8eb883bfba3,
     type: 3}
 --- !u!4 &1695546095
 Transform:

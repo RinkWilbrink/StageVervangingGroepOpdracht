@@ -144,6 +144,8 @@ namespace Tower
                                 {
                                     if (CurrentBuildingType == Types.Tower)
                                     {
+                                        DataManager.TowerPlaced();
+
                                         GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                         go.GetComponent<TowerCore>().SetNewSprite();
 
@@ -204,6 +206,8 @@ namespace Tower
                             {
                                 if (TowerHit.collider.tag == "Tower")
                                 {
+                                    DataManager.TowerRemoved();
+
                                     Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                     Destroy(TowerHit.collider.gameObject);
                                     CurrentBuildingType = PreviousBuildingType;

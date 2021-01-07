@@ -11,6 +11,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject beginWaveIcon;
 
     [Header("Waves")]
+    [SerializeField] private int levelNummer;
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
@@ -96,6 +97,8 @@ public class WaveManager : MonoBehaviour
 
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
+
+            DataManager.LevelComplete(levelNummer);
 
             Time.timeScale = 0;
         }

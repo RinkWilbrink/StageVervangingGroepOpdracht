@@ -54,7 +54,10 @@ MonoBehaviour:
   AmountAddedPerInterval: 1
   ResourcesInStorage: 0
   BuildingHealth: 3
-  button: {fileID: 0}
+  goldButton: {fileID: 2571995776109023053, guid: ca79cf15e15e6f141acfbf6d6d9a35e3,
+    type: 3}
+  manaButton: {fileID: 2571995776109023053, guid: 849a0e7c1c03a714bbe1daa71a05f33a,
+    type: 3}
   resourceManager: {fileID: 0}
   CanCollectResources: 0
   collectSFX: {fileID: 8300000, guid: ec4b4857a1bc96f41a4b287149a841a7, type: 3}

@@ -35,7 +35,8 @@ namespace Tower
         [SerializeField] private UINotificationManager notificationManager;
 
         [Space(6)]
-        [SerializeField] private GameObject ResourceCollectButtonPrefab;
+        [SerializeField] private GameObject ResourceCollectButtonPrefabGold;
+        [SerializeField] private GameObject ResourceCollectButtonPrefabMana;
 
         [Header("Building Collection Button Parents")]
         [SerializeField] private Transform GoldButtonParent;
@@ -144,6 +145,8 @@ namespace Tower
                                 {
                                     if (CurrentBuildingType == Types.Tower)
                                     {
+                                        DataManager.TowerPlaced();
+
                                         GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                         go.GetComponent<TowerCore>().SetNewSprite();
 
@@ -184,12 +187,17 @@ namespace Tower
                                         }
                                         GameObject go = Instantiate(BuildingList[BuildingSelectedIndex], hitPoint, Quaternion.identity, BuildingParent);
 
-                                        GameObject bu = Instantiate(ResourceCollectButtonPrefab, t);
-                                        bu.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
-                                        bu.SetActive(false);
+                                        GameObject buGold = Instantiate(ResourceCollectButtonPrefabGold, t);
+                                        buGold.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
+                                        buGold.SetActive(false);
+
+                                        GameObject buMana = Instantiate(ResourceCollectButtonPrefabMana, t);
+                                        buMana.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);
+                                        buMana.SetActive(false);
 
                                         // Settings for the Collect Resource Building
-                                        go.GetComponent<ResourceBuilding.ResourceBuildingCore>().button = bu.GetComponent<Button>();
+                                        go.GetComponent<ResourceBuilding.ResourceBuildingCore>().goldButton = buGold.GetComponent<Button>();
+                                        go.GetComponent<ResourceBuilding.ResourceBuildingCore>().manaButton = buMana.GetComponent<Button>();
                                         go.GetComponent<ResourceBuilding.ResourceBuildingCore>().resourceManager = resourceManager;
                                         go.GetComponent<ResourceBuilding.ResourceBuildingCore>().AddButtonListener();
                                         go.GetComponent<ResourceBuilding.ResourceBuildingCore>().Init();
@@ -204,6 +212,8 @@ namespace Tower
                             {
                                 if (TowerHit.collider.tag == "Tower")
                                 {
+                                    DataManager.TowerRemoved();
+
                                     Destroy(TowerHit.collider.GetComponent<TowerCore>().specialDirectionUI);
                                     Destroy(TowerHit.collider.gameObject);
                                     CurrentBuildingType = PreviousBuildingType;
@@ -212,7 +222,7 @@ namespace Tower
                                 }
                                 else if (TowerHit.collider.tag == "Building")
                                 {
-                                    Destroy(TowerHit.collider.GetComponent<ResourceBuilding.ResourceBuildingCore>().button);
+                                    Destroy(TowerHit.collider.GetComponent<ResourceBuilding.ResourceBuildingCore>().goldButton);
                                     Destroy(TowerHit.collider.gameObject);
                                     CurrentBuildingType = PreviousBuildingType;
                                     SetSelectedButtonAttributes(previousButtonSelectionIndex);

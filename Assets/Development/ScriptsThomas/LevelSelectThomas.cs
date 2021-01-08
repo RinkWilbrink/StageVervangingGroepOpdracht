@@ -16,6 +16,8 @@ public class LevelSelectThomas : MonoBehaviour{
     private int amountPerPage;
     private int currentLevelCount;
     private GameObject text;
+    [SerializeField] private Animator _MusicAnimator;
+    [SerializeField] private float _WaitTime;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +84,17 @@ public class LevelSelectThomas : MonoBehaviour{
         }
     }
 
-    private void LoadScene(int index ) {
+    public void LoadScene(int index)
+    {
+        StartCoroutine(ChangeScene(index));
+        Time.timeScale = 1;
+    }
+
+    private IEnumerator ChangeScene(int index)
+    {
+        _MusicAnimator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(_WaitTime);
         SceneManager.LoadScene("Level" + index, LoadSceneMode.Single);
+        _MusicAnimator.SetTrigger("FadeIn");
     }
 }

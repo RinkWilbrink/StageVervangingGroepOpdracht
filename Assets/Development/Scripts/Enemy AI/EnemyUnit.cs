@@ -164,6 +164,10 @@ public class EnemyUnit : MonoBehaviour
 
     private void Death() {
         GameController.Gold += GoldReward;
+
+        DataManager.ResourcesGained(GoldReward);
+        DataManager.EnemySlayed();
+
         resourceUIManager.UpdateResourceUI();
         selectionButtonManager.UpdateTowerButtonUI();
 

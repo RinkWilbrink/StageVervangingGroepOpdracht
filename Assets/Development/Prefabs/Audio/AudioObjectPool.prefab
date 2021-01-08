@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794ed03d69aaca4468b82ce009511382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Clip: {fileID: 8300000, guid: d0b02c6e7ecd5c34cb866a87daf402c7, type: 3}
+  _MusicAudioObject: {fileID: 7274249651935854203, guid: e71b63c3212a54248867680703e8a922,
+    type: 3}
+  _MusicTrack0: {fileID: 8300000, guid: fea658294e5679d4fa906ca0e6d32dd6, type: 3}
+  _MusicTrack1: {fileID: 8300000, guid: b4485f80bc1958345bd95ae6812cfe44, type: 3}
   _MasterMixer: {fileID: 24100000, guid: 80acedbd28f5d284bb2e3b7095552771, type: 2}
   _AudioMixerGroupMusic: {fileID: -8535357275037238653, guid: 80acedbd28f5d284bb2e3b7095552771,
     type: 2}

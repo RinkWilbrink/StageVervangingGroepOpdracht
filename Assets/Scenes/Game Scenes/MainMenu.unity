@@ -3368,6 +3368,8 @@ MonoBehaviour:
   PageManager: {fileID: 1226109647}
   numberOfLevels: 60
   iconSpacing: {x: 40, y: 80}
+  _MusicAnimator: {fileID: 5035958015243489378}
+  _WaitTime: 1
   levelSelectButtons: []
 --- !u!114 &1226109647
 MonoBehaviour:
@@ -5119,6 +5121,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioObjectPool
       objectReference: {fileID: 0}
+    - target: {fileID: 8665265554233605854, guid: fc101ea6f0788f840b2536c11a7f03b3,
+        type: 3}
+      propertyPath: _MusicAudioObject
+      value: 
+      objectReference: {fileID: 1757868661890552917}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc101ea6f0788f840b2536c11a7f03b3, type: 3}
 --- !u!114 &1731428144 stripped
@@ -5958,6 +5965,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072942735}
   m_CullTransparentMesh: 0
+--- !u!1 &1757868661890552917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7274249651935854203, guid: e71b63c3212a54248867680703e8a922,
+    type: 3}
+  m_PrefabInstance: {fileID: 8977476949578492462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5035958015243489378 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4140275469985299020, guid: e71b63c3212a54248867680703e8a922,
+    type: 3}
+  m_PrefabInstance: {fileID: 8977476949578492462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5263292657238205345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6077,3 +6096,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67b51a0f297c5eb47921ab785bdc3e38, type: 3}
+--- !u!1001 &8977476949578492462
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2944333343684901731, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120378916113478802, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274249651935854203, guid: e71b63c3212a54248867680703e8a922,
+        type: 3}
+      propertyPath: m_Name
+      value: MusicAudioObject
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e71b63c3212a54248867680703e8a922, type: 3}

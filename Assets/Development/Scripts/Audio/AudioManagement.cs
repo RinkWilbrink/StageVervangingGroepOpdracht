@@ -24,13 +24,16 @@ public class AudioManagement : MonoBehaviour
         _Pooling = GetComponent<Pooling>();
         _MusicAudioObject = GameObject.Find("MusicAudioObject");
 
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (_MusicAudioObject != null)
         {
-            _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack0;
-        }
-        else
-        {
-            _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack1;
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack0;
+            }
+            else
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack1;
+            }
         }
 
         _MusicAudioObject.GetComponent<AudioSource>().Play();

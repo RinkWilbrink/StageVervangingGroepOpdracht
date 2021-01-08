@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
     private float spawnNext;
 
     private void Start() {
+        currentWave = waves[currentWaveNum];
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
@@ -94,6 +95,10 @@ public class WaveManager : MonoBehaviour
 
         beginWaveIcon.SetActive(true);
 
+        for (int i = 0; i < currentWave.enemies.Length; i++)
+        {
+            currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(true);
+        }
 
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
@@ -116,6 +121,11 @@ public class WaveManager : MonoBehaviour
         new WaitForSeconds(0.01f);
 
         beginWaveIcon.SetActive(false);
+
+        for (int i = 0; i < currentWave.enemies.Length; i++)
+        {
+            currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(false);
+        }
     }
 
     [Serializable]

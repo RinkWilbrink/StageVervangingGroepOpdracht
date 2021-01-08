@@ -24,9 +24,11 @@ public class TowerSelectionButtonsUI : MonoBehaviour
     // Set the Slide In or Out state.
     public void UISlideIn()
     {
-        if (!IsOpening)
+        if (!IsOpening && !UI.UpgradeUI.UpgradeUIReady )
         {
             towerPlacement.SetSelectedButtonAttributes(towerPlacement.ButtonSelectionIndex);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[1], AudioMixerGroups.SFX);
 
             if (IsOpened)
             {
@@ -61,10 +63,13 @@ public class TowerSelectionButtonsUI : MonoBehaviour
         IsOpening = false;
     }
 
+    [SerializeField] private AudioClip[] buttonAudio;
     // Set the time scale for the GameTime.delta time
     public void PauseGame(float TimeScale)
     {
+        FindObjectOfType<AudioManagement>().PlayAudioClip(buttonAudio[1], AudioMixerGroups.SFX);
         //GameTime.SetTimeScale(TimeScale);
+        
         Time.timeScale = TimeScale;
     }
 }

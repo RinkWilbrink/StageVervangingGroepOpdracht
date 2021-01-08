@@ -22,8 +22,15 @@ namespace Tower
         [SerializeField] private GameObject BigBombPrefab;
         [SerializeField] private GameObject ExplosionPrefab;
         [Space(6)]
-        [SerializeField] private GameObject FireBombPrefab;
-        [SerializeField] private GameObject FireEffectPrefab;
+        [SerializeField] private GameObject OilBombPrefab;
+        [SerializeField] private GameObject OilSpillPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip CannonAudioSFX;
+        [SerializeField] private AudioClip FireCannonAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip BigBombSpecialAudioSFX;
+
+        public float vuurtijd = 10f;
 
         public override void Init()
         {
@@ -38,6 +45,11 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+
+            if (SpecialUnlocked == SpecialAttack.Special2 )
+                FindObjectOfType<AudioManagement>().PlayAudioClip(FireCannonAudioSFX, AudioMixerGroups.SFX);
+            else if (SpecialUnlocked != SpecialAttack.Special1 || SpecialUnlocked != SpecialAttack.Special2 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(CannonAudioSFX, AudioMixerGroups.SFX);
         }
 
         protected override void SecondaryAttack()
@@ -66,18 +78,19 @@ namespace Tower
         private IEnumerator BigBomb()
         {
             
-            GameObject go = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
+            GameObject BombBullet = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
 
             Vector3 newPos = CurrentTarget.transform.position;
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BigBombSpecialAudioSFX, AudioMixerGroups.SFX);
 
-            while(Vector3.Distance(go.transform.position, newPos) > 0.1f)
+            while(Vector3.Distance(BombBullet.transform.position, newPos) > 0.1f)
             {
-                go.transform.position = Vector3.Lerp(go.transform.position, newPos, BombThrowSpeed * Time.deltaTime);
+                BombBullet.transform.position = Vector3.Lerp(BombBullet.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
 
                 yield return null;
             }
 
-            go.transform.position = newPos;
+            BombBullet.transform.position = newPos;
 
             Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
             GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
@@ -90,7 +103,7 @@ namespace Tower
                 yield return null;
             }
 
-            Destroy(go);
+            Destroy(BombBullet);
 
             yield return new WaitForSeconds(2f);
 
@@ -100,7 +113,61 @@ namespace Tower
 
         private IEnumerator FireBomb()
         {
+            //als current target != null schiet oil spill op target
+
             float timer = 0f;
+
+            float FireTimer = 1.5f;
+
+            GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
+
+            Vector3 EnemyPosition = CurrentTarget.transform.position;
+
+            while (Vector3.Distance(OilBall.transform.position, EnemyPosition) > 0.1f)
+            {
+                OilBall.transform.position = Vector3.Lerp(OilBall.transform.position, EnemyPosition, BombThrowSpeed * GameTime.deltaTime);
+
+                yield return null;
+            }
+
+            OilBall.transform.position = EnemyPosition; 
+
+            GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
+
+            while(vuurtijd > 0f)
+            {
+                vuurtijd -= GameTime.deltaTime;
+            }
+
+            if (vuurtijd <= 0f)
+            {
+                Debug.Log("het werkt");
+                while (timer < FireTime)
+                {
+                    if (CurrentTarget != null)
+                    {
+                        Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
+                        for (int i = 0; i < EnemiesInRange.Length; i++)
+                        {
+                            Debug.Log(EnemiesInRange);
+                            EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
+                        }
+                    }
+                    timer += 1f;
+                    
+                }
+
+                vuurtijd = 10f;
+            }
+            Destroy(OilBall);
+
+            yield return new WaitForSeconds(2f);
+
+            Destroy(OilSpill);
+            SpecialAttackMode = false;
+
+
+            /*float timer = 0f;
 
             GameObject fireEffect = Instantiate(FireEffectPrefab, new Vector3(ShootOrigin.transform.position.x, 0, ShootOrigin.transform.position.z), Quaternion.LookRotation(CurrentTarget.transform.position));
 
@@ -118,7 +185,9 @@ namespace Tower
                 yield return new WaitForSeconds(1f);
             }
 
+            Destroy(fireEffect);
             SpecialAttackMode = false;
+            */
         }
 
         #endregion

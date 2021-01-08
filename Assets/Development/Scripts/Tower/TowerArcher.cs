@@ -9,7 +9,10 @@ namespace Tower
     {
         // Variables
         [Header("Ballista")]
-        [SerializeField] private int BallistaDamage;
+        [SerializeField] private float angle;
+        [SerializeField] private float anglestep;
+        [SerializeField] private int amountToSpawn;
+        //[SerializeField] private int BallistaDamage;
 
         [Header("Poison Darts")]
         [SerializeField] private int InitialHitDamage;
@@ -22,6 +25,13 @@ namespace Tower
         [Space(6)]
         [SerializeField] private GameObject PoisonCloudSprite;
         [SerializeField] private GameObject PoisonsBombPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip ArrowAudioSFX;
+        [SerializeField] private AudioClip BlowdartAudioSFX;
+        [SerializeField] private AudioClip BallistaAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip BallistaSpecialAudioSFX;
+        [SerializeField] private AudioClip PoisonCloudAudioSFX;
 
         public override void Init()
         {
@@ -33,9 +43,15 @@ namespace Tower
         {
             base.PrimaryAttack();
 
+
             if (SpecialUnlocked == SpecialAttack.Special2)
             {
                 CurrentTarget.GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
+                FindObjectOfType<AudioManagement>().PlayAudioClip(BlowdartAudioSFX, AudioMixerGroups.SFX);
+            } else if ( SpecialUnlocked != SpecialAttack.Special2 || SpecialUnlocked != SpecialAttack.Special1 ) {
+                FindObjectOfType<AudioManagement>().PlayAudioClip(ArrowAudioSFX, AudioMixerGroups.SFX);
+            } else if ( SpecialUnlocked == SpecialAttack.Special1 ) {
+                FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaAudioSFX, AudioMixerGroups.SFX);
             }
 
             Debug.Log("Archer Primairy");
@@ -67,10 +83,44 @@ namespace Tower
             //base.LookAt();
         }
 
-        #region Ballista Shot
-
+        #region balista bolts
         private IEnumerator BallistaBolts()
         {
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
+
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                float bulDirX =  Mathf.Cos((angle * Mathf.PI) / 180f);
+                float bulDirZ =  Mathf.Sin((angle * Mathf.PI) / 180f);
+
+                Vector3 bulMoveVector = new Vector3(bulDirX, 0f, bulDirZ);
+                Vector3 bulDir = bulMoveVector.normalized;
+
+                GameObject bul = GenericPool.bulletPoolInstanse.GetBullet();
+                bul.transform.position = transform.position;
+
+                bul.transform.rotation = Quaternion.LookRotation(bulDir, Vector3.down);
+
+                bul.SetActive(true);
+                bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
+                angle += anglestep;
+                yield return new WaitForSeconds(0.01f);
+
+            }
+        }
+
+
+        #endregion
+
+
+        #region not my code
+
+        /*private IEnumerator BallistaBolts()
+        {
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
+
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.forward, 10f));
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.back, 10f));
             StartCoroutine(BallistaShot(ShootOrigin.transform.position, Vector3.left, 10f));
@@ -127,7 +177,7 @@ namespace Tower
 
             // Clean up local variables
             list = null;
-        }
+        }*/
 
         #endregion
 
@@ -136,6 +186,8 @@ namespace Tower
             float timer = 0f;
 
             PoisonCloudSprite.SetActive(true);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(PoisonCloudAudioSFX, AudioMixerGroups.SFX);
 
             while (timer < PoisonTimeInSeconds)
             {
@@ -155,5 +207,6 @@ namespace Tower
             PoisonCloudSprite.SetActive(false);
             SpecialAttackMode = false;
         }
+
     }
 }

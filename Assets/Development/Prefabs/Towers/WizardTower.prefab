@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: bc14727a2d1fd574bbc64659decbfddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -81,6 +81,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1785595228397220447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288611855225311904}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288611855225311904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785595228397220447}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2727193882764642318}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &2727193882764642312
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +142,7 @@ Transform:
   m_Children:
   - {fileID: 2727193884480791048}
   - {fileID: 3523257916895029059}
+  - {fileID: 288611855225311904}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -127,16 +158,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17269fd232a851843b718369c15a1414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackShootingTime: 2
-  AttackDamage: 2
+  AttackShootingTime: 1.2
+  AttackDamage: 1.2
   DamageAddedPerLevel: 1
-  FireRateAddedPerLevel: 0.1
+  FireRateAddedPerLevel: 0.08
   ShootingRange: 3
   ShootOrigin: {fileID: 2727193884480791051}
   specialDirectionUI: {fileID: 0}
+  Bullet: {fileID: 7014403932099339953, guid: dabd4c5b5ee45b9409226eb84bb9b65e, type: 3}
+  FirePoint: {fileID: 288611855225311904}
   TowerLevelToUnlockSpecial: 4
   TowerLevel: 1
   TowerSpecialLevel: 0
+  AttackDelayTime: 0
   towerType: 1
   SpecialUnlocked: 0
   CurrentTarget: {fileID: 0}
@@ -154,16 +188,23 @@ MonoBehaviour:
   LightningDamage: 5
   LightningRadius: 3
   LightningChainLimit: 5
-  LightningUI: {fileID: 0}
   LightningInBetweenTime: 0.5
   FrostRadius: 2
-  SlowDownAmount: 0
+  SlowDownAmount: 100
   SlowDownTime: 5
-  LightningBetweenTime: 0.4
-  LightningFinishTime: 0.4
   LightningCloudPrefab: {fileID: 4151242053571582214, guid: a2f384e237b658b4d8f980530be33174,
     type: 3}
+  LightningBoltPrefab: {fileID: 7325455136250800380, guid: 61625167890fb5a4287141947d2f78fb,
+    type: 3}
   FrostPrefab: {fileID: 7049167200491236686, guid: 1abefd54697424a45b5cd8c53849dc35,
+    type: 3}
+  MagicSpellAudioSFX: {fileID: 8300000, guid: cc63e4d6d8fb0334f8bbafff0e868008, type: 3}
+  LightningAttackAudioSFX: {fileID: 8300000, guid: ae514fdeffe764a4c8dfeb7a752900e8,
+    type: 3}
+  FrostAttackAudioSFX: {fileID: 8300000, guid: a7555186ce9d71d45ba533b26e066220, type: 3}
+  FrostSpecialAudioSFX: {fileID: 8300000, guid: 83d3fd7ab616673478d15ebd61a7c12a,
+    type: 3}
+  LightningSpecialAudioSFX: {fileID: 8300000, guid: 626b21d2db5c6ca41a2df8e018ea793e,
     type: 3}
 --- !u!65 &8437573251633843400
 BoxCollider:

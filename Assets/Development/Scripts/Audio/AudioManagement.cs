@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public enum AudioMixerGroups { Music, SFX, Voiceline}
 
@@ -10,7 +11,9 @@ public class AudioManagement : MonoBehaviour
 {
     private AudioMixerGroups _AudioMixerGroups;
     private Pooling _Pooling;
-    [SerializeField] private AudioClip _Clip; //DEBUG
+    private GameObject _MusicAudioObject;
+    [SerializeField] private AudioClip _MusicTrack0;
+    [SerializeField] private AudioClip _MusicTrack1;
     [SerializeField] private AudioMixer _MasterMixer;
     [SerializeField] private AudioMixerGroup _AudioMixerGroupMusic;
     [SerializeField] private AudioMixerGroup _AudioMixerGroupSFX;
@@ -19,15 +22,21 @@ public class AudioManagement : MonoBehaviour
     private void Start()
     {
         _Pooling = GetComponent<Pooling>();
-    }
+        _MusicAudioObject = GameObject.Find("MusicAudioObject");
 
-    private void Update()
-    {
-        //DEBUG
-        if (Input.GetKeyDown(KeyCode.Backslash))
+        if (_MusicAudioObject != null)
         {
-            PlayAudioClip(_Clip, AudioMixerGroups.SFX);
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack0;
+            }
+            else
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack1;
+            }
         }
+
+        _MusicAudioObject.GetComponent<AudioSource>().Play();
     }
 
     public void PlayAudioClip(AudioClip audioClip, AudioMixerGroups audiomixergroups)

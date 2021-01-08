@@ -8,15 +8,21 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private GameObject frostOverlayImage;
 
-    public int Health { get; private set; }
+    public float Health; //{ get; private set; }
     public float Speed { get; private set; }
-    public float GoldReward { get; private set; }
+    public int GoldReward { get; private set; }
     public int AttackDamage { get; private set; }
 
     public event Action OnDeath;
 
     public Transform[] wayPoints;
     private int waypointIndex;
+
+    private SpriteRenderer spriteRenderer;
+
+    private ResourceUIManager resourceUIManager;
+    private SelectionButtonManager selectionButtonManager;
+    private UI.UpgradeUI upgradeUI;
 
     public void Initialize( EnemyData e ) {
         this.Health = e.health;
@@ -25,22 +31,40 @@ public class EnemyUnit : MonoBehaviour
         this.AttackDamage = e.attackDamage;
     }
 
-    private void Start() {
+    private void Awake() {
         //wayPoints = FindObjectOfType<WaypointManager>();
-        dailyChallenges = FindObjectOfType<DailyChallenges>();
+        resourceUIManager = FindObjectOfType<ResourceUIManager>();
+        upgradeUI = FindObjectOfType<UI.UpgradeUI>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
+
+        if ( walkSheet.Length > 0 )
+            StartCoroutine(AnimatedWalk());
 
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
 
+    Vector3 lastPos;
     private void Update() {
-        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
+
+        Vector3 spritePos = transform.position - lastPos;
+
+        if ( spritePos.x >= 0 )
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
 
         // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * Time.deltaTime);
+        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
 
-        //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
+        transform.rotation = Quaternion.Euler(transform.localRotation.x, 180f, transform.rotation.z);
+
+        //Vector3 dir = wayPoints[waypointIndex].position - transform.position;
+        //print(dir);
+
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
 
         if ( Input.GetKeyDown(KeyCode.E) )
@@ -50,7 +74,7 @@ public class EnemyUnit : MonoBehaviour
             Speed = 0;
 
         if ( slowDebuffActive ) {
-            slowDebuffTimer += Time.deltaTime;
+            slowDebuffTimer += GameTime.deltaTime;
 
             if ( slowDebuffTimer > slowDebuffTime ) {
                 Speed += slowDownSpeed;
@@ -70,13 +94,32 @@ public class EnemyUnit : MonoBehaviour
             if ( waypointIndex < wayPoints.Length - 1 ) {
                 waypointIndex++;
             } else {
-                Death();
-                GameController.MainTowerHP -= AttackDamage;
+                AttackDeath();
+                //GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
+                upgradeUI.DoMainTowerDamage(AttackDamage);
             }
+
+        lastPos = transform.position;
     }
 
-    public void TakeDamage( int damage ) {
+    [SerializeField] private Sprite[] walkSheet;
+    [SerializeField] private float animSpeed = .1f;
+    private IEnumerator AnimatedWalk() {
+        int i;
+        i = 0;
+
+        while ( i < walkSheet.Length ) {
+            spriteRenderer.sprite = walkSheet[i];
+            i++;
+            yield return new WaitForSeconds(animSpeed);
+            yield return 0;
+        }
+
+        StartCoroutine(AnimatedWalk());
+    }
+
+    public void TakeDamage( float damage ) {
         Health -= damage;
 
         if ( Health < 1 )
@@ -119,15 +162,23 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
-    DailyChallenges dailyChallenges;
     private void Death() {
+        GameController.Gold += GoldReward;
+
+        DataManager.ResourcesGained(GoldReward);
+        DataManager.EnemySlayed();
+
+        resourceUIManager.UpdateResourceUI();
+        selectionButtonManager.UpdateTowerButtonUI();
+
         Destroy(gameObject);
 
-        if ( dailyChallenges.challenge.challengeType == ChallengeType.KillAnyEnemy ) {
-            if ( dailyChallenges.challenge.progress <= dailyChallenges.challenge.maxProgress )
-                dailyChallenges.challenge.progress++;
-            print("Progress: " + dailyChallenges.challenge.progress);
-        }
+        if ( OnDeath != null )
+            OnDeath();
+    }
+
+    private void AttackDeath() {
+        Destroy(gameObject);
 
         if ( OnDeath != null )
             OnDeath();
@@ -137,7 +188,7 @@ public class EnemyUnit : MonoBehaviour
         float timer = 0;
         frostOverlayImage.SetActive(true);
         while ( timer < maxTimer ) {
-            timer += Time.deltaTime;
+            timer += GameTime.deltaTime;
 
             yield return null;
         }

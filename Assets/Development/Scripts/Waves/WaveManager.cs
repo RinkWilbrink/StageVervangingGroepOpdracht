@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+    [SerializeField] private SelectionButtonManager SelectionButtonManager;
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private AudioClip[] coinDropAudio;
     [SerializeField] private AudioClip[] waveAudio;
@@ -85,6 +86,7 @@ public class WaveManager : MonoBehaviour
 
             GameController.Gold += currentWave.goldReward;
             FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
+            SelectionButtonManager.UpdateTowerButtonUI();
 
             StartCoroutine(updateWave);
         }

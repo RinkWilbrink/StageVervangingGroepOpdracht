@@ -47,7 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaveText: {fileID: 0}
+  SelectionButtonManager: {fileID: 0}
   EndScreen: {fileID: 0}
+  coinDropAudio: []
+  waveAudio: []
+  beginWaveIcon: {fileID: 0}
+  levelNummer: 0
   waves:
   - enemyCount: 10
     goldReward: 20
@@ -267,7 +272,9 @@ MonoBehaviour:
   - {fileID: 4637088074827303202, guid: 50e1e549cd5382b4eb2700bea0b68793, type: 3}
   - {fileID: 1893043397780587038, guid: bceea53ec4bc3194085178be0e596173, type: 3}
   notificationManager: {fileID: 0}
-  ResourceCollectButtonPrefab: {fileID: 2571995776109023052, guid: ca79cf15e15e6f141acfbf6d6d9a35e3,
+  ResourceCollectButtonPrefabGold: {fileID: 2571995776109023052, guid: ca79cf15e15e6f141acfbf6d6d9a35e3,
+    type: 3}
+  ResourceCollectButtonPrefabMana: {fileID: 2571995776109023052, guid: 849a0e7c1c03a714bbe1daa71a05f33a,
     type: 3}
   GoldButtonParent: {fileID: 0}
   ManaButtonParent: {fileID: 0}
@@ -292,6 +299,7 @@ MonoBehaviour:
   itemCosts: {fileID: 11400000, guid: c45f4a969f02e0444988f37839f9bcf3, type: 2}
   CurrentInteractionMode: 0
   SpecialAbilityUnlockedTowerList: []
+  constructionAudio: {fileID: 0}
 --- !u!114 &6682590823350285528
 MonoBehaviour:
   m_ObjectHideFlags: 0

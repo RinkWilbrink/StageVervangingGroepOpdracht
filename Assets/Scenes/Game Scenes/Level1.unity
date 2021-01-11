@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3795,6 +3795,16 @@ PrefabInstance:
       objectReference: {fileID: 4318821454803897585}
     - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
+      propertyPath: HealthText
+      value: 
+      objectReference: {fileID: 2265071693375422225}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: DeathScreen
+      value: 
+      objectReference: {fileID: 6634946766616849031}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
       propertyPath: TowerSelectionManager
       value: 
       objectReference: {fileID: 5175730040167041647}
@@ -3808,73 +3818,11 @@ PrefabInstance:
       propertyPath: SpecialAbilityModeButton
       value: 
       objectReference: {fileID: 3143559478368820529}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: HealthText
-      value: 
-      objectReference: {fileID: 2265071693375422225}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: DeathScreen
-      value: 
-      objectReference: {fileID: 6634946766616849031}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: Towers.Array.data[2].image1
-      value: 
-      objectReference: {fileID: 21300000, guid: 7636b86e2a597084fb1cf9a9da023bc2,
-        type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: Towers.Array.data[2].image2
-      value: 
-      objectReference: {fileID: 21300000, guid: 4b8bc39cb8bd78940b5611896e22b780,
-        type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: constructionAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: 296f3795642f4a94e8ca2687ca21ca99, type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: closeUpgradeButton
-      value: 
-      objectReference: {fileID: 900721089}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 600629071}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5237801879261522617, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3984,26 +3932,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: World Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879261522622, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7593ef97becac3348934e7e8f55fa80d, type: 3}
@@ -5339,18 +5267,6 @@ Transform:
   m_Father: {fileID: 2007543958}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900721089 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-    type: 3}
-  m_PrefabInstance: {fileID: 719504240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &916980913
 GameObject:
   m_ObjectHideFlags: 0

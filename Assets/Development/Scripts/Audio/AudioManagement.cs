@@ -57,10 +57,17 @@ public class AudioManagement : MonoBehaviour
 
     public void SetMusicVolume(float musicVolume)
     {
-        float temp;
         _MasterMixer.SetFloat("MusicVolume", Mathf.Log10 (musicVolume) * 20);
-        _MasterMixer.GetFloat("MusicVolume", out temp);
-        Debug.Log(temp);
+    }
+
+    public void EnableMusicLowPass()
+    {
+        _MasterMixer.SetFloat("MusicLowPass", 600);
+    }
+    
+    public void DisableMusicLowPass()
+    {
+        _MasterMixer.SetFloat("MusicLowPass", 22000);
     }
     
     public void SetSFXVolume(float sfxVolume)

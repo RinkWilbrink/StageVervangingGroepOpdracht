@@ -29,6 +29,13 @@ namespace Tower
         [SerializeField] private GameObject LightningBoltPrefab;
         [Space(6)]
         [SerializeField] private GameObject FrostPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip MagicSpellAudioSFX;
+        [SerializeField] private AudioClip LightningAttackAudioSFX;
+        [SerializeField] private AudioClip FrostAttackAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip FrostSpecialAudioSFX;
+        [SerializeField] private AudioClip LightningSpecialAudioSFX;
 
         private CRSpline spline;
 
@@ -41,6 +48,13 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+
+            if ( SpecialUnlocked == SpecialAttack.Special2 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(FrostAttackAudioSFX, AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked != SpecialAttack.Special2 || SpecialUnlocked != SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(MagicSpellAudioSFX, AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked == SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(LightningAttackAudioSFX, AudioMixerGroups.SFX);   
         }
 
         protected override void SecondaryAttack()
@@ -51,7 +65,7 @@ namespace Tower
                     StartCoroutine(LightningAttack());
                     break;
                 case SpecialAttack.Special2:
-                    FrostAttack();
+                    StartCoroutine(FrostAttack());
                     break;
             }
 
@@ -63,6 +77,10 @@ namespace Tower
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
             int LightningChainCount = 0;
+            
+            FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
 
             while(LightningChainCount < LightningChainLimit)
             {
@@ -117,11 +135,15 @@ namespace Tower
             SpecialAttackMode = false;
         }
 
-        private void FrostAttack()
+        private IEnumerator FrostAttack()
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
             Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(FrostSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
 
             for(int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {

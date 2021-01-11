@@ -31,11 +31,15 @@ namespace ResourceBuilding
         [SerializeField] public int BuildingHealth = 1;
 
         [Header("Special Variables")]
-        [SerializeField] public Button button;
+        [SerializeField] public Button goldButton;
+        [SerializeField] public Button manaButton;
 
         [SerializeField] public ResourceUIManager resourceManager;
 
         [HideInInspector] public bool CanCollectResources = false;
+
+        [Header("Audio")]
+        [SerializeField] private AudioClip collectSFX;
 
         /// <summary>Init functions, This function gets called when the building gets created (like a start)</summary>
         public void Init()
@@ -46,7 +50,9 @@ namespace ResourceBuilding
         /// <summary>Add the CollectResource function to the OnButtonClick Event to collect the resource</summary>
         public void AddButtonListener()
         {
-            button.onClick.AddListener(delegate { CollectResources(); });
+            goldButton.onClick.AddListener(delegate { CollectResources(); });
+            manaButton.onClick.AddListener(delegate { CollectResources(); });
+
         }
 
         /// <summary>Collect the resource of the current building</summary>
@@ -54,7 +60,9 @@ namespace ResourceBuilding
         {
             Debug.Log(Resource);
 
-            if(Resource == ResourceType.GoldMine)
+            DataManager.ResourcesGained(ResourcesInStorage);
+
+            if (Resource == ResourceType.GoldMine)
             {
                 GameController.Gold += ResourcesInStorage;
             }
@@ -63,16 +71,21 @@ namespace ResourceBuilding
                 GameController.Mana += ResourcesInStorage;
             }
 
+
             resourceManager.UpdateResourceUI();
 
             ResourcesInStorage = 0;
+
+            if (collectSFX != null)
+                FindObjectOfType<AudioManagement>().PlayAudioClip(collectSFX, AudioMixerGroups.SFX);
         }
 
         private void Update()
         {
             if(BuildingHealth <= 0)
             {
-                Destroy(button.gameObject);
+                Destroy(goldButton.gameObject);
+                Destroy(manaButton.gameObject);
                 Destroy(gameObject);
 
                 Debug.LogFormat("{0} Died!!!", gameObject.name);
@@ -87,19 +100,30 @@ namespace ResourceBuilding
                 }
                 else
                 {
-                    ResourceCollectTimer += GameTime.deltaTime;
+                    ResourceCollectTimer += Time.deltaTime;
                 }
             }
 
-            if(ResourcesInStorage >= MinimumCollectionCount)
+            if(ResourcesInStorage >= MinimumCollectionCount && Resource == ResourceType.GoldMine)
             {
                 CanCollectResources = true;
-                button.gameObject.SetActive(true);
+                goldButton.gameObject.SetActive(true);
             }
             else if(ResourcesInStorage < MinimumCollectionCount)
             {
                 CanCollectResources = false;
-                button.gameObject.SetActive(false);
+                goldButton.gameObject.SetActive(false);
+            }
+
+            if (ResourcesInStorage >= MinimumCollectionCount && Resource == ResourceType.ManaWell)
+            {
+                CanCollectResources = true;
+                manaButton.gameObject.SetActive(true);
+            }
+            else if (ResourcesInStorage < MinimumCollectionCount)
+            {
+                CanCollectResources = false;
+                manaButton.gameObject.SetActive(false);
             }
         }
 

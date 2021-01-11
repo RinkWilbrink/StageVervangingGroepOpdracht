@@ -11,7 +11,8 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private TowerType towerWeakness;
     [SerializeField] private float damageMultiplier;
 
-    public float Health { get; private set; }
+
+    public float Health; //{ get; private set; }
     public float Speed { get; private set; }
     public int GoldReward { get; private set; }
     public int AttackDamage { get; private set; }
@@ -21,7 +22,10 @@ public class EnemyUnit : MonoBehaviour
     public Transform[] wayPoints;
     private int waypointIndex;
 
+    private SpriteRenderer spriteRenderer;
+
     private ResourceUIManager resourceUIManager;
+    private SelectionButtonManager selectionButtonManager;
     private UI.UpgradeUI upgradeUI;
 
     public void Initialize(EnemyData e)
@@ -32,24 +36,42 @@ public class EnemyUnit : MonoBehaviour
         this.AttackDamage = e.attackDamage;
     }
 
-    private void Start()
-    {
+
+    private void Awake() {
         //wayPoints = FindObjectOfType<WaypointManager>();
         resourceUIManager = FindObjectOfType<ResourceUIManager>();
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
+
+        //if ( walkSheet.Length > 0 )
+        //    StartCoroutine(AnimatedWalk());
+
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
 
-    private void Update()
-    {
+
+    Vector3 lastPos;
+    private void Update() {
         transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
 
-        // Need to test the rotation more
-        Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
+        Vector3 spritePos = transform.position - lastPos;
 
-        //Vector3 dir = WayPointManager.waypoints[waypointIndex].position - transform.position;
+        if ( spritePos.x >= 0 )
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
+
+        // Need to test the rotation more
+        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
+
+        transform.rotation = Quaternion.Euler(transform.localRotation.x, 180f, transform.rotation.z);
+
+        //Vector3 dir = wayPoints[waypointIndex].position - transform.position;
+        //print(dir);
+
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -81,15 +103,18 @@ public class EnemyUnit : MonoBehaviour
             if (waypointIndex < wayPoints.Length - 1)
             {
                 waypointIndex++;
-            }
-            else
-            {
-                Death();
+            } else {
+                AttackDeath();
                 //GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
                 upgradeUI.DoMainTowerDamage(AttackDamage);
             }
+
+        lastPos = transform.position;
     }
+
+    [SerializeField] private Sprite[] walkSheet;
+    [SerializeField] private float animSpeed = .1f;
 
     public void TakeDamage(float damage, TowerType towerType)
     {
@@ -149,8 +174,20 @@ public class EnemyUnit : MonoBehaviour
     private void Death()
     {
         GameController.Gold += GoldReward;
-        resourceUIManager.UpdateResourceUI();
 
+        DataManager.ResourcesGained(GoldReward);
+        DataManager.EnemySlayed();
+
+        resourceUIManager.UpdateResourceUI();
+        selectionButtonManager.UpdateTowerButtonUI();
+
+        Destroy(gameObject);
+
+        if ( OnDeath != null )
+            OnDeath();
+    }
+
+    private void AttackDeath() {
         Destroy(gameObject);
 
         if (OnDeath != null)

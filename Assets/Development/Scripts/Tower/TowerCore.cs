@@ -18,7 +18,7 @@ namespace Tower
         // Variables
         [Header("Stats")]
         [SerializeField] protected float AttackShootingTime;
-        [SerializeField] protected int AttackDamage;
+        [SerializeField] protected float AttackDamage;
 
         [HideInInspector] protected bool SpecialAttackMode = false;
 
@@ -30,12 +30,15 @@ namespace Tower
         [SerializeField] private float ShootingRange = 0;
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
+        [SerializeField] public GameObject Bullet;
         [HideInInspector] private RaycastHit hit;
-
+        [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]
         [SerializeField] public int TowerLevelToUnlockSpecial;
         [HideInInspector] public int TowerLevel = 1;
         [HideInInspector] public int TowerSpecialLevel = 0;
+        [Header("Attack delay for Audio")]
+        [SerializeField] public float AttackDelayTime;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
@@ -112,7 +115,7 @@ namespace Tower
                 }
                 else
                 {
-                    AttackTimer += GameTime.deltaTime;
+                    AttackTimer += Time.deltaTime;
                 }
             }
         }
@@ -138,7 +141,19 @@ namespace Tower
                 if(CurrentTarget != null)
                 {
                     PrimaryAttack();
+                    Shoot();
                 }
+            }
+        }
+        
+        void Shoot()
+        {
+            GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+            Projectile bullet = bulletGO.GetComponent<Projectile>();
+
+            if(bullet != null)
+            {
+                bullet.seek(CurrentTarget);
             }
         }
 
@@ -153,8 +168,10 @@ namespace Tower
 
         public void UpdateDamageValues()
         {
-            UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
-            UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
+            AttackDamage += DamageAddedPerLevel;
+            AttackShootingTime += FireRateAddedPerLevel;
+            //UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
+            //UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
         }
 
         public void StartSecondairyAttack()

@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341408205393899863}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 341408206199449652}
   m_RootOrder: 1
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 7ee0829c2751640448584422454bf83b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,7 +106,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341408206199449656}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -114,7 +114,7 @@ Transform:
   - {fileID: 341408205393899862}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &341408206199449659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,7 +143,18 @@ MonoBehaviour:
   rotateSpeed: 60
   enemyData: {fileID: 11400000, guid: a87a74250b89c9f47979d0164cb4304c, type: 2}
   frostOverlayImage: {fileID: 2089042610387478241}
+  Health: 0
   wayPoints: []
+  walkSheet:
+  - {fileID: -6802955296112004871, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: -3706508057106614031, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: 8984212584389346321, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: 4992222255433938602, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: -192330557807600067, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: -218779377025079062, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: 2231052108590376757, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  - {fileID: -6370184983434972902, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
+  animSpeed: 0.057
 --- !u!1 &2089042610387478241
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ namespace Tower
         [SerializeField] private float FireRateAddedPerLevel;
 
         [Header("Shooting and Range")]
-        [SerializeField] private float ShootingRange = 0;
+        public float ShootingRange = 0;
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [SerializeField] public GameObject Bullet;
@@ -57,6 +57,8 @@ namespace Tower
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
         [HideInInspector] protected bool CanAttack = true;
+
+        public UpgradeCost TowerUpgradeCosts;
 
         // Init function gets called when the tower gets destroyed
         public virtual void Init()

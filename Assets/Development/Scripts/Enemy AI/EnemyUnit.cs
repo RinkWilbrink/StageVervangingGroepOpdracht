@@ -21,6 +21,7 @@ public class EnemyUnit : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private ResourceUIManager resourceUIManager;
+    private SelectionButtonManager selectionButtonManager;
     private UI.UpgradeUI upgradeUI;
 
     public void Initialize( EnemyData e ) {
@@ -35,6 +36,7 @@ public class EnemyUnit : MonoBehaviour
         resourceUIManager = FindObjectOfType<ResourceUIManager>();
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
 
         if ( walkSheet.Length > 0 )
             StartCoroutine(AnimatedWalk());
@@ -167,6 +169,7 @@ public class EnemyUnit : MonoBehaviour
         DataManager.EnemySlayed();
 
         resourceUIManager.UpdateResourceUI();
+        selectionButtonManager.UpdateTowerButtonUI();
 
         Destroy(gameObject);
 

@@ -24,13 +24,16 @@ public class AudioManagement : MonoBehaviour
         _Pooling = GetComponent<Pooling>();
         _MusicAudioObject = GameObject.Find("MusicAudioObject");
 
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (_MusicAudioObject != null)
         {
-            _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack0;
-        }
-        else
-        {
-            _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack1;
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack0;
+            }
+            else
+            {
+                _MusicAudioObject.GetComponent<AudioSource>().clip = _MusicTrack1;
+            }
         }
 
         _MusicAudioObject.GetComponent<AudioSource>().Play();
@@ -54,10 +57,17 @@ public class AudioManagement : MonoBehaviour
 
     public void SetMusicVolume(float musicVolume)
     {
-        float temp;
         _MasterMixer.SetFloat("MusicVolume", Mathf.Log10 (musicVolume) * 20);
-        _MasterMixer.GetFloat("MusicVolume", out temp);
-        Debug.Log(temp);
+    }
+
+    public void EnableMusicLowPass()
+    {
+        _MasterMixer.SetFloat("MusicLowPass", 600);
+    }
+    
+    public void DisableMusicLowPass()
+    {
+        _MasterMixer.SetFloat("MusicLowPass", 22000);
     }
     
     public void SetSFXVolume(float sfxVolume)

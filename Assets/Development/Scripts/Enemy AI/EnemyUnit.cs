@@ -10,6 +10,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private GameObject frostOverlayImage;
     [SerializeField] private TowerType towerWeakness;
     [SerializeField] private float damageMultiplier;
+    [SerializeField] private float resistanceMultiplier;
 
 
     public float Health; //{ get; private set; }
@@ -116,11 +117,28 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private Sprite[] walkSheet;
     [SerializeField] private float animSpeed = .1f;
 
-    public void TakeDamage(float damage, TowerType towerType)
+    public void TakeDamage(float damage, TowerType towerTypeWeakness)
     {
-        if (towerType != TowerType.NullValue && towerWeakness == towerType)
+        int towerRes = (int)towerTypeWeakness + 1;
+
+        if (towerRes + 1 < (int)TowerType.NullValue)
         {
-            Health -= damage * damageMultiplier;
+            towerRes += 1;
+        }
+        else if(towerRes + 1 == (int)TowerType.NullValue)
+        {
+            towerRes = 0;
+        }
+
+        TowerType towerTypeResistance = (TowerType)towerRes;
+
+        if (towerTypeWeakness != TowerType.NullValue && towerWeakness == towerTypeWeakness)
+        {
+            Health -= (damage * damageMultiplier);
+        }
+        else if (towerTypeWeakness != TowerType.NullValue && towerWeakness == towerTypeResistance)
+        {
+            Health -= (damage / resistanceMultiplier);
         }
         else
         {

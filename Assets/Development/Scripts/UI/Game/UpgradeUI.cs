@@ -101,7 +101,7 @@ namespace UI
             }
             else 
             {
-                Errormssg.SetActive(true);
+                Debug.Log("Can't upgrade towers on level 1");
             }
             
         }

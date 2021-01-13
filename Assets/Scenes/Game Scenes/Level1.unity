@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -888,18 +888,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271069867}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &287007577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5350080469934362663, guid: 7593ef97becac3348934e7e8f55fa80d,
-    type: 3}
-  m_PrefabInstance: {fileID: 719504240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &294933703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1348,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.26e-41, z: 0, w: -Infinity}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3827,6 +3815,16 @@ PrefabInstance:
       objectReference: {fileID: 4318821454803897585}
     - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
+      propertyPath: HealthText
+      value: 
+      objectReference: {fileID: 2265071693375422225}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: DeathScreen
+      value: 
+      objectReference: {fileID: 6634946766616849031}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
       propertyPath: TowerSelectionManager
       value: 
       objectReference: {fileID: 5175730040167041647}
@@ -3840,51 +3838,6 @@ PrefabInstance:
       propertyPath: SpecialAbilityModeButton
       value: 
       objectReference: {fileID: 3143559478368820529}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: HealthText
-      value: 
-      objectReference: {fileID: 2265071693375422225}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: DeathScreen
-      value: 
-      objectReference: {fileID: 6634946766616849031}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: constructionAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: 296f3795642f4a94e8ca2687ca21ca99, type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: closeUpgradeButton
-      value: 
-      objectReference: {fileID: 900721089}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: towerUpgradeCostText
-      value: 
-      objectReference: {fileID: 287007577}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3892,49 +3845,9 @@ PrefabInstance:
       objectReference: {fileID: 600629071}
     - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 600629071}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: DisableRangeIndicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5237801879261522617, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4044,31 +3957,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: World Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879261522622, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546672, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5237801879393546673, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7593ef97becac3348934e7e8f55fa80d, type: 3}
@@ -5404,18 +5292,6 @@ Transform:
   m_Father: {fileID: 2007543958}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900721089 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
-    type: 3}
-  m_PrefabInstance: {fileID: 719504240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &916980913
 GameObject:
   m_ObjectHideFlags: 0
@@ -6348,7 +6224,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.6804e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

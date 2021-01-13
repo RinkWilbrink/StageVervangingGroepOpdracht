@@ -71,7 +71,7 @@ namespace Tower
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         [SerializeField] private AudioClip constructionAudio;
-        [SerializeField] private Image towerRangeIndicator;
+        [SerializeField] private SpriteRenderer towerRangeIndicator;
         private string sceneName;
 
         private void Start()
@@ -395,15 +395,15 @@ namespace Tower
         }
 
         public void EnableRangeIndicator(Vector3 indicatorPos) {
-                float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange * .1f;
+            float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange / 4f;
 
-                towerRangeIndicator.gameObject.SetActive(true);
-                towerRangeIndicator.transform.position = indicatorPos;
-                towerRangeIndicator.transform.localScale = new Vector3(shootRange, shootRange);
+            towerRangeIndicator.gameObject.SetActive(true);
+            towerRangeIndicator.transform.position = indicatorPos;
+            towerRangeIndicator.transform.localScale = new Vector3(shootRange, shootRange);
         }
 
         public void DisableRangeIndicator() {
-                towerRangeIndicator.gameObject.SetActive(false);
+            towerRangeIndicator.gameObject.SetActive(false);
         }
 
         #endregion

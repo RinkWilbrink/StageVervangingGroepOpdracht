@@ -2892,6 +2892,11 @@ PrefabInstance:
       propertyPath: constructionAudio
       value: 
       objectReference: {fileID: 8300000, guid: 60e8128df6795724583e31fcdce81478, type: 3}
+    - target: {fileID: 6682590823350285529, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: towerRangeIndicator
+      value: 
+      objectReference: {fileID: 719504245}
     - target: {fileID: 6682590823350285530, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5555,6 +5560,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &719504245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6468832892676024645, guid: 7593ef97becac3348934e7e8f55fa80d,
+    type: 3}
+  m_PrefabInstance: {fileID: 719504240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &740322156

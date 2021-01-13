@@ -16,12 +16,14 @@ public class LevelSelectThomas : MonoBehaviour{
     private int amountPerPage;
     private int currentLevelCount;
     private GameObject text;
-    [SerializeField] private Animator _MusicAnimator;
-    [SerializeField] private float _WaitTime;
+    [SerializeField] private Animator musicAnimator;
+    [SerializeField] private float waitTime;
+    [SerializeField] private AudioManagement audioManagement;
 
     // Start is called before the first frame update
     void Start()
     {
+        musicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
         iconDimensions = levelIcon.GetComponent<RectTransform>().rect;
         int maxInARow = Mathf.FloorToInt((panelDimensions.width + iconSpacing.x) / (iconDimensions.width + iconSpacing.x));
@@ -87,14 +89,15 @@ public class LevelSelectThomas : MonoBehaviour{
     public void LoadScene(int index)
     {
         StartCoroutine(ChangeScene(index));
+        audioManagement.DisableMusicLowPass();
         Time.timeScale = 1;
     }
 
     private IEnumerator ChangeScene(int index)
     {
-        _MusicAnimator.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(_WaitTime);
+        musicAnimator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(waitTime);
         SceneManager.LoadScene("Level" + index, LoadSceneMode.Single);
-        _MusicAnimator.SetTrigger("FadeIn");
+        musicAnimator.SetTrigger("FadeIn");
     }
 }

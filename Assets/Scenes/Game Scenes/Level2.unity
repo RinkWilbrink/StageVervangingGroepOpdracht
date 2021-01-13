@@ -2592,6 +2592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d05d61fc18a2c4d980f7ec0f25616b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _WaitTime: 2
+  _MusicAnimator: {fileID: 0}
+  _AudioManagement: {fileID: 247861648}
 --- !u!1 &589739645
 GameObject:
   m_ObjectHideFlags: 0
@@ -8997,6 +9000,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 600629071}
+    - target: {fileID: 567130887, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
+      propertyPath: _AudioManagement
+      value: 
+      objectReference: {fileID: 247861648}
+    - target: {fileID: 567130887, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
+      propertyPath: _WaitTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1038490984, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9748,6 +9759,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634946766066759079, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: _AudioManagement
+      value: 
+      objectReference: {fileID: 247861648}
+    - target: {fileID: 6634946766066759079, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: _WaitTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634946766356234828, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}

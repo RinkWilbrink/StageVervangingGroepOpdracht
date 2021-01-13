@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3262,7 +3262,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[1].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3406,12 +3406,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[2].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3431,7 +3431,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3530,7 +3530,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3659,7 +3659,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3788,7 +3788,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4214,7 +4214,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4341,7 +4341,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4468,7 +4468,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4595,7 +4595,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4722,7 +4722,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4849,7 +4849,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}

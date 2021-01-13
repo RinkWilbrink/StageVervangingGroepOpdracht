@@ -2510,7 +2510,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[1].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -2654,12 +2654,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[2].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -2679,7 +2679,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -2778,7 +2778,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -2907,7 +2907,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3036,7 +3036,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].goldReward
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -8097,6 +8097,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 600629071}
+    - target: {fileID: 3640508377795081476, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4341514585495377111, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -10965,7 +10970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2099413870
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5359,18 +5359,6 @@ PrefabInstance:
       objectReference: {fileID: 6634946766616849031}
     - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
-      propertyPath: Towers.Array.data[2].image1
-      value: 
-      objectReference: {fileID: 21300000, guid: 7636b86e2a597084fb1cf9a9da023bc2,
-        type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
-      propertyPath: Towers.Array.data[2].image2
-      value: 
-      objectReference: {fileID: 21300000, guid: 4b8bc39cb8bd78940b5611896e22b780,
-        type: 3}
-    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
-        type: 3}
       propertyPath: constructionAudio
       value: 
       objectReference: {fileID: 8300000, guid: 296f3795642f4a94e8ca2687ca21ca99, type: 3}
@@ -5394,6 +5382,11 @@ PrefabInstance:
       propertyPath: Level3
       value: Level3
       objectReference: {fileID: 0}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: towerUpgradeCostText
+      value: 
+      objectReference: {fileID: 719504244}
     - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5559,6 +5552,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5237801879393546673, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7593ef97becac3348934e7e8f55fa80d, type: 3}
 --- !u!224 &719504241 stripped
@@ -5583,6 +5581,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 542fed1978b68c84f9d152239296968e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &719504244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5350080469934362663, guid: 7593ef97becac3348934e7e8f55fa80d,
+    type: 3}
+  m_PrefabInstance: {fileID: 719504240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &728859535

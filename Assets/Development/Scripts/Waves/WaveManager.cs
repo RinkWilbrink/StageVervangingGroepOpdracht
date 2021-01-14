@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int levelNummer;
     [SerializeField] private WaveData[] waves;
     [Space(10)]
+    [Header("Wave Cooldown")]
     [SerializeField] private float waveCooldown = 10;
 
     private WaveData currentWave;
@@ -49,7 +51,7 @@ public class WaveManager : MonoBehaviour
         if ( currentWave.spawnIntensity.length < 1 ) {
             spawnNext = Time.time + UnityEngine.Random.Range(currentWave.minSpawnTime, currentWave.maxSpawnTime);
         } else if ( currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
-            float spawnTime = spawnCurveIndex / currentWave.enemyCount;
+            float spawnTime = spawnCurveIndex / SheetData.EnemyCount[currentWaveNum - 1];
             spawnNext = Time.time + currentWave.spawnIntensity.Evaluate(spawnTime);
             //Debug.Log("Next Spawn: " + currentWave.spawnIntensity.Evaluate(spawnTime));
         } else if ( !currentWave.normalizeCurve && currentWave.spawnIntensity.length >= 1 ) {
@@ -118,7 +120,9 @@ public class WaveManager : MonoBehaviour
 
         FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
-        enemiesLeftToSpawn = currentWave.enemyCount;
+        //CSVWaveData waveData = ReadData(currentWaveNum - 1);
+        print(SheetData.GoldReward[currentWaveNum - 1]);
+        enemiesLeftToSpawn = SheetData.EnemyCount[currentWaveNum - 1];
         enemiesLeftAlive = enemiesLeftToSpawn;
 
         new WaitForSeconds(0.01f);
@@ -128,13 +132,14 @@ public class WaveManager : MonoBehaviour
         for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
             currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(false);
         }
+        GameController.Gold += SheetData.GoldReward[currentWaveNum - 1];
     }
 
     [Serializable]
     public struct WaveData
     {
-        public int enemyCount;
-        public int goldReward;
+        private int enemyCount;
+        private int goldReward;
         public AnimationCurve spawnIntensity;
         public bool normalizeCurve;
         public float minSpawnTime;
@@ -148,5 +153,27 @@ public class WaveManager : MonoBehaviour
         public EnemyUnit enemy;
         public int chance;
         public WaypointManager waypointManager;
+    }
+
+    // Local data reading
+    private CSVWaveData ReadData( int waveIndex ) {
+        string fileName = "Yokai TD - WaveData.csv";
+        string filePath = Application.dataPath + "/Development/Sheet Data/" + fileName;
+        string s = File.ReadAllText(filePath);
+        CSVWaveData data = new CSVWaveData();
+
+        string[] lines = s.Split('\n');
+        string[] fields = lines[waveIndex].Split(',');
+
+        data = new CSVWaveData() {
+            goldReward = int.Parse(fields[0])
+        };
+
+        return data;
+    }
+
+    public struct CSVWaveData
+    {
+        public int goldReward;
     }
 }

@@ -117,7 +117,7 @@ namespace Tower
                     else
                     {
                         LightningChainCount = LightningChainLimit + 1;
-                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
+                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
 
                         yield return null;
                     }
@@ -125,7 +125,7 @@ namespace Tower
 
                 if(collider != null)
                 {
-                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
+                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
                 }
 
                 LightningChainCount++;

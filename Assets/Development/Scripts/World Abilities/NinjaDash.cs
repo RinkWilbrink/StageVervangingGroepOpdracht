@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class NinjaDash : MonoBehaviour
 {
@@ -34,7 +36,7 @@ public class NinjaDash : MonoBehaviour
         ninja = Instantiate(ninjaSprite, startPos, Quaternion.Euler(90, 0, 0));
         ninja.transform.SetParent(transform);
         ninja.SetActive(false);
-        
+
         if ( gameObject.active )
             gameObject.SetActive(false);
 
@@ -45,7 +47,7 @@ public class NinjaDash : MonoBehaviour
     bool stopTest = false;
     bool moveNinja = false;
     private void Update() {
-        if ( Input.GetMouseButtonDown(0) && !moveNinja ) {
+        if ( Input.GetMouseButtonDown(0) && !moveNinja && !IsMouseOnUI() ) {
             print("Down");
             line.enabled = true;
 
@@ -58,7 +60,8 @@ public class NinjaDash : MonoBehaviour
             ninja.transform.position = startPos;
             ninja.SetActive(true);
         }
-        if ( Input.GetMouseButton(0) && !moveNinja ) {
+
+        if ( Input.GetMouseButton(0) && !moveNinja && !IsMouseOnUI() ) {
             print("Drag");
 
             Vector3 dist = startPos - endPos;
@@ -76,6 +79,7 @@ public class NinjaDash : MonoBehaviour
                 stopTest = true;
             }
         }
+
         if ( Input.GetMouseButtonUp(0) && !moveNinja ) {
             print("Up");
 
@@ -111,5 +115,9 @@ public class NinjaDash : MonoBehaviour
                 Debug.Log("An Enemy is hit");
             }
         }
+    }
+
+    private bool IsMouseOnUI() {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

@@ -72,6 +72,7 @@ namespace Tower
 
         [SerializeField] private AudioClip constructionAudio;
         [SerializeField] private Image towerRangeIndicator;
+        private string sceneName;
 
         private void Start()
         {
@@ -98,6 +99,8 @@ namespace Tower
                 BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
                 BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
             }
+
+            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         }
 
         private void Update()
@@ -247,7 +250,7 @@ namespace Tower
             }
             else if(CurrentInteractionMode == InteractionMode.UpgradeMode)
             {
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0) && sceneName != "Level1" )
                 {
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit _hit = new RaycastHit();

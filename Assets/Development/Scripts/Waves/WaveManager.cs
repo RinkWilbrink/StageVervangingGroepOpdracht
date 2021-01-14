@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     private float spawnCurveIndex;
     private void Update() {
         //Debug.LogError(currentWaveNum);
-        print("Enemies left to spawn: " + enemiesLeftToSpawn);
+        //print("Enemies left to spawn: " + enemiesLeftToSpawn);
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
             SpawnEnemy();

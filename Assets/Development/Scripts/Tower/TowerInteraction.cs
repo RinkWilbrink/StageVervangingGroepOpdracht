@@ -71,6 +71,8 @@ namespace Tower
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         [SerializeField] private AudioClip constructionAudio;
+        [SerializeField] private SpriteRenderer towerRangeIndicator;
+        private string sceneName;
 
         private void Start()
         {
@@ -97,6 +99,8 @@ namespace Tower
                 BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
                 BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
             }
+
+            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         }
 
         private void Update()
@@ -121,6 +125,8 @@ namespace Tower
                                 {
                                     TowerPrefablist[TowerSelectedIndex].SetActive(true);
                                     TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
+
+                                    EnableRangeIndicator(hitPoint);
                                 }
                                 else
                                 {
@@ -151,6 +157,8 @@ namespace Tower
                                         go.GetComponent<TowerCore>().SetNewSprite();
 
                                         FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
+
+                                        DisableRangeIndicator();
 
                                         // Create UI
                                         switch (go.GetComponent<TowerCore>().towerType)
@@ -242,7 +250,7 @@ namespace Tower
             }
             else if(CurrentInteractionMode == InteractionMode.UpgradeMode)
             {
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0) && sceneName != "Level1" )
                 {
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit _hit = new RaycastHit();
@@ -252,8 +260,10 @@ namespace Tower
                         if(_hit.collider.tag == "Tower")
                         {
                             upgradeUI.currentTower = _hit.collider.GetComponent<TowerCore>();
+                            upgradeUI.towerUpgradeCostText.text = upgradeUI.currentTower.TowerUpgradeCosts.UpgradeCosts[upgradeUI.currentTower.TowerLevel - 1] + "";
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
                             upgradeUI.SpecialButton();
+                            EnableRangeIndicator(_hit.collider.transform.position);
                             CurrentInteractionMode = InteractionMode.None;
                         }
                     }
@@ -300,6 +310,8 @@ namespace Tower
                         return itemCosts.ArcherTowerCost;
                     case 1:
                         return itemCosts.WizardTowerCost;
+                    case 2:
+                        return itemCosts.CannonTowerCost;
                 }
             }
             else if(CurrentBuildingType == Types.ResourceBuilding)
@@ -315,6 +327,7 @@ namespace Tower
 
             return 0;
         }
+
 
         #region Public Functions
 
@@ -379,6 +392,18 @@ namespace Tower
             }
 
             SpecialAbilityUnlockedTowerList.Add(core);
+        }
+
+        public void EnableRangeIndicator(Vector3 indicatorPos) {
+            float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange / 4f;
+
+            towerRangeIndicator.gameObject.SetActive(true);
+            towerRangeIndicator.transform.position = indicatorPos;
+            towerRangeIndicator.transform.localScale = new Vector3(shootRange, shootRange);
+        }
+
+        public void DisableRangeIndicator() {
+            towerRangeIndicator.gameObject.SetActive(false);
         }
 
         #endregion

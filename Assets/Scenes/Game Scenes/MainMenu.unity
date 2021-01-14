@@ -221,17 +221,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1226109648}
-        m_MethodName: ButtonAudio
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &75332824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d05d61fc18a2c4d980f7ec0f25616b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _WaitTime: 0
+  _MusicAnimator: {fileID: 0}
+  _AudioManagement: {fileID: 0}
 --- !u!1 &388129506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,6 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardTime: 3800000
+  updateCooldown: 1
   rewardButton: {fileID: 1159868040}
   timerText: {fileID: 653271791}
 --- !u!4 &487989694
@@ -2043,17 +2036,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1731428144}
         m_MethodName: SetMusicVolume
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1226109648}
-        m_MethodName: ButtonAudio
-        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2610,17 +2592,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1731428144}
         m_MethodName: SetSFXVolume
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1226109648}
-        m_MethodName: ButtonAudio
-        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3368,8 +3339,9 @@ MonoBehaviour:
   PageManager: {fileID: 1226109647}
   numberOfLevels: 60
   iconSpacing: {x: 40, y: 80}
-  _MusicAnimator: {fileID: 5035958015243489378}
-  _WaitTime: 1
+  musicAnimator: {fileID: 0}
+  waitTime: 2
+  audioManagement: {fileID: 1731428144}
   levelSelectButtons: []
 --- !u!114 &1226109647
 MonoBehaviour:
@@ -5968,12 +5940,6 @@ CanvasRenderer:
 --- !u!1 &1757868661890552917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7274249651935854203, guid: e71b63c3212a54248867680703e8a922,
-    type: 3}
-  m_PrefabInstance: {fileID: 8977476949578492462}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5035958015243489378 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4140275469985299020, guid: e71b63c3212a54248867680703e8a922,
     type: 3}
   m_PrefabInstance: {fileID: 8977476949578492462}
   m_PrefabAsset: {fileID: 0}

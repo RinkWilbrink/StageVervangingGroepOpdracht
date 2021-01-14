@@ -67,6 +67,7 @@ namespace UI
 
         [SerializeField] private Sprite lockedImage;
 
+        public TMPro.TextMeshProUGUI towerUpgradeCostText;
 
         private void Awake()
         {
@@ -100,7 +101,7 @@ namespace UI
             }
             else 
             {
-                Errormssg.SetActive(true);
+                Debug.Log("Can't upgrade towers on level 1");
             }
             
         }
@@ -232,10 +233,12 @@ namespace UI
         [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (PayGold(4))
+            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1]))
             {
                 currentTower.TowerLevel += 1;
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
+                towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1] + "";
+
                 if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);

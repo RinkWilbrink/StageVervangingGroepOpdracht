@@ -5,11 +5,14 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
+    [SerializeField] private SelectionButtonManager SelectionButtonManager;
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private AudioClip[] coinDropAudio;
     [SerializeField] private AudioClip[] waveAudio;
+    [SerializeField] private GameObject beginWaveIcon;
 
     [Header("Waves")]
+    [SerializeField] private int levelNummer;
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
@@ -21,6 +24,7 @@ public class WaveManager : MonoBehaviour
     private float spawnNext;
 
     private void Start() {
+        currentWave = waves[currentWaveNum];
         updateWave = UpdateWave(waveCooldown);
         StartCoroutine(updateWave);
     }
@@ -82,6 +86,7 @@ public class WaveManager : MonoBehaviour
 
             GameController.Gold += currentWave.goldReward;
             FindObjectOfType<ResourceUIManager>().UpdateResourceUI();
+            SelectionButtonManager.UpdateTowerButtonUI();
 
             StartCoroutine(updateWave);
         }
@@ -90,8 +95,17 @@ public class WaveManager : MonoBehaviour
     private IEnumerator UpdateWave( float waitTime ) {
         currentWaveNum++;
 
+        beginWaveIcon.SetActive(true);
+
+        for (int i = 0; i < currentWave.enemies.Length; i++)
+        {
+            currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(true);
+        }
+
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
+
+            DataManager.LevelComplete(levelNummer);
 
             Time.timeScale = 0;
         }
@@ -105,6 +119,15 @@ public class WaveManager : MonoBehaviour
 
         enemiesLeftToSpawn = currentWave.enemyCount;
         enemiesLeftAlive = enemiesLeftToSpawn;
+
+        new WaitForSeconds(0.01f);
+
+        beginWaveIcon.SetActive(false);
+
+        for (int i = 0; i < currentWave.enemies.Length; i++)
+        {
+            currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(false);
+        }
     }
 
     [Serializable]

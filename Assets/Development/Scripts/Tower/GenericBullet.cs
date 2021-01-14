@@ -6,7 +6,7 @@ public class GenericBullet : MonoBehaviour
 {
     private Vector3 moveDirection;
     private float moveSpeed;
-
+    [SerializeField] private float damage;
     private void OnEnable()
     {
         Invoke("Destroy", 3f);   
@@ -32,5 +32,14 @@ public class GenericBullet : MonoBehaviour
     private void Destroy()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Debug.Log(damage);
+            other.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.ArcherTower);
+        }
     }
 }

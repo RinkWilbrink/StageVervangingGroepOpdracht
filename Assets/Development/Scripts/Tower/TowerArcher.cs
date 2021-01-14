@@ -10,6 +10,7 @@ namespace Tower
         // Variables
         [Header("Ballista")]
         [SerializeField] private float angle;
+        [SerializeField] private float anglestep;
         [SerializeField] private int amountToSpawn;
         //[SerializeField] private int BallistaDamage;
 
@@ -85,6 +86,10 @@ namespace Tower
         #region balista bolts
         private IEnumerator BallistaBolts()
         {
+            FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
+
             for (int i = 0; i < amountToSpawn; i++)
             {
                 float bulDirX =  Mathf.Cos((angle * Mathf.PI) / 180f);
@@ -100,7 +105,7 @@ namespace Tower
 
                 bul.SetActive(true);
                 bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
-                angle += 10f;
+                angle += anglestep;
                 yield return new WaitForSeconds(0.01f);
 
             }
@@ -192,7 +197,7 @@ namespace Tower
                 for (int i = 0; i < EnemiesInRange.Length; i++)
                 {
                     EnemiesInRange[i].GetComponent<EnemyUnit>().PoisonDOT(PoisonDamage, PoisonTimeInSeconds);
-                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage);
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(PoisonDamage, towerType);
                 }
 
                 timer += 1f;

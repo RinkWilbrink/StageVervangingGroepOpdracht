@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Tower;
 
 public class EnemyUnit : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 60;
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private GameObject frostOverlayImage;
+    [SerializeField] private TowerType towerWeakness;
+    [SerializeField] private float damageMultiplier;
+    [SerializeField] private float resistanceMultiplier;
+
 
     public float Health; //{ get; private set; }
     public float Speed { get; private set; }
@@ -21,27 +26,32 @@ public class EnemyUnit : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private ResourceUIManager resourceUIManager;
+    private SelectionButtonManager selectionButtonManager;
     private UI.UpgradeUI upgradeUI;
 
-    public void Initialize( EnemyData e ) {
+    public void Initialize(EnemyData e)
+    {
         this.Health = e.health;
         this.Speed = e.speed;
         this.GoldReward = e.goldReward;
         this.AttackDamage = e.attackDamage;
     }
 
+
     private void Awake() {
         //wayPoints = FindObjectOfType<WaypointManager>();
         resourceUIManager = FindObjectOfType<ResourceUIManager>();
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
 
-        if ( walkSheet.Length > 0 )
-            StartCoroutine(AnimatedWalk());
+        //if ( walkSheet.Length > 0 )
+        //    StartCoroutine(AnimatedWalk());
 
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
     }
+
 
     Vector3 lastPos;
     private void Update() {
@@ -65,16 +75,18 @@ public class EnemyUnit : MonoBehaviour
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
 
-        if ( Input.GetKeyDown(KeyCode.E) )
-            TakeDamage(1);
+        if (Input.GetKeyDown(KeyCode.E))
+            TakeDamage(1, TowerType.NullValue);
 
-        if ( Speed < 0 )
+        if (Speed < 0)
             Speed = 0;
 
-        if ( slowDebuffActive ) {
+        if (slowDebuffActive)
+        {
             slowDebuffTimer += GameTime.deltaTime;
 
-            if ( slowDebuffTimer > slowDebuffTime ) {
+            if (slowDebuffTimer > slowDebuffTime)
+            {
                 Speed += slowDownSpeed;
                 slowDebuffTimer = 0f;
                 slowDebuffActive = false;
@@ -82,14 +94,15 @@ public class EnemyUnit : MonoBehaviour
         }
 
         // Test
-        if ( Input.GetKeyDown(KeyCode.S) )
+        if (Input.GetKeyDown(KeyCode.S))
             SlowDown(80f, 4f);
 
-        if ( Input.GetKeyDown(KeyCode.G) )
+        if (Input.GetKeyDown(KeyCode.G))
             StartCoroutine(TakeDamageOverTime(1, 2));
 
-        if ( Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f )
-            if ( waypointIndex < wayPoints.Length - 1 ) {
+        if (Vector3.Distance(transform.position, wayPoints[waypointIndex].position) < .1f)
+            if (waypointIndex < wayPoints.Length - 1)
+            {
                 waypointIndex++;
             } else {
                 AttackDeath();
@@ -103,36 +116,50 @@ public class EnemyUnit : MonoBehaviour
 
     [SerializeField] private Sprite[] walkSheet;
     [SerializeField] private float animSpeed = .1f;
-    private IEnumerator AnimatedWalk() {
-        int i;
-        i = 0;
 
-        while ( i < walkSheet.Length ) {
-            spriteRenderer.sprite = walkSheet[i];
-            i++;
-            yield return new WaitForSeconds(animSpeed);
-            yield return 0;
+    public void TakeDamage(float damage, TowerType towerTypeWeakness)
+    {
+        int towerRes = (int)towerTypeWeakness + 1;
+
+        if (towerRes + 1 < (int)TowerType.NullValue)
+        {
+            towerRes += 1;
+        }
+        else if(towerRes + 1 == (int)TowerType.NullValue)
+        {
+            towerRes = 0;
         }
 
-        StartCoroutine(AnimatedWalk());
-    }
+        TowerType towerTypeResistance = (TowerType)towerRes;
 
-    public void TakeDamage( float damage ) {
-        Health -= damage;
+        if (towerTypeWeakness != TowerType.NullValue && towerWeakness == towerTypeWeakness)
+        {
+            Health -= (damage * damageMultiplier);
+        }
+        else if (towerTypeWeakness != TowerType.NullValue && towerWeakness == towerTypeResistance)
+        {
+            Health -= (damage / resistanceMultiplier);
+        }
+        else
+        {
+            Health -= damage;
+        }
 
-        if ( Health < 1 )
+        if (Health < 1)
             Death();
     }
 
     [NonSerialized] public int takeDamageOTTimer = 0;
     private bool takeDamageOTActive = false;
-    public IEnumerator TakeDamageOverTime( int dps, int damageTime, int timeUntilDamageTaken = 1 ) {
+    public IEnumerator TakeDamageOverTime(int dps, int damageTime, int timeUntilDamageTaken = 1)
+    {
         takeDamageOTActive = true;
         takeDamageOTTimer = 0;
 
-        while ( takeDamageOTTimer < damageTime ) {
+        while (takeDamageOTTimer < damageTime)
+        {
             Health -= dps;
-            if ( Health < 1 )
+            if (Health < 1)
                 Death();
             yield return new WaitForSeconds(timeUntilDamageTaken);
             takeDamageOTTimer++;
@@ -146,12 +173,14 @@ public class EnemyUnit : MonoBehaviour
     private float slowDownTotalSpeed;
     private float slowDebuffTime;
     private float slowDebuffTimer = 0;
-    public void SlowDown( float speedDebuff, float time ) {
-        if ( Speed > slowDownTotalSpeed ) {
-            slowDownSpeed = ( speedDebuff / 100 ) * Speed;
+    public void SlowDown(float speedDebuff, float time)
+    {
+        if (Speed > slowDownTotalSpeed)
+        {
+            slowDownSpeed = (speedDebuff / 100) * Speed;
 
-            print(( speedDebuff / 100 ) * Speed);
-            Speed -= ( speedDebuff / 100 ) * Speed;
+            print((speedDebuff / 100) * Speed);
+            Speed -= (speedDebuff / 100) * Speed;
 
             slowDownTotalSpeed = Speed;
             slowDebuffTime = time;
@@ -160,9 +189,15 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
-    private void Death() {
+    private void Death()
+    {
         GameController.Gold += GoldReward;
+
+        DataManager.ResourcesGained(GoldReward);
+        DataManager.EnemySlayed();
+
         resourceUIManager.UpdateResourceUI();
+        selectionButtonManager.UpdateTowerButtonUI();
 
         Destroy(gameObject);
 
@@ -173,14 +208,16 @@ public class EnemyUnit : MonoBehaviour
     private void AttackDeath() {
         Destroy(gameObject);
 
-        if ( OnDeath != null )
+        if (OnDeath != null)
             OnDeath();
     }
 
-    public IEnumerator FrostOverlay( float maxTimer ) {
+    public IEnumerator FrostOverlay(float maxTimer)
+    {
         float timer = 0;
         frostOverlayImage.SetActive(true);
-        while ( timer < maxTimer ) {
+        while (timer < maxTimer)
+        {
             timer += GameTime.deltaTime;
 
             yield return null;
@@ -189,13 +226,16 @@ public class EnemyUnit : MonoBehaviour
         frostOverlayImage.SetActive(false);
     }
 
-    public IEnumerator FireOverlay( float maxTimer ) {
+    public IEnumerator FireOverlay(float maxTimer)
+    {
         yield return null;
     }
 
-    public void PoisonDOT( int dps, int damageTime, int timeUntilDamageTaken = 1 ) {
+    public void PoisonDOT(int dps, int damageTime, int timeUntilDamageTaken = 1)
+    {
         takeDamageOTTimer = 0;
-        if ( takeDamageOTActive == false ) {
+        if (takeDamageOTActive == false)
+        {
             takeDamageOTActive = true;
 
             StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));

@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using Tower;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
     public class UpgradeUI : MonoBehaviour
     {
         public static bool UpgradeUIReady;
+
+        private Scene currScene;
         // Variables
         [SerializeField] private RectTransform UpgradePanel;
         [Header("UI Stuff")]
@@ -55,6 +58,15 @@ namespace UI
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
+        
+        [SerializeField] private string Level1;
+        [SerializeField] private string Level2;
+        [SerializeField] private string Level3;
+
+        [SerializeField] private GameObject Errormssg;
+
+        [SerializeField] private Sprite lockedImage;
+
 
         private void Awake()
         {
@@ -69,18 +81,28 @@ namespace UI
             UpgradePanel.gameObject.SetActive(false);
             SpecialAbilityModeButton.interactable = false;
             UpgradeUIReady = false;
+            currScene = SceneManager.GetActiveScene();
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
         }
 
         public void UpdateUIPosition(float _x, float _y)
         {
-            UpgradePanel.gameObject.SetActive(true);
 
-            UpgradePanel.anchoredPosition = new Vector2(_x, _y);
-            UpgradePanel.localScale = Vector3.zero;
+            if (currScene.name != Level1)
+            {
+                UpgradePanel.gameObject.SetActive(true);
 
-            StartCoroutine(LerpUI());
+                UpgradePanel.anchoredPosition = new Vector2(_x, _y);
+                UpgradePanel.localScale = Vector3.zero;
+
+                StartCoroutine(LerpUI());
+            }
+            else 
+            {
+                Errormssg.SetActive(true);
+            }
+            
         }
 
         #region Private Functions
@@ -134,8 +156,16 @@ namespace UI
             {
                 if(currentTower.SpecialUnlocked == SpecialAttack.None)
                 {
-                    buttonSpecial1.interactable = true;
-                    buttonSpecial2.interactable = true;
+                    if(currScene.name == Level3)
+                    {
+                        buttonSpecial1.interactable = true;
+                        buttonSpecial2.interactable = true;
+                    }
+                    else
+                    {
+                        buttonSpecial1.interactable = false;
+                        buttonSpecial2.interactable = false;                      
+                    }
                 }
             }
 
@@ -206,7 +236,7 @@ namespace UI
             {
                 currentTower.TowerLevel += 1;
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
-                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
+                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
@@ -214,8 +244,12 @@ namespace UI
                     closeUpgradeButton.interactable = false;
                     UpgradeUIReady = true;
                     SetSpecialButtons();
+                } else
+                {
+                    SpecialAbilityModeButton.interactable = false;
+                    UpgradeUIReady = false;
                 }
-                if(currentTower.SpecialUnlocked != SpecialAttack.None)
+                if (currentTower.SpecialUnlocked != SpecialAttack.None)
                 {
                     currentTower.TowerSpecialLevel += 1;
                 }
@@ -233,12 +267,25 @@ namespace UI
         public void SpecialButton()
         {
             images b;
-            TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
-            buttonSpecial1.image.sprite = b.image1;
-            buttonSpecial2.image.sprite = b.image2;
 
-            SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
-            SetSpecialButtons();
+            if (currScene.name == Level3)
+            {
+                TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
+                buttonSpecial1.image.sprite = b.image1;
+                buttonSpecial2.image.sprite = b.image2;
+
+                SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
+                SetSpecialButtons();
+            }
+            else if (currScene.name == Level2)
+            {
+                buttonSpecial1.image.sprite = lockedImage;
+                buttonSpecial2.image.sprite = lockedImage;
+
+                SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
+                SetSpecialButtons();
+            }
+            
         }
 
         // Unlock special ability for the tower that has just been upgraded.

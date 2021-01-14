@@ -171,6 +171,7 @@ MonoBehaviour:
   TowerLevelToUnlockSpecial: 4
   TowerLevel: 1
   TowerSpecialLevel: 0
+  AttackDelayTime: 0.3
   towerType: 0
   SpecialUnlocked: 0
   CurrentTarget: {fileID: 0}
@@ -185,8 +186,9 @@ MonoBehaviour:
   Special2ModeSprites:
   - {fileID: 21300000, guid: f00464fee4b28974a9071eb644bd0578, type: 3}
   - {fileID: 21300000, guid: db3b60ea5f1d1884096e51025f3b77d5, type: 3}
-  angle: 10
-  amountToSpawn: 36
+  angle: 0
+  anglestep: 30
+  amountToSpawn: 12
   InitialHitDamage: 1
   PoisonDamage: 1
   PoisonCloudRange: 3

@@ -39,7 +39,7 @@ public class GenericBullet : MonoBehaviour
         if (other.tag == "Enemy")
         {
             Debug.Log(damage);
-            other.GetComponent<EnemyUnit>().TakeDamage(damage);
+            other.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.ArcherTower);
         }
     }
 }

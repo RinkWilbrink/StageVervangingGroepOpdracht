@@ -111,7 +111,7 @@ public class NinjaDash : MonoBehaviour
 
         for ( int i = 0; i < hits.Length; i++ ) {
             if ( hits[i].transform.GetComponent<EnemyUnit>() ) {
-                hits[i].transform.GetComponent<EnemyUnit>().TakeDamage(damage);
+                hits[i].transform.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
                 Debug.Log("An Enemy is hit");
             }
         }

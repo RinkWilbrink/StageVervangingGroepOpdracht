@@ -115,7 +115,6 @@ public class WaveManager : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
-
         FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
         enemiesLeftToSpawn = currentWave.enemyCount;

@@ -66,10 +66,10 @@ public class NinjaDash : MonoBehaviour
 
             Vector3 dist = startPos - endPos;
 
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = camZ;
+            endPos = mainCam.ScreenToWorldPoint(mousePos);
             if ( !stopTest ) {
-                Vector3 mousePos = Input.mousePosition;
-                mousePos.z = camZ;
-                endPos = mainCam.ScreenToWorldPoint(mousePos);
                 //endPos.y = 0;
                 line.SetPosition(1, endPos);
             }
@@ -77,6 +77,8 @@ public class NinjaDash : MonoBehaviour
             //Debug.Log("StartPos: " + startPos + " / EndPos: " + endPos);
             if ( Vector3.Distance(startPos, endPos) > dragRange ) {
                 stopTest = true;
+            } else {
+                stopTest = false;
             }
         }
 

@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float waveCooldown = 10;
 
     private WaveData currentWave;
-    private int currentWaveNum;
+    [SerializeField] private int currentWaveNum;
     private int enemiesLeftToSpawn;
     private int enemiesLeftAlive;
     private float spawnNext;
@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     private float spawnCurveIndex;
     private void Update() {
         //Debug.LogError(currentWaveNum);
-
+        //print("Enemies left to spawn: " + enemiesLeftToSpawn);
         //if ( GameTime.deltaTime > 0 ) {
         if ( enemiesLeftToSpawn > 0 && Time.time > spawnNext ) {
             SpawnEnemy();
@@ -78,8 +78,10 @@ public class WaveManager : MonoBehaviour
     private IEnumerator updateWave;
     private void OnEnemyDeath() {
         enemiesLeftAlive--;
+        print("Enemies left alive: " + enemiesLeftAlive);
 
         if ( enemiesLeftAlive <= 0 ) {
+            print("Updating wave...");
             updateWave = UpdateWave(waveCooldown);
 
             FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
@@ -94,27 +96,26 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator UpdateWave( float waitTime ) {
         currentWaveNum++;
-
-        beginWaveIcon.SetActive(true);
-
-        for (int i = 0; i < currentWave.enemies.Length; i++)
-        {
-            currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(true);
-        }
-
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
 
             DataManager.LevelComplete(levelNummer);
 
             Time.timeScale = 0;
+        } else {
+            WaveText.text = string.Format("{0}", currentWaveNum);
+            currentWave = waves[currentWaveNum - 1];
+
+            beginWaveIcon.SetActive(true);
+
+            for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
+                currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(true);
+            }
         }
 
         yield return new WaitForSeconds(waitTime);
 
-        currentWave = waves[currentWaveNum - 1];
 
-        WaveText.text = string.Format("{0}", currentWaveNum);
         FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[0], AudioMixerGroups.SFX);
 
         enemiesLeftToSpawn = currentWave.enemyCount;
@@ -124,8 +125,7 @@ public class WaveManager : MonoBehaviour
 
         beginWaveIcon.SetActive(false);
 
-        for (int i = 0; i < currentWave.enemies.Length; i++)
-        {
+        for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
             currentWave.enemies[i].waypointManager.spawnIndicator.SetActive(false);
         }
     }

@@ -71,7 +71,8 @@ namespace Tower
         [SerializeField] private List<TowerCore> SpecialAbilityUnlockedTowerList;
 
         [SerializeField] private AudioClip constructionAudio;
-        [SerializeField] private Image towerRangeIndicator;
+        [SerializeField] private SpriteRenderer towerRangeIndicator;
+        private string sceneName;
 
         private void Start()
         {
@@ -98,6 +99,8 @@ namespace Tower
                 BuildingPrefablist[i].GetComponentInChildren<BoxCollider>().enabled = false;
                 BuildingPrefablist[i].GetComponent<ResourceBuilding.ResourceBuildingCore>().enabled = false;
             }
+
+            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         }
 
         private void Update()
@@ -247,7 +250,7 @@ namespace Tower
             }
             else if(CurrentInteractionMode == InteractionMode.UpgradeMode)
             {
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0) && sceneName != "Level1" )
                 {
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit _hit = new RaycastHit();
@@ -392,15 +395,15 @@ namespace Tower
         }
 
         public void EnableRangeIndicator(Vector3 indicatorPos) {
-                float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange * .1f;
+            float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange / 4f;
 
-                towerRangeIndicator.gameObject.SetActive(true);
-                towerRangeIndicator.transform.position = indicatorPos;
-                towerRangeIndicator.transform.localScale = new Vector3(shootRange, shootRange);
+            towerRangeIndicator.gameObject.SetActive(true);
+            towerRangeIndicator.transform.position = indicatorPos;
+            towerRangeIndicator.transform.localScale = new Vector3(shootRange, shootRange);
         }
 
         public void DisableRangeIndicator() {
-                towerRangeIndicator.gameObject.SetActive(false);
+            towerRangeIndicator.gameObject.SetActive(false);
         }
 
         #endregion

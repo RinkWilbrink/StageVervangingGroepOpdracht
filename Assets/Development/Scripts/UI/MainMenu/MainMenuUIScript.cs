@@ -25,7 +25,10 @@ public class MainMenuUIScript : MonoBehaviour
 
     private IEnumerator ChangeScene(int index)
     {
-        _MusicAnimator.SetTrigger("FadeOut");
+        if (_MusicAnimator != null)
+        {
+            _MusicAnimator.SetTrigger("FadeOut");
+        }
         _SplashScreenAnimator.SetTrigger("ScreenDown");
 
         yield return new WaitForSeconds(_WaitTime);
@@ -37,7 +40,11 @@ public class MainMenuUIScript : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
-        _MusicAnimator.SetTrigger("FadeIn");
+
+        if (_MusicAnimator != null)
+        {
+            _MusicAnimator.SetTrigger("FadeIn");
+        }
         _SplashScreenAnimator.SetTrigger("ScreenUp");
     }
 }

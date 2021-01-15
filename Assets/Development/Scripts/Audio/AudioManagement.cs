@@ -36,7 +36,10 @@ public class AudioManagement : MonoBehaviour
             }
         }
 
-        _MusicAudioObject.GetComponent<AudioSource>().Play();
+        if (_MusicAudioObject != null)
+        {
+            _MusicAudioObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     public void PlayAudioClip(AudioClip audioClip, AudioMixerGroups audiomixergroups)

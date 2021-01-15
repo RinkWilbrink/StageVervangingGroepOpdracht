@@ -60,14 +60,17 @@ namespace ResourceBuilding
         {
             Debug.Log(Resource);
 
-            DataManager.ResourcesGained(ResourcesInStorage);
 
             if (Resource == ResourceType.GoldMine)
             {
+                DataManager.ResourcesGained(ResourcesInStorage, true);
+
                 GameController.Gold += ResourcesInStorage;
             }
             if(Resource == ResourceType.ManaWell)
             {
+                DataManager.ResourcesGained(ResourcesInStorage, false);
+
                 GameController.Mana += ResourcesInStorage;
             }
 

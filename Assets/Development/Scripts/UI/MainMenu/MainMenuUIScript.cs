@@ -7,11 +7,13 @@ public class MainMenuUIScript : MonoBehaviour
 {
     [SerializeField] private float _WaitTime;
     [SerializeField] private Animator _MusicAnimator;
+    [SerializeField] private Animator _SplashScreenAnimator;
     [SerializeField] private AudioManagement _AudioManagement;
 
     private void Start()
     {
         _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
+        _SplashScreenAnimator = GameObject.Find("SplashScreen").GetComponent<Animator>();
     }
 
     public void LoadScene(int index)
@@ -24,6 +26,8 @@ public class MainMenuUIScript : MonoBehaviour
     private IEnumerator ChangeScene(int index)
     {
         _MusicAnimator.SetTrigger("FadeOut");
+        _SplashScreenAnimator.SetTrigger("ScreenDown");
+
         yield return new WaitForSeconds(_WaitTime);
         if (index > 0)
         {
@@ -34,5 +38,6 @@ public class MainMenuUIScript : MonoBehaviour
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
         _MusicAnimator.SetTrigger("FadeIn");
+        _SplashScreenAnimator.SetTrigger("ScreenUp");
     }
 }

@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8362,6 +8362,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1975003614399655171, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2314496051011496214, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -8872,6 +8877,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8185577455937894318, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185577455937894318, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8244708523830826342, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_IsActive
@@ -8910,12 +8925,7 @@ PrefabInstance:
     - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -8936,6 +8946,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}

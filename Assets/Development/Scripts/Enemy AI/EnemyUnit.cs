@@ -193,7 +193,7 @@ public class EnemyUnit : MonoBehaviour
     {
         GameController.Gold += GoldReward;
 
-        DataManager.ResourcesGained(GoldReward);
+        DataManager.ResourcesGained(GoldReward, true);
         DataManager.EnemySlayed();
 
         resourceUIManager.UpdateResourceUI();

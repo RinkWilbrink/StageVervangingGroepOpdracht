@@ -55,7 +55,8 @@ public class SaveLoad : MonoBehaviour
 
             DataManager._LastLevelBeaten = saveObject._LastLevelBeaten;
             DataManager._EnemiesKilled = saveObject._EnemiesKilled;
-            DataManager._ResourcesGathered = saveObject._ResourcesGathered;
+            DataManager._ManaCollected = saveObject._ManaCollected;
+            DataManager._GoldCollected = saveObject._GoldCollected;
             DataManager._TowersPlaced = saveObject._TowersPlaced;
             DataManager._AchivementCheck = saveObject._AchivementCheck;
 
@@ -72,7 +73,7 @@ public class SaveLoad : MonoBehaviour
 
     private string GetHashCode(SaveObject saveObject)
     {
-        string hashCode = saveObject._LastLevelBeaten.ToString() + saveObject._EnemiesKilled.ToString() + saveObject._ResourcesGathered.ToString() + saveObject._ResourcesGathered.ToString();
+        string hashCode = saveObject._LastLevelBeaten.ToString() + saveObject._EnemiesKilled.ToString() + saveObject._ManaCollected.ToString() + saveObject._ManaCollected.ToString() + saveObject._GoldCollected.ToString();
 
         for (int i = 0; i < saveObject._AchivementCheck.Length; i++)
         {
@@ -102,7 +103,8 @@ public class SaveLoad : MonoBehaviour
         {
             _LastLevelBeaten = DataManager._LastLevelBeaten,
             _EnemiesKilled = DataManager._EnemiesKilled,
-            _ResourcesGathered = DataManager._ResourcesGathered,
+            _ManaCollected = DataManager._ManaCollected,
+            _GoldCollected = DataManager._GoldCollected,
             _TowersPlaced = DataManager._TowersPlaced,
             _AchivementCheck = DataManager._AchivementCheck
         };
@@ -129,7 +131,8 @@ public struct SaveObject
     public int _LastLevelBeaten;
 
     public int _EnemiesKilled;
-    public int _ResourcesGathered;
+    public int _ManaCollected;
+    public int _GoldCollected;
     public int _TowersPlaced;
 
     public string _Hash;

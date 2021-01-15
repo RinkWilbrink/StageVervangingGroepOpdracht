@@ -9,8 +9,7 @@ public class SwitchSceneOnActive : MonoBehaviour
     [SerializeField] SaveLoad _SaveLoad;
     [SerializeField] string _SceneName;
 
-    [SerializeField] Image _Panel;
-    [SerializeField] Color _PanelColor;
+    [SerializeField] Image _Kappa;
     Coroutine _Corouting;
 
     [SerializeField] FadeIn _FadeIn;
@@ -19,21 +18,20 @@ public class SwitchSceneOnActive : MonoBehaviour
     {
         if (_SaveLoad.GetLoadThread() == false && _FadeIn._FadeDone == true)
         {
-            _Panel.color = _PanelColor;
             _Corouting = StartCoroutine(FadingOut());
         }
     }
 
     IEnumerator FadingOut()
     {
-        _Panel.gameObject.SetActive(true);
+        _Kappa.gameObject.SetActive(true);
 
-        for (float i = 0; i <= 1; i += Time.deltaTime)
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
         {
-            _Panel.color = new Color(_Panel.color.r, _Panel.color.g, _Panel.color.b, i);
+            _Kappa.color = new Color(_Kappa.color.r, _Kappa.color.g, _Kappa.color.b, i);
             yield return null;
         }
-        _Panel.color = _PanelColor;
+        _Kappa.color = new Color(0, 0, 0, 0);
         SceneManager.LoadScene(_SceneName);
     }
 }

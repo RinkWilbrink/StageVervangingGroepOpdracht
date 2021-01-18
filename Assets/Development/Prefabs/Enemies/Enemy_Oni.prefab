@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341408205393899862}
   - component: {fileID: 5065544824985871647}
+  - component: {fileID: 7249869402011155887}
   m_Layer: 0
   m_Name: Art_Holder
   m_TagString: Untagged
@@ -81,6 +82,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7249869402011155887
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341408205393899863}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0cbd06d851eb1048a65728af7ad166b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &341408206199449656
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,17 +165,6 @@ MonoBehaviour:
   frostOverlayImage: {fileID: 2089042610387478241}
   Health: 0
   wayPoints: []
-  walkSheet:
-  - {fileID: -2600459641238878590, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: -281674522602472326, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: 7145610723874244444, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: 4725960526563270111, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: 983517427322130782, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: -4270182624589192310, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: -2251711590773097080, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: -9134089961451739832, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  - {fileID: 5480631529837853177, guid: f48d40007b8f2d2409d914eed46427a5, type: 3}
-  animSpeed: 0.1
 --- !u!1 &2089042610387478241
 GameObject:
   m_ObjectHideFlags: 0

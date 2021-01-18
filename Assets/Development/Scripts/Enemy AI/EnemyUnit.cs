@@ -24,6 +24,8 @@ public class EnemyUnit : MonoBehaviour
     private SelectionButtonManager selectionButtonManager;
     private UI.UpgradeUI upgradeUI;
 
+    private Animator animator;
+
     public void Initialize( EnemyData e ) {
         this.Health = e.health;
         this.Speed = e.speed;
@@ -38,8 +40,7 @@ public class EnemyUnit : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
 
-        if ( walkSheet.Length > 0 )
-            StartCoroutine(AnimatedWalk());
+        animator = GetComponentInChildren<Animator>();
 
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
@@ -103,27 +104,15 @@ public class EnemyUnit : MonoBehaviour
         lastPos = transform.position;
     }
 
-    [SerializeField] private Sprite[] walkSheet;
-    [SerializeField] private float animSpeed = .1f;
-    private IEnumerator AnimatedWalk() {
-        int i;
-        i = 0;
+    
 
-        while ( i < walkSheet.Length ) {
-            spriteRenderer.sprite = walkSheet[i];
-            i++;
-            yield return new WaitForSeconds(animSpeed);
-            yield return 0;
-        }
-
-        StartCoroutine(AnimatedWalk());
-    }
+   
 
     public void TakeDamage( float damage ) {
         Health -= damage;
 
-        if ( Health < 1 )
-            Death();
+        if (Health < 1)
+            StartCoroutine(Death()); 
     }
 
     [NonSerialized] public int takeDamageOTTimer = 0;
@@ -135,7 +124,7 @@ public class EnemyUnit : MonoBehaviour
         while ( takeDamageOTTimer < damageTime ) {
             Health -= dps;
             if ( Health < 1 )
-                Death();
+                StartCoroutine(Death());
             yield return new WaitForSeconds(timeUntilDamageTaken);
             takeDamageOTTimer++;
         }
@@ -162,7 +151,7 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
-    private void Death() {
+    private IEnumerator Death() {
         GameController.Gold += GoldReward;
 
         DataManager.ResourcesGained(GoldReward);
@@ -170,6 +159,12 @@ public class EnemyUnit : MonoBehaviour
 
         resourceUIManager.UpdateResourceUI();
         selectionButtonManager.UpdateTowerButtonUI();
+
+        Speed = 0;
+
+        animator.SetBool("Death", true);
+
+        yield return new WaitForSeconds(2f); 
 
         Destroy(gameObject);
 

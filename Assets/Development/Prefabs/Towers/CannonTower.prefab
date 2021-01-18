@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 5103604029012343211}
   - component: {fileID: 1371416420144308075}
   - component: {fileID: 1013384505365920037}
+  - component: {fileID: 826211557010794860}
   m_Layer: 8
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -350,3 +351,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &826211557010794860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010224598784234405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481d0fa7ad7fafc47824c235a7336017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

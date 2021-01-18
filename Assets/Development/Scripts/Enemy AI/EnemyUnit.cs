@@ -64,16 +64,7 @@ public class EnemyUnit : MonoBehaviour
         else
             spriteRenderer.flipX = true;
 
-        // Need to test the rotation more
-        //Quaternion dir = Quaternion.LookRotation(wayPoints[waypointIndex].position - transform.position);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, dir, rotateSpeed * GameTime.deltaTime);
-
         transform.rotation = Quaternion.Euler(transform.localRotation.x, 180f, transform.rotation.z);
-
-        //Vector3 dir = wayPoints[waypointIndex].position - transform.position;
-        //print(dir);
-
-        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(dir.x, dir.y) / Mathf.PI * 180, 0), 0.1f);
 
         if (Input.GetKeyDown(KeyCode.E))
             TakeDamage(1, TowerType.NullValue);
@@ -106,8 +97,6 @@ public class EnemyUnit : MonoBehaviour
                 waypointIndex++;
             } else {
                 AttackDeath();
-                //GameController.MainTowerHP -= AttackDamage;
-                // Do damage to the main structure
                 upgradeUI.DoMainTowerDamage(AttackDamage);
             }
 

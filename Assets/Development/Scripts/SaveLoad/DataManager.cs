@@ -10,10 +10,11 @@ public static class DataManager
     public static int _LastLevelBeaten;
 
     public static int _EnemiesKilled;
-    public static int _ResourcesGathered;
+    public static int _GoldCollected;
+    public static int _ManaCollected;
     public static int _TowersPlaced;
 
-    public static bool[] _AchivementCheck = new bool[3];
+    public static bool[] _AchivementCheck = new bool[5];
 
     public static void EnemySlayed()
     {
@@ -26,14 +27,27 @@ public static class DataManager
         }
     }
 
-    public static void ResourcesGained(int amount)
+    public static void ResourcesGained(int amount, bool gold)
     {
-        _ResourcesGathered += amount;
-
-        if (_ResourcesGathered >= 1 && _AchivementCheck[1] == false)
+        if (gold != true)
         {
-            AchievementManager.current.UnlockAchievement("Resources Gathered", "Collect 1 resources");
+            _ManaCollected += amount;
+        }
+        else
+        {
+            _GoldCollected += amount;
+        }
+
+        if (_ManaCollected >= 1 && _AchivementCheck[1] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Gold Gathered", "Collect 1 gold");
             _AchivementCheck[1] = true;
+        }
+
+        if (_GoldCollected >= 1 && _AchivementCheck[4] == false)
+        {
+            AchievementManager.current.UnlockAchievement("Mana Gathered", "Collect 1 mana");
+            _AchivementCheck[4] = true;
         }
     }
 

@@ -97,7 +97,7 @@ namespace Tower
 
             for (int i = 0; i < EnemiesInRange.Length; i++)
             {
-                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage);
+                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage, towerType);
 
 
                 yield return null;
@@ -150,7 +150,7 @@ namespace Tower
                         for (int i = 0; i < EnemiesInRange.Length; i++)
                         {
                             Debug.Log(EnemiesInRange);
-                            EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
+                            EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond, towerType);
                         }
                     }
                     timer += 1f;

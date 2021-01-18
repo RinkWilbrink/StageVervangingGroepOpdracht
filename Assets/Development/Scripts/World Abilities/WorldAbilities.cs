@@ -9,6 +9,7 @@ public class WorldAbilities : MonoBehaviour
     [SerializeField] private Color notEnoughManaColor;
     [SerializeField] private AudioClip buttonAudio;
     [SerializeField] private AudioManagement audioManager;
+    [SerializeField] private ResourceUIManager resourceUIManager;
 
     private void NotEnoughMana( int manaCost, Button button ) {
         if ( GameController.Mana < manaCost )
@@ -146,6 +147,7 @@ public class WorldAbilities : MonoBehaviour
         thousandCranesTimer = 0;
         thousandCranesInUseTimer = 0;
         GameController.Mana -= thousandCranesManaCost;
+        resourceUIManager.UpdateResourceUI();
         thousandCranesButton.image.color = Color.white;
     }
 
@@ -174,6 +176,7 @@ public class WorldAbilities : MonoBehaviour
         fireworkRocket.SetActive(false);
         fireworkTimer = 0f;
         GameController.Mana -= fireworkManaCost;
+        resourceUIManager.UpdateResourceUI();
         fireworkButton.image.color = Color.white;
     }
 
@@ -202,6 +205,7 @@ public class WorldAbilities : MonoBehaviour
         ninjaDash.SetActive(false);
         ninjaDashTimer = 0f;
         GameController.Mana -= ninjaDashManaCost;
+        resourceUIManager.UpdateResourceUI();
         ninjaDashButton.image.color = Color.white;
         print("FINISHED NINJA DASH");
     }

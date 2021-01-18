@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 341408205393899862}
   - component: {fileID: 5065544824985871647}
   - component: {fileID: 7249869402011155887}
+  - component: {fileID: 8038175489624351111}
   m_Layer: 0
   m_Name: Art_Holder
   m_TagString: Untagged
@@ -101,6 +102,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8038175489624351111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341408205393899863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481d0fa7ad7fafc47824c235a7336017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &341408206199449656
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,8 +176,13 @@ MonoBehaviour:
   rotateSpeed: 60
   enemyData: {fileID: 11400000, guid: dc1fd529326160b46bd91faf970d9593, type: 2}
   frostOverlayImage: {fileID: 2089042610387478241}
+  towerWeakness: 0
+  damageMultiplier: 1.3
+  resistanceMultiplier: 0.7
   Health: 0
   wayPoints: []
+  walkSheet: []
+  animSpeed: 0.1
 --- !u!1 &2089042610387478241
 GameObject:
   m_ObjectHideFlags: 0

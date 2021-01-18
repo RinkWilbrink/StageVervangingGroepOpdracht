@@ -23,6 +23,8 @@ public class EnemyUnit : MonoBehaviour
     public Transform[] wayPoints;
     private int waypointIndex;
 
+    private Animator animator;
+
     private SpriteRenderer spriteRenderer;
 
     private ResourceUIManager resourceUIManager;
@@ -44,6 +46,8 @@ public class EnemyUnit : MonoBehaviour
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
+
+        animator = GetComponentInChildren<Animator>();
 
         //if ( walkSheet.Length > 0 )
         //    StartCoroutine(AnimatedWalk());
@@ -146,7 +150,7 @@ public class EnemyUnit : MonoBehaviour
         }
 
         if (Health < 1)
-            Death();
+            StartCoroutine(Death());
     }
 
     [NonSerialized] public int takeDamageOTTimer = 0;
@@ -160,7 +164,7 @@ public class EnemyUnit : MonoBehaviour
         {
             Health -= dps;
             if (Health < 1)
-                Death();
+                StartCoroutine(Death());
             yield return new WaitForSeconds(timeUntilDamageTaken);
             takeDamageOTTimer++;
         }
@@ -189,7 +193,7 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
-    private void Death()
+    private IEnumerator Death()
     {
         GameController.Gold += GoldReward;
 
@@ -198,6 +202,10 @@ public class EnemyUnit : MonoBehaviour
 
         resourceUIManager.UpdateResourceUI();
         selectionButtonManager.UpdateTowerButtonUI();
+
+        animator.SetBool("Death", true);
+
+        yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
 

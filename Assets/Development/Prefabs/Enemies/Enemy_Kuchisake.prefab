@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 341408205393899862}
   - component: {fileID: 5065544824985871647}
-  - component: {fileID: 9107196821288940185}
+  - component: {fileID: 3877283549305480717}
+  - component: {fileID: 2331588427843881356}
   m_Layer: 0
   m_Name: Art_Holder
   m_TagString: Untagged
@@ -82,7 +83,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9107196821288940185
+--- !u!95 &3877283549305480717
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341408205393899863}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93b7826a30f11e344b71aa0537a63e60, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2331588427843881356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,16 +181,8 @@ MonoBehaviour:
   resistanceMultiplier: 0.8
   Health: 0
   wayPoints: []
-  walkSheet:
-  - {fileID: -6802955296112004871, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: -3706508057106614031, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: 8984212584389346321, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: 4992222255433938602, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: -192330557807600067, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: -218779377025079062, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: 2231052108590376757, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  - {fileID: -6370184983434972902, guid: 3499fa01665d1fe4ba94ebf883e14c80, type: 3}
-  animSpeed: 0.057
+  walkSheet: []
+  animSpeed: 0.1
 --- !u!1 &2089042610387478241
 GameObject:
   m_ObjectHideFlags: 0

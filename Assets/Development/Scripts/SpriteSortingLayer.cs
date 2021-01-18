@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpriteSortingLayer : MonoBehaviour
 {
     SpriteRenderer m_SpriteRenderer;
-    int m_Accuracy = 50;
+    int m_Accuracy = 10;
 
     void Start()
     {

@@ -203,6 +203,8 @@ public class EnemyUnit : MonoBehaviour
         resourceUIManager.UpdateResourceUI();
         selectionButtonManager.UpdateTowerButtonUI();
 
+        Speed = 0f;
+
         animator.SetBool("Death", true);
 
         yield return new WaitForSeconds(1f);

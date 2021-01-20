@@ -106,7 +106,7 @@ namespace Tower
                 bul.SetActive(true);
                 bul.GetComponent<GenericBullet>().SetMoveDirection(bulDir);
                 angle += anglestep;
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.1f);
 
             }
         }

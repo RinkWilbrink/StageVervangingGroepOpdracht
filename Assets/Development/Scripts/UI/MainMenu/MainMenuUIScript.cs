@@ -12,7 +12,14 @@ public class MainMenuUIScript : MonoBehaviour
 
     private void Start()
     {
-        _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
+        try
+        {
+            _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("This is only shown when the starting scene is not the MainMenu: " + e);
+        }
     }
 
     public void LoadScene(int index)

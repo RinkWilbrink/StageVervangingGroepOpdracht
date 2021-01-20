@@ -25,6 +25,7 @@ public class AudioManagement : MonoBehaviour
     private void Start()
     {
         //SET VOLUME TOSLIDER VALUES
+        
         _Pooling = GetComponent<Pooling>();
         _MusicAudioObject = GameObject.Find("MusicAudioObject");
 

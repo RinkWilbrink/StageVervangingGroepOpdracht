@@ -8,7 +8,6 @@ public class AudioTransition : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("test");
         if (_Instance == null)
         {
             _Instance = this;

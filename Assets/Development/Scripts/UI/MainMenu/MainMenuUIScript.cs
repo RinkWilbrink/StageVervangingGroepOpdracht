@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 public class MainMenuUIScript : MonoBehaviour
 {
     [SerializeField] private float _WaitTime;
-    [SerializeField] private Animator _MusicAnimator;
+    private Animator _MusicAnimator;
     [SerializeField] private Animator _SplashScreenAnimator;
     [SerializeField] private AudioManagement _AudioManagement;
 
     private void Start()
     {
         _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
-        _SplashScreenAnimator = GameObject.Find("SplashScreen").GetComponent<Animator>();
     }
 
     public void LoadScene(int index)

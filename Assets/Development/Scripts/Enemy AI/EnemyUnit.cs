@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using Tower;
+using UnityEngine.UI;
 
 public class EnemyUnit : MonoBehaviour
 {
@@ -26,10 +27,13 @@ public class EnemyUnit : MonoBehaviour
     private Animator animator;
 
     private SpriteRenderer spriteRenderer;
+    [SerializeField] Slider healthBar;
 
     private ResourceUIManager resourceUIManager;
     private SelectionButtonManager selectionButtonManager;
     private UI.UpgradeUI upgradeUI;
+
+    float maxHealth;
 
     public void Initialize(EnemyData e)
     {
@@ -40,7 +44,8 @@ public class EnemyUnit : MonoBehaviour
     }
 
 
-    private void Awake() {
+    private void Awake()
+    {
         //wayPoints = FindObjectOfType<WaypointManager>();
         resourceUIManager = FindObjectOfType<ResourceUIManager>();
         upgradeUI = FindObjectOfType<UI.UpgradeUI>();
@@ -54,16 +59,19 @@ public class EnemyUnit : MonoBehaviour
 
         // The values can be decided here but we need to figure out what type of enemy unit we are first
         Initialize(enemyData);
+
+        maxHealth = Health;
     }
 
 
     Vector3 lastPos;
-    private void Update() {
+    private void Update()
+    {
         transform.position = Vector3.MoveTowards(transform.position, wayPoints[waypointIndex].position, Speed * GameTime.deltaTime);
 
         Vector3 spritePos = transform.position - lastPos;
 
-        if ( spritePos.x >= 0 )
+        if (spritePos.x >= 0)
             spriteRenderer.flipX = false;
         else
             spriteRenderer.flipX = true;
@@ -108,7 +116,9 @@ public class EnemyUnit : MonoBehaviour
             if (waypointIndex < wayPoints.Length - 1)
             {
                 waypointIndex++;
-            } else {
+            }
+            else
+            {
                 AttackDeath();
                 //GameController.MainTowerHP -= AttackDamage;
                 // Do damage to the main structure
@@ -116,6 +126,11 @@ public class EnemyUnit : MonoBehaviour
             }
 
         lastPos = transform.position;
+
+        //Update Health Bar
+        float updatedHealth = (healthBar.maxValue / maxHealth) * Health;
+
+        healthBar.value = Mathf.MoveTowards(healthBar.value, updatedHealth, 0.4f * Time.deltaTime);
     }
 
     [SerializeField] private Sprite[] walkSheet;
@@ -129,7 +144,7 @@ public class EnemyUnit : MonoBehaviour
         {
             towerRes += 1;
         }
-        else if(towerRes + 1 == (int)TowerType.NullValue)
+        else if (towerRes + 1 == (int)TowerType.NullValue)
         {
             towerRes = 0;
         }
@@ -149,7 +164,7 @@ public class EnemyUnit : MonoBehaviour
             Health -= damage;
         }
 
-        if (Health < 1)
+        if (Health <= 0)
             StartCoroutine(Death());
     }
 
@@ -203,17 +218,20 @@ public class EnemyUnit : MonoBehaviour
         resourceUIManager.UpdateResourceUI();
         selectionButtonManager.UpdateTowerButtonUI();
 
+        Speed = 0f;
+
         animator.SetBool("Death", true);
 
         yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
 
-        if ( OnDeath != null )
+        if (OnDeath != null)
             OnDeath();
     }
 
-    private void AttackDeath() {
+    private void AttackDeath()
+    {
         Destroy(gameObject);
 
         if (OnDeath != null)

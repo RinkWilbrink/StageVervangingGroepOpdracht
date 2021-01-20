@@ -214,7 +214,12 @@ namespace Tower
                                 else
                                 {
                                     notificationManager.OpenGoldNotification();
+                                    DisableRangeIndicator();
                                 }
+                            } 
+                            else 
+                            {
+                                DisableRangeIndicator();
                             }
                             if (CurrentBuildingType == Types.Destroy)
                             {

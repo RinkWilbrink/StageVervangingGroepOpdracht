@@ -10,6 +10,7 @@ public class WorldAbilities : MonoBehaviour
     [SerializeField] private AudioClip buttonAudio;
     [SerializeField] private AudioManagement audioManager;
     [SerializeField] private ResourceUIManager resourceUIManager;
+    [SerializeField] private Tower.TowerInteraction towerInteraction;
 
     private void NotEnoughMana( int manaCost, Button button ) {
         if ( GameController.Mana < manaCost )
@@ -80,6 +81,9 @@ public class WorldAbilities : MonoBehaviour
     private float thousandCranesInUseTimer;
     private bool thousandCranesInUse = false;
     public void ThousandCranes() {
+        if (towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode)
+            return;
+
         thousandCranesAbilityActive = !thousandCranesAbilityActive;
 
         if ( !thousandCranesInUse && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
@@ -160,6 +164,9 @@ public class WorldAbilities : MonoBehaviour
     private float fireworkTimer;
     private bool fireworkAbilityActive = false;
     public void FireworkRocket() {
+        if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
+            return;
+
         if ( fireworkRocket.gameObject.activeInHierarchy ) {
             fireworkRocket.SetActive(false);
             fireworkAbilityActive = false;
@@ -189,6 +196,9 @@ public class WorldAbilities : MonoBehaviour
     private float ninjaDashTimer;
     private bool ninjaDashAbilityActive = false;
     public void NinjaDash() {
+        if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
+            return;
+
         if ( ninjaDash.gameObject.activeInHierarchy ) {
             ninjaDash.gameObject.SetActive(false);
             ninjaDashAbilityActive = false;

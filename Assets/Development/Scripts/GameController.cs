@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     private void Awake() {
         Gems = PlayerPrefs.GetInt("Gems");
-        MainTowerHP = 5000;
+        MainTowerHP = 50;
         Gold = 30;
         Mana = 10;
         GameTime.SetTimeScale(1);

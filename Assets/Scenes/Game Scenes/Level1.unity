@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6717,6 +6717,7 @@ MonoBehaviour:
   buttonAudio: {fileID: 8300000, guid: 65664e50d7bdb6448ba7afd75816121e, type: 3}
   audioManager: {fileID: 247861648}
   resourceUIManager: {fileID: 4318821454803897585}
+  towerInteraction: {fileID: 600629071}
   thousandCranes: {fileID: 1479291279}
   thousandCranesActiveColor: {r: 0.24313727, g: 0.6, b: 0.28235295, a: 1}
   thousandCranesButton: {fileID: 112257210510853291}

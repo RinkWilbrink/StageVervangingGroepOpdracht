@@ -24,7 +24,21 @@ public class AudioManagement : MonoBehaviour
 
     private void Start()
     {
-        //SET VOLUME TOSLIDER VALUES
+        if (_MasterMixer.GetFloat("MusicVolume", out float musicVolume))
+        {
+            _MusicVolumeSlider.value = Mathf.Pow(10, musicVolume / 20);
+        }
+
+        if (_MasterMixer.GetFloat("SFXVolume", out float SFXVolume))
+        {
+            _SFXVolumeSlider.value = Mathf.Pow(10, SFXVolume / 20);
+        }
+
+        if (_MasterMixer.GetFloat("VoicelineVolume", out float voiceVolume))
+        {
+            _VoiceVolumeSlider.value = Mathf.Pow(10, voiceVolume / 20);
+        }
+
         _Pooling = GetComponent<Pooling>();
         _MusicAudioObject = GameObject.Find("MusicAudioObject");
 

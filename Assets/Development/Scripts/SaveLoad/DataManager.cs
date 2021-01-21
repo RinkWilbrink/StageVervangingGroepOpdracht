@@ -44,10 +44,10 @@ public static class DataManager
             _AchivementCheck[1] = true;
         }
 
-        if (_GoldCollected >= 1 && _AchivementCheck[4] == false)
+        if (_GoldCollected >= 1 && _AchivementCheck[2] == false)
         {
             AchievementManager.current.UnlockAchievement("Mana Gathered", "Collect 1 mana");
-            _AchivementCheck[4] = true;
+            _AchivementCheck[2] = true;
         }
     }
 
@@ -55,10 +55,10 @@ public static class DataManager
     {
         _TowersPlaced += 1;
 
-        if (_TowersPlaced >= 1 && _AchivementCheck[2] == false)
+        if (_TowersPlaced >= 1 && _AchivementCheck[3] == false)
         {
             AchievementManager.current.UnlockAchievement("Tower Place", "Place 1 Tower");
-            _AchivementCheck[2] = true;
+            _AchivementCheck[3] = true;
         }
     }
 
@@ -74,10 +74,10 @@ public static class DataManager
             _LastLevelBeaten = levelNumber;
         }
 
-        if (_LastLevelBeaten == 3 && _AchivementCheck[3] == false)
+        if (_LastLevelBeaten == 3 && _AchivementCheck[4] == false)
         {
-            AchievementManager.current.UnlockAchievement("Level 3 Beaten", "You have completed the all 3 levels!");
-            _AchivementCheck[3] = true;
+            //AchievementManager.current.UnlockAchievement("Level 3 Beaten", "You have completed the all 3 levels!");
+            //_AchivementCheck[4] = true;
         }
 
         _SaveLoad.SaveData();

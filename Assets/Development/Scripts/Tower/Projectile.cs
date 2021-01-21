@@ -39,7 +39,9 @@ namespace Tower
 
             //transform.position = Vector3.SmoothDamp(transform. position, dir, ref velocity, smoothTime);
 
+            
             transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+            
         }
 
         void HitTarget()

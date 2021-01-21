@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154614, g: 0.22718894, b: 0.30740753, a: 1}
+  m_IndirectSpecularColor: {r: 0.1815466, g: 0.22718978, b: 0.3074084, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -274,6 +274,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &58920948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 58920949}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &58920949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58920948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 19.999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77157658
 GameObject:
@@ -1883,7 +1913,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -597949875
-  m_SortingLayer: -3
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 10.3, y: 10.3, z: 0}
@@ -2503,6 +2533,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8665265554233605849, guid: fc101ea6f0788f840b2536c11a7f03b3,
+        type: 3}
+      propertyPath: _PoolSize
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8665265554233605851, guid: fc101ea6f0788f840b2536c11a7f03b3,
         type: 3}
       propertyPath: m_Name
@@ -3085,7 +3120,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3096,22 +3131,22 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[0].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[1].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[2].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[1].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[2].spawnIntensity.m_Curve.Array.data[0].inSlope
@@ -3220,7 +3255,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waveCooldown
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3236,7 +3271,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[2].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[1].enemies.Array.data[1].chance
@@ -3265,7 +3300,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3386,7 +3421,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[1].enemy
@@ -3402,7 +3437,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[0].enemy
@@ -3418,7 +3453,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[2].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1743099168}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].enemies.Array.data[3].enemy
@@ -3454,47 +3489,47 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].enemyCount
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].enemyCount
-      value: 22
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].goldReward
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3511,7 +3546,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[1].enemy
@@ -3527,7 +3562,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1743099168}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[2].enemy
@@ -3543,7 +3578,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[2].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].enemies.Array.data[3].enemy
@@ -3563,17 +3598,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].enemyCount
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].goldReward
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[0].value
-      value: 0.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3583,17 +3618,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[1].value
-      value: 0.8
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: 0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: 0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3618,12 +3653,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].minSpawnTime
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].maxSpawnTime
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3640,7 +3675,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[1].enemy
@@ -3656,7 +3691,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1743099168}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[2].enemy
@@ -3672,7 +3707,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[2].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].enemies.Array.data[3].enemy
@@ -3692,17 +3727,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].enemyCount
-      value: 22
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3712,17 +3747,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3747,12 +3782,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].minSpawnTime
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].maxSpawnTime
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3769,7 +3804,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[6].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007543959}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].enemies.Array.data[1].enemy
@@ -3785,7 +3820,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[6].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].enemies.Array.data[2].enemy
@@ -3821,17 +3856,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].enemyCount
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3841,17 +3876,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3876,12 +3911,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].minSpawnTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].maxSpawnTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3898,7 +3933,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[7].enemies.Array.data[0].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1743099168}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].enemies.Array.data[1].enemy
@@ -3914,7 +3949,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[7].enemies.Array.data[1].waypointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1963586533}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].enemies.Array.data[2].enemy
@@ -3961,12 +3996,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.39999998
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.39999998
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3981,17 +4016,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[1].value
-      value: 0.9
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.39999998
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[3].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.39999998
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4016,7 +4051,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4031,12 +4066,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: 0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[5].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: 0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4061,12 +4096,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[6].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4121,7 +4156,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].goldReward
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4164,7 +4199,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[2].maxSpawnTime
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4174,7 +4209,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[4].maxSpawnTime
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4207,12 +4242,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4237,27 +4272,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].enemyCount
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4277,17 +4312,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4322,12 +4357,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].minSpawnTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[8].maxSpawnTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4354,27 +4389,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].enemyCount
-      value: 25
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4394,17 +4429,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4439,12 +4474,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].minSpawnTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[9].maxSpawnTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4471,27 +4506,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].enemyCount
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4511,17 +4546,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4556,12 +4591,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].minSpawnTime
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[10].maxSpawnTime
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4588,27 +4623,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].enemyCount
-      value: 40
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.3499999
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.3499999
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4628,17 +4663,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1.45
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.3499999
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.3499999
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4673,12 +4708,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].minSpawnTime
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[11].maxSpawnTime
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4716,27 +4751,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].enemyCount
-      value: 30
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.100000024
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.100000024
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4756,17 +4791,17 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.100000024
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.100000024
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4801,12 +4836,12 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].minSpawnTime
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[12].maxSpawnTime
-      value: 3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4844,27 +4879,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].enemyCount
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].goldReward
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.053586368
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.053586368
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4879,22 +4914,22 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[1].time
-      value: 0.19783765
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1.0893986
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: 0.0008603111
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: 0.0008603111
+      value: -0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4909,27 +4944,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[1].outWeight
-      value: 0.33333334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[2].time
-      value: 0.39819172
+      value: 1.0115967
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[2].value
-      value: 1.1004796
+      value: 0.8441925
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[2].inSlope
-      value: -0.05582791
+      value: 0.036187217
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[2].outSlope
-      value: -0.05582791
+      value: 0.036187217
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -4944,27 +4979,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[2].outWeight
-      value: 0.33333334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[3].time
-      value: 1
+      value: 1.0115967
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[3].value
-      value: 1
+      value: 0.8441925
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[3].inSlope
-      value: -0.1669628
+      value: 0.05763545
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[3].outSlope
-      value: -0.1669628
+      value: 0.05763545
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -5004,7 +5039,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[13].maxSpawnTime
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -5049,6 +5084,131 @@ PrefabInstance:
       propertyPath: SelectionButtonManager
       value: 
       objectReference: {fileID: 5175730040167041647}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: beginWaveIcon
+      value: 
+      objectReference: {fileID: 58920948}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[0].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 2007543959}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[13].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[13].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[13].enemies.Array.data[2].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[12].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[12].enemies.Array.data[2].waypointManager
+      value: 
+      objectReference: {fileID: 2007543959}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[12].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[2].enemies.Array.data[2].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[8].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 2007543959}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[8].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[9].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[9].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[10].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 2007543959}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[10].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[11].enemies.Array.data[0].waypointManager
+      value: 
+      objectReference: {fileID: 1963586533}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[11].enemies.Array.data[1].waypointManager
+      value: 
+      objectReference: {fileID: 2007543959}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[11].enemies.Array.data[2].waypointManager
+      value: 
+      objectReference: {fileID: 1743099168}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[13].spawnIntensity.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: currentWaveNum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[4].minSpawnTime
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285534, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: m_Name
@@ -5217,6 +5377,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb430db9f8095e40a64221c2d1b0405, type: 3}
+--- !u!95 &614701670 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8892685348578319281, guid: 5bb430db9f8095e40a64221c2d1b0405,
+    type: 3}
+  m_PrefabInstance: {fileID: 614701669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &637659568
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,6 +5476,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637659568}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &666445604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2432198797754235658, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &669270166
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,6 +5665,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 600629071}
+    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 600629071}
+    - target: {fileID: 5237801878504541823, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: DisableRangeIndicator
+      objectReference: {fileID: 0}
     - target: {fileID: 5237801878634153269, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7943,6 +8125,8 @@ MonoBehaviour:
   notEnoughManaColor: {r: 0, g: 1, b: 0.86651444, a: 0.7176471}
   buttonAudio: {fileID: 8300000, guid: 65664e50d7bdb6448ba7afd75816121e, type: 3}
   audioManager: {fileID: 247861648}
+  resourceUIManager: {fileID: 4318821454803897585}
+  towerInteraction: {fileID: 600629071}
   thousandCranes: {fileID: 1479291279}
   thousandCranesActiveColor: {r: 0.24313727, g: 0.6, b: 0.28235295, a: 1}
   thousandCranesButton: {fileID: 112257210510853291}
@@ -8870,6 +9054,10 @@ PrefabInstance:
       propertyPath: _WaitTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 567130887, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
+      propertyPath: _SplashScreenAnimator
+      value: 
+      objectReference: {fileID: 614701670}
     - target: {fileID: 1038490984, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -9001,6 +9189,41 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140878, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 112257210396140878, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140878, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140879, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140879, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140879, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257210396140879, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -350
+      objectReference: {fileID: 0}
     - target: {fileID: 112257210642604623, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -9035,6 +9258,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917175, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917175, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917175, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211099917175, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -470
       objectReference: {fileID: 0}
     - target: {fileID: 112257212107332532, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -9146,6 +9419,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1307568069388322146, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 1307568069388322146, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307568069388322146, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975003614399655171, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336097618605576717, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2432198797754235658, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_IsActive
@@ -9160,6 +9458,111 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -288
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064722932436056, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064722932436056, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 2809064722932436056, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064722932436056, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064722932436056, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723109952972, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723109952972, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723109952972, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723238835535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723238835535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723539361303, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723539361303, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723539361303, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723839319251, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723906625168, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064723906625168, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064724037312474, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064724037312474, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064724037312474, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064724139477246, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5229523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809064724139477246, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3143559478908518957, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -9196,6 +9599,41 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 600629071}
+    - target: {fileID: 5009166787253883284, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: _WaitTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5009166787253883284, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: _SplashScreenAnimator
+      value: 
+      objectReference: {fileID: 614701670}
+    - target: {fileID: 5009166787253883284, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: _AudioManagement
+      value: 
+      objectReference: {fileID: 247861648}
+    - target: {fileID: 5176263269586495565, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176263269586495565, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176263269586495565, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176263269586495565, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -590
+      objectReference: {fileID: 0}
     - target: {fileID: 5589941671344187827, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9215,6 +9653,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -435
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371754058920223862, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022241}
+    - target: {fileID: 6371754058920223862, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371754058920223862, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6447551082696616803, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -9356,6 +9809,66 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7951317450857262751, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185577455937894318, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185577455937894318, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022240}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078256560875319356, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 9078256560875319356, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerBuildMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
 --- !u!1 &1625022237 stripped
@@ -9379,6 +9892,85 @@ MonoBehaviour:
 --- !u!224 &1625022239 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6634946766551223682, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1625022240 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5009166787253883284, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625022237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d05d61fc18a2c4d980f7ec0f25616b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625022241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 567130887, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625022245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d05d61fc18a2c4d980f7ec0f25616b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1625022242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2809064723839319252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1625022243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6634946766981065773, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1625022244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6520703031672262534, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1625022245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7951317450857262751, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1625022246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6634946766551223681, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1625022247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625022246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99711599f76f18e439c2b979bbee31db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AudioManagement: {fileID: 247861648}
+  _ButtonSound: {fileID: 8300000, guid: 65664e50d7bdb6448ba7afd75816121e, type: 3}
+  _ButtonSoundSlide: {fileID: 8300000, guid: 8fafcd3e3282cf240a893264808b8bd0, type: 3}
+  _BuildMenu: {fileID: 1625022243}
+  _PauseMenu: {fileID: 1625022244}
+  _SettingsMenu: {fileID: 1625022242}
+  _PauseMenuBackGround: {fileID: 1625022245}
+--- !u!1 &1640888929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1110898694429892159, guid: d27b1165a3810444b9bfc58bf53d0e97,
     type: 3}
   m_PrefabInstance: {fileID: 1625022236}
   m_PrefabAsset: {fileID: 0}
@@ -9647,7 +10239,7 @@ MonoBehaviour:
   - {fileID: 198748573}
   - {fileID: 1095072113}
   - {fileID: 1387492263}
-  spawnIndicator: {fileID: 0}
+  spawnIndicator: {fileID: 1952092049}
 --- !u!1 &1751448351
 GameObject:
   m_ObjectHideFlags: 0
@@ -10233,7 +10825,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1762099263
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -11022,6 +11614,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1952092049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3640508377795081476, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1963586531
 GameObject:
   m_ObjectHideFlags: 0
@@ -11097,7 +11695,7 @@ MonoBehaviour:
   - {fileID: 33787873}
   - {fileID: 1787519110}
   - {fileID: 1139044836}
-  spawnIndicator: {fileID: 0}
+  spawnIndicator: {fileID: 1640888929}
 --- !u!1 &1986173901
 GameObject:
   m_ObjectHideFlags: 0
@@ -11201,7 +11799,7 @@ MonoBehaviour:
   - {fileID: 546375786}
   - {fileID: 1317817390}
   - {fileID: 1113645953}
-  spawnIndicator: {fileID: 0}
+  spawnIndicator: {fileID: 666445604}
 --- !u!1 &2048824527
 GameObject:
   m_ObjectHideFlags: 0
@@ -11520,7 +12118,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1625022236}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1625022246}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06d0fde95b770cc4c9cad9f0c80254f3, type: 3}

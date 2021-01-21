@@ -6,14 +6,20 @@ using UnityEngine.SceneManagement;
 public class MainMenuUIScript : MonoBehaviour
 {
     [SerializeField] private float _WaitTime;
-    [SerializeField] private Animator _MusicAnimator;
+    private Animator _MusicAnimator;
     [SerializeField] private Animator _SplashScreenAnimator;
     [SerializeField] private AudioManagement _AudioManagement;
 
     private void Start()
     {
-        _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
-        _SplashScreenAnimator = GameObject.Find("SplashScreen").GetComponent<Animator>();
+        try
+        {
+            _MusicAnimator = GameObject.Find("MusicAudioObject").GetComponent<Animator>();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("This is only shown when the starting scene is not the MainMenu: " + e);
+        }
     }
 
     public void LoadScene(int index)
@@ -25,7 +31,10 @@ public class MainMenuUIScript : MonoBehaviour
 
     private IEnumerator ChangeScene(int index)
     {
-        _MusicAnimator.SetTrigger("FadeOut");
+        if (_MusicAnimator != null)
+        {
+            _MusicAnimator.SetTrigger("FadeOut");
+        }
         _SplashScreenAnimator.SetTrigger("ScreenDown");
 
         yield return new WaitForSeconds(_WaitTime);
@@ -37,7 +46,11 @@ public class MainMenuUIScript : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
-        _MusicAnimator.SetTrigger("FadeIn");
+
+        if (_MusicAnimator != null)
+        {
+            _MusicAnimator.SetTrigger("FadeIn");
+        }
         _SplashScreenAnimator.SetTrigger("ScreenUp");
     }
 }

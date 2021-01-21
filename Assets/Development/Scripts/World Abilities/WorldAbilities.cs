@@ -9,6 +9,8 @@ public class WorldAbilities : MonoBehaviour
     [SerializeField] private Color notEnoughManaColor;
     [SerializeField] private AudioClip buttonAudio;
     [SerializeField] private AudioManagement audioManager;
+    [SerializeField] private ResourceUIManager resourceUIManager;
+    [SerializeField] private Tower.TowerInteraction towerInteraction;
 
     private void NotEnoughMana( int manaCost, Button button ) {
         if ( GameController.Mana < manaCost )
@@ -79,6 +81,9 @@ public class WorldAbilities : MonoBehaviour
     private float thousandCranesInUseTimer;
     private bool thousandCranesInUse = false;
     public void ThousandCranes() {
+        if (towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode)
+            return;
+
         thousandCranesAbilityActive = !thousandCranesAbilityActive;
 
         if ( !thousandCranesInUse && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
@@ -146,6 +151,7 @@ public class WorldAbilities : MonoBehaviour
         thousandCranesTimer = 0;
         thousandCranesInUseTimer = 0;
         GameController.Mana -= thousandCranesManaCost;
+        resourceUIManager.UpdateResourceUI();
         thousandCranesButton.image.color = Color.white;
     }
 
@@ -158,6 +164,9 @@ public class WorldAbilities : MonoBehaviour
     private float fireworkTimer;
     private bool fireworkAbilityActive = false;
     public void FireworkRocket() {
+        if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
+            return;
+
         if ( fireworkRocket.gameObject.activeInHierarchy ) {
             fireworkRocket.SetActive(false);
             fireworkAbilityActive = false;
@@ -174,6 +183,7 @@ public class WorldAbilities : MonoBehaviour
         fireworkRocket.SetActive(false);
         fireworkTimer = 0f;
         GameController.Mana -= fireworkManaCost;
+        resourceUIManager.UpdateResourceUI();
         fireworkButton.image.color = Color.white;
     }
 
@@ -186,6 +196,9 @@ public class WorldAbilities : MonoBehaviour
     private float ninjaDashTimer;
     private bool ninjaDashAbilityActive = false;
     public void NinjaDash() {
+        if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
+            return;
+
         if ( ninjaDash.gameObject.activeInHierarchy ) {
             ninjaDash.gameObject.SetActive(false);
             ninjaDashAbilityActive = false;
@@ -202,6 +215,7 @@ public class WorldAbilities : MonoBehaviour
         ninjaDash.SetActive(false);
         ninjaDashTimer = 0f;
         GameController.Mana -= ninjaDashManaCost;
+        resourceUIManager.UpdateResourceUI();
         ninjaDashButton.image.color = Color.white;
         print("FINISHED NINJA DASH");
     }

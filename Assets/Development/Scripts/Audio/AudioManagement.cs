@@ -18,9 +18,14 @@ public class AudioManagement : MonoBehaviour
     [SerializeField] private AudioMixerGroup _AudioMixerGroupMusic;
     [SerializeField] private AudioMixerGroup _AudioMixerGroupSFX;
     [SerializeField] private AudioMixerGroup _AudioMixerGroupVoiceline;
+    [SerializeField] private Slider _MusicVolumeSlider;
+    [SerializeField] private Slider _SFXVolumeSlider;
+    [SerializeField] private Slider _VoiceVolumeSlider;
 
     private void Start()
     {
+        //SET VOLUME TOSLIDER VALUES
+        
         _Pooling = GetComponent<Pooling>();
         _MusicAudioObject = GameObject.Find("MusicAudioObject");
 
@@ -36,7 +41,10 @@ public class AudioManagement : MonoBehaviour
             }
         }
 
-        _MusicAudioObject.GetComponent<AudioSource>().Play();
+        if (_MusicAudioObject != null)
+        {
+            _MusicAudioObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     public void PlayAudioClip(AudioClip audioClip, AudioMixerGroups audiomixergroups)

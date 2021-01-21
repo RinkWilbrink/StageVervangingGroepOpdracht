@@ -71,7 +71,7 @@ namespace UI
 
         private void Awake()
         {
-            for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length; i++)
+            for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length - 1; i++)
             {
                 TowerTypeImageDictionairy.Add((TowerType)i, Towers[i]);
             }

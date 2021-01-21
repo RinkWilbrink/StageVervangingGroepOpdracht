@@ -36,10 +36,14 @@ public class GenericBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
+            print("take damage");
             Debug.Log(damage);
             other.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.ArcherTower);
+        } else
+        {
+            Debug.Log(other.gameObject);
         }
     }
 }

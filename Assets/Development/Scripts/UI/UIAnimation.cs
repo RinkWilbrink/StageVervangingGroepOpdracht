@@ -186,12 +186,12 @@ public class UIAnimation : MonoBehaviour
         _AudioManagement.PlayAudioClip(_ButtonSoundSlide, AudioMixerGroups.SFX);
         if (_BuildMenuOpen)
         {
-            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
             _BuildMenuOpen = false;
         }
         else
         {
-            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
             _BuildMenuOpen = true;
         }
     }

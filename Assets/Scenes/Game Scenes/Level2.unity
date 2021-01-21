@@ -2418,6 +2418,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioObjectPool
       objectReference: {fileID: 0}
+    - target: {fileID: 8665265554233605854, guid: fc101ea6f0788f840b2536c11a7f03b3,
+        type: 3}
+      propertyPath: _MusicVolumeSlider
+      value: 
+      objectReference: {fileID: 1625022247}
+    - target: {fileID: 8665265554233605854, guid: fc101ea6f0788f840b2536c11a7f03b3,
+        type: 3}
+      propertyPath: _SFXVolumeSlider
+      value: 
+      objectReference: {fileID: 1625022246}
+    - target: {fileID: 8665265554233605854, guid: fc101ea6f0788f840b2536c11a7f03b3,
+        type: 3}
+      propertyPath: _VoiceVolumeSlider
+      value: 
+      objectReference: {fileID: 1625022245}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc101ea6f0788f840b2536c11a7f03b3, type: 3}
 --- !u!114 &567130887
@@ -7561,6 +7576,17 @@ MonoBehaviour:
   _PauseMenu: {fileID: 712362407}
   _SettingsMenu: {fileID: 613086974}
   _PauseMenuBackGround: {fileID: 7951317449241915779}
+  _MainMenuTitle: {fileID: 0}
+  _MainMenuPlayButton: {fileID: 0}
+  _MainMenuAnalyticsButton: {fileID: 0}
+  _MainMenuSettingsButton: {fileID: 0}
+  _MainMenuLevelBackButton: {fileID: 0}
+  _MainMenuAnalyticsBackButton: {fileID: 0}
+  _MainMenuSettingsBackButton: {fileID: 0}
+  _MainMenuRewardButton: {fileID: 0}
+  _MainMenuLevelSelectionMenu: {fileID: 0}
+  _MainMenuAnalyticsMenu: {fileID: 0}
+  _MainMenuAnimationSpeed: 0
 --- !u!1 &1169008428
 GameObject:
   m_ObjectHideFlags: 0
@@ -9467,6 +9493,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1165855010}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583178587153468733, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1701790695782215791, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -10374,6 +10430,42 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1625022236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1625022245 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2809064724700379715, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625022246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2809064724415116825, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625022247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2809064724138722783, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1669744968 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8892685348578319281, guid: 5bb430db9f8095e40a64221c2d1b0405,

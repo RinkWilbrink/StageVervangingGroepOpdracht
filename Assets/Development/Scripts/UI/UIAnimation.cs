@@ -37,6 +37,11 @@ public class UIAnimation : MonoBehaviour
 
     private bool _SetToClosePauseMenu;
 
+    private void Start()
+    {
+        TriggerMainMenuStartAnimation();
+    }
+
     private void Update()
     {
         if (_SetToClosePauseMenu && !LeanTween.isTweening(_PauseMenu))
@@ -49,14 +54,27 @@ public class UIAnimation : MonoBehaviour
 
     public void TriggerMainMenuStartAnimation()
     {
-
+        LTSeq sequence = LeanTween.sequence();
+        sequence.append(1f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.rotateZ(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.3f);
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.rotateZ(_MainMenuPlayButton, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
     }
 
     public void OpenMainMenuUI()
     {
         LTSeq sequence = LeanTween.sequence();
         sequence.append(_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
         sequence.append(-_MainMenuAnimationSpeed);
         sequence.append(LeanTween.moveLocalY(_MainMenuTitle, 250f, _MainMenuAnimationSpeed).setEaseInBack());
         sequence.append(-_MainMenuAnimationSpeed);

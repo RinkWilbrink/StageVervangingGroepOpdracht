@@ -6446,13 +6446,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99711599f76f18e439c2b979bbee31db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _AudioManagement: {fileID: 0}
+  _AudioManagement: {fileID: 247861648}
   _ButtonSound: {fileID: 8300000, guid: 65664e50d7bdb6448ba7afd75816121e, type: 3}
   _ButtonSoundSlide: {fileID: 8300000, guid: 8fafcd3e3282cf240a893264808b8bd0, type: 3}
   _BuildMenu: {fileID: 515893542}
   _PauseMenu: {fileID: 2083167486}
   _SettingsMenu: {fileID: 616763776}
   _PauseMenuBackGround: {fileID: 7951317449241915779}
+  _MainMenuTitle: {fileID: 0}
+  _MainMenuPlayButton: {fileID: 0}
+  _MainMenuAnalyticsButton: {fileID: 0}
+  _MainMenuSettingsButton: {fileID: 0}
+  _MainMenuLevelBackButton: {fileID: 0}
+  _MainMenuAnalyticsBackButton: {fileID: 0}
+  _MainMenuSettingsBackButton: {fileID: 0}
+  _MainMenuRewardButton: {fileID: 0}
+  _MainMenuLevelSelectionMenu: {fileID: 0}
+  _MainMenuAnalyticsMenu: {fileID: 0}
+  _MainMenuAnimationSpeed: 0.2
 --- !u!1 &1252929835
 GameObject:
   m_ObjectHideFlags: 0

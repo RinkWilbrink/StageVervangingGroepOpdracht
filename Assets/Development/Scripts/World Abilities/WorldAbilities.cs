@@ -72,8 +72,8 @@ public class WorldAbilities : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private ThousandCranes thousandCranes;
-    [SerializeField] private Color thousandCranesActiveColor;
     [SerializeField] private Button thousandCranesButton;
+    [SerializeField] private Color thousandCranesActiveColor;
     [SerializeField] private float thousandCranesCooldown = 15;
     [SerializeField] private int thousandCranesManaCost = 8;
     private float thousandCranesTimer;
@@ -157,8 +157,8 @@ public class WorldAbilities : MonoBehaviour
 
     [Space(20)]
     [SerializeField] private GameObject fireworkRocket;
-    [SerializeField] private Color fireworkActiveColor;
     [SerializeField] private Button fireworkButton;
+    [SerializeField] private Color fireworkActiveColor;
     [SerializeField] private float fireworkCooldown = 10;
     [SerializeField] private int fireworkManaCost = 5;
     private float fireworkTimer;
@@ -189,8 +189,8 @@ public class WorldAbilities : MonoBehaviour
 
     [Space(20)]
     [SerializeField] private GameObject ninjaDash;
-    [SerializeField] private Color ninjaDashActiveColor;
     [SerializeField] private Button ninjaDashButton;
+    [SerializeField] private Color ninjaDashActiveColor;
     [SerializeField] private float ninjaDashCooldown = 30;
     [SerializeField] private int ninjaDashManaCost = 15;
     private float ninjaDashTimer;

@@ -6447,6 +6447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AudioManagement: {fileID: 247861648}
+  _TowerInteraction: {fileID: 600629071}
   _ButtonSound: {fileID: 8300000, guid: 65664e50d7bdb6448ba7afd75816121e, type: 3}
   _ButtonSoundSlide: {fileID: 8300000, guid: 8fafcd3e3282cf240a893264808b8bd0, type: 3}
   _BuildMenu: {fileID: 515893542}
@@ -6464,8 +6465,6 @@ MonoBehaviour:
   _MainMenuLevelSelectionMenu: {fileID: 0}
   _MainMenuAnalyticsMenu: {fileID: 0}
   _MainMenuAnimationSpeed: 0.2
-  _BuildMenuOpen: 0
-  _SettingsMenuOpen: 0
 --- !u!1 &1252929835
 GameObject:
   m_ObjectHideFlags: 0

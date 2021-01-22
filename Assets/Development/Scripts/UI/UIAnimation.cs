@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIAnimation : MonoBehaviour
 {
     [SerializeField] private AudioManagement _AudioManagement;
+    [SerializeField] private Tower.TowerInteraction _TowerInteraction;
     [SerializeField] private AudioClip _ButtonSound;
     [SerializeField] private AudioClip _ButtonSoundSlide;
 
@@ -39,7 +41,10 @@ public class UIAnimation : MonoBehaviour
 
     private void Start()
     {
-        TriggerMainMenuStartAnimation();
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            TriggerMainMenuStartAnimation();
+        }
     }
 
     private void Update()
@@ -187,11 +192,13 @@ public class UIAnimation : MonoBehaviour
         if (_BuildMenuOpen)
         {
             LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.UpgradeMode);
             _BuildMenuOpen = false;
         }
         else
         {
             LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.PlacementMode);
             _BuildMenuOpen = true;
         }
     }

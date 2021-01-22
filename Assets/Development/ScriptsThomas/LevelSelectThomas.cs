@@ -22,6 +22,8 @@ public class LevelSelectThomas : MonoBehaviour
     [SerializeField] private float waitTime;
     [SerializeField] private AudioManagement audioManagement;
 
+    [SerializeField] private bool UseLocking = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,8 @@ public class LevelSelectThomas : MonoBehaviour
             icon.transform.SetParent(parentObject.transform);
             icon.name = "Level " + i;
 
+            icon.GetComponentInChildren<Button>().interactable = !UseLocking || (DataManager._LastLevelBeaten >= i - 1);
+
             if (DataManager._LastLevelBeaten >= i - 1)
             {
                 icon.GetComponentInChildren<Text>().text = "" + currentLevelCount;
@@ -85,7 +89,6 @@ public class LevelSelectThomas : MonoBehaviour
             else
             {
                 icon.GetComponentInChildren<Text>().text = "";
-                icon.GetComponentInChildren<Button>().interactable = false;
             }
 
             levelSelectButtons.Add(icon.GetComponent<Button>());
@@ -100,7 +103,7 @@ public class LevelSelectThomas : MonoBehaviour
         {
             Button button = levelSelectButtons[i];
 
-            if (DataManager._LastLevelBeaten >= i)
+            if (DataManager._LastLevelBeaten >= i || !UseLocking)
             {
                 button.onClick.RemoveAllListeners();
                 int j = i + 1;

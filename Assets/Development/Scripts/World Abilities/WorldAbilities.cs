@@ -212,12 +212,10 @@ public class WorldAbilities : MonoBehaviour
 
     public void ResetNinjaDash() {
         ninjaDashAbilityActive = false;
-        ninjaDash.SetActive(false);
         ninjaDashTimer = 0f;
         GameController.Mana -= ninjaDashManaCost;
         resourceUIManager.UpdateResourceUI();
         ninjaDashButton.image.color = Color.white;
-        print("FINISHED NINJA DASH");
     }
 
     public void WorldAbilityAudio() {

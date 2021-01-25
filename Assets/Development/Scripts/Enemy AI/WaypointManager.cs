@@ -6,6 +6,7 @@ public class WaypointManager : MonoBehaviour
 {
     public float waypointDeadZone = .5f;
     public Transform[] waypoints;
+    public GameObject spawnIndicator;
 
     private void Start() {
         if ( waypoints.Length < 1 ) {

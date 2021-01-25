@@ -9,6 +9,7 @@ public class FireworkRocket : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private GameObject fireworkSprite;
     [SerializeField] private GameObject explosionSprite;
+    [SerializeField] private AudioClip fireworkExplosionAudio;
     private GameObject fireworkRocket;
     private GameObject fireworkExplosion;
     private Camera mainCam;
@@ -47,11 +48,14 @@ public class FireworkRocket : MonoBehaviour
             fireworkExplosion.transform.position = explosionPos;
             fireworkRocket.SetActive(true);
             rocketLaunched = true;
+            FindObjectOfType<AudioManagement>().PlayAudioClip(fireworkExplosionAudio, AudioMixerGroups.SFX);
         }
 
         if ( rocketLaunched ) {
             if ( fireworkRocket.transform.localScale.x >= .1f )
-                fireworkRocket.transform.localScale -= new Vector3(1.6f * Time.deltaTime, 1.6f * Time.deltaTime);
+                fireworkRocket.transform.localScale -= new Vector3(1.1f * Time.deltaTime, 1.1f * Time.deltaTime);
+
+            //if ( fireworkRocket.transform.localScale.x > .65f && fireworkRocket.transform.localScale.x < .7f )
 
             if ( fireworkRocket.transform.localScale.x < .6f ) {
                 fireworkRocket.SetActive(false);
@@ -64,7 +68,7 @@ public class FireworkRocket : MonoBehaviour
 
                 for ( int i = 0; i < enemies.Length; i++ ) {
                     if ( enemies[i].GetComponent<EnemyUnit>() ) {
-                        enemies[i].GetComponent<EnemyUnit>().TakeDamage(damage);
+                        enemies[i].GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
                     }
                 }
             }

@@ -18,6 +18,7 @@ namespace Tower
         [SerializeField] private int LightningRadius;
         [SerializeField] private int LightningChainLimit;
         [SerializeField] private float LightningInBetweenTime;
+        [SerializeField] private float LightningCloudSpeed;
 
         [Header("Frost Attack")]
         [SerializeField] private int FrostRadius;
@@ -26,12 +27,19 @@ namespace Tower
 
         [Header("Prefabs")]
         [SerializeField] private GameObject LightningCloudPrefab;
-        [SerializeField] private GameObject LightningBoltPrefab;
+        [SerializeField] private LineRenderer LightningBoltPrefab;
         [Space(6)]
         [SerializeField] private GameObject FrostPrefab;
+        [Space(6)]
+        [SerializeField] private AudioClip MagicSpellAudioSFX;
+        [SerializeField] private AudioClip LightningAttackAudioSFX;
+        [SerializeField] private AudioClip FrostAttackAudioSFX;
+        [Space(3)]
+        [SerializeField] private AudioClip FrostSpecialAudioSFX;
+        [SerializeField] private AudioClip LightningSpecialAudioSFX;
 
         private CRSpline spline;
-
+        private LineRenderer lineRenderer;
         /// <summary>Override of the Init(Start) function</summary>
         public override void Init()
         {
@@ -41,6 +49,13 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+
+            if ( SpecialUnlocked == SpecialAttack.Special2 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(FrostAttackAudioSFX, AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked != SpecialAttack.Special2 || SpecialUnlocked != SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(MagicSpellAudioSFX, AudioMixerGroups.SFX);
+            else if ( SpecialUnlocked == SpecialAttack.Special1 ) 
+                FindObjectOfType<AudioManagement>().PlayAudioClip(LightningAttackAudioSFX, AudioMixerGroups.SFX);   
         }
 
         protected override void SecondaryAttack()
@@ -51,7 +66,7 @@ namespace Tower
                     StartCoroutine(LightningAttack());
                     break;
                 case SpecialAttack.Special2:
-                    FrostAttack();
+                    StartCoroutine(FrostAttack());
                     break;
             }
 
@@ -60,25 +75,40 @@ namespace Tower
 
         private IEnumerator LightningAttack()
         {
+            GameObject ElektricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
+            Vector3 newPos = CurrentTarget.transform.position;
+            //lineRenderer = LightningBoltPrefab.GetComponent<LineRenderer>();
+            GameObject chainPoint;
+            GameObject[] chianedEnemys;
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
             int LightningChainCount = 0;
+            
+            FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
 
-            while(LightningChainCount < LightningChainLimit)
+            yield return new WaitForSeconds(AttackDelayTime);
+
+            while (Vector3.Distance(ElektricCloud.transform.position, newPos) > 0.1f)
+            {
+                ElektricCloud.transform.position = Vector3.Lerp(ElektricCloud.transform.position, newPos, LightningCloudSpeed * GameTime.deltaTime);
+                yield return null;
+            }
+
+            //instatiate lightninh prefab 
+
+            while (LightningChainCount < LightningChainLimit)
             {
                 if(LightningChainCount < LightningChainLimit)
                 {
                     if(LightningChainCount > 0)
                     {
+                        //zet de lightning prefab point 1 = collider position && prefab point 2 = nextcollider position 
                         collider = nextCollider;
                     }
-
                     Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
-
-                    if(EnemiesInRange.Length > 1)
+                    if (EnemiesInRange.Length > 1)
                     {
                         float B = float.MaxValue;
-
                         for(int y = 0; y < EnemiesInRange.Length; y++)
                         {
                             if(EnemiesInRange[y] != null)
@@ -99,29 +129,35 @@ namespace Tower
                     else
                     {
                         LightningChainCount = LightningChainLimit + 1;
-                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
-
+                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
+                        
                         yield return null;
                     }
                 }
 
                 if(collider != null)
                 {
-                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage);
+                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
                 }
 
                 LightningChainCount++;
                 yield return new WaitForSecondsRealtime(LightningInBetweenTime);
+
             }
+            Destroy(ElektricCloud);
 
             SpecialAttackMode = false;
         }
 
-        private void FrostAttack()
+        private IEnumerator FrostAttack()
         {
             Vector3 newPos = CurrentTarget.transform.position;
 
             Collider[] EnemiesWithingFrostRange = Physics.OverlapSphere(newPos, FrostRadius);
+
+            FindObjectOfType<AudioManagement>().PlayAudioClip(FrostSpecialAudioSFX, AudioMixerGroups.SFX);
+
+            yield return new WaitForSeconds(AttackDelayTime);
 
             for(int i = 0; i < EnemiesWithingFrostRange.Length; i++)
             {

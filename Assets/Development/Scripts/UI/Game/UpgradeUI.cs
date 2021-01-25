@@ -5,11 +5,15 @@ using System.Collections.Generic;
 using Tower;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
     public class UpgradeUI : MonoBehaviour
     {
+        public static bool UpgradeUIReady;
+
+        private Scene currScene;
         // Variables
         [SerializeField] private RectTransform UpgradePanel;
         [Header("UI Stuff")]
@@ -23,6 +27,7 @@ namespace UI
         [SerializeField] private Button buttonUpgrade;
         [SerializeField] private Button buttonSpecial1;
         [SerializeField] private Button buttonSpecial2;
+        [SerializeField] private Button closeUpgradeButton;
 
         [Space(4)]
 
@@ -53,9 +58,20 @@ namespace UI
         [Space(4)]
         [HideInInspector] public TowerCore currentTower;
 
+        
+        [SerializeField] private string Level1;
+        [SerializeField] private string Level2;
+        [SerializeField] private string Level3;
+
+        [SerializeField] private GameObject Errormssg;
+
+        [SerializeField] private Sprite lockedImage;
+
+        public TMPro.TextMeshProUGUI towerUpgradeCostText;
+
         private void Awake()
         {
-            for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length; i++)
+            for(int i = 0; i < Enum.GetNames(typeof(Tower.TowerType)).Length - 1; i++)
             {
                 TowerTypeImageDictionairy.Add((TowerType)i, Towers[i]);
             }
@@ -65,18 +81,29 @@ namespace UI
         {
             UpgradePanel.gameObject.SetActive(false);
             SpecialAbilityModeButton.interactable = false;
+            UpgradeUIReady = false;
+            currScene = SceneManager.GetActiveScene();
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
         }
 
         public void UpdateUIPosition(float _x, float _y)
         {
-            UpgradePanel.gameObject.SetActive(true);
 
-            UpgradePanel.anchoredPosition = new Vector2(_x, _y);
-            UpgradePanel.localScale = Vector3.zero;
+            if (currScene.name != Level1)
+            {
+                UpgradePanel.gameObject.SetActive(true);
 
-            StartCoroutine(LerpUI());
+                UpgradePanel.anchoredPosition = new Vector2(_x, _y);
+                UpgradePanel.localScale = Vector3.zero;
+
+                StartCoroutine(LerpUI());
+            }
+            else 
+            {
+                Debug.Log("Can't upgrade towers on level 1");
+            }
+            
         }
 
         #region Private Functions
@@ -130,8 +157,16 @@ namespace UI
             {
                 if(currentTower.SpecialUnlocked == SpecialAttack.None)
                 {
-                    buttonSpecial1.interactable = true;
-                    buttonSpecial2.interactable = true;
+                    if(currScene.name == Level3)
+                    {
+                        buttonSpecial1.interactable = true;
+                        buttonSpecial2.interactable = true;
+                    }
+                    else
+                    {
+                        buttonSpecial1.interactable = false;
+                        buttonSpecial2.interactable = false;                      
+                    }
                 }
             }
 
@@ -195,19 +230,29 @@ namespace UI
 
         #endregion
 
+        [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (PayGold(1))
+            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1]))
             {
                 currentTower.TowerLevel += 1;
-                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial)
+                FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
+                towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1] + "";
+
+                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
                     buttonUpgrade.interactable = false;
+                    closeUpgradeButton.interactable = false;
+                    UpgradeUIReady = true;
                     SetSpecialButtons();
+                } else
+                {
+                    SpecialAbilityModeButton.interactable = false;
+                    UpgradeUIReady = false;
                 }
-                if(currentTower.SpecialUnlocked != SpecialAttack.None)
+                if (currentTower.SpecialUnlocked != SpecialAttack.None)
                 {
                     currentTower.TowerSpecialLevel += 1;
                 }
@@ -225,12 +270,25 @@ namespace UI
         public void SpecialButton()
         {
             images b;
-            TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
-            buttonSpecial1.image.sprite = b.image1;
-            buttonSpecial2.image.sprite = b.image2;
 
-            SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
-            SetSpecialButtons();
+            if (currScene.name == Level3)
+            {
+                TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
+                buttonSpecial1.image.sprite = b.image1;
+                buttonSpecial2.image.sprite = b.image2;
+
+                SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
+                SetSpecialButtons();
+            }
+            else if (currScene.name == Level2)
+            {
+                buttonSpecial1.image.sprite = lockedImage;
+                buttonSpecial2.image.sprite = lockedImage;
+
+                SetSpecialButtonTransform((int)currentTower.SpecialUnlocked);
+                SetSpecialButtons();
+            }
+            
         }
 
         // Unlock special ability for the tower that has just been upgraded.
@@ -243,6 +301,8 @@ namespace UI
             currentTower.SpecialUnlocked = (SpecialAttack)_i;
 
             buttonUpgrade.interactable = true;
+            closeUpgradeButton.interactable = true;
+            UpgradeUIReady = false;
             buttonSpecial1.interactable = false;
             buttonSpecial2.interactable = false;
 

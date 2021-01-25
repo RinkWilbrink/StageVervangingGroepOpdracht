@@ -10,7 +10,7 @@ namespace Tower
 
     public enum TowerType
     {
-        ArcherTower = 0, WizardTower = 1, CannonTower = 2
+        ArcherTower = 0, WizardTower = 1, CannonTower = 2, NullValue = 3
     }
 
     public class TowerCore : MonoBehaviour
@@ -18,7 +18,7 @@ namespace Tower
         // Variables
         [Header("Stats")]
         [SerializeField] protected float AttackShootingTime;
-        [SerializeField] protected int AttackDamage;
+        [SerializeField] protected float AttackDamage;
 
         [HideInInspector] protected bool SpecialAttackMode = false;
 
@@ -27,15 +27,18 @@ namespace Tower
         [SerializeField] private float FireRateAddedPerLevel;
 
         [Header("Shooting and Range")]
-        [SerializeField] private float ShootingRange = 0;
+        public float ShootingRange = 0;
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
+        [SerializeField] public GameObject Bullet;
         [HideInInspector] private RaycastHit hit;
-
+        [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]
         [SerializeField] public int TowerLevelToUnlockSpecial;
         [HideInInspector] public int TowerLevel = 1;
         [HideInInspector] public int TowerSpecialLevel = 0;
+        [Header("Attack delay for Audio")]
+        [SerializeField] public float AttackDelayTime;
         protected float UpgradedDamage;
         protected float UpgradedFireRate;
 
@@ -54,6 +57,8 @@ namespace Tower
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
         [HideInInspector] protected bool CanAttack = true;
+
+        public UpgradeCost TowerUpgradeCosts;
 
         // Init function gets called when the tower gets destroyed
         public virtual void Init()
@@ -121,7 +126,7 @@ namespace Tower
 
         protected virtual void PrimaryAttack()
         {
-            CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage);
+            CurrentTarget.GetComponent<EnemyUnit>().TakeDamage(AttackDamage, towerType);
 
             CanAttack = false;
             AttackTimer = 0;
@@ -138,7 +143,19 @@ namespace Tower
                 if(CurrentTarget != null)
                 {
                     PrimaryAttack();
+                    Shoot();
                 }
+            }
+        }
+        
+        void Shoot()
+        {
+            GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+            Projectile bullet = bulletGO.GetComponent<Projectile>();
+
+            if(bullet != null)
+            {
+                bullet.seek(CurrentTarget);
             }
         }
 
@@ -153,8 +170,10 @@ namespace Tower
 
         public void UpdateDamageValues()
         {
-            UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
-            UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
+            AttackDamage += DamageAddedPerLevel;
+            AttackShootingTime += FireRateAddedPerLevel;
+            //UpgradedDamage = (DamageAddedPerLevel * (TowerLevel - 1));
+            //UpgradedFireRate = (FireRateAddedPerLevel * (TowerLevel - 1));
         }
 
         public void StartSecondairyAttack()

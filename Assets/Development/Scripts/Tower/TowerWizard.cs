@@ -101,9 +101,9 @@ namespace Tower
                 {
                     if(LightningChainCount > 0)
                     {
+                        newLine.AssignTarget(collider.transform, nextCollider.transform);
                         collider = nextCollider;
 
-                        newLine.AssignTarget(collider.transform, nextCollider.transform);
                     }
                     Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
                     if (EnemiesInRange.Length > 1)

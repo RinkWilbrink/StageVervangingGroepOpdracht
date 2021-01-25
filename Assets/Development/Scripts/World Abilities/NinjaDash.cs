@@ -16,18 +16,19 @@ public class NinjaDash : MonoBehaviour
     [SerializeField] private GameObject ninjaSprite;
     [SerializeField] private float dragRange = 7;
     [SerializeField] private int damage = 20;
+
+    [SerializeField] private AudioManagement audioManagement;
+    [SerializeField] private AudioClip summonSound;
+    [SerializeField] private AudioClip slashSound;
     private float camZ;
 
     private WorldAbilities worldAbilities;
 
     private void Start() {
-        //line = GetComponent<LineRenderer>();
         if ( worldAbilities == null )
             worldAbilities = FindObjectOfType<WorldAbilities>();
 
         line.sortingOrder = 1;
-        line.material = new Material(Shader.Find("Sprites/Default"));
-        //line.material.color = Color.red;
         line.SetVertexCount(2);
 
         mainCam = Camera.main;
@@ -39,9 +40,6 @@ public class NinjaDash : MonoBehaviour
 
         if ( gameObject.active )
             gameObject.SetActive(false);
-
-        //line.gameObject.SetActive(false);
-        //line.enabled = false;
     }
 
     bool stopTest = false;
@@ -54,15 +52,14 @@ public class NinjaDash : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
             startPos = mainCam.ScreenToWorldPoint(mousePos);
-            //startPos.y = 0;
             line.SetPosition(0, startPos);
 
             ninja.transform.position = startPos;
             ninja.SetActive(true);
+            audioManagement.PlayAudioClip(summonSound, AudioMixerGroups.SFX);
         }
 
         if ( Input.GetMouseButton(0) && !moveNinja && !IsMouseOnUI() ) {
-            print("Drag");
 
             Vector3 dist = startPos - endPos;
 
@@ -70,11 +67,9 @@ public class NinjaDash : MonoBehaviour
             mousePos.z = camZ;
             endPos = mainCam.ScreenToWorldPoint(mousePos);
             if ( !stopTest ) {
-                //endPos.y = 0;
                 line.SetPosition(1, endPos);
             }
 
-            //Debug.Log("StartPos: " + startPos + " / EndPos: " + endPos);
             if ( Vector3.Distance(startPos, endPos) > dragRange ) {
                 stopTest = true;
             } else {
@@ -83,9 +78,9 @@ public class NinjaDash : MonoBehaviour
         }
 
         if ( Input.GetMouseButtonUp(0) && !moveNinja ) {
-            print("Up");
 
             moveNinja = true;
+            audioManagement.PlayAudioClip(slashSound, AudioMixerGroups.SFX);
         }
 
         if ( moveNinja ) {
@@ -97,8 +92,7 @@ public class NinjaDash : MonoBehaviour
                 line.enabled = false;
                 stopTest = false;
                 moveNinja = false;
-                ninja.SetActive(false);
-
+                StartCoroutine(DisableObject());
                 worldAbilities.ResetNinjaDash();
             }
         }
@@ -114,9 +108,15 @@ public class NinjaDash : MonoBehaviour
         for ( int i = 0; i < hits.Length; i++ ) {
             if ( hits[i].transform.GetComponent<EnemyUnit>() ) {
                 hits[i].transform.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
-                Debug.Log("An Enemy is hit");
             }
         }
+    }
+
+    private IEnumerator DisableObject()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ninja.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private bool IsMouseOnUI() {

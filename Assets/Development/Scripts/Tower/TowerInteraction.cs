@@ -239,7 +239,7 @@ namespace Tower
                                     Destroy(TowerHit.collider.gameObject);
                                     CurrentBuildingType = PreviousBuildingType;
                                     SetSelectedButtonAttributes(previousButtonSelectionIndex);
-                                    upgradeUI.PayGold(-10);
+                                    upgradeUI.PayGold(-5);
                                 }
                             }
                         }

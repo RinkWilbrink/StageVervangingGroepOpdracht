@@ -216,6 +216,7 @@ public class WorldAbilities : MonoBehaviour
         GameController.Mana -= ninjaDashManaCost;
         resourceUIManager.UpdateResourceUI();
         ninjaDashButton.image.color = Color.white;
+        Debug.Log("samurai reset");
     }
 
     public void WorldAbilityAudio() {

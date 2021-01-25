@@ -1570,7 +1570,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: e732b2cc99ecef64ea34d72e6a84a003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1611,7 +1611,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.8
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1623,8 +1623,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.16140087, g: 0.5097561, b: 0.8773585, a: 1}
-      key1: {r: 0.7169812, g: 0.15895337, b: 0.15895337, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1675,6 +1675,9 @@ MonoBehaviour:
     type: 3}
   dragRange: 7
   damage: 20
+  audioManagement: {fileID: 0}
+  summonSound: {fileID: 0}
+  slashSound: {fileID: 0}
 --- !u!224 &392809334 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 392809334, guid: 7593ef97becac3348934e7e8f55fa80d,
@@ -3037,7 +3040,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waveCooldown
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}

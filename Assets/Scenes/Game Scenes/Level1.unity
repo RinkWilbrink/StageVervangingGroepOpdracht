@@ -2553,7 +2553,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waveCooldown
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -2603,27 +2603,27 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[0].inSlope
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[0].outSlope
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[1].value
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[1].inSlope
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[0].spawnIntensity.m_Curve.Array.data[1].outSlope
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3164,7 +3164,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[0].value
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
@@ -3174,7 +3174,7 @@ PrefabInstance:
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: waves.Array.data[7].spawnIntensity.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}

@@ -116,6 +116,7 @@ public class NinjaDash : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         ninja.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private bool IsMouseOnUI() {

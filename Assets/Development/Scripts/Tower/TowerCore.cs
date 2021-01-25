@@ -140,7 +140,7 @@ namespace Tower
         {
             if(CanAttack)
             {
-                if(CurrentTarget != null)
+                if(CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
                 {
                     PrimaryAttack();
                     Shoot();

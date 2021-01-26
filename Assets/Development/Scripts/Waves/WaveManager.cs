@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioClip[] coinDropAudio;
     [SerializeField] private AudioClip[] waveAudio;
     [SerializeField] private GameObject beginWaveIcon;
+    [SerializeField] private GameObject enemyList;
 
     [Header("Waves")]
     [SerializeField] private int levelNummer;
@@ -58,8 +59,8 @@ public class WaveManager : MonoBehaviour
         }
 
         int random = UnityEngine.Random.Range(0, 100);
-        int lowestPercentage;
-        int highestPercentage = 0;
+        float lowestPercentage;
+        float highestPercentage = 0;
 
         for ( int i = 0; i < currentWave.enemies.Length; i++ ) {
             lowestPercentage = highestPercentage;
@@ -67,7 +68,7 @@ public class WaveManager : MonoBehaviour
 
             if ( random >= lowestPercentage && random < highestPercentage ) {
 
-                EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity);
+                EnemyUnit enemy = Instantiate(currentWave.enemies[i].enemy, currentWave.enemies[i].waypointManager.waypoints[0].position, Quaternion.identity, enemyList.transform);
                 enemy.wayPoints = currentWave.enemies[i].waypointManager.waypoints;
 
                 enemy.OnDeath += OnEnemyDeath;
@@ -78,10 +79,10 @@ public class WaveManager : MonoBehaviour
     private IEnumerator updateWave;
     private void OnEnemyDeath() {
         enemiesLeftAlive--;
-        print("Enemies left alive: " + enemiesLeftAlive);
+        //print("Enemies left alive: " + enemiesLeftAlive);
 
         if ( enemiesLeftAlive <= 0 ) {
-            print("Updating wave...");
+            //print("Updating wave...");
             updateWave = UpdateWave(waveCooldown);
 
             FindObjectOfType<AudioManagement>().PlayAudioClip(waveAudio[1], AudioMixerGroups.SFX);
@@ -145,7 +146,7 @@ public class WaveManager : MonoBehaviour
     public struct EnemyStructure
     {
         public EnemyUnit enemy;
-        public int chance;
+        public float chance;
         public WaypointManager waypointManager;
     }
 }

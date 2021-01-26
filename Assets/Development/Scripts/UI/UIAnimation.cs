@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIAnimation : MonoBehaviour
 {
     [SerializeField] private AudioManagement _AudioManagement;
+    [SerializeField] private Tower.TowerInteraction _TowerInteraction;
     [SerializeField] private AudioClip _ButtonSound;
     [SerializeField] private AudioClip _ButtonSoundSlide;
 
@@ -37,6 +39,14 @@ public class UIAnimation : MonoBehaviour
 
     private bool _SetToClosePauseMenu;
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            TriggerMainMenuStartAnimation();
+        }
+    }
+
     private void Update()
     {
         if (_SetToClosePauseMenu && !LeanTween.isTweening(_PauseMenu))
@@ -49,22 +59,35 @@ public class UIAnimation : MonoBehaviour
 
     public void TriggerMainMenuStartAnimation()
     {
-
+        LTSeq sequence = LeanTween.sequence();
+        sequence.append(1f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.rotateZ(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.3f);
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.rotateZ(_MainMenuPlayButton, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
     }
 
     public void OpenMainMenuUI()
     {
         LTSeq sequence = LeanTween.sequence();
         sequence.append(_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
         sequence.append(-_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.moveLocalY(_MainMenuTitle, 250f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.moveLocalY(_MainMenuTitle, 250f, _MainMenuAnimationSpeed).setEaseOutBack());
         sequence.append(-_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
         sequence.append(-_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
         sequence.append(-_MainMenuAnimationSpeed);
-        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseOutBack());
     }
 
     public void CloseMainMenuUI()
@@ -101,9 +124,9 @@ public class UIAnimation : MonoBehaviour
 
             LTSeq sequence = LeanTween.sequence();
             sequence.append(_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_MainMenuLevelBackButton, -430f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_MainMenuLevelBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
             sequence.append(-_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_MainMenuLevelSelectionMenu, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_MainMenuLevelSelectionMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
 
             _MainMenuLevelSelectionOpen = true;
         }
@@ -128,9 +151,9 @@ public class UIAnimation : MonoBehaviour
 
             LTSeq sequence = LeanTween.sequence();
             sequence.append(_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsBackButton, -430f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
             sequence.append(-_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsMenu, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
 
             _MainMenuAnalyticsMenuOpen = true;
         }
@@ -155,9 +178,9 @@ public class UIAnimation : MonoBehaviour
 
             LTSeq sequence = LeanTween.sequence();
             sequence.append(_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_MainMenuSettingsBackButton, -430f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_MainMenuSettingsBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
             sequence.append(-_MainMenuAnimationSpeed);
-            sequence.append(LeanTween.moveLocalY(_SettingsMenu, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(LeanTween.moveLocalY(_SettingsMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
 
             _MainMenuSettingsMenuOpen = true;
         }
@@ -168,12 +191,14 @@ public class UIAnimation : MonoBehaviour
         _AudioManagement.PlayAudioClip(_ButtonSoundSlide, AudioMixerGroups.SFX);
         if (_BuildMenuOpen)
         {
-            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.UpgradeMode);
             _BuildMenuOpen = false;
         }
         else
         {
-            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.PlacementMode);
             _BuildMenuOpen = true;
         }
     }

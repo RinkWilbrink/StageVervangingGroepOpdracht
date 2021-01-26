@@ -140,7 +140,7 @@ namespace Tower
         {
             if(CanAttack)
             {
-                if(CurrentTarget != null)
+                if(CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
                 {
                     PrimaryAttack();
                     Shoot();
@@ -152,6 +152,9 @@ namespace Tower
         {
             GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
             Projectile bullet = bulletGO.GetComponent<Projectile>();
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(LeanTween.scale(gameObject, new Vector3(0.9f, 0.9f, 0.9f), 0.1f).setEaseInCirc());
+            sequence.append(LeanTween.scale(gameObject, Vector3.one, 0.1f).setEaseOutCirc());
 
             if(bullet != null)
             {

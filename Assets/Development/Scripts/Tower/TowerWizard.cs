@@ -19,6 +19,7 @@ namespace Tower
         [SerializeField] private int LightningChainLimit;
         [SerializeField] private float LightningInBetweenTime;
         [SerializeField] private float LightningCloudSpeed;
+        [SerializeField] private LineController linePrefab;
 
         [Header("Frost Attack")]
         [SerializeField] private int FrostRadius;
@@ -72,19 +73,17 @@ namespace Tower
 
             base.SecondaryAttack();
         }
-
+        
         private IEnumerator LightningAttack()
-        {
+        {            
             GameObject ElektricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
+            Instantiate(LightningBoltPrefab);
             Vector3 newPos = CurrentTarget.transform.position;
-            //lineRenderer = LightningBoltPrefab.GetComponent<LineRenderer>();
-            GameObject chainPoint;
-            GameObject[] chianedEnemys;
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
             int LightningChainCount = 0;
-            
             FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
+            LineController newLine = Instantiate(linePrefab);
 
             yield return new WaitForSeconds(AttackDelayTime);
 
@@ -102,8 +101,9 @@ namespace Tower
                 {
                     if(LightningChainCount > 0)
                     {
-                        //zet de lightning prefab point 1 = collider position && prefab point 2 = nextcollider position 
+                        newLine.AssignTarget(collider.transform, nextCollider.transform);
                         collider = nextCollider;
+
                     }
                     Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
                     if (EnemiesInRange.Length > 1)
@@ -144,8 +144,6 @@ namespace Tower
                 yield return new WaitForSecondsRealtime(LightningInBetweenTime);
 
             }
-            Destroy(ElektricCloud);
-
             SpecialAttackMode = false;
         }
 

@@ -16,7 +16,7 @@ namespace Tower
         public void seek(GameObject _target)
         {
             Target = _target;
-            Debug.Log(_target);
+            //Debug.Log(_target);
         }
 
         // Update is called once per frame
@@ -46,8 +46,6 @@ namespace Tower
 
         void HitTarget()
         {
-
-            Debug.Log("hit");
             Destroy(gameObject);
         }
     }

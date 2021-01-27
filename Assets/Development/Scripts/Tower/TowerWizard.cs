@@ -9,6 +9,21 @@ using UnityEngine;
 
 namespace Tower
 {
+    struct LightningTargetCache
+    {
+        public Collider collider1;
+        public Vector3 lastPosition;
+
+        public Vector3 GetVector()
+        {
+            if (collider1)
+            {
+                return collider1.transform.position;
+            }
+
+            return lastPosition;
+        }
+    }
     [SelectionBase]
     public class TowerWizard : TowerCore
     {
@@ -81,6 +96,10 @@ namespace Tower
             Vector3 newPos = CurrentTarget.transform.position;
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
+
+            LightningTargetCache target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
+            LightningTargetCache next;
+
             int LightningChainCount = 0;
             FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
             LineController newLine = Instantiate(linePrefab);

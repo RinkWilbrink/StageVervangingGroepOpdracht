@@ -44,7 +44,7 @@ public class EggVisualIndicator : MonoBehaviour
             {
                 if (m_EggHP > m_EggDivisions[i] && m_EggHP <= m_EggDivisions[i + 1])
                 {
-                    print(m_EggDivisions[i]);
+                    //print(m_EggDivisions[i]);
                     m_SpriteRenderer.sprite = m_EggSprites[i];
                     m_CurrentActiveSprite = i;
                 }

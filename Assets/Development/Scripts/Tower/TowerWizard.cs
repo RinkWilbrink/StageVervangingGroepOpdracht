@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Tower
 {
-    struct LightningTargetCache
+    public struct LightningTargetCache
     {
         public Collider collider1;
         public Vector3 lastPosition;
@@ -92,13 +92,11 @@ namespace Tower
         private IEnumerator LightningAttack()
         {            
             GameObject ElektricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
-            Instantiate(LightningBoltPrefab);
             Vector3 newPos = CurrentTarget.transform.position;
             Collider collider = CurrentTarget.GetComponent<Collider>();
             Collider nextCollider = null;
-
             LightningTargetCache target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
-            LightningTargetCache next;
+            LightningTargetCache next = new LightningTargetCache();
 
             int LightningChainCount = 0;
             FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
@@ -120,27 +118,29 @@ namespace Tower
                 {
                     if(LightningChainCount > 0)
                     {
-                        newLine.AssignTarget(collider.transform, nextCollider.transform);
-                        collider = nextCollider;
+                        newLine.AssignTarget(target, next);
+                        target = next;
 
                     }
-                    Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
+                    Debug.Log(target.GetVector());
+                    Collider[] EnemiesInRange = Physics.OverlapSphere(target.GetVector(), LightningRadius, 1 << 9);
                     if (EnemiesInRange.Length > 1)
                     {
                         float B = float.MaxValue;
                         for(int y = 0; y < EnemiesInRange.Length; y++)
                         {
-                            if(EnemiesInRange[y] != null)
+                            if(EnemiesInRange[y] != null && EnemiesInRange[y].GetComponent<EnemyUnit>().IsDeath() != true)
                             {
                                 // Check the distance of a new potential target, if its lower then the current target, that will be the new Target
-                                float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
+                                float distance1 = Mathf.Sqrt((target.GetVector() - EnemiesInRange[y].transform.position).sqrMagnitude);
 
                                 // Compare the distance of the Current target and the new potential target
                                 if(distance1 > 0 && distance1 < B)
                                 {
                                     B = distance1;
 
-                                    nextCollider = EnemiesInRange[y];
+                                    next = new LightningTargetCache { collider1 = EnemiesInRange[y], lastPosition = EnemiesInRange[y].transform.position };
+                                        
                                 }
                             }
                         }
@@ -148,15 +148,15 @@ namespace Tower
                     else
                     {
                         LightningChainCount = LightningChainLimit + 1;
-                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
+                        target.collider1.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
                         
                         yield return null;
                     }
                 }
 
-                if(collider != null)
+                if(target.collider1 != null)
                 {
-                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
+                    target.collider1.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
                 }
 
                 LightningChainCount++;
@@ -164,6 +164,9 @@ namespace Tower
 
             }
             SpecialAttackMode = false;
+
+            Destroy(newLine);
+
         }
 
         private IEnumerator FrostAttack()

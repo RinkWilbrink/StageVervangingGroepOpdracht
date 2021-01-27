@@ -109,6 +109,7 @@ namespace Tower
                 yield return new WaitForSeconds(0.1f);
 
             }
+            SpecialAttackMode = false;
         }
 
 

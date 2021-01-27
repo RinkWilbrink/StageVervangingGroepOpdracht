@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class NinjaDash : MonoBehaviour
 {
+    [SerializeField] private ResourceUIManager resourceUIManager;
     private Vector3 startPos;
     private Vector3 endPos;
     private Camera mainCam;
@@ -46,7 +47,7 @@ public class NinjaDash : MonoBehaviour
     bool moveNinja = false;
     private void Update() {
         if ( Input.GetMouseButtonDown(0) && !moveNinja && !IsMouseOnUI() ) {
-            print("Down");
+            //print("Down");
             line.enabled = true;
 
             Vector3 mousePos = Input.mousePosition;
@@ -57,6 +58,11 @@ public class NinjaDash : MonoBehaviour
             ninja.transform.position = startPos;
             ninja.SetActive(true);
             audioManagement.PlayAudioClip(summonSound, AudioMixerGroups.SFX);
+            GameController.Mana -= worldAbilities.ninjaDashManaCost;
+            resourceUIManager.UpdateResourceUI();
+            worldAbilities.ninjaDashButton.interactable = false;
+            worldAbilities.ninjaDashTimer = 0f;
+            
         }
 
         if ( Input.GetMouseButton(0) && !moveNinja && !IsMouseOnUI() ) {

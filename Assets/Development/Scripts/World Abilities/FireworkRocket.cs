@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class FireworkRocket : MonoBehaviour
 {
+    [SerializeField] private ResourceUIManager resourceUIManager;
     [SerializeField] private float explosionSize;
     [SerializeField] private int damage;
     [SerializeField] private GameObject fireworkSprite;
@@ -49,6 +50,10 @@ public class FireworkRocket : MonoBehaviour
             fireworkRocket.SetActive(true);
             rocketLaunched = true;
             FindObjectOfType<AudioManagement>().PlayAudioClip(fireworkExplosionAudio, AudioMixerGroups.SFX);
+            GameController.Mana -= worldAbilities.fireworkManaCost;
+            resourceUIManager.UpdateResourceUI();
+            worldAbilities.fireworkButton.interactable = false;
+            worldAbilities.fireworkTimer = 0f;
         }
 
         if ( rocketLaunched ) {

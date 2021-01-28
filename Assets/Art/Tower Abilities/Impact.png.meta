@@ -1,43 +1,28 @@
 fileFormatVersion: 2
-guid: e4bd48474fcfc7044a0d25838a0d9a2a
+guid: e525c8fa00ea0ec45abed2a9202589f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8299237929856428753
-    second: ThunderCloudSprites_0
+      213: 5838690487585382102
+    second: Impact_0
   - first:
-      213: 919345382832514380
-    second: ThunderCloudSprites_1
+      213: 2912065134375024089
+    second: Impact_1
   - first:
-      213: 6473765881709934787
-    second: ThunderCloudSprites_2
+      213: 2149313183507242163
+    second: Impact_2
   - first:
-      213: 1651788361167637922
-    second: ThunderCloudSprites_3
+      213: -2666882680432870540
+    second: Impact_3
   - first:
-      213: -7283195115697062041
-    second: ThunderCloudSprites_4
+      213: -7769254484576812942
+    second: Impact_4
   - first:
-      213: 8945456330414762675
-    second: ThunderCloudSprites_5
+      213: -5623080056597879961
+    second: Impact_5
   - first:
-      213: -4375190713414315333
-    second: ThunderCloudSprites_6
-  - first:
-      213: -2690196444659274770
-    second: ThunderCloudSprites_7
-  - first:
-      213: 4523858174296734665
-    second: ThunderCloudSprites_8
-  - first:
-      213: -6768990481302603210
-    second: ThunderCloudSprites_9
-  - first:
-      213: 169570828383820998
-    second: ThunderCloudSprites_10
-  - first:
-      213: 662681180422424107
-    second: ThunderCloudSprites_11
+      213: -1648334716361060864
+    second: Impact_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,13 +120,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ThunderCloudSprites_0
+      name: Impact_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1806
-        width: 688.5
-        height: 903
+        y: 455
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1da6a8b0de0dc2370800000000000000
-      internalID: 8299237929856428753
+      spriteID: 6de9af15012370150800000000000000
+      internalID: 5838690487585382102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_1
+      name: Impact_1
       rect:
         serializedVersion: 2
-        x: 688
-        y: 1806
-        width: 688.5
-        height: 903
+        x: 455
+        y: 455
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c45a0a931cb22cc00800000000000000
-      internalID: 919345382832514380
+      spriteID: 9d539399fcbb96820800000000000000
+      internalID: 2912065134375024089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_2
+      name: Impact_2
       rect:
         serializedVersion: 2
-        x: 1376
-        y: 1806
-        width: 688.5
-        height: 903
+        x: 910
+        y: 455
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c83d5a15cf67d950800000000000000
-      internalID: 6473765881709934787
+      spriteID: 3bc530ee3f4e3dd10800000000000000
+      internalID: 2149313183507242163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_3
+      name: Impact_3
       rect:
         serializedVersion: 2
-        x: 2064
-        y: 1806
-        width: 688.5
-        height: 903
+        x: 1365
+        y: 455
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,104 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ad858f43c45ce610800000000000000
-      internalID: 1651788361167637922
+      spriteID: 47b3827f4545dfad0800000000000000
+      internalID: -2666882680432870540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 903
-        width: 688.5
-        height: 903
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76f340b51a4ecea90800000000000000
-      internalID: -7283195115697062041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderCloudSprites_5
-      rect:
-        serializedVersion: 2
-        x: 688
-        y: 903
-        width: 688.5
-        height: 903
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ba24203325a42c70800000000000000
-      internalID: 8945456330414762675
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderCloudSprites_6
-      rect:
-        serializedVersion: 2
-        x: 1376
-        y: 903
-        width: 688.5
-        height: 903
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb21a561a333843c0800000000000000
-      internalID: -4375190713414315333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderCloudSprites_7
-      rect:
-        serializedVersion: 2
-        x: 2064
-        y: 903
-        width: 688.5
-        height: 903
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eeba01c36908aaad0800000000000000
-      internalID: -2690196444659274770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderCloudSprites_8
+      name: Impact_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 688.5
-        height: 903
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cb34358a09f7ce30800000000000000
-      internalID: 4523858174296734665
+      spriteID: 2704035a5301e2490800000000000000
+      internalID: -7769254484576812942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_9
+      name: Impact_5
       rect:
         serializedVersion: 2
-        x: 688
+        x: 455
         y: 0
-        width: 688.5
-        height: 903
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,20 +239,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63a35f95507bf02a0800000000000000
-      internalID: -6768990481302603210
+      spriteID: 76366ea1b7ec6f1b0800000000000000
+      internalID: -5623080056597879961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ThunderCloudSprites_10
+      name: Impact_6
       rect:
         serializedVersion: 2
-        x: 1376
+        x: 910
         y: 0
-        width: 688.5
-        height: 903
+        width: 455.75
+        height: 455
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,29 +260,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cc161e15cf6a5200800000000000000
-      internalID: 169570828383820998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderCloudSprites_11
-      rect:
-        serializedVersion: 2
-        x: 2064
-        y: 0
-        width: 688.5
-        height: 903
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b264a66c501523900800000000000000
-      internalID: 662681180422424107
+      spriteID: 00eca580f40ff19e0800000000000000
+      internalID: -1648334716361060864
       vertices: []
       indices: 
       edges: []
@@ -389,7 +269,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8612c82c23ecbd541b8beec25d5dcb37
+    spriteID: 569a747889645814eac868d623c34141
     internalID: 0
     vertices: []
     indices: 

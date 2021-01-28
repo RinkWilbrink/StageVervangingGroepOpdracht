@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1348,7 +1348,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.26e-41, z: 0, w: -Infinity}
+  m_BoundingSphereOverride: {x: 0, y: 1.5386e-41, z: 0, w: -0.000000006897608}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1562,6 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3543ab04a684604468e204c16becbc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceUIManager: {fileID: 4318821454803897585}
   line: {fileID: 391065410}
   ninjaSprite: {fileID: 4516719405004359715, guid: b736a0af7db59b94db8567859e24f3e5,
     type: 3}
@@ -4213,7 +4214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 737210492}
   m_Layer: 0
-  m_Name: EnemyPool
+  m_Name: EnemyList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5842,6 +5843,18 @@ Transform:
   m_Father: {fileID: 1963586532}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1024149905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7025402270811787973, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1030160880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6591,7 +6604,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.6804e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.5251e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -6769,8 +6782,10 @@ MonoBehaviour:
   audioManager: {fileID: 247861648}
   resourceUIManager: {fileID: 4318821454803897585}
   towerInteraction: {fileID: 600629071}
+  uiAnimation: {fileID: 1231101625}
   thousandCranes: {fileID: 1479291279}
   thousandCranesButton: {fileID: 112257210510853291}
+  thousandCranesIndicator: {fileID: 1507791236}
   thousandCranesActiveColor: {r: 0.24313727, g: 0.6, b: 0.28235295, a: 1}
   thousandCranesCooldown: 4
   thousandCranesManaCost: 2
@@ -6789,14 +6804,18 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   fireworkRocket: {fileID: 1864268949}
   fireworkButton: {fileID: 112257211649927536}
+  fireworkIndicator: {fileID: 1024149905}
   fireworkActiveColor: {r: 0.62352943, g: 0.28235295, b: 0.2509804, a: 1}
   fireworkCooldown: 6
-  fireworkManaCost: 2
+  fireworkManaCost: 4
+  fireworkTimer: 0
   ninjaDash: {fileID: 391065408}
   ninjaDashButton: {fileID: 112257210584714934}
+  ninjaDashIndicator: {fileID: 2104388980}
   ninjaDashActiveColor: {r: 0.24705884, g: 0.5176471, b: 0.6313726, a: 1}
   ninjaDashCooldown: 10
-  ninjaDashManaCost: 5
+  ninjaDashManaCost: 4
+  ninjaDashTimer: 0
 --- !u!1 &1317817389
 GameObject:
   m_ObjectHideFlags: 0
@@ -7264,6 +7283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c48e1f6350bf1b498367837c93ea781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManagement: {fileID: 247861648}
+  flockOfCranesAudio: {fileID: 8300000, guid: 74ced6f8ceeff45448afc87de3a80c99, type: 3}
   speedDebuff: 70
   speedDebuffTime: 10
 --- !u!1 &1481111411
@@ -7452,6 +7473,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500750728}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1507791236 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6008284757022795069, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1519754827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5582597527016447565, guid: f0e5b782da038794babb1fbfa6b8f01e,
@@ -7928,6 +7961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 31428123, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 170972950, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -8218,6 +8255,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257211098822252, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireworkRocket
+      objectReference: {fileID: 0}
     - target: {fileID: 112257211098822253, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -8373,6 +8440,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212107332535, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ThousandCranes
+      objectReference: {fileID: 0}
     - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -8406,6 +8503,31 @@ PrefabInstance:
     - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 112257212201243050, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 112257212201243051, guid: d27b1165a3810444b9bfc58bf53d0e97,
@@ -9453,7 +9575,8 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1389802308}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1165855010, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d27b1165a3810444b9bfc58bf53d0e97, type: 3}
 --- !u!224 &1625022237 stripped
 RectTransform:
@@ -10679,6 +10802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6045445cdb85ab642b7530d8a05b665a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceUIManager: {fileID: 4318821454803897585}
   explosionSize: 3
   damage: 2
   fireworkSprite: {fileID: 5953730543688878180, guid: abbad098f53c29b41ae976e7da30c4fa,
@@ -11876,6 +12000,18 @@ RectTransform:
   m_AnchoredPosition: {x: 529, y: -330}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2104388980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 350616233524478434, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2137479157 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2809064724138722783, guid: d27b1165a3810444b9bfc58bf53d0e97,

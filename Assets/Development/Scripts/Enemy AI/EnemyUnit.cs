@@ -129,7 +129,7 @@ public class EnemyUnit : MonoBehaviour
         //Update Health Bar
         float updatedHealth = (healthBar.maxValue / maxHealth) * Health;
 
-        healthBar.value = Mathf.MoveTowards(healthBar.value, updatedHealth, 0.4f * Time.deltaTime);
+        healthBar.value = Mathf.MoveTowards(healthBar.value, updatedHealth, 0.8f * Time.deltaTime);
     }
 
     [SerializeField] private Sprite[] walkSheet;

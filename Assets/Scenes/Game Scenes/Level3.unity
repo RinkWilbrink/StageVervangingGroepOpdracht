@@ -1159,6 +1159,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312228262}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &319513451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 350616233524478434, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &334801026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,14 +1752,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3543ab04a684604468e204c16becbc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceUIManager: {fileID: 4318821454803897585}
   line: {fileID: 391065410}
   ninjaSprite: {fileID: 4516719405004359715, guid: b736a0af7db59b94db8567859e24f3e5,
     type: 3}
   dragRange: 7
   damage: 20
-  audioManagement: {fileID: 0}
-  summonSound: {fileID: 0}
-  slashSound: {fileID: 0}
+  audioManagement: {fileID: 247861648}
+  summonSound: {fileID: 8300000, guid: 259bcee0535d8f34488fd15110fc0f69, type: 3}
+  slashSound: {fileID: 8300000, guid: 3792363887ce883489257f390b0401e4, type: 3}
 --- !u!224 &392809334 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 392809334, guid: 7593ef97becac3348934e7e8f55fa80d,
@@ -8180,8 +8193,10 @@ MonoBehaviour:
   audioManager: {fileID: 247861648}
   resourceUIManager: {fileID: 4318821454803897585}
   towerInteraction: {fileID: 600629071}
+  uiAnimation: {fileID: 1625022251}
   thousandCranes: {fileID: 1479291279}
   thousandCranesButton: {fileID: 112257210510853291}
+  thousandCranesIndicator: {fileID: 1339571754}
   thousandCranesActiveColor: {r: 0.24313727, g: 0.6, b: 0.28235295, a: 1}
   thousandCranesCooldown: 4
   thousandCranesManaCost: 2
@@ -8200,14 +8215,18 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   fireworkRocket: {fileID: 1864268949}
   fireworkButton: {fileID: 112257211649927536}
+  fireworkIndicator: {fileID: 1817945481}
   fireworkActiveColor: {r: 0.62352943, g: 0.28235295, b: 0.2509804, a: 1}
   fireworkCooldown: 6
-  fireworkManaCost: 2
+  fireworkManaCost: 4
+  fireworkTimer: 0
   ninjaDash: {fileID: 391065408}
   ninjaDashButton: {fileID: 112257210584714934}
+  ninjaDashIndicator: {fileID: 319513451}
   ninjaDashActiveColor: {r: 0.24705884, g: 0.5176471, b: 0.6313726, a: 1}
   ninjaDashCooldown: 10
-  ninjaDashManaCost: 5
+  ninjaDashManaCost: 4
+  ninjaDashTimer: 0
 --- !u!1 &1317817389
 GameObject:
   m_ObjectHideFlags: 0
@@ -8308,6 +8327,18 @@ Transform:
   m_Father: {fileID: 1004481210}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1339571754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6008284757022795069, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1343315064
 GameObject:
   m_ObjectHideFlags: 0
@@ -8598,6 +8629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c48e1f6350bf1b498367837c93ea781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManagement: {fileID: 247861648}
+  flockOfCranesAudio: {fileID: 8300000, guid: 74ced6f8ceeff45448afc87de3a80c99, type: 3}
   speedDebuff: 70
   speedDebuffTime: 10
 --- !u!1 &1499512082
@@ -10144,6 +10177,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1625022251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1165855010, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625022246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99711599f76f18e439c2b979bbee31db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1640888929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1110898694429892159, guid: d27b1165a3810444b9bfc58bf53d0e97,
@@ -10716,6 +10761,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1817945481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7025402270811787973, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1827480188
 GameObject:
   m_ObjectHideFlags: 0
@@ -10882,6 +10939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6045445cdb85ab642b7530d8a05b665a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceUIManager: {fileID: 4318821454803897585}
   explosionSize: 3
   damage: 2
   fireworkSprite: {fileID: 5953730543688878180, guid: abbad098f53c29b41ae976e7da30c4fa,

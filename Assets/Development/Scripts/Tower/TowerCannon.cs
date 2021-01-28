@@ -105,7 +105,7 @@ namespace Tower
 
             Destroy(BombBullet);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.3f);
 
             Destroy(explosion);
             SpecialAttackMode = false;
@@ -116,8 +116,6 @@ namespace Tower
             //als current target != null schiet oil spill op target
 
             float timer = 0f;
-
-            float FireTimer = 1.5f;
 
             GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
 
@@ -134,12 +132,12 @@ namespace Tower
 
             GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
 
-            while(vuurtijd > 0f)
+            /*while(vuurtijd > 0f)
             {
                 vuurtijd -= GameTime.deltaTime;
-            }
+            }*/
 
-            if (vuurtijd <= 0f)
+            /*if (vuurtijd <= 0f)
             {
                 Debug.Log("het werkt");
                 while (timer < FireTime)
@@ -158,13 +156,12 @@ namespace Tower
                 }
 
                 vuurtijd = 10f;
-            }
+            }*/
             Destroy(OilBall);
-
-            yield return new WaitForSeconds(2f);
+            SpecialAttackMode = false;
+            yield return new WaitForSeconds(FireTime);
 
             Destroy(OilSpill);
-            SpecialAttackMode = false;
 
 
             /*float timer = 0f;
@@ -191,5 +188,6 @@ namespace Tower
         }
 
         #endregion
+
     }
 }

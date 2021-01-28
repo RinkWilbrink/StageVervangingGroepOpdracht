@@ -11,12 +11,58 @@ public class WorldAbilities : MonoBehaviour
     [SerializeField] private AudioManagement audioManager;
     [SerializeField] private ResourceUIManager resourceUIManager;
     [SerializeField] private Tower.TowerInteraction towerInteraction;
+    [SerializeField] private UIAnimation uiAnimation;
+
+    [Space(10)]
+    [SerializeField] private ThousandCranes thousandCranes;
+    [SerializeField] private Button thousandCranesButton;
+    [SerializeField] private Image thousandCranesIndicator;
+    [SerializeField] private Color thousandCranesActiveColor;
+    [SerializeField] private float thousandCranesCooldown;
+    [SerializeField] private int thousandCranesManaCost;
+    private float thousandCranesTimer;
+    private bool thousandCranesAbilityActive = false;
+    private float thousandCranesInUseTimer;
+    private bool thousandCranesInUse = false;
+
+    [SerializeField] private Sprite[] craneSprites;
+    [SerializeField] private GameObject cranePrefab;
+    [SerializeField] private Color[] craneColors;
+    private Transform craneParent;
+    private List<GameObject> craneFlockList = new List<GameObject>();
+    private float screenSize;
+
+    [Space(20)]
+    [SerializeField] private GameObject fireworkRocket;
+    public Button fireworkButton;
+    [SerializeField] private Image fireworkIndicator;
+    [SerializeField] private Color fireworkActiveColor;
+    [SerializeField] private float fireworkCooldown;
+    public int fireworkManaCost;
+    public float fireworkTimer;
+    private bool fireworkAbilityActive = false;
+
+    [Space(20)]
+    [SerializeField] private GameObject ninjaDash;
+    public Button ninjaDashButton;
+    [SerializeField] private Image ninjaDashIndicator;
+    [SerializeField] private Color ninjaDashActiveColor;
+    [SerializeField] private float ninjaDashCooldown;
+    public int ninjaDashManaCost;
+    public float ninjaDashTimer;
+    private bool ninjaDashAbilityActive = false;
 
     private void NotEnoughMana( int manaCost, Button button ) {
         if ( GameController.Mana < manaCost )
+        {
             button.image.color = notEnoughManaColor;
+            button.transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(false);
+        }
         else
+        {
             button.image.color = Color.white;
+            button.transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
+        }
     }
     private void Start() {
         InitiateCranes();
@@ -33,17 +79,23 @@ public class WorldAbilities : MonoBehaviour
         if ( !fireworkRocket.activeInHierarchy )
             NotEnoughMana(fireworkManaCost, fireworkButton);
 
-        if ( ninjaDashTimer < ninjaDashCooldown ) {
+        if ( ninjaDashTimer < ninjaDashCooldown ) 
+        {
             ninjaDashButton.interactable = false;
             ninjaDashTimer += Time.deltaTime;
-        } else {
+        } 
+        else if ( ninjaDashTimer >= ninjaDashCooldown)
+        {
             ninjaDashButton.interactable = true;
         }
 
-        if ( fireworkTimer < fireworkCooldown ) {
+        if ( fireworkTimer < fireworkCooldown ) 
+        {
             fireworkButton.interactable = false;
             fireworkTimer += Time.deltaTime;
-        } else {
+        }
+        else if ( fireworkTimer >= fireworkCooldown )
+        {
             fireworkButton.interactable = true;
         }
 
@@ -68,38 +120,42 @@ public class WorldAbilities : MonoBehaviour
         } else {
             thousandCranesButton.interactable = true;
         }
+
+        if (!thousandCranesInUse)
+        {
+            thousandCranesIndicator.fillAmount = 1 / thousandCranesCooldown * thousandCranesTimer;
+        }
+
+        if (!fireworkAbilityActive)
+        {
+            fireworkIndicator.fillAmount = 1 / fireworkCooldown * fireworkTimer;
+        }
+
+        if (!ninjaDashAbilityActive)
+        {
+            ninjaDashIndicator.fillAmount = 1 / ninjaDashCooldown * ninjaDashTimer;
+        }
     }
 
-    [Space(10)]
-    [SerializeField] private ThousandCranes thousandCranes;
-    [SerializeField] private Color thousandCranesActiveColor;
-    [SerializeField] private Button thousandCranesButton;
-    [SerializeField] private float thousandCranesCooldown = 15;
-    [SerializeField] private int thousandCranesManaCost = 8;
-    private float thousandCranesTimer;
-    private bool thousandCranesAbilityActive = false;
-    private float thousandCranesInUseTimer;
-    private bool thousandCranesInUse = false;
     public void ThousandCranes() {
         if (towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode)
-            return;
+        {
+            towerInteraction.CurrentInteractionMode = Tower.InteractionMode.None;
+            uiAnimation.TriggerBuildMenu();
+        }
 
         thousandCranesAbilityActive = !thousandCranesAbilityActive;
 
         if ( !thousandCranesInUse && thousandCranesAbilityActive && GameController.Mana >= thousandCranesManaCost && thousandCranesTimer > thousandCranesCooldown ) {
             thousandCranes.ThousandCranesAbility();
             thousandCranesInUse = true;
+            thousandCranesIndicator.fillAmount = 0;
+            GameController.Mana -= thousandCranesManaCost;
+            resourceUIManager.UpdateResourceUI();
             craneParent.transform.position = new Vector3(( ( Camera.main.transform.position.x + screenSize + 2 ) * 2 ) * -1, 0,
                  ( Camera.main.transform.position.z + screenSize ) * -1);
         }
     }
-
-    [SerializeField] private Sprite[] craneSprites;
-    [SerializeField] private GameObject cranePrefab;
-    [SerializeField] private Color[] craneColors;
-    private Transform craneParent;
-    private List<GameObject> craneFlockList = new List<GameObject>();
-    private float screenSize;
 
     private void InitiateCranes() {
         float camDist = 5;
@@ -150,22 +206,15 @@ public class WorldAbilities : MonoBehaviour
         thousandCranesInUse = false;
         thousandCranesTimer = 0;
         thousandCranesInUseTimer = 0;
-        GameController.Mana -= thousandCranesManaCost;
-        resourceUIManager.UpdateResourceUI();
         thousandCranesButton.image.color = Color.white;
     }
-
-    [Space(20)]
-    [SerializeField] private GameObject fireworkRocket;
-    [SerializeField] private Color fireworkActiveColor;
-    [SerializeField] private Button fireworkButton;
-    [SerializeField] private float fireworkCooldown = 10;
-    [SerializeField] private int fireworkManaCost = 5;
-    private float fireworkTimer;
-    private bool fireworkAbilityActive = false;
+    
     public void FireworkRocket() {
-        if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
-            return;
+        if (towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode)
+        {
+            towerInteraction.CurrentInteractionMode = Tower.InteractionMode.None;
+            uiAnimation.TriggerBuildMenu();
+        }
 
         if ( fireworkRocket.gameObject.activeInHierarchy ) {
             fireworkRocket.SetActive(false);
@@ -174,6 +223,7 @@ public class WorldAbilities : MonoBehaviour
         } else if ( !fireworkRocket.gameObject.activeInHierarchy && GameController.Mana >= fireworkManaCost && fireworkTimer > fireworkCooldown ) {
             fireworkRocket.SetActive(true);
             fireworkAbilityActive = true;
+            fireworkIndicator.fillAmount = 0;
             fireworkButton.image.color = fireworkActiveColor;
         }
     }
@@ -182,23 +232,16 @@ public class WorldAbilities : MonoBehaviour
         fireworkAbilityActive = false;
         fireworkRocket.SetActive(false);
         fireworkTimer = 0f;
-        GameController.Mana -= fireworkManaCost;
-        resourceUIManager.UpdateResourceUI();
         fireworkButton.image.color = Color.white;
     }
-
-    [Space(20)]
-    [SerializeField] private GameObject ninjaDash;
-    [SerializeField] private Color ninjaDashActiveColor;
-    [SerializeField] private Button ninjaDashButton;
-    [SerializeField] private float ninjaDashCooldown = 30;
-    [SerializeField] private int ninjaDashManaCost = 15;
-    private float ninjaDashTimer;
-    private bool ninjaDashAbilityActive = false;
+    
     public void NinjaDash() {
         if ( towerInteraction.CurrentInteractionMode == Tower.InteractionMode.PlacementMode )
-            return;
-
+        {
+            towerInteraction.CurrentInteractionMode = Tower.InteractionMode.None;
+            uiAnimation.TriggerBuildMenu();
+        }
+        
         if ( ninjaDash.gameObject.activeInHierarchy ) {
             ninjaDash.gameObject.SetActive(false);
             ninjaDashAbilityActive = false;
@@ -206,18 +249,17 @@ public class WorldAbilities : MonoBehaviour
         } else if ( !ninjaDash.gameObject.activeInHierarchy && GameController.Mana >= ninjaDashManaCost && ninjaDashTimer > ninjaDashCooldown ) {
             ninjaDash.gameObject.SetActive(true);
             ninjaDashAbilityActive = true;
+            ninjaDashIndicator.fillAmount = 0;
+            resourceUIManager.UpdateResourceUI();
             ninjaDashButton.image.color = ninjaDashActiveColor;
         }
     }
 
     public void ResetNinjaDash() {
         ninjaDashAbilityActive = false;
-        ninjaDash.SetActive(false);
         ninjaDashTimer = 0f;
-        GameController.Mana -= ninjaDashManaCost;
-        resourceUIManager.UpdateResourceUI();
         ninjaDashButton.image.color = Color.white;
-        print("FINISHED NINJA DASH");
+        //Debug.Log("samurai reset");
     }
 
     public void WorldAbilityAudio() {

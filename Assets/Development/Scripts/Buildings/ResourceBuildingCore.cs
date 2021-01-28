@@ -41,10 +41,12 @@ namespace ResourceBuilding
         [Header("Audio")]
         [SerializeField] private AudioClip collectSFX;
 
+        private SelectionButtonManager selectionButtonManager;
+
         /// <summary>Init functions, This function gets called when the building gets created (like a start)</summary>
         public void Init()
         {
-
+            selectionButtonManager = FindObjectOfType<SelectionButtonManager>();
         }
 
         /// <summary>Add the CollectResource function to the OnButtonClick Event to collect the resource</summary>
@@ -66,6 +68,7 @@ namespace ResourceBuilding
                 DataManager.ResourcesGained(ResourcesInStorage, true);
 
                 GameController.Gold += ResourcesInStorage;
+                selectionButtonManager.UpdateTowerButtonUI();
             }
             if(Resource == ResourceType.ManaWell)
             {

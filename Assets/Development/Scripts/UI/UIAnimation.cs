@@ -1,20 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIAnimation : MonoBehaviour
 {
+    [SerializeField] private AudioManagement _AudioManagement;
+    [SerializeField] private Tower.TowerInteraction _TowerInteraction;
     [SerializeField] private AudioClip _ButtonSound;
     [SerializeField] private AudioClip _ButtonSoundSlide;
+
+    [Header("In-game")]
     [SerializeField] private GameObject _BuildMenu;
     [SerializeField] private GameObject _PauseMenu;
     [SerializeField] private GameObject _SettingsMenu;
     [SerializeField] private GameObject _PauseMenuBackGround;
+
+    [Header("MainMenu")]
+    [SerializeField] private GameObject _MainMenuTitle;
+    [SerializeField] private GameObject _MainMenuPlayButton;
+    [SerializeField] private GameObject _MainMenuAnalyticsButton;
+    [SerializeField] private GameObject _MainMenuSettingsButton;
+    [SerializeField] private GameObject _MainMenuLevelBackButton;
+    [SerializeField] private GameObject _MainMenuAnalyticsBackButton;
+    [SerializeField] private GameObject _MainMenuSettingsBackButton;
+    [SerializeField] private GameObject _MainMenuRewardButton;
+    [SerializeField] private GameObject _MainMenuLevelSelectionMenu;
+    [SerializeField] private GameObject _MainMenuAnalyticsMenu;
+    [SerializeField] private float _MainMenuAnimationSpeed;
+
     private bool _BuildMenuOpen;
     private bool _PauseMenuOpen;
     private bool _SettingsMenuOpen;
 
+    private bool _MainMenuLevelSelectionOpen;
+    private bool _MainMenuSettingsMenuOpen;
+    private bool _MainMenuAnalyticsMenuOpen;
+
     private bool _SetToClosePauseMenu;
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            TriggerMainMenuStartAnimation();
+        }
+    }
 
     private void Update()
     {
@@ -26,24 +57,155 @@ public class UIAnimation : MonoBehaviour
         }
     }
 
+    public void TriggerMainMenuStartAnimation()
+    {
+        LTSeq sequence = LeanTween.sequence();
+        sequence.append(1f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(LeanTween.rotateZ(_MainMenuTitle, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.3f);
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.rotateZ(_MainMenuPlayButton, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-0.2f);
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+    }
+
+    public void OpenMainMenuUI()
+    {
+        LTSeq sequence = LeanTween.sequence();
+        sequence.append(_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.one, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalY(_MainMenuTitle, 250f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 850f, _MainMenuAnimationSpeed).setEaseOutBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -850f, _MainMenuAnimationSpeed).setEaseOutBack());
+    }
+
+    public void CloseMainMenuUI()
+    {
+        LTSeq sequence = LeanTween.sequence();
+
+        sequence.append(LeanTween.scale(_MainMenuPlayButton, Vector3.zero, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalY(_MainMenuTitle, 750f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuSettingsButton, 1200f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuAnalyticsButton, 1200f, _MainMenuAnimationSpeed).setEaseInBack());
+        sequence.append(-_MainMenuAnimationSpeed);
+        sequence.append(LeanTween.moveLocalX(_MainMenuRewardButton, -1200f, _MainMenuAnimationSpeed).setEaseInBack());
+    }
+
+    public void TriggerMainMenuLevelSelection()
+    {
+        if (_MainMenuLevelSelectionOpen)
+        {
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(LeanTween.moveY(_MainMenuLevelBackButton, -60f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuLevelSelectionMenu, 1000f, _MainMenuAnimationSpeed).setEaseInBack());
+
+            OpenMainMenuUI();
+
+            _MainMenuLevelSelectionOpen = false;
+        }
+        else
+        {
+            CloseMainMenuUI();
+
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuLevelBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuLevelSelectionMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+
+            _MainMenuLevelSelectionOpen = true;
+        }
+    }
+
+    public void TriggerMainMenuAnalyticsMenu()
+    {
+        if (_MainMenuAnalyticsMenuOpen)
+        {
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsBackButton, -640f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsMenu, 1000f, _MainMenuAnimationSpeed).setEaseInBack());
+
+            OpenMainMenuUI();
+
+            _MainMenuAnalyticsMenuOpen = false;
+        }
+        else
+        {
+            CloseMainMenuUI();
+
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuAnalyticsMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+
+            _MainMenuAnalyticsMenuOpen = true;
+        }
+    }
+
+    public void TriggerMainMenuSettingsMenu()
+    {
+        if (_MainMenuSettingsMenuOpen)
+        {
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(LeanTween.moveLocalY(_MainMenuSettingsBackButton, -640f, _MainMenuAnimationSpeed).setEaseInBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_SettingsMenu, 1000f, _MainMenuAnimationSpeed).setEaseInBack());
+
+            OpenMainMenuUI();
+
+            _MainMenuSettingsMenuOpen = false;
+        }
+        else
+        {
+            CloseMainMenuUI();
+
+            LTSeq sequence = LeanTween.sequence();
+            sequence.append(_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_MainMenuSettingsBackButton, -430f, _MainMenuAnimationSpeed).setEaseOutBack());
+            sequence.append(-_MainMenuAnimationSpeed);
+            sequence.append(LeanTween.moveLocalY(_SettingsMenu, 0f, _MainMenuAnimationSpeed).setEaseOutBack());
+
+            _MainMenuSettingsMenuOpen = true;
+        }
+    }
+
     public void TriggerBuildMenu()
     {
-        FindObjectOfType<AudioManagement>().PlayAudioClip(_ButtonSoundSlide, AudioMixerGroups.SFX);
+        _AudioManagement.PlayAudioClip(_ButtonSoundSlide, AudioMixerGroups.SFX);
         if (_BuildMenuOpen)
         {
-            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.UpgradeMode);
             _BuildMenuOpen = false;
         }
         else
         {
-            LeanTween.moveLocalX(_BuildMenu, 820f, 0.2f).setEaseOutQuart();
+            LeanTween.moveLocalX(_BuildMenu, -5f, 0.2f).setEaseOutQuart();
+            _TowerInteraction.SetInteractionMode((int)Tower.InteractionMode.PlacementMode);
             _BuildMenuOpen = true;
         }
     }
 
     public void TriggerPauseMenu()
     {
-        FindObjectOfType<AudioManagement>().PlayAudioClip(_ButtonSound, AudioMixerGroups.SFX);
+        _AudioManagement.PlayAudioClip(_ButtonSound, AudioMixerGroups.SFX);
         if (_PauseMenuOpen)
         {
             _SetToClosePauseMenu = true;
@@ -59,6 +221,7 @@ public class UIAnimation : MonoBehaviour
 
     public void TriggerSettingsMenu()
     {
+        _AudioManagement.PlayAudioClip(_ButtonSound, AudioMixerGroups.SFX);
         if (_SettingsMenuOpen)
         {
             LTSeq sequence = LeanTween.sequence();

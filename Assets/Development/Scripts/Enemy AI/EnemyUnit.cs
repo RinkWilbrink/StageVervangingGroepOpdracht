@@ -34,6 +34,7 @@ public class EnemyUnit : MonoBehaviour
     private UI.UpgradeUI upgradeUI;
 
     float maxHealth;
+    private bool isDeath;
 
     public void Initialize(EnemyData e)
     {
@@ -42,7 +43,6 @@ public class EnemyUnit : MonoBehaviour
         this.GoldReward = e.goldReward;
         this.AttackDamage = e.attackDamage;
     }
-
 
     private void Awake()
     {
@@ -62,7 +62,6 @@ public class EnemyUnit : MonoBehaviour
 
         maxHealth = Health;
     }
-
 
     Vector3 lastPos;
     private void Update()
@@ -198,7 +197,7 @@ public class EnemyUnit : MonoBehaviour
         {
             slowDownSpeed = (speedDebuff / 100) * Speed;
 
-            print((speedDebuff / 100) * Speed);
+            //print((speedDebuff / 100) * Speed);
             Speed -= (speedDebuff / 100) * Speed;
 
             slowDownTotalSpeed = Speed;
@@ -210,24 +209,27 @@ public class EnemyUnit : MonoBehaviour
 
     private IEnumerator Death()
     {
-        GameController.Gold += GoldReward;
+        if( isDeath == false )
+        {
+            GameController.Gold += GoldReward;
 
-        DataManager.ResourcesGained(GoldReward, true);
-        DataManager.EnemySlayed();
+            DataManager.ResourcesGained(GoldReward, true);
+            DataManager.EnemySlayed();
 
-        resourceUIManager.UpdateResourceUI();
-        selectionButtonManager.UpdateTowerButtonUI();
+            resourceUIManager.UpdateResourceUI();
+            selectionButtonManager.UpdateTowerButtonUI();
 
-        Speed = 0f;
+            Speed = 0f;
+            isDeath = true;
+            animator.SetBool("Death", true);
 
-        animator.SetBool("Death", true);
+            yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
 
-        Destroy(gameObject);
-
-        if (OnDeath != null)
-            OnDeath();
+            if (OnDeath != null)
+                OnDeath();
+        }
     }
 
     private void AttackDeath()
@@ -267,4 +269,6 @@ public class EnemyUnit : MonoBehaviour
             StartCoroutine(TakeDamageOverTime(dps, damageTime, timeUntilDamageTaken));
         }
     }
+
+    public bool IsDeath() => isDeath;
 }

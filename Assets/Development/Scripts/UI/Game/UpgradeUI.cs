@@ -108,6 +108,11 @@ namespace UI
             {
                 UpgradePanel.gameObject.SetActive(true);
 
+                if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length )
+                    towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel] + "";
+                else
+                    towerUpgradeCostText.text = "";
+
                 UpgradePanel.anchoredPosition = new Vector2(_x, _y);
                 UpgradePanel.localScale = Vector3.zero;
 
@@ -252,13 +257,19 @@ namespace UI
         [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1]))
+            if ( currentTower.TowerLevel >= currentTower.TowerUpgradeCosts.UpgradeCosts.Length )
+                return;
+
+            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel]) )
             {
                 currentTower.TowerLevel += 1;
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
-                towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1] + "";
+                if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length )
+                    towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel] + "";
+                else
+                    towerUpgradeCostText.text = "";
 
-                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
+                if (currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;

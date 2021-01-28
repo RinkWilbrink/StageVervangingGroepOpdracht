@@ -21,15 +21,10 @@ public class SelectionButtonManager : MonoBehaviour
         BuildingCosts = new int[5];
 
         BuildingCosts[0] = itemCosts.ArcherTowerCost;
-        buttons[0].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = itemCosts.ArcherTowerCost + "";
         BuildingCosts[1] = itemCosts.WizardTowerCost;
-        buttons[1].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = itemCosts.WizardTowerCost + "";
         BuildingCosts[2] = itemCosts.CannonTowerCost;
-        buttons[2].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = itemCosts.CannonTowerCost + "";
         BuildingCosts[3] = itemCosts.GoldMineCost;
-        buttons[3].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = itemCosts.GoldMineCost + "";
         BuildingCosts[4] = itemCosts.ManaWellCost;
-        buttons[4].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = itemCosts.ManaWellCost + "";
 
         AbilityManaCost = new int[3];
 

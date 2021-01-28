@@ -17,11 +17,6 @@ public class GameController : MonoBehaviour
         GameTime.SetTimeScale(1);
     }
 
-    private void Update() {
-        if ( Input.GetKeyDown(KeyCode.F) )
-            MainTowerHP -= 5;
-    }
-
     //public static bool GameIsPaused = false;
 
     // Other things

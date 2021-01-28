@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1653,7 +1653,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e732b2cc99ecef64ea34d72e6a84a003, type: 2}
+  - {fileID: 2100000, guid: f7c7836549a8dfd4bbc39b6273cbd572, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1679,7 +1679,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   line: {fileID: 391065410}
   ninjaSprite: {fileID: 4516719405004359715, guid: b736a0af7db59b94db8567859e24f3e5,
     type: 3}
-  dragRange: 7
+  dragRange: 5
   damage: 20
   audioManagement: {fileID: 247861648}
   summonSound: {fileID: 8300000, guid: 259bcee0535d8f34488fd15110fc0f69, type: 3}
@@ -5816,6 +5816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: World Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6433693760474726941, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7593ef97becac3348934e7e8f55fa80d, type: 3}
@@ -10920,7 +10925,7 @@ PrefabInstance:
     - target: {fileID: 7622698566277591164, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7951317450857262751, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -10940,7 +10945,7 @@ PrefabInstance:
     - target: {fileID: 8892685350350456106, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}

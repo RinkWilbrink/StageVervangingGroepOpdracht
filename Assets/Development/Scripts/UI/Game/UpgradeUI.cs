@@ -6,6 +6,7 @@ using Tower;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace UI
 {
@@ -46,6 +47,11 @@ namespace UI
         [Space(4)]
         [SerializeField] private TMPro.TextMeshProUGUI HealthText;
         [SerializeField] private GameObject DeathScreen;
+        [SerializeField] private TextMeshProUGUI GoldLeftText;
+        [SerializeField] private TextMeshProUGUI HealthLeftText;
+        [SerializeField] private TextMeshProUGUI FinalScoreText;
+        [SerializeField] private int GoldMultiplier;
+        [SerializeField] private int HealthMultiplier;
 
         [Header("Script References")]
         [SerializeField] private SelectionButtonManager TowerSelectionManager;
@@ -85,6 +91,14 @@ namespace UI
             currScene = SceneManager.GetActiveScene();
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
+        }
+
+        public void EnableGameOverPanel()
+        {
+            DeathScreen.SetActive(true);
+            GoldLeftText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
+            HealthLeftText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
+            FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -181,10 +195,15 @@ namespace UI
         {
             GameController.MainTowerHP -= _dmg;
 
-            if(GameController.MainTowerHP < 1)
+            if (GameController.MainTowerHP < 0)
+            {
+                GameController.MainTowerHP = 0;
+            }
+
+            if(GameController.MainTowerHP == 0)
             {
                 Debug.Log("GAME OVER");
-                DeathScreen.SetActive(true);
+                EnableGameOverPanel();
 
                 GameTime.SetTimeScale(0);
             }

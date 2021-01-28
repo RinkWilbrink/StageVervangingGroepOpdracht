@@ -182,7 +182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.01, y: -2.3}
+  m_AnchoredPosition: {x: -0.01, y: -1.02}
   m_SizeDelta: {x: 12.110409, y: 9.218885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1815876152392455888
@@ -214,8 +214,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5f1892f5ed4af494884fdbc80b39cf1e, type: 2}
+  m_sharedMaterial: {fileID: 6708293768517051976, guid: 5f1892f5ed4af494884fdbc80b39cf1e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -239,8 +240,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5.5
-  m_fontSizeBase: 5.5
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -465,6 +466,11 @@ MonoBehaviour:
   ResourceManager: {fileID: 0}
   HealthText: {fileID: 0}
   DeathScreen: {fileID: 0}
+  GoldLeftText: {fileID: 0}
+  HealthLeftText: {fileID: 0}
+  FinalScoreText: {fileID: 0}
+  GoldMultiplier: 2
+  HealthMultiplier: 10
   TowerSelectionManager: {fileID: 0}
   TowerInteraction: {fileID: 0}
   SpecialAbilityModeButton: {fileID: 0}

@@ -6,7 +6,7 @@ namespace Tower
 {
     public class Projectile : MonoBehaviour
     {
-        private GameObject Target;
+        private BoxCollider Target;
 
         public float speed = 20f;
 
@@ -15,7 +15,7 @@ namespace Tower
         private Vector3 velocity = Vector3.zero;
         public void seek(GameObject _target)
         {
-            Target = _target;
+            Target = _target.GetComponent<BoxCollider>();
             Debug.Log(_target);
         }
 
@@ -28,7 +28,7 @@ namespace Tower
                 return;
             }
 
-            Vector3 dir = Target.transform.position - transform.position;
+            Vector3 dir = Target.bounds.center - transform.position;
             float distanceThisFrame = speed * Time.deltaTime;
 
             if (dir.magnitude <= distanceThisFrame)

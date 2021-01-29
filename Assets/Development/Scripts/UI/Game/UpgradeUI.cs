@@ -68,6 +68,8 @@ namespace UI
         [SerializeField] private string Level1;
         [SerializeField] private string Level2;
         [SerializeField] private string Level3;
+        [SerializeField] private string Level4;
+
 
         [SerializeField] private GameObject Errormssg;
 
@@ -181,7 +183,7 @@ namespace UI
             {
                 if(currentTower.SpecialUnlocked == SpecialAttack.None)
                 {
-                    if(currScene.name == Level3)
+                    if (currScene.name == Level3 || currScene.name == Level4)
                     {
                         buttonSpecial1.interactable = true;
                         buttonSpecial2.interactable = true;
@@ -278,7 +280,7 @@ namespace UI
                     towerUpgradeCostText.text = "";
                 }
 
-                if (currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
+                if (currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3 || currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level4)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;
@@ -310,7 +312,7 @@ namespace UI
         {
             images b;
 
-            if (currScene.name == Level3)
+            if (currScene.name == Level3 || currScene.name == Level4)
             {
                 TowerTypeImageDictionairy.TryGetValue(currentTower.towerType, out b);
                 buttonSpecial1.image.sprite = b.image1;

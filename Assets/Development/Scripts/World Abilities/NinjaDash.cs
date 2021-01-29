@@ -73,13 +73,19 @@ public class NinjaDash : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
             dragPos = mainCam.ScreenToWorldPoint(mousePos);
-            //print(dragPos);
+
             if ( !stopTest ) {
                 endPos = dragPos;
                 line.SetPosition(1, endPos);
             }
 
             Debug.DrawLine(startPos, endPos, Color.cyan);
+
+            ninja.transform.rotation = Quaternion.LookRotation(Vector3.up, endPos - ninja.transform.position);
+            ninja.transform.eulerAngles -= new Vector3(0, 0, 90f);
+
+            if ( ninja.transform.eulerAngles.z < 90f && ninja.transform.eulerAngles.z > -90f )
+                print("facing left");
 
             if ( Vector3.Distance(startPos, dragPos) > dragRange ) {
                 stopTest = true;

@@ -9,6 +9,7 @@ public class NinjaDash : MonoBehaviour
 {
     [SerializeField] private ResourceUIManager resourceUIManager;
     private Vector3 startPos;
+    private Vector3 dragPos;
     private Vector3 endPos;
     private Camera mainCam;
     private GameObject ninja;
@@ -62,21 +63,25 @@ public class NinjaDash : MonoBehaviour
             resourceUIManager.UpdateResourceUI();
             worldAbilities.ninjaDashButton.interactable = false;
             worldAbilities.ninjaDashTimer = 0f;
-            
+
         }
 
         if ( Input.GetMouseButton(0) && !moveNinja && !IsMouseOnUI() ) {
 
-            Vector3 dist = startPos - endPos;
+            //Vector3 dist = startPos - endPos;
 
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
-            endPos = mainCam.ScreenToWorldPoint(mousePos);
+            dragPos = mainCam.ScreenToWorldPoint(mousePos);
+            print(dragPos);
             if ( !stopTest ) {
+                endPos = dragPos;
                 line.SetPosition(1, endPos);
             }
 
-            if ( Vector3.Distance(startPos, endPos) > dragRange ) {
+            Debug.DrawLine(startPos, endPos, Color.cyan);
+
+            if ( Vector3.Distance(startPos, dragPos) > dragRange ) {
                 stopTest = true;
             } else {
                 stopTest = false;
@@ -105,7 +110,7 @@ public class NinjaDash : MonoBehaviour
     }
 
     private void DamageEnemies() {
-        float thickness = 1f;
+        float thickness = .1f;
 
         RaycastHit[] hits;
 
@@ -118,8 +123,7 @@ public class NinjaDash : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableObject()
-    {
+    private IEnumerator DisableObject() {
         yield return new WaitForSeconds(0.5f);
         ninja.SetActive(false);
         gameObject.SetActive(false);

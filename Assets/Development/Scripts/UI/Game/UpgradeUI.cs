@@ -6,6 +6,7 @@ using Tower;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace UI
 {
@@ -46,6 +47,11 @@ namespace UI
         [Space(4)]
         [SerializeField] private TMPro.TextMeshProUGUI HealthText;
         [SerializeField] private GameObject DeathScreen;
+        [SerializeField] private TextMeshProUGUI GoldLeftText;
+        [SerializeField] private TextMeshProUGUI HealthLeftText;
+        [SerializeField] private TextMeshProUGUI FinalScoreText;
+        [SerializeField] private int GoldMultiplier;
+        [SerializeField] private int HealthMultiplier;
 
         [Header("Script References")]
         [SerializeField] private SelectionButtonManager TowerSelectionManager;
@@ -68,6 +74,7 @@ namespace UI
         [SerializeField] private Sprite lockedImage;
 
         public TMPro.TextMeshProUGUI towerUpgradeCostText;
+        private Button UpgradeButton;
 
         private void Awake()
         {
@@ -83,8 +90,17 @@ namespace UI
             SpecialAbilityModeButton.interactable = false;
             UpgradeUIReady = false;
             currScene = SceneManager.GetActiveScene();
+            UpgradeButton = towerUpgradeCostText.transform.parent.GetComponent<Button>();
 
             HealthText.text = string.Format("{0}", GameController.MainTowerHP);
+        }
+
+        public void EnableGameOverPanel()
+        {
+            DeathScreen.SetActive(true);
+            GoldLeftText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
+            HealthLeftText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
+            FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -93,6 +109,14 @@ namespace UI
             if (currScene.name != Level1)
             {
                 UpgradePanel.gameObject.SetActive(true);
+
+                if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length ) {
+                    towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel] + "";
+                    UpgradeButton.interactable = true;
+                } else {
+                    UpgradeButton.interactable = false;
+                    towerUpgradeCostText.text = "";
+                }
 
                 UpgradePanel.anchoredPosition = new Vector2(_x, _y);
                 UpgradePanel.localScale = Vector3.zero;
@@ -181,10 +205,15 @@ namespace UI
         {
             GameController.MainTowerHP -= _dmg;
 
-            if(GameController.MainTowerHP < 1)
+            if (GameController.MainTowerHP < 0)
+            {
+                GameController.MainTowerHP = 0;
+            }
+
+            if(GameController.MainTowerHP == 0)
             {
                 Debug.Log("GAME OVER");
-                DeathScreen.SetActive(true);
+                EnableGameOverPanel();
 
                 GameTime.SetTimeScale(0);
             }
@@ -233,13 +262,23 @@ namespace UI
         [SerializeField] private AudioClip constructionAudio;
         public void UpgradeTower()
         {
-            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1]))
+            if ( currentTower.TowerLevel >= currentTower.TowerUpgradeCosts.UpgradeCosts.Length )
+                return;
+
+            if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel]) )
             {
                 currentTower.TowerLevel += 1;
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
-                towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel - 1] + "";
 
-                if(currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
+                if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length ) {
+                    towerUpgradeCostText.text = currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel] + "";
+                    UpgradeButton.interactable = true;
+                } else {
+                    UpgradeButton.interactable = false;
+                    towerUpgradeCostText.text = "";
+                }
+
+                if (currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3)
                 {
                     TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
                     SpecialAbilityModeButton.interactable = true;

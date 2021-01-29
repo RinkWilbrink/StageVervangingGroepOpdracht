@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 5703ce549c556e54d9d4694f4165a9a3,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1464,7 +1464,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.4601e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 9.1837e-41, w: -1.177e-42}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5551,6 +5551,21 @@ PrefabInstance:
       propertyPath: waves.Array.data[13].enemies.Array.data[7].waypointManager
       value: 
       objectReference: {fileID: 1546248018}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: FinalScoreText
+      value: 
+      objectReference: {fileID: 1625022249}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: HealthScoreText
+      value: 
+      objectReference: {fileID: 1625022248}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: GoldScoreText
+      value: 
+      objectReference: {fileID: 1625022247}
     - target: {fileID: 6682590823350285534, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: m_Name
@@ -7660,7 +7675,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.097271e+27, y: 1.1280481e+27, z: 7.311997e+28, w: 1.8694487e+25}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 9.1837e-41, w: -1.177e-42}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -9792,6 +9807,42 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1625022236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1625022247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1777160106448597619, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625022248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7784580720568467757, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625022249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3303273379140288174, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625783552
 GameObject:
   m_ObjectHideFlags: 0

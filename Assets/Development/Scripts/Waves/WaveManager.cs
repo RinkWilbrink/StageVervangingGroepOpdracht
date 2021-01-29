@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private TMPro.TextMeshProUGUI WaveText;
     [SerializeField] private SelectionButtonManager SelectionButtonManager;
     [SerializeField] private GameObject EndScreen;
+    [SerializeField] private TextMeshProUGUI FinalScoreText;
+    [SerializeField] private TextMeshProUGUI GoldScoreText;
+    [SerializeField] private TextMeshProUGUI HealthScoreText;
+    [SerializeField] private int GoldMultiplier;
+    [SerializeField] private int HealthMultiplier;
     [SerializeField] private AudioClip[] coinDropAudio;
     [SerializeField] private AudioClip[] waveAudio;
     [SerializeField] private GameObject beginWaveIcon;
@@ -99,6 +106,9 @@ public class WaveManager : MonoBehaviour
         currentWaveNum++;
         if ( currentWaveNum > waves.Length ) {
             EndScreen.SetActive(true);
+            GoldScoreText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
+            HealthScoreText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
+            FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
 
             DataManager.LevelComplete(levelNummer);
 

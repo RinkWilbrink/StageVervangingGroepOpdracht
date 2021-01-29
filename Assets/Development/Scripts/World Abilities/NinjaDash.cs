@@ -73,7 +73,7 @@ public class NinjaDash : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
             dragPos = mainCam.ScreenToWorldPoint(mousePos);
-            print(dragPos);
+            //print(dragPos);
             if ( !stopTest ) {
                 endPos = dragPos;
                 line.SetPosition(1, endPos);

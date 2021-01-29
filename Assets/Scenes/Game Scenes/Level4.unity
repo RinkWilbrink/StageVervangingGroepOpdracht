@@ -9442,7 +9442,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _SplashScreenAnimator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1625022246}
     - target: {fileID: 5009166787253883284, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: _AudioManagement
@@ -9661,7 +9661,7 @@ PrefabInstance:
     - target: {fileID: 7622698566277591164, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7951317450857262751, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -9677,6 +9677,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925410466205570965, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9078256560875319356, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -9778,6 +9783,12 @@ GameObject:
 --- !u!1 &1625022245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2852055588793093101, guid: d27b1165a3810444b9bfc58bf53d0e97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625022236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1625022246 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8892685350350456107, guid: d27b1165a3810444b9bfc58bf53d0e97,
     type: 3}
   m_PrefabInstance: {fileID: 1625022236}
   m_PrefabAsset: {fileID: 0}

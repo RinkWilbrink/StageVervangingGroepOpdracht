@@ -54,7 +54,7 @@ namespace Tower
                 FindObjectOfType<AudioManagement>().PlayAudioClip(BallistaAudioSFX, AudioMixerGroups.SFX);
             }
 
-            Debug.Log("Archer Primairy");
+            Debug.Log("Archer Primary");
         }
 
         protected override void SecondaryAttack()
@@ -109,6 +109,7 @@ namespace Tower
                 yield return new WaitForSeconds(0.1f);
 
             }
+            SpecialAttackMode = false;
         }
 
 

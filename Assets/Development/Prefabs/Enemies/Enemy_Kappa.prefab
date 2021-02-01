@@ -160,8 +160,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.0185633}
+  m_Center: {x: -0, y: 0, z: -0.49214244}
 --- !u!114 &341408206199449655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,11 +273,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341408206199449652}
     m_Modifications:
-    - target: {fileID: 1034130868855505320, guid: 31609c6bd05859e4bb7cfb968028bb73,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1034130868855505323, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -398,20 +393,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1034130869028457532, guid: 31609c6bd05859e4bb7cfb968028bb73,
+    - target: {fileID: 1034130869596087028, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1034130869596087028, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}
       propertyPath: m_Value
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034130869596087028, guid: 31609c6bd05859e4bb7cfb968028bb73,
-        type: 3}
-      propertyPath: m_Colors.m_ColorMultiplier
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31609c6bd05859e4bb7cfb968028bb73, type: 3}

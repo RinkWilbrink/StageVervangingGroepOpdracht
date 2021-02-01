@@ -7,6 +7,8 @@ public class GenericBullet : MonoBehaviour
     private Vector3 moveDirection;
     private float moveSpeed;
     [SerializeField] private float damage;
+    [SerializeField] private float ShootingRange = 0f;
+    private Rigidbody rb;
     private void OnEnable()
     {
         Invoke("Destroy", 3f);   
@@ -16,12 +18,13 @@ public class GenericBullet : MonoBehaviour
     void Start()
     {
         moveSpeed = 10f;
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+        rb.position += moveDirection * moveSpeed * Time.fixedDeltaTime;        
     }
 
     public void SetMoveDirection(Vector3 dir)

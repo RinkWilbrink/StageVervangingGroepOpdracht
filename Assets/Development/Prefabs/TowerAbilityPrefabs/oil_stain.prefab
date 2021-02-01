@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6614605398718920100}
   - component: {fileID: 2943259322947817653}
   - component: {fileID: 5745040152089884760}
+  - component: {fileID: 2019759023939419340}
+  - component: {fileID: 3021072246923184334}
   m_Layer: 0
   m_Name: oil_stain
   m_TagString: Untagged
@@ -88,7 +90,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 245bb29a0ee8d8841af846e49ba2da82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -113,6 +115,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.19, y: 7.650002, z: 4.084913}
   m_Center: {x: 0, y: -2.778733e-15, z: -0.6563663}
+--- !u!54 &2019759023939419340
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882337538003970148}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &3021072246923184334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2882337538003970148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e7390827ed0de47978c9c949fe48ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0.5
+  damage: 1
 --- !u!1001 &970355965490376215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -225,6 +262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -319,6 +361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -415,6 +462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -509,6 +561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -605,6 +662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -699,6 +761,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -795,6 +862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -889,6 +961,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -985,6 +1062,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1079,6 +1161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -1175,6 +1262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1269,6 +1361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -1365,6 +1462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1459,6 +1561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
@@ -1555,6 +1662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1650,6 +1762,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameSprite_0 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1744,6 +1861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameSprite_0 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561176562433857220, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697691544979944963, guid: 6cc572ceb51f76c4bb3a4ceed0bb6f31,
         type: 3}

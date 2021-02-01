@@ -9,6 +9,21 @@ using UnityEngine;
 
 namespace Tower
 {
+    public struct LightningTargetCache
+    {
+        public Collider collider1;
+        public Vector3 lastPosition;
+
+        public Vector3 GetVector()
+        {
+            if (collider1)
+            {
+                return collider1.transform.position;
+            }
+
+            return lastPosition;
+        }
+    }
     [SelectionBase]
     public class TowerWizard : TowerCore
     {
@@ -41,6 +56,7 @@ namespace Tower
 
         private CRSpline spline;
         private LineRenderer lineRenderer;
+        private Animation lightningAnim;
         /// <summary>Override of the Init(Start) function</summary>
         public override void Init()
         {
@@ -75,75 +91,98 @@ namespace Tower
         }
         
         private IEnumerator LightningAttack()
-        {            
-            GameObject ElektricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
-            Instantiate(LightningBoltPrefab);
-            Vector3 newPos = CurrentTarget.transform.position;
-            Collider collider = CurrentTarget.GetComponent<Collider>();
+        {
+            lightningAnim = LightningCloudPrefab.GetComponent<Animation>();
+            GameObject ElectricCloud;
+            Vector3 newPos;
+            Collider collider;
             Collider nextCollider = null;
+            LightningTargetCache target;
+            LightningTargetCache next = new LightningTargetCache();
+
             int LightningChainCount = 0;
             FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
             LineController newLine = Instantiate(linePrefab);
 
             yield return new WaitForSeconds(AttackDelayTime);
 
-            while (Vector3.Distance(ElektricCloud.transform.position, newPos) > 0.1f)
+            
+            if(CurrentTarget != null)
             {
-                ElektricCloud.transform.position = Vector3.Lerp(ElektricCloud.transform.position, newPos, LightningCloudSpeed * GameTime.deltaTime);
-                yield return null;
+                ElectricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
+                newPos = CurrentTarget.transform.position;
+                while (Vector3.Distance(ElectricCloud.transform.position, newPos) > 0.2f && ElectricCloud != null)
+                {
+                    ElectricCloud.transform.position = Vector3.MoveTowards(ElectricCloud.transform.position, newPos, LightningCloudSpeed * GameTime.deltaTime);
+                    yield return null;       
+                }             
+            } else
+            {
+                SpecialAttackMode = false;
+                StopCoroutine(LightningAttack());
             }
 
-            //instatiate lightninh prefab 
+            lightningAnim.Play("Lightning");
 
-            while (LightningChainCount < LightningChainLimit)
+            if(CurrentTarget != null)
             {
-                if(LightningChainCount < LightningChainLimit)
+                while (LightningChainCount < LightningChainLimit)
                 {
-                    if(LightningChainCount > 0)
+                    collider = CurrentTarget.GetComponent<Collider>();
+                    target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
+                    if (LightningChainCount < LightningChainLimit)
                     {
-                        newLine.AssignTarget(collider.transform, nextCollider.transform);
-                        collider = nextCollider;
-
-                    }
-                    Collider[] EnemiesInRange = Physics.OverlapSphere(collider.transform.position, LightningRadius, 1 << 9);
-                    if (EnemiesInRange.Length > 1)
-                    {
-                        float B = float.MaxValue;
-                        for(int y = 0; y < EnemiesInRange.Length; y++)
+                        if (LightningChainCount > 0)
                         {
-                            if(EnemiesInRange[y] != null)
+                            newLine.AssignTarget(target, next);
+                            target = next;
+
+                        }
+                        Debug.Log(target.GetVector());
+                        Collider[] EnemiesInRange = Physics.OverlapSphere(target.GetVector(), LightningRadius, 1 << 9);
+                        if (EnemiesInRange.Length > 1)
+                        {
+                            float B = float.MaxValue;
+                            for (int y = 0; y < EnemiesInRange.Length; y++)
                             {
-                                // Check the distance of a new potential target, if its lower then the current target, that will be the new Target
-                                float distance1 = Mathf.Sqrt((collider.transform.position - EnemiesInRange[y].transform.position).sqrMagnitude);
-
-                                // Compare the distance of the Current target and the new potential target
-                                if(distance1 > 0 && distance1 < B)
+                                if (EnemiesInRange[y] != null && EnemiesInRange[y].GetComponent<EnemyUnit>().IsDeath() != true)
                                 {
-                                    B = distance1;
+                                    // Check the distance of a new potential target, if its lower then the current target, that will be the new Target
+                                    float distance1 = Mathf.Sqrt((target.GetVector() - EnemiesInRange[y].transform.position).sqrMagnitude);
 
-                                    nextCollider = EnemiesInRange[y];
+                                    // Compare the distance of the Current target and the new potential target
+                                    if (distance1 > 0 && distance1 < B)
+                                    {
+                                        B = distance1;
+
+                                        next = new LightningTargetCache { collider1 = EnemiesInRange[y], lastPosition = EnemiesInRange[y].transform.position };
+
+                                    }
                                 }
                             }
                         }
+                        else
+                        {
+                            LightningChainCount = LightningChainLimit + 1;
+                            target.collider1.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
+
+                            yield return null;
+                        }
                     }
-                    else
+
+                    if (target.collider1 != null)
                     {
-                        LightningChainCount = LightningChainLimit + 1;
-                        collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
-                        
-                        yield return null;
+                        target.collider1.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
                     }
+
+                    LightningChainCount++;
+                    yield return new WaitForSecondsRealtime(LightningInBetweenTime);
+
                 }
-
-                if(collider != null)
-                {
-                    collider.GetComponent<EnemyUnit>().TakeDamage(LightningDamage, towerType);
-                }
-
-                LightningChainCount++;
-                yield return new WaitForSecondsRealtime(LightningInBetweenTime);
-
             }
+            
+            Debug.Log(newLine);
+            Destroy(newLine.gameObject);
             SpecialAttackMode = false;
         }
 

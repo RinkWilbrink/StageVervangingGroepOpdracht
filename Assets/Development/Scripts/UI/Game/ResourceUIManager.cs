@@ -14,6 +14,13 @@ public class ResourceUIManager : MonoBehaviour
         UpdateResourceUI();
     }
 
+    private void Update() {
+        if ( Input.GetKeyDown(KeyCode.J) ) {
+            GameController.Gold += 10;
+            UpdateResourceUI();
+        }
+    }
+
     public void UpdateResourceUI()
     {
         GoldCount.text = string.Format("{0}", GameController.Gold);

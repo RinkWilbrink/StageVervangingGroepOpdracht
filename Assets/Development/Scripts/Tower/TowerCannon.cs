@@ -78,113 +78,86 @@ namespace Tower
         private IEnumerator BigBomb()
         {
             
-            GameObject BombBullet = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
-
-            Vector3 newPos = CurrentTarget.transform.position;
-            FindObjectOfType<AudioManagement>().PlayAudioClip(BigBombSpecialAudioSFX, AudioMixerGroups.SFX);
-
-            while(Vector3.Distance(BombBullet.transform.position, newPos) > 0.1f)
+            
+            if(CurrentTarget != null)
             {
-                BombBullet.transform.position = Vector3.Lerp(BombBullet.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
+                GameObject BombBullet = Instantiate(BigBombPrefab, ShootOrigin.transform.position, BigBombPrefab.transform.rotation);
 
-                yield return null;
+                FindObjectOfType<AudioManagement>().PlayAudioClip(BigBombSpecialAudioSFX, AudioMixerGroups.SFX);
+
+
+                Vector3 newPos = CurrentTarget.transform.position;
+                while (Vector3.Distance(BombBullet.transform.position, newPos) > 0.1f)
+                {
+                    BombBullet.transform.position = Vector3.Lerp(BombBullet.transform.position, newPos, BombThrowSpeed * GameTime.deltaTime);
+
+                    yield return null;
+                }
+
+                BombBullet.transform.position = newPos;
+
+                Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
+                GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
+
+                for (int i = 0; i < EnemiesInRange.Length; i++)
+                {
+                    EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage, towerType);
+
+
+                    yield return null;
+                }
+
+                Destroy(BombBullet);
+
+                yield return new WaitForSeconds(1.3f);
+
+                Destroy(explosion);
+                SpecialAttackMode = false;
+
+            } else
+            {
+                GameController.Mana += 2;
+                SpecialAttackMode = false;
+                StopCoroutine(BigBomb());
             }
 
-            BombBullet.transform.position = newPos;
-
-            Collider[] EnemiesInRange = Physics.OverlapSphere(newPos, ExplosionRadius, 1 << 9);
-            GameObject explosion = Instantiate(ExplosionPrefab, newPos, ExplosionPrefab.transform.rotation);
-
-            for (int i = 0; i < EnemiesInRange.Length; i++)
-            {
-                EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(ExplosionDamage, towerType);
-
-
-                yield return null;
-            }
-
-            Destroy(BombBullet);
-
-            yield return new WaitForSeconds(1.3f);
-
-            Destroy(explosion);
-            SpecialAttackMode = false;
+            
         }
 
         private IEnumerator FireBomb()
         {
             //als current target != null schiet oil spill op target
-
-            float timer = 0f;
-
-            GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
-
-            Vector3 EnemyPosition = CurrentTarget.transform.position;
-
-            while (Vector3.Distance(OilBall.transform.position, EnemyPosition) > 0.1f)
+            if (CurrentTarget != null)
             {
-                OilBall.transform.position = Vector3.Lerp(OilBall.transform.position, EnemyPosition, BombThrowSpeed * GameTime.deltaTime);
+                float timer = 0f;
 
-                yield return null;
-            }
+                GameObject OilBall = Instantiate(OilBombPrefab, ShootOrigin.transform.position, OilBombPrefab.transform.rotation);
 
-            OilBall.transform.position = EnemyPosition; 
+                Vector3 EnemyPosition = CurrentTarget.transform.position;
 
-            GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
-
-            /*while(vuurtijd > 0f)
-            {
-                vuurtijd -= GameTime.deltaTime;
-            }*/
-
-            /*if (vuurtijd <= 0f)
-            {
-                Debug.Log("het werkt");
-                while (timer < FireTime)
+                while (Vector3.Distance(OilBall.transform.position, EnemyPosition) > 0.1f)
                 {
-                    if (CurrentTarget != null)
-                    {
-                        Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
-                        for (int i = 0; i < EnemiesInRange.Length; i++)
-                        {
-                            Debug.Log(EnemiesInRange);
-                            EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond, towerType);
-                        }
-                    }
-                    timer += 1f;
-                    
+                    OilBall.transform.position = Vector3.Lerp(OilBall.transform.position, EnemyPosition, BombThrowSpeed * GameTime.deltaTime);
+
+                    yield return null;
                 }
 
-                vuurtijd = 10f;
-            }*/
-            Destroy(OilBall);
-            SpecialAttackMode = false;
-            yield return new WaitForSeconds(FireTime);
+                OilBall.transform.position = EnemyPosition;
 
-            Destroy(OilSpill);
+                GameObject OilSpill = Instantiate(OilSpillPrefab, EnemyPosition, OilSpillPrefab.transform.rotation);
 
+                Destroy(OilBall);
+                SpecialAttackMode = false;
+                yield return new WaitForSeconds(FireTime);
 
-            /*float timer = 0f;
-
-            GameObject fireEffect = Instantiate(FireEffectPrefab, new Vector3(ShootOrigin.transform.position.x, 0, ShootOrigin.transform.position.z), Quaternion.LookRotation(CurrentTarget.transform.position));
-
-            while(timer < FireTime)
+                Destroy(OilSpill);
+            } else
             {
-                if(CurrentTarget != null)
-                {
-                    Collider[] EnemiesInRange = Physics.OverlapSphere(CurrentTarget.transform.position, FireRadius, 1 << 9);
-                    for (int i = 0; i < EnemiesInRange.Length; i++)
-                    {
-                        EnemiesInRange[i].GetComponent<EnemyUnit>().TakeDamage(FireDamagePerSecond);
-                    }
-                }
-                timer += 1f;
-                yield return new WaitForSeconds(1f);
+                GameController.Mana += 2;
+                SpecialAttackMode = false;
+                StopCoroutine(FireBomb());
             }
 
-            Destroy(fireEffect);
-            SpecialAttackMode = false;
-            */
         }
 
         #endregion

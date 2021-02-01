@@ -31,6 +31,7 @@ namespace Tower
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [SerializeField] public GameObject Bullet;
+        [SerializeField] public int returnmana = 2;
         [HideInInspector] private RaycastHit hit;
         [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]

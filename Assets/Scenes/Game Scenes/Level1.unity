@@ -5667,7 +5667,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -237232837
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 10.3, y: 10.3, z: 0}
@@ -11414,6 +11414,7 @@ MonoBehaviour:
     type: 3}
   fireworkExplosionAudio: {fileID: 8300000, guid: 3cbe55436d3e30a49887302b0949331b,
     type: 3}
+  fireworkRangeIndicator: {fileID: 6890706961806435239}
 --- !u!1 &1872854488
 GameObject:
   m_ObjectHideFlags: 0
@@ -13193,6 +13194,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 243ff70afd10d4448b3a7a1b4f0b2dca, type: 3}
+--- !u!4 &6890706961806435239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6890706961561277677, guid: 243ff70afd10d4448b3a7a1b4f0b2dca,
+    type: 3}
+  m_PrefabInstance: {fileID: 6890706961806435238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7951317449241915779 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7951317450857262751, guid: d27b1165a3810444b9bfc58bf53d0e97,

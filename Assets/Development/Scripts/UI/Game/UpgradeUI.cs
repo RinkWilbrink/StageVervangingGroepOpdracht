@@ -270,6 +270,12 @@ namespace UI
             if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel]) )
             {
                 currentTower.TowerLevel += 1;
+
+                if (currentTower.towerType == TowerType.CannonTower)
+                {
+                    currentTower.GetComponent<TowerCannon>().UpdateFireAnimationPosition();
+                }
+
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
                 if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length ) {

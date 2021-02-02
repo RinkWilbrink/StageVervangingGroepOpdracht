@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341408205393899863}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: -0.46}
+  m_LocalScale: {x: -0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 341408206199449652}
   m_RootOrder: 1
@@ -160,8 +160,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.55, y: 0, z: 1}
+  m_Center: {x: -0, y: 0.5, z: -0.45}
 --- !u!114 &341408206199449655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089042610387478241}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0.35}
+  m_LocalPosition: {x: 0, y: 0.51, z: -0.11}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 341408206199449652}
@@ -264,7 +264,7 @@ SpriteRenderer:
   m_Size: {x: 3.2, y: 4.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &7960363979513713704
@@ -302,7 +302,7 @@ PrefabInstance:
     - target: {fileID: 1034130869028457532, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.75
+      value: -1.21
       objectReference: {fileID: 0}
     - target: {fileID: 1034130869028457532, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}

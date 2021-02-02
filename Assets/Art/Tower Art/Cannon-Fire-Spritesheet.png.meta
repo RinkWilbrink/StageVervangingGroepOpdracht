@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: -6147506507853522827
     second: Cannon-Fire-Spritesheet_6
+  - first:
+      213: 2598068638425959523
+    second: Cannon-Fire-Spritesheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -128,7 +131,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,7 +152,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,7 +173,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -191,7 +194,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -212,7 +215,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -228,12 +231,12 @@ TextureImporter:
       name: Cannon-Fire-Spritesheet_5
       rect:
         serializedVersion: 2
-        x: 361
-        y: 0.5
-        width: 361.75
-        height: 321.5
+        x: 363
+        y: 0
+        width: 362
+        height: 322
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,7 +257,7 @@ TextureImporter:
         width: 361.75
         height: 321.5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,6 +265,27 @@ TextureImporter:
       bones: []
       spriteID: 5781df8e66bafaaa0800000000000000
       internalID: -6147506507853522827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon-Fire-Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 69
+        width: 216
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36c467759a13e0420800000000000000
+      internalID: 2598068638425959523
       vertices: []
       indices: 
       edges: []

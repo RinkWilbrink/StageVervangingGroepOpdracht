@@ -32,6 +32,7 @@ namespace Tower
         [SerializeField] public GameObject specialDirectionUI;
         [SerializeField] public GameObject Bullet;
         [SerializeField] private Sprite BulletSprite;
+        [SerializeField] public int returnmana = 2;
         [HideInInspector] private RaycastHit hit;
         [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]

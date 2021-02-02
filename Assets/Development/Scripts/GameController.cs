@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     private void Awake() {
         Gems = PlayerPrefs.GetInt("Gems");
         MainTowerHP = 10;
-        Gold = 30;
+        Gold = 1000;
         Mana = 10;
         GameTime.SetTimeScale(1);
     }

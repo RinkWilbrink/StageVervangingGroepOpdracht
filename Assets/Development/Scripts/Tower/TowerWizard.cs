@@ -56,7 +56,7 @@ namespace Tower
 
         private CRSpline spline;
         private LineRenderer lineRenderer;
-        private Animation lightningAnim;
+        private Animator lightningAnim;
         /// <summary>Override of the Init(Start) function</summary>
         public override void Init()
         {
@@ -91,44 +91,37 @@ namespace Tower
         }
         
         private IEnumerator LightningAttack()
-        {
-            lightningAnim = LightningCloudPrefab.GetComponent<Animation>();
-            GameObject ElectricCloud;
-            Vector3 newPos;
-            Collider collider;
-            Collider nextCollider = null;
-            LightningTargetCache target;
-            LightningTargetCache next = new LightningTargetCache();
-
-            int LightningChainCount = 0;
-            FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
-            LineController newLine = Instantiate(linePrefab);
-
-            yield return new WaitForSeconds(AttackDelayTime);
-
-            
+        {           
             if(CurrentTarget != null)
             {
+                FindObjectOfType<AudioManagement>().PlayAudioClip(LightningSpecialAudioSFX, AudioMixerGroups.SFX);
+                GameController.Mana += 2;
+                GameObject ElectricCloud;
+                Vector3 newPos;
+                Collider collider;
+                Collider nextCollider = null;
+                LightningTargetCache target;
+                LightningTargetCache next = new LightningTargetCache();
+                LineController newLine = Instantiate(linePrefab);
+                collider = CurrentTarget.GetComponent<Collider>();
+
+                int LightningChainCount = 0;
+
+                yield return new WaitForSeconds(AttackDelayTime);
+
                 ElectricCloud = Instantiate(LightningCloudPrefab, ShootOrigin.transform.position, LightningCloudPrefab.transform.rotation);
+                lightningAnim = ElectricCloud.GetComponent<Animator>();
                 newPos = CurrentTarget.transform.position;
                 while (Vector3.Distance(ElectricCloud.transform.position, newPos) > 0.2f && ElectricCloud != null)
                 {
                     ElectricCloud.transform.position = Vector3.MoveTowards(ElectricCloud.transform.position, newPos, LightningCloudSpeed * GameTime.deltaTime);
+                    lightningAnim.SetBool("play", true);
                     yield return null;       
-                }             
-            } else
-            {
-                SpecialAttackMode = false;
-                StopCoroutine(LightningAttack());
-            }
+                }
 
-            lightningAnim.Play("Lightning");
-
-            if(CurrentTarget != null)
-            {
                 while (LightningChainCount < LightningChainLimit)
                 {
-                    collider = CurrentTarget.GetComponent<Collider>();
+                    
                     target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
                     if (LightningChainCount < LightningChainLimit)
                     {
@@ -177,13 +170,16 @@ namespace Tower
 
                     LightningChainCount++;
                     yield return new WaitForSecondsRealtime(LightningInBetweenTime);
-
+                    Debug.Log(newLine);
+                    SpecialAttackMode = false;
                 }
+            } else
+            {
+                DataManager.ResourcesGained(returnmana, false);
+                GameController.Mana += returnmana;
+                SpecialAttackMode = false;
+                StopCoroutine(LightningAttack());
             }
-            
-            Debug.Log(newLine);
-            Destroy(newLine.gameObject);
-            SpecialAttackMode = false;
         }
 
         private IEnumerator FrostAttack()

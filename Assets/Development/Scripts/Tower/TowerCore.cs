@@ -31,6 +31,8 @@ namespace Tower
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [SerializeField] public GameObject Bullet;
+        [SerializeField] private Sprite BulletSprite;
+        [SerializeField] public int returnmana = 2;
         [HideInInspector] private RaycastHit hit;
         [SerializeField] public Transform FirePoint;
         [Header("Upgrades and Special Abilities")]
@@ -138,9 +140,14 @@ namespace Tower
 
         protected virtual void HandleShooting()
         {
-            if(CanAttack)
+            if (CurrentTarget != null)
             {
-                if(CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
+                FirePoint.transform.LookAt(CurrentTarget.transform.position);
+            }
+
+            if (CanAttack)
+            {
+                if (CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
                 {
                     PrimaryAttack();
                     Shoot();
@@ -151,6 +158,7 @@ namespace Tower
         void Shoot()
         {
             GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+            bulletGO.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = BulletSprite;
             Projectile bullet = bulletGO.GetComponent<Projectile>();
             LTSeq sequence = LeanTween.sequence();
             sequence.append(LeanTween.scale(gameObject, new Vector3(0.9f, 0.9f, 0.9f), 0.1f).setEaseInCirc());

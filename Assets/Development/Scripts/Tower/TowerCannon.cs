@@ -83,8 +83,8 @@ namespace Tower
 
         public void UpdateFireAnimationPosition()
         {
-            FireBeingAnimated[0].transform.localPosition = LevelFirePositions0[TowerLevel -1];
-            FireBeingAnimated[1].transform.localPosition = LevelFirePositions1[TowerLevel -1];
+            FireBeingAnimated[0].transform.localPosition = LevelFirePositions0[TowerLevel];
+            FireBeingAnimated[1].transform.localPosition = LevelFirePositions1[TowerLevel];
 
             //switch (TowerLevel)
             //{

@@ -103,6 +103,7 @@ namespace UI
             GoldLeftText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
             HealthLeftText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
             FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
+            Time.timeScale = 0f;
         }
 
         public void UpdateUIPosition(float _x, float _y)

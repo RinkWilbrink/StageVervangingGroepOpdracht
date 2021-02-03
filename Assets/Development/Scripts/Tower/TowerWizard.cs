@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /* References
@@ -102,8 +103,11 @@ namespace Tower
                 Collider nextCollider = null;
                 LightningTargetCache target;
                 LightningTargetCache next = new LightningTargetCache();
+
+                List<Collider> targetCache = new List<Collider>();
                 LineController newLine = Instantiate(linePrefab);
                 collider = CurrentTarget.GetComponent<Collider>();
+                target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
 
                 int LightningChainCount = 0;
 
@@ -121,16 +125,10 @@ namespace Tower
 
                 while (LightningChainCount < LightningChainLimit)
                 {
-                    
-                    target = new LightningTargetCache { collider1 = collider, lastPosition = collider.transform.position };
+
                     if (LightningChainCount < LightningChainLimit)
                     {
-                        if (LightningChainCount > 0)
-                        {
-                            newLine.AssignTarget(target, next);
-                            target = next;
-
-                        }
+                        
                         Debug.Log(target.GetVector());
                         Collider[] EnemiesInRange = Physics.OverlapSphere(target.GetVector(), LightningRadius, 1 << 9);
                         if (EnemiesInRange.Length > 1)
@@ -140,6 +138,9 @@ namespace Tower
                             {
                                 if (EnemiesInRange[y] != null && EnemiesInRange[y].GetComponent<EnemyUnit>().IsDeath() != true)
                                 {
+                                    if (targetCache.Contains(EnemiesInRange[y]))
+                                        continue;
+
                                     // Check the distance of a new potential target, if its lower then the current target, that will be the new Target
                                     float distance1 = Mathf.Sqrt((target.GetVector() - EnemiesInRange[y].transform.position).sqrMagnitude);
 
@@ -161,6 +162,13 @@ namespace Tower
 
                             yield return null;
                         }
+                        if (LightningChainCount > 0)
+                        {
+                            targetCache.Add(target.collider1);
+
+                            newLine.AssignTarget(target, next);
+                            target = next;
+                        }
                     }
 
                     if (target.collider1 != null)
@@ -169,11 +177,14 @@ namespace Tower
                     }
 
                     LightningChainCount++;
+                    Debug.Log(LightningChainCount);
                     yield return new WaitForSecondsRealtime(LightningInBetweenTime);
                     Debug.Log(newLine);
                     SpecialAttackMode = false;
                 }
-            } else
+                Destroy(newLine.gameObject);
+            }
+            else
             {
                 DataManager.ResourcesGained(returnmana, false);
                 GameController.Mana += returnmana;

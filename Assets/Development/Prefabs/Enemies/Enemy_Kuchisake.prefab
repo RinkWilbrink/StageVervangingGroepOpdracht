@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 341408206199449652}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &5065544824985871647
 SpriteRenderer:
@@ -143,9 +143,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4084348831637262640}
   - {fileID: 341408205393899862}
   - {fileID: 6116748608130449780}
+  - {fileID: 2967023748922966960}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 60
   enemyData: {fileID: 11400000, guid: a87a74250b89c9f47979d0164cb4304c, type: 2}
-  frostOverlayImage: {fileID: 2089042610387478241}
+  frostOverlayImage: {fileID: 0}
   towerWeakness: 1
   damageMultiplier: 1.1
   resistanceMultiplier: 0.8
@@ -185,7 +185,7 @@ MonoBehaviour:
   healthBar: {fileID: 6116748607489339324}
   walkSheet: []
   animSpeed: 0.1
---- !u!1 &2089042610387478241
+--- !u!1 &8523026210221851448
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,8 +193,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4084348831637262640}
-  - component: {fileID: 1342975054835037161}
+  - component: {fileID: 2967023748922966960}
+  - component: {fileID: 8846640214984478660}
   m_Layer: 9
   m_Name: FrostEffect
   m_TagString: Untagged
@@ -202,27 +202,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &4084348831637262640
+--- !u!4 &2967023748922966960
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089042610387478241}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0.35}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_GameObject: {fileID: 8523026210221851448}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0.51, z: -0.623}
+  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 1}
   m_Children: []
   m_Father: {fileID: 341408206199449652}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!212 &1342975054835037161
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
+--- !u!212 &8846640214984478660
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089042610387478241}
+  m_GameObject: {fileID: 8523026210221851448}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -255,12 +255,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5d370bd87d0d5014c98666549bcc301c, type: 3}
+  m_Sprite: {fileID: -527608136161052643, guid: b984d51c2cc55614fb4cb426f6236529,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.2, y: 4.12}
+  m_Size: {x: 10.570323, y: 4.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -366,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 1034130869028457532, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034130869028457532, guid: 31609c6bd05859e4bb7cfb968028bb73,
         type: 3}

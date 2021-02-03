@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693307945941028173}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.25}
+  m_LocalPosition: {x: 0, y: -0, z: 0.348}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 6181294654963417303}
@@ -203,6 +203,7 @@ MonoBehaviour:
   Bullet: {fileID: 7014403932099339953, guid: dabd4c5b5ee45b9409226eb84bb9b65e, type: 3}
   BulletSprite: {fileID: 7943234610795647804, guid: fd98c81f2ebbf4d428e4f874cb43905b,
     type: 3}
+  returnmana: 2
   FirePoint: {fileID: 288611855225311904}
   TowerLevelToUnlockSpecial: 4
   TowerLevel: 1

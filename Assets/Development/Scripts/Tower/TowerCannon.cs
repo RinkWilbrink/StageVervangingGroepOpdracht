@@ -30,7 +30,28 @@ namespace Tower
         [Space(3)]
         [SerializeField] private AudioClip BigBombSpecialAudioSFX;
 
+        [Header("FireAnimation")]
+        [SerializeField] private List<Animator> FireAnimators;
+        [SerializeField] private GameObject[] FireBeingAnimated;
+        [SerializeField] private Vector3[] LevelFirePositions0;
+        [SerializeField] private Vector3[] LevelFirePositions1;
         public float vuurtijd = 10f;
+
+        private void Start()
+        {
+            foreach (Animator animator in gameObject.GetComponentsInChildren<Animator>())
+            {
+                FireAnimators.Add(animator);
+            }
+
+            for (int i = 0; i < FireAnimators.Count; i++)
+            {
+                if (FireAnimators[i].gameObject.name == "SpriteRenderer")
+                {
+                    FireAnimators.RemoveAt(i);
+                }
+            }
+        }
 
         public override void Init()
         {
@@ -45,11 +66,45 @@ namespace Tower
         protected override void PrimaryAttack()
         {
             base.PrimaryAttack();
+            
+            for (int i = 0; i < FireAnimators.Count; i++)
+            {
+                if (SpecialUnlocked == SpecialAttack.None)
+                {
+                    FireAnimators[i].SetTrigger("TriggerFire");
+                }
+            }
 
             if (SpecialUnlocked == SpecialAttack.Special2 )
                 FindObjectOfType<AudioManagement>().PlayAudioClip(FireCannonAudioSFX, AudioMixerGroups.SFX);
             else if (SpecialUnlocked != SpecialAttack.Special1 || SpecialUnlocked != SpecialAttack.Special2 ) 
                 FindObjectOfType<AudioManagement>().PlayAudioClip(CannonAudioSFX, AudioMixerGroups.SFX);
+        }
+
+        public void UpdateFireAnimationPosition()
+        {
+            FireBeingAnimated[0].transform.localPosition = LevelFirePositions0[TowerLevel -1];
+            FireBeingAnimated[1].transform.localPosition = LevelFirePositions1[TowerLevel -1];
+
+            //switch (TowerLevel)
+            //{
+            //    case 1:
+            //        FireBeingAnimated[0].transform.position = LevelFirePositions0[0];
+            //        FireBeingAnimated[1].transform.position = LevelFirePositions1[0];
+            //        break;
+
+            //    case 2:
+            //        FireBeingAnimated[0].transform.position = LevelFirePositions0[1];
+            //        FireBeingAnimated[1].transform.position = LevelFirePositions1[1];
+            //        break;
+
+            //    case 3:
+            //        FireBeingAnimated[0].transform.position = LevelFirePositions0[2];
+            //        FireBeingAnimated[1].transform.position = LevelFirePositions1[2];
+            //        break;
+
+            //    default:
+            //}
         }
 
         protected override void SecondaryAttack()

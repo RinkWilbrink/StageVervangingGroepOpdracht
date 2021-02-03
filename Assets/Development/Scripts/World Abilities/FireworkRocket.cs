@@ -11,6 +11,7 @@ public class FireworkRocket : MonoBehaviour
     [SerializeField] private GameObject fireworkSprite;
     [SerializeField] private GameObject explosionSprite;
     [SerializeField] private AudioClip fireworkExplosionAudio;
+    [SerializeField] private Transform fireworkRangeIndicator;
     private GameObject fireworkRocket;
     private GameObject fireworkExplosion;
     private Camera mainCam;
@@ -38,13 +39,27 @@ public class FireworkRocket : MonoBehaviour
 
     Vector3 explosionPos;
     private bool rocketLaunched = false;
+    private bool fireworkExploded = false;
     private void Update() {
+        if ( Input.GetMouseButton(0) && !rocketLaunched ) {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = camZ;
+
+            explosionPos = mainCam.ScreenToWorldPoint(mousePos);
+
+            fireworkRangeIndicator.gameObject.SetActive(true);
+            fireworkRangeIndicator.position = explosionPos;
+
+            float explosionRange = explosionSize * .22f;
+            fireworkRangeIndicator.transform.localScale = new Vector3(explosionRange, explosionRange);
+        }
         if ( Input.GetMouseButtonUp(0) && !rocketLaunched ) {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = camZ;
 
             explosionPos = mainCam.ScreenToWorldPoint(mousePos);
 
+            fireworkRangeIndicator.gameObject.SetActive(false);
             fireworkRocket.transform.position = new Vector3(explosionPos.x, .5f, explosionPos.z);
             fireworkExplosion.transform.position = explosionPos;
             fireworkRocket.SetActive(true);
@@ -68,19 +83,21 @@ public class FireworkRocket : MonoBehaviour
                 fireworkExplosion.SetActive(true);
             }
 
-            if ( fireworkRocket.transform.localScale.x < .4f ) {
+            if ( fireworkRocket.transform.localScale.x < .4f && !fireworkExploded ) {
                 Collider[] enemies = Physics.OverlapSphere(explosionPos, explosionSize);
-
+                print("firework");
                 for ( int i = 0; i < enemies.Length; i++ ) {
                     if ( enemies[i].GetComponent<EnemyUnit>() ) {
                         enemies[i].GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
                     }
                 }
+                fireworkExploded = true;
             }
             if ( fireworkRocket.transform.localScale.x < .2f ) {
                 fireworkRocket.transform.localScale = Vector3.one * 2f;
                 fireworkExplosion.SetActive(false);
                 rocketLaunched = false;
+                fireworkExploded = false;
                 worldAbilities.ResetFireworkRocket();
             }
         }

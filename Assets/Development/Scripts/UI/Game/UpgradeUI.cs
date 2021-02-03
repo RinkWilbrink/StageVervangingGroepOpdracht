@@ -103,6 +103,7 @@ namespace UI
             GoldLeftText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
             HealthLeftText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
             FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
+            Time.timeScale = 0f;
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -270,6 +271,12 @@ namespace UI
             if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel]) )
             {
                 currentTower.TowerLevel += 1;
+
+                if (currentTower.towerType == TowerType.CannonTower)
+                {
+                    currentTower.GetComponent<TowerCannon>().UpdateFireAnimationPosition();
+                }
+
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
                 if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length ) {

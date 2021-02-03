@@ -8,11 +8,16 @@ namespace Tower
     {
         private BoxCollider Target;
 
-        public float speed = 20f;
+        public float speed;
 
         public float smoothTime = 0.3f;
 
         private Vector3 velocity = Vector3.zero;
+
+        private Vector3 temp;
+
+        private bool rotated;
+
         public void seek(GameObject _target)
         {
             Target = _target.GetComponent<BoxCollider>();
@@ -40,7 +45,15 @@ namespace Tower
 
             
             transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-            
+
+            temp.x = 90f;
+            if (!rotated)
+            {
+                temp.y = transform.rotation.eulerAngles.y - 180f;
+                rotated = true;
+            }
+            temp.z = transform.rotation.eulerAngles.z;
+            transform.rotation = Quaternion.Euler(temp);
         }
 
         void HitTarget()

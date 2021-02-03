@@ -155,6 +155,8 @@ namespace Tower
 
                                         GameObject go = Instantiate(TowerList[TowerSelectedIndex], hitPoint, Quaternion.identity, TowerParent);
                                         go.GetComponent<TowerCore>().SetNewSprite();
+                                        //go.GetComponent<TowerCore>().spriteRenderer.enabled = false;
+                                        go.GetComponent<TowerCore>().SetBuildAnimation(true);
 
                                         FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
@@ -194,6 +196,8 @@ namespace Tower
 
                                         }
                                         GameObject go = Instantiate(BuildingList[BuildingSelectedIndex], hitPoint, Quaternion.identity, BuildingParent);
+                                        go.GetComponent<ResourceBuilding.ResourceBuildingCore>().SetBuildAnimation(true);
+                                        FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
                                         GameObject buGold = Instantiate(ResourceCollectButtonPrefabGold, t);
                                         buGold.transform.localPosition = new Vector2(hitPoint.x, hitPoint.z);

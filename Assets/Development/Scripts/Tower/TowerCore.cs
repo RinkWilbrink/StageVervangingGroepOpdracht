@@ -31,6 +31,7 @@ namespace Tower
         [SerializeField] protected GameObject ShootOrigin;
         [SerializeField] public GameObject specialDirectionUI;
         [SerializeField] public GameObject Bullet;
+        [SerializeField] private Sprite BulletSprite;
         [SerializeField] public int returnmana = 2;
         [HideInInspector] private RaycastHit hit;
         [SerializeField] public Transform FirePoint;
@@ -50,10 +51,11 @@ namespace Tower
         [SerializeField] protected GameObject CurrentTarget;
 
         [Header("Sprites And Art")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRenderer;
         [SerializeField] private Sprite[] NoSpecialModeSprites;
         [SerializeField] private Sprite[] Special1ModeSprites;
         [SerializeField] private Sprite[] Special2ModeSprites;
+        [SerializeField] private Animator buildAnimation;
 
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
@@ -64,11 +66,13 @@ namespace Tower
         // Init function gets called when the tower gets destroyed
         public virtual void Init()
         {
-
+            
         }
 
         private void Update()
         {
+            if ( !buildAnimation.GetCurrentAnimatorStateInfo(0).IsName("Tower_Build") && buildAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 )
+                return;
             CheckTargets();
             HandleAttackTiming();
             HandleShooting();
@@ -139,9 +143,14 @@ namespace Tower
 
         protected virtual void HandleShooting()
         {
-            if(CanAttack)
+            if (CurrentTarget != null)
             {
-                if(CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
+                FirePoint.transform.LookAt(CurrentTarget.transform.position);
+            }
+
+            if (CanAttack)
+            {
+                if (CurrentTarget != null && CurrentTarget.GetComponent<EnemyUnit>().IsDeath() != true)
                 {
                     PrimaryAttack();
                     Shoot();
@@ -152,6 +161,7 @@ namespace Tower
         void Shoot()
         {
             GameObject bulletGO =(GameObject)Instantiate(Bullet, FirePoint.position, FirePoint.rotation);
+            bulletGO.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = BulletSprite;
             Projectile bullet = bulletGO.GetComponent<Projectile>();
             LTSeq sequence = LeanTween.sequence();
             sequence.append(LeanTween.scale(gameObject, new Vector3(0.9f, 0.9f, 0.9f), 0.1f).setEaseInCirc());
@@ -220,6 +230,11 @@ namespace Tower
             {
                 specialDirectionUI.transform.LookAt(CurrentTarget.transform.position);
             }
+        }
+
+        public void SetBuildAnimation(bool b)
+        {
+            buildAnimation.SetBool("StartAnimation", b);
         }
 
         #endregion

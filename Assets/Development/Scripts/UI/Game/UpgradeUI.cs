@@ -103,6 +103,7 @@ namespace UI
             GoldLeftText.text = GameController.Gold.ToString() + " x " + GoldMultiplier;
             HealthLeftText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
             FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
+            Time.timeScale = 0f;
         }
 
         public void UpdateUIPosition(float _x, float _y)
@@ -270,6 +271,12 @@ namespace UI
             if (/*PayGold(4)*/ PayGold(currentTower.TowerUpgradeCosts.UpgradeCosts[currentTower.TowerLevel]) )
             {
                 currentTower.TowerLevel += 1;
+
+                if (currentTower.towerType == TowerType.CannonTower)
+                {
+                    currentTower.GetComponent<TowerCannon>().UpdateFireAnimationPosition();
+                }
+
                 FindObjectOfType<AudioManagement>().PlayAudioClip(constructionAudio, AudioMixerGroups.SFX);
 
                 if ( currentTower.TowerLevel < currentTower.TowerUpgradeCosts.UpgradeCosts.Length ) {
@@ -280,19 +287,27 @@ namespace UI
                     towerUpgradeCostText.text = "";
                 }
 
-                if (currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level3 || currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial && currScene.name == Level4)
+                if (currScene.name == Level3 || currScene.name == Level4 ) 
                 {
-                    TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
-                    SpecialAbilityModeButton.interactable = true;
-                    buttonUpgrade.interactable = false;
-                    closeUpgradeButton.interactable = false;
-                    UpgradeUIReady = true;
-                    SetSpecialButtons();
-                } else
-                {
-                    SpecialAbilityModeButton.interactable = false;
-                    UpgradeUIReady = false;
+                    if ( currentTower.TowerLevel == currentTower.TowerLevelToUnlockSpecial )
+                    {
+                        TowerInteraction.AddTowerToSpecialAbilityUnlockedList(currentTower);
+                        buttonUpgrade.interactable = false;
+                        closeUpgradeButton.interactable = false;
+                        UpgradeUIReady = true;
+                        SetSpecialButtons();
+                    } 
+                    else
+                    {
+                        UpgradeUIReady = false;
+                    }
+
+                    if (currentTower.TowerLevel >= currentTower.TowerLevelToUnlockSpecial)
+                        SpecialAbilityModeButton.interactable = true;
+                    else
+                        SpecialAbilityModeButton.interactable = false;
                 }
+
                 if (currentTower.SpecialUnlocked != SpecialAttack.None)
                 {
                     currentTower.TowerSpecialLevel += 1;

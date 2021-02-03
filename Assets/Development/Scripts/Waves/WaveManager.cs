@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject enemyList;
 
     [Header("Waves")]
-    [SerializeField] private int levelNummer;
+    [SerializeField] private int levelNumber;
     [SerializeField] private WaveData[] waves;
     [Space(10)]
     [SerializeField] private float waveCooldown = 10;
@@ -110,7 +110,7 @@ public class WaveManager : MonoBehaviour
             HealthScoreText.text = GameController.MainTowerHP.ToString() + " x " + HealthMultiplier;
             FinalScoreText.text = ((GameController.Gold * GoldMultiplier) + (GameController.MainTowerHP * HealthMultiplier)).ToString();
 
-            DataManager.LevelComplete(levelNummer);
+            DataManager.LevelComplete(levelNumber);
 
             Time.timeScale = 0;
         } else {

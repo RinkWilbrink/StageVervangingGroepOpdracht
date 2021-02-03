@@ -81,11 +81,13 @@ public class NinjaDash : MonoBehaviour
 
             Debug.DrawLine(startPos, endPos, Color.cyan);
 
-            ninja.transform.rotation = Quaternion.LookRotation(Vector3.up, endPos - ninja.transform.position);
-            ninja.transform.eulerAngles -= new Vector3(0, 0, 90f);
+            //ninja.transform.rotation = Quaternion.LookRotation(Vector3.up, endPos - ninja.transform.position);
+            //ninja.transform.eulerAngles -= new Vector3(0, 0, 90f);
 
-            if ( ninja.transform.eulerAngles.z < 90f && ninja.transform.eulerAngles.z > -90f )
-                print("facing left");
+            if ( endPos.x > startPos.x )
+                ninja.GetComponent<SpriteRenderer>().flipX = false;
+            else
+                ninja.GetComponent<SpriteRenderer>().flipX = true;
 
             if ( Vector3.Distance(startPos, dragPos) > dragRange ) {
                 stopTest = true;
@@ -104,17 +106,16 @@ public class NinjaDash : MonoBehaviour
             ninja.transform.position = Vector3.MoveTowards(ninja.transform.position, endPos, 20 * Time.deltaTime);
 
             if ( Vector3.Distance(ninja.transform.position, endPos) < .1f ) {
-                DamageEnemies();
+                if ( !enemiesDamaged )
+                    DamageEnemies();
 
-                line.enabled = false;
-                stopTest = false;
-                moveNinja = false;
                 StartCoroutine(DisableObject());
                 worldAbilities.ResetNinjaDash();
             }
         }
     }
 
+    bool enemiesDamaged = false;
     private void DamageEnemies() {
         float thickness = .1f;
 
@@ -127,11 +128,17 @@ public class NinjaDash : MonoBehaviour
                 hits[i].transform.GetComponent<EnemyUnit>().TakeDamage(damage, Tower.TowerType.NullValue);
             }
         }
+
+        enemiesDamaged = true;
     }
 
     private IEnumerator DisableObject() {
         yield return new WaitForSeconds(0.5f);
         ninja.SetActive(false);
+        line.enabled = false;
+        stopTest = false;
+        moveNinja = false;
+        enemiesDamaged = false;
         gameObject.SetActive(false);
     }
 

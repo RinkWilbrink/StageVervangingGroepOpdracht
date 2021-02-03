@@ -34,6 +34,7 @@ namespace ResourceBuilding
         [SerializeField] public Button goldButton;
         [SerializeField] public Button manaButton;
 
+        [SerializeField] private Animator buildAnimation;
         [SerializeField] public ResourceUIManager resourceManager;
 
         [HideInInspector] public bool CanCollectResources = false;
@@ -131,6 +132,10 @@ namespace ResourceBuilding
                 CanCollectResources = false;
                 manaButton.gameObject.SetActive(false);
             }
+        }
+
+        public void SetBuildAnimation(bool b ) {
+            buildAnimation.SetBool("StartAnimation", b);
         }
 
         // Return an Int with the amount of resource in storage

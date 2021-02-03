@@ -51,10 +51,11 @@ namespace Tower
         [SerializeField] protected GameObject CurrentTarget;
 
         [Header("Sprites And Art")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRenderer;
         [SerializeField] private Sprite[] NoSpecialModeSprites;
         [SerializeField] private Sprite[] Special1ModeSprites;
         [SerializeField] private Sprite[] Special2ModeSprites;
+        [SerializeField] private Animator buildAnimation;
 
         // Hidden Primairy Attack Variables
         [HideInInspector] protected float AttackTimer;
@@ -65,11 +66,13 @@ namespace Tower
         // Init function gets called when the tower gets destroyed
         public virtual void Init()
         {
-
+            
         }
 
         private void Update()
         {
+            if ( !buildAnimation.GetCurrentAnimatorStateInfo(0).IsName("Tower_Build") && buildAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 )
+                return;
             CheckTargets();
             HandleAttackTiming();
             HandleShooting();
@@ -227,6 +230,11 @@ namespace Tower
             {
                 specialDirectionUI.transform.LookAt(CurrentTarget.transform.position);
             }
+        }
+
+        public void SetBuildAnimation(bool b)
+        {
+            buildAnimation.SetBool("StartAnimation", b);
         }
 
         #endregion

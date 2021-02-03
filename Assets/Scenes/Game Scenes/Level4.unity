@@ -6226,6 +6226,11 @@ PrefabInstance:
       propertyPath: GoldScoreText
       value: 
       objectReference: {fileID: 1625022237}
+    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
+        type: 3}
+      propertyPath: levelNumber
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285534, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
       propertyPath: m_Name
@@ -6562,6 +6567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: HealthMultiplier
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237801878153343387, guid: 7593ef97becac3348934e7e8f55fa80d,
+        type: 3}
+      propertyPath: Level4
+      value: Level4
       objectReference: {fileID: 0}
     - target: {fileID: 5237801878504541820, guid: 7593ef97becac3348934e7e8f55fa80d,
         type: 3}

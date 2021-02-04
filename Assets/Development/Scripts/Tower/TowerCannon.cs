@@ -41,7 +41,6 @@ namespace Tower
         {
             foreach (Animator animator in gameObject.GetComponentsInChildren<Animator>())
             {
-                animator.gameObject.SetActive(false);
                 FireAnimators.Add(animator);
             }
 
@@ -51,6 +50,11 @@ namespace Tower
                 {
                     FireAnimators.RemoveAt(i);
                 }
+            }
+
+            for (int i = 0; i < FireAnimators.Count; i++)
+            {
+                FireAnimators[i].gameObject.SetActive(false);
             }
         }
 

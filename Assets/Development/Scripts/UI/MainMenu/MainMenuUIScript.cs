@@ -44,7 +44,7 @@ public class MainMenuUIScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            SceneManager.LoadScene("SplashScreen", LoadSceneMode.Single);
         }
 
         if (_MusicAnimator != null)

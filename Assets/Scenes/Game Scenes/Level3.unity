@@ -515,8 +515,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162792583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.98, y: -1, z: -1.01}
-  m_LocalScale: {x: 3.0219066, y: 1, z: 3.0198717}
+  m_LocalPosition: {x: 13.98, y: -1, z: -1.469}
+  m_LocalScale: {x: 3.021908, y: 1, z: 2.101664}
   m_Children: []
   m_Father: {fileID: 1321240014}
   m_RootOrder: 36
@@ -2371,15 +2371,6 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: 5, y: -6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 4
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 2
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741827
   - first: {x: 7, y: -6, z: 0}
     second:
       serializedVersion: 2
@@ -2516,7 +2507,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: e1314a09456718b4a8f9eef733afdd8f, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 1082800885}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: fcb242f181140eb4c8175d85239a5ebc, type: 2}
@@ -2525,7 +2516,7 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 56d24b84aa5363d409a11df037bb50b4, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 228171270}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 6211e092adb8cef4c8ff4fb597f98c53, type: 3}
@@ -2578,7 +2569,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 8.46e-43
-  - m_RefCount: 20
+  - m_RefCount: 19
     m_Data:
       e00: 1
       e01: 0
@@ -2617,7 +2608,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 17
     m_Data: {r: 1, g: 1, b: 1, a: 1}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {r: 0.8664992, g: 0.37574852, b: 0.50476396, a: 1}
   - m_RefCount: 0
     m_Data: {r: 0, g: 0, b: 0, a: 0}
@@ -2698,8 +2689,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1823844449
-  m_SortingLayer: -1
+  m_SortingLayerID: 1558407429
+  m_SortingLayer: 2
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: d6d9bc07ebf07d14fa14b80199bcd44a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5604,11 +5595,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
         type: 3}
-      propertyPath: currentWaveNum
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6682590823350285531, guid: b183dc0797c42a64f96aba662d748087,
-        type: 3}
       propertyPath: waves.Array.data[4].minSpawnTime
       value: 0.75
       objectReference: {fileID: 0}
@@ -7693,8 +7679,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050648492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.13, y: -1, z: 4.46}
-  m_LocalScale: {x: 1.0852001, y: 0.9999999, z: 2.0450158}
+  m_LocalPosition: {x: 3.032, y: -1, z: 4.002}
+  m_LocalScale: {x: 1.2816366, y: 0.9999999, z: 1.1283188}
   m_Children: []
   m_Father: {fileID: 1321240014}
   m_RootOrder: 48
@@ -11655,6 +11641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117717103652432983, guid: d27b1165a3810444b9bfc58bf53d0e97,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 842634470392328551, guid: d27b1165a3810444b9bfc58bf53d0e97,
         type: 3}
@@ -15696,8 +15687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116619984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.979, y: -1, z: 0.977}
-  m_LocalScale: {x: 3.0219066, y: 1, z: 3.0198717}
+  m_LocalPosition: {x: 12, y: -1, z: 1.029}
+  m_LocalScale: {x: 3.1469247, y: 1, z: 3.1240487}
   m_Children: []
   m_Father: {fileID: 1321240014}
   m_RootOrder: 33

@@ -41,6 +41,7 @@ namespace Tower
         {
             foreach (Animator animator in gameObject.GetComponentsInChildren<Animator>())
             {
+                animator.gameObject.SetActive(false);
                 FireAnimators.Add(animator);
             }
 
@@ -71,6 +72,7 @@ namespace Tower
             {
                 if (SpecialUnlocked == SpecialAttack.None)
                 {
+                    FireAnimators[i].gameObject.SetActive(true);
                     FireAnimators[i].SetTrigger("TriggerFire");
                 }
             }

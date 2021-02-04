@@ -126,7 +126,7 @@ namespace Tower
                                     TowerPrefablist[TowerSelectedIndex].SetActive(true);
                                     TowerPrefablist[TowerSelectedIndex].transform.position = hitPoint;
 
-                                    EnableRangeIndicator(hitPoint);
+                                    EnableRangeIndicator(hitPoint, TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>());
                                 }
                                 else
                                 {
@@ -272,7 +272,7 @@ namespace Tower
                             upgradeUI.towerUpgradeCostText.text = upgradeUI.currentTower.TowerUpgradeCosts.UpgradeCosts[upgradeUI.currentTower.TowerLevel - 1] + "";
                             upgradeUI.UpdateUIPosition(_hit.collider.transform.position.x, _hit.collider.transform.position.z);
                             upgradeUI.SpecialButton();
-                            EnableRangeIndicator(_hit.collider.transform.position);
+                            EnableRangeIndicator(_hit.collider.transform.position, upgradeUI.currentTower);
                             CurrentInteractionMode = InteractionMode.None;
                         }
                     }
@@ -403,8 +403,8 @@ namespace Tower
             SpecialAbilityUnlockedTowerList.Add(core);
         }
 
-        public void EnableRangeIndicator(Vector3 indicatorPos) {
-            float shootRange = TowerPrefablist[TowerSelectedIndex].GetComponent<TowerCore>().ShootingRange / 4f;
+        public void EnableRangeIndicator(Vector3 indicatorPos, TowerCore tc) {
+            float shootRange = tc.ShootingRange * .22f;
 
             towerRangeIndicator.gameObject.SetActive(true);
             towerRangeIndicator.transform.position = indicatorPos;
